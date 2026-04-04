@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#10141a",
+                    "on-background": "#dfe2eb",
+                    "tertiary": "#e2edff",
+                    "primary-fixed": "#b7eaff",
+                    "secondary-container": "#3e4960",
+                    "surface-container-lowest": "#0a0e14",
+                    "outline-variant": "#3b494c",
+                    "on-primary-fixed": "#001f28",
+                    "on-error-container": "#ffdad6",
+                    "on-primary": "#003543",
+                    "primary": "#d2f2ff",
+                    "on-surface-variant": "#bac9cc",
+                    "secondary-fixed-dim": "#bbc6e2",
+                    "secondary-fixed": "#d7e2ff",
+                    "on-tertiary-fixed-variant": "#334861",
+                    "surface": "#10141a",
+                    "on-primary-fixed-variant": "#004e60",
+                    "on-tertiary-fixed": "#031d34",
+                    "tertiary-fixed": "#d1e4ff",
+                    "error-container": "#93000a",
+                    "inverse-primary": "#00677f",
+                    "primary-container": "#7bddff",
+                    "on-surface": "#dfe2eb",
+                    "on-secondary-fixed": "#101b30",
+                    "error": "#ffb4ab",
+                    "surface-bright": "#353940",
+                    "primary-fixed-dim": "#4cd6ff",
+                    "outline": "#849396",
+                    "inverse-on-surface": "#2d3137",
+                    "on-primary-container": "#006178",
+                    "on-error": "#690005",
+                    "inverse-surface": "#dfe2eb",
+                    "tertiary-container": "#bcd2f1",
+                    "on-secondary-container": "#adb8d3",
+                    "surface-container-low": "#181c22",
+                    "surface-tint": "#4cd6ff",
+                    "background": "#10141a",
+                    "tertiary-fixed-dim": "#b2c8e7",
+                    "surface-container-high": "#262a31",
+                    "surface-variant": "#31353c",
+                    "secondary": "#bbc6e2",
+                    "on-tertiary": "#1b324a",
+                    "on-secondary": "#263046",
+                    "on-secondary-fixed-variant": "#3c475d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(16, 20, 26, 0.6);
+            backdrop-filter: blur(20px);
+        }
+        .kinetic-gradient {
+            background: linear-gradient(135deg, #4cd6ff 0%, #006178 100%);
+        }
+        .node-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 4px;
+            background-color: #d2f2ff;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-[#10141a]/60 backdrop-blur-xl flex justify-between items-center px-8 py-4 max-w-full font-['Space_Grotesk'] tracking-tight">
+<div class="text-2xl font-bold tracking-tighter text-cyan-400">KINETIC AI</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-slate-400 font-medium hover:text-cyan-300 transition-colors duration-300" href="#">Solutions</a>
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1 hover:text-cyan-300 transition-colors duration-300" href="#">Portfolio</a>
+<a class="text-slate-400 font-medium hover:text-cyan-300 transition-colors duration-300" href="#">Blog</a>
+<a class="text-slate-400 font-medium hover:text-cyan-300 transition-colors duration-300" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="kinetic-gradient text-on-primary-fixed px-6 py-2 rounded-lg font-bold scale-95 transition-transform hover:scale-100">
+                Get Started
+            </button>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
+<!-- Hero Header Section -->
+<header class="mb-20">
+<div class="flex items-center gap-2 mb-4">
+<span class="w-8 h-[1px] bg-primary-fixed-dim"></span>
+<span class="font-label text-xs tracking-widest uppercase text-primary-fixed-dim">Case Studies</span>
+</div>
+<h1 class="font-headline text-5xl md:text-7xl font-bold tracking-tighter mb-6 max-w-4xl">
+                ENGINEERING THE <span class="text-primary-fixed-dim">FUTURE</span> OF VECTOR LOGIC.
+            </h1>
+<p class="font-body text-on-surface-variant text-lg max-w-2xl leading-relaxed">
+                Explore how Kinetic Intelligence transforms complex enterprise challenges into streamlined, AI-driven architectures. Precise, efficient, and relentlessly innovative.
+            </p>
+</header>
+<!-- Projects Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Case Study 1: Large Featured Card -->
+<section class="lg:col-span-12 group relative bg-surface-container-low rounded-lg overflow-hidden border border-outline-variant/15 transition-all duration-500 hover:bg-surface-container">
+<div class="node-indicator"></div>
+<div class="grid md:grid-cols-2 h-full">
+<div class="p-8 md:p-12 flex flex-col justify-between">
+<div>
+<div class="flex gap-2 mb-6">
+<span class="px-3 py-1 bg-secondary-container/30 text-on-secondary-container text-[10px] font-bold tracking-widest uppercase rounded">Automation</span>
+<span class="px-3 py-1 bg-primary-container/20 text-primary-fixed-dim text-[10px] font-bold tracking-widest uppercase rounded">AI Engine</span>
+</div>
+<h2 class="font-headline text-3xl md:text-4xl font-bold mb-6 text-primary">AI Customer Service Automation</h2>
+<div class="space-y-6">
+<div>
+<h3 class="font-label text-[10px] tracking-widest uppercase text-outline mb-2">Project Overview</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Deployed a neural-linguistic processing layer for a Fortune 500 logistics firm to handle 85% of tier-1 support queries without human intervention.</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<h3 class="font-label text-[10px] tracking-widest uppercase text-outline mb-2">The Problem</h3>
+<p class="text-on-surface-variant text-xs">Latency in response times leading to 22% customer churn during peak hours.</p>
+</div>
+<div>
+<h3 class="font-label text-[10px] tracking-widest uppercase text-outline mb-2">The Solution</h3>
+<p class="text-on-surface-variant text-xs">Vector-based intent mapping and real-time sentiment analysis engine.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-8 border-t border-outline-variant/10 flex items-center justify-between">
+<div class="flex flex-wrap gap-4">
+<span class="font-label text-[10px] text-primary-fixed-dim">PYTHON</span>
+<span class="font-label text-[10px] text-primary-fixed-dim">PYTORCH</span>
+<span class="font-label text-[10px] text-primary-fixed-dim">AWS SAGE</span>
+</div>
+<div class="text-right">
+<span class="block font-headline text-2xl font-bold text-white">92%</span>
+<span class="block font-label text-[10px] text-outline uppercase tracking-tighter">Efficiency Gain</span>
+</div>
+</div>
+</div>
+<div class="relative min-h-[300px] bg-surface-container-highest">
+<img alt="AI neural network visualization" class="absolute inset-0 w-full h-full object-cover mix-blend-screen opacity-60" data-alt="abstract 3d visualization of glowing blue neural network nodes and data connections in a dark void atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmLFYLahTEmMSK1yVFE_FqRIT3NtXlpIndCYmBLhDVUI-dHeyCoaqo1gADQIERMptDFI0lsr_Fd1rqqVY2-yTCbn-JT423qP5wsdhjY6efrghXeIyg80412U9ahadA4Ga1fWYbkyn2sj-HcPBQGFeomAOYIDAS9-JcG0dYT0VnXACjdHQuLLjwkEjRTwG-ySyDiz9wV5vj7FfuecisMF-2R-Jc6P6vNIo38JUZVYANVKCtLGxDo4L5otgCkelT42c4rN6H7ilB8iGp"/>
+<div class="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-surface-container-low md:block hidden"></div>
+</div>
+</div>
+</section>
+<!-- Case Study 2: System Integration Platform -->
+<section class="lg:col-span-7 group relative bg-surface-container-low rounded-lg overflow-hidden border border-outline-variant/15 transition-all duration-500">
+<div class="p-8">
+<div class="flex justify-between items-start mb-12">
+<div>
+<span class="px-3 py-1 bg-secondary-container/30 text-on-secondary-container text-[10px] font-bold tracking-widest uppercase rounded">Infrastructure</span>
+<h2 class="font-headline text-2xl font-bold mt-4 text-primary">System Integration Platform</h2>
+</div>
+<span class="material-symbols-outlined text-primary-fixed-dim text-3xl">hub</span>
+</div>
+<div class="space-y-6 mb-8">
+<div>
+<h3 class="font-label text-[10px] tracking-widest uppercase text-outline mb-2">The Problem</h3>
+<p class="text-on-surface-variant text-sm italic">"Siloed legacy data prevented real-time decision making across global offices."</p>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+                            We architected a unified API mesh that bridged 14 disparate ERP systems into a single source of truth, enabling millisecond data propagation.
+                        </p>
+</div>
+<div class="grid grid-cols-2 gap-8 py-6 border-y border-outline-variant/10">
+<div>
+<h3 class="font-label text-[10px] tracking-widest uppercase text-outline mb-1">Technology</h3>
+<div class="text-xs text-on-surface font-medium">GraphQL, Kubernetes, Kafka</div>
+</div>
+<div>
+<h3 class="font-label text-[10px] tracking-widest uppercase text-outline mb-1">Result</h3>
+<div class="text-xs text-primary-fixed-dim font-bold">400ms Average Latency</div>
+</div>
+</div>
+<button class="mt-8 flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-primary-fixed-dim group-hover:gap-4 transition-all">
+                        Deep Dive Technicals <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Case Study 3: Digital Business Dashboard -->
+<section class="lg:col-span-5 group relative bg-surface-container-low rounded-lg overflow-hidden border border-outline-variant/15 transition-all duration-500">
+<div class="h-48 relative overflow-hidden bg-surface-container-high">
+<img alt="Digital dashboard visualization" class="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="futuristic digital dashboard with glowing cyan data charts and abstract architectural geometric lines on a dark interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvTKlNzDKiDxig-9NlnFGm4VJfQIuBzi_rIRcJIZ3LKqj_13_kxvkl-cIHn0BET7CSLGHPq1NLcU3JZcCk9w05iSVjT_O5UPRdncDxf0pjS-RMutGJh6Uf6lh8761kp2FCx1oHh0KxqBI33ftKAbenXpAGohWWl3UDf-gbX5xJQxrcLs7G2d_gjPDVzFL8ZdyWuBtlIQT3eoWvTDfI5C5YwAiZoOAsWxEo-TRhisoAYoGt-XRo-gCrrhcMYkh_zJZ6FUKxoO7kp6zV"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+</div>
+<div class="p-8 -mt-10 relative z-10">
+<h2 class="font-headline text-2xl font-bold mb-4 text-primary">Digital Business Dashboard</h2>
+<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">
+                        A high-fidelity visualization suite for executive-level oversight, featuring predictive modeling and risk assessment simulations.
+                    </p>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<span class="w-1.5 h-1.5 bg-primary-fixed-dim rounded-full"></span>
+<span class="text-xs text-on-surface">Predictive Market Simulation</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="w-1.5 h-1.5 bg-primary-fixed-dim rounded-full"></span>
+<span class="text-xs text-on-surface">Real-time Risk Indexing</span>
+</div>
+</div>
+<div class="mt-10 pt-6 border-t border-outline-variant/10 flex justify-between items-end">
+<div>
+<span class="font-label text-[10px] text-outline block uppercase mb-1">Visual Stack</span>
+<span class="text-xs font-bold">React + D3.js</span>
+</div>
+<div class="p-3 bg-surface-container-high rounded-lg text-primary">
+<span class="material-symbols-outlined">monitoring</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Metric Section (Horizontal Banner) -->
+<div class="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-y border-outline-variant/10">
+<div class="text-center md:text-left">
+<span class="block font-headline text-4xl font-bold text-white mb-2">50+</span>
+<span class="block font-label text-[10px] tracking-widest text-outline uppercase">Global Deployments</span>
+</div>
+<div class="text-center md:text-left">
+<span class="block font-headline text-4xl font-bold text-white mb-2">99.9%</span>
+<span class="block font-label text-[10px] tracking-widest text-outline uppercase">Uptime Performance</span>
+</div>
+<div class="text-center md:text-left">
+<span class="block font-headline text-4xl font-bold text-white mb-2">$1.2B</span>
+<span class="block font-label text-[10px] tracking-widest text-outline uppercase">Optimized Capital</span>
+</div>
+<div class="text-center md:text-left">
+<span class="block font-headline text-4xl font-bold text-white mb-2">12ms</span>
+<span class="block font-label text-[10px] tracking-widest text-outline uppercase">System Latency</span>
+</div>
+</div>
+<!-- Contact CTA -->
+<section class="mt-24 kinetic-gradient p-1 bg-rounded-lg overflow-hidden rounded-xl">
+<div class="bg-surface-dim rounded-[calc(0.75rem-3px)] p-12 text-center relative overflow-hidden">
+<div class="absolute top-0 right-0 p-24 bg-primary/5 rounded-full blur-3xl -mr-12 -mt-12"></div>
+<h2 class="font-headline text-3xl md:text-4xl font-bold mb-6 relative z-10">READY TO INTEGRATE YOUR FUTURE?</h2>
+<p class="text-on-surface-variant max-w-xl mx-auto mb-10 relative z-10">Our engineers are standing by to audit your existing architecture and propose a kinetic roadmap for intelligence-driven growth.</p>
+<div class="flex flex-col md:flex-row gap-4 justify-center items-center relative z-10">
+<button class="kinetic-gradient text-on-primary-fixed px-10 py-4 rounded-lg font-bold w-full md:w-auto">Consult with an Architect</button>
+<button class="px-10 py-4 border border-outline-variant/30 hover:border-primary-fixed-dim transition-all text-sm font-bold tracking-widest uppercase w-full md:w-auto">View Technical Docs</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-white/5 bg-[#10141a] flex flex-col md:flex-row justify-between items-center px-12 py-10 gap-6">
+<div class="text-lg font-black text-slate-100 uppercase tracking-tighter">KINETIC INTELLIGENCE</div>
+<div class="flex flex-wrap justify-center gap-8 font-['Inter'] text-xs tracking-widest uppercase">
+<a class="text-slate-500 hover:text-white transition-all opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-white transition-all opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="text-slate-500 hover:text-white transition-all opacity-80 hover:opacity-100" href="#">Security</a>
+<a class="text-slate-500 hover:text-white transition-all opacity-80 hover:opacity-100" href="#">System Status</a>
+</div>
+<div class="text-slate-500 font-['Inter'] text-[10px] tracking-widest uppercase">
+            © 2024 KINETIC INTELLIGENCE. ALL RIGHTS RESERVED.
+        </div>
+</footer>
+</body></html>

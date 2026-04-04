@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Careers">
+	<section class="careers-hero">
+		<div class="container text-center">
+			<span class="badge">Join the Mission</span>
+			<h1>Build the <span class="highlight">Future with Us</span></h1>
+			<p>We are always looking for visionary engineers, designers, and strategists.</p>
+		</div>
+	</section>
+
+	<section class="culture section">
+		<div class="container grid-2">
+			<div class="image-placeholder glass"></div>
+			<div class="content">
+				<h2>Our Culture</h2>
+				<p>Innovation is at the heart of everything we do. We foster an environment of continuous learning, architectural excellence, and collaborative problem-solving.</p>
+				<ul class="benefits">
+					<li>Flexible Remote Work</li>
+					<li>Learning & Development Budget</li>
+					<li>High-end Tech Stipend</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<style>
+		.careers-hero {
+			padding: 160px 0 80px;
+		}
+
+		.grid-2 {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 80px;
+			align-items: center;
+		}
+
+		.image-placeholder {
+			height: 400px;
+			border-radius: 20px;
+		}
+
+		.benefits {
+			margin-top: 20px;
+			list-style: none;
+		}
+
+		.benefits li::before {
+			content: '✓';
+			color: var(--accent-blue);
+			margin-right: 10px;
+			font-weight: 900;
+		}
+	</style>
+</BaseLayout>

@@ -1,0 +1,195 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const techStack = [
+  { icon: 'memory', label: 'AI Core' },
+  { icon: 'cloud', label: 'Cloud Native' },
+  { icon: 'api', label: 'API Integration' },
+  { icon: 'settings_slow_motion', label: 'Automation' },
+  { icon: 'database', label: 'Data Engineering' },
+  { icon: 'security', label: 'Zero Trust' },
+  { icon: 'hub', label: 'Edge Computing' },
+  { icon: 'swap_calls', label: 'System Integration' },
+  { icon: 'insights', label: 'Predictive Analytics' }
+];
+---
+
+<BaseLayout title="Home">
+<!-- Hero Section -->
+<section class="relative min-h-[100vh] pt-32 pb-16 flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-30" data-alt="abstract digital data streams and network nodes glowing in deep blue and cyan space background with motion blur" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdfWCdm-XRiLaDDHo3Rpky51iJmFxsQBQDM_6zxMTubJaChKbKz1qxOmJz5YEii2XgVQCX0tBzbBGAIGq84iXEufq_HTm1O2kRCyH4-ghzRLGt4YP6KGhoGxVG4ORDCOwqlkhYarYRplu8sOgu6M2F8ymB-AFRZuruF3yx5WLLtBPC1vSeVYdF-sKlv8W7n0HYyEmK3WxznkuzwsR58ksK2dFvdsEKwONlrKRJyebBhoqm8_yp1pMxYHVZ0Lvqxf3txpvaW3mughhc"/>
+<div class="absolute inset-0 bg-gradient-to-b from-surface via-transparent to-surface"></div>
+</div>
+<div class="relative z-10 max-w-[1440px] mx-auto px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+<div class="space-y-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container/30 border border-outline-variant/15 rounded-full text-primary-fixed-dim text-xs font-label tracking-widest uppercase">
+<span class="w-2 h-2 rounded-full bg-primary-fixed-dim animate-pulse"></span>
+                    Now Integrating Future Systems
+                </div>
+<h1 class="text-5xl md:text-7xl xl:text-8xl font-bold leading-[0.9] tracking-tighter md: xl: font-bold font-headline text-slate-900 dark:text-white break-words relative z-20">
+                    Integrating Technology for a <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-fixed-dim to-on-primary-container">Smarter Future</span>
+</h1>
+<p class="text-on-surface-variant text-xl leading-relaxed max-w-lg">
+                    VEIN is a technology company focused on AI-based automation systems and digital solutions for business efficiency.
+                </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-gradient-to-br from-primary-fixed-dim to-on-primary-container text-on-primary-fixed px-8 py-4 rounded-lg font-bold font-headline shadow-lg shadow-primary-fixed-dim/40 dark:shadow-primary-fixed-dim/20 transition-all hover:-translate-y-1 hover:brightness-110 flex items-center justify-center gap-2 group w-full md:w-auto">
+                        Konsultasi Sekarang
+                        <span class="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<a href="/services" class="bg-surface-container-highest border border-primary/15 text-slate-900 dark:text-white font-bold px-8 py-4 rounded-lg hover:bg-surface-container-high transition-all flex items-center justify-center">
+                        Lihat Layanan
+                    </a>
+</div>
+</div>
+<div class="hidden lg:block relative">
+<div class="absolute -inset-4 bg-primary-fixed-dim/5 blur-3xl rounded-full"></div>
+<div class="relative bg-surface-container-low border border-outline-variant/15 p-8 rounded-xl backdrop-blur-md">
+<div class="grid grid-cols-2 gap-4">
+<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-end p-6 group hover:bg-surface-container-high transition-all node-indicator relative">
+<span class="material-symbols-outlined text-primary-fixed-dim mb-4" data-icon="hub">hub</span>
+<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-xs tracking-widest">Connectivity</span>
+</div>
+<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-end p-6 group hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-primary-fixed-dim mb-4" data-icon="psychology">psychology</span>
+<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-xs tracking-widest">Intelligence</span>
+</div>
+<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-end p-6 group hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-primary-fixed-dim mb-4" data-icon="settings_input_component">settings_input_component</span>
+<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-xs tracking-widest">Automation</span>
+</div>
+<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-end p-6 group hover:bg-surface-container-high transition-all node-indicator relative">
+<span class="material-symbols-outlined text-primary-fixed-dim mb-4" data-icon="shield">shield</span>
+<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-xs tracking-widest">Security</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Partners / Clients Section -->
+<section class="py-12 bg-surface-container-lowest overflow-hidden border border-outline-variant/15">
+<div class="max-w-[1440px] mx-auto px-12">
+<p class="text-center font-label text-xs tracking-[0.3em] uppercase text-slate-500 mb-10">Trusted Global Partners</p>
+<div class="flex flex-wrap justify-center gap-12 lg:gap-24 opacity-50 grayscale hover:grayscale-0 transition-all duration-700 items-center">
+<img class="h-8 w-auto" data-alt="minimalist clean corporate logo for technology partner 1 in white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABbvNdEKMAsqlUNlkXVEDMGUnB1wHnYW3UD2Am1N1zMTkQtNTmYeJX7nrAhOvttQ5wOBhrz2vypqW_NPAUgR_1f7WNwcKkkDpNuxAzz-crYPstTBVpTYeTFCqDvw-xegBMdYcSOfXi4DW9UA7pLu8U2lfj7hhXpb0O6BSfncghOI-GJ1Ex8yvSy-oJcyM8tTiKA8CzPPsv9sUnXDFx9UZIkM3Sx5cykKCyx8rFJ7B3K8PsiSKv9LeSob4f6X0zoioUblDFcdahS9n3"/>
+<img class="h-8 w-auto" data-alt="modern geometric vector logo for technology partner 2 in white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnhe3tAUGJ9fiavSnqaxjj0IBiv1Xhr7iHzvPrI2JsYtco1WBxYvnAoYZ_nyKwxJ4KAzbZLzIf8RcSWh3qwscL2a0CmKD9xbSpgAm9Ttv2fduUPOs7Azdu9xVCsUkrH2zHIsGzRhzxR6BRWu5PHIjR0uDGHGELCOUuA8vcQ-N63aCvyKxAE_9B0chhmAHfeG8QV3zhy62xBHC-gMJacKG02egg2at9XHbjG3HoSG_gUmxRxEaVbefyD-q-KoLOWaFw73YMIoUssk__"/>
+<img class="h-10 w-auto" data-alt="professional abstract typography logo for technology partner 3 in white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAA-zGLBhfgxO0AO8Po8WT3Mn04d9FQFB4hy8EHDm_0bdHJOOaYiMyAmSmUJ6dc-4ABANvxm1fx3L2ByABeLlpToNwSmIBUWosvT-QQoSwdZQBt2nVXbCsW2-6-nXtf5941pFI5Wlp4CCVz5Z9JQ6Y2EmrEN1hhrv7i6zqSkgJmkUKbqYl-Uq33pOHWqgliH7JbNC7ThZuAfPRjO_vJfG7dNsdAUSalt6N3EIfanlsEhvItMMP2NNJ1mTwDI4kYLAO3I9mtlUY4GDK5"/>
+<img class="h-7 w-auto" data-alt="tech-focused minimal logo for technology partner 4 in white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtP1qQ5XGc9-ZelVNV3l9ATITiDeZcGUXFdWVnFxHOk2iTU_dnJmYc-vS4mL-7lFrWyriOAuJSYHD5YfSiYXCGLoYfEcoKgzaFhtHgMwOGB8CWc6TrAwNWUNE6ijydImk8XtnYRCEabhjPE8WA_NevQFXZJPayv4UzbEtj_9Mk85DNPYO_2z3rH_CFzf5c6fBrhzfQNDGEQdwjYV-VOiHdMtzHtPR7-HQ3C7A5czy-fuJo5qmYB3KUDQGNc48Q3B6t41yCv-Mrgatb"/>
+<img class="h-9 w-auto" data-alt="sleek corporate tech brand logo for technology partner 5 in white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtYyrt0U5au17usipZs_a9q0rHI-TDQfBgevaV38z9BbW2FTjT_fHC7NVNE7lIb9ApnDcUEnBSVgQcCFglxGyrtvZQOJCcxME1aL3RUMWAyM5ViMnAOwYVf1UF9_AvI06_idB-Al9LFPm8QyMei4k4xO5-UTo426TQZn_u_Z_A9qV43q9JBKbDjIICD08xqYVPgHOCuEIRJxt4GD5kzzanhCWTgzuH7qDFlf9GSJaOy0fiU5ruV_Wrtt1qZts0VGwsMfxIiT4Dhema"/>
+</div>
+</div>
+</section>
+<!-- Services Bento Grid -->
+<section class="py-24 bg-surface">
+<div class="max-w-[1440px] mx-auto px-12">
+<div class="mb-16">
+<h2 class="text-4xl md:text-6xl font-bold font-headline tracking-tighter text-slate-900 dark:text-white mb-6">Our Core Capabilities</h2>
+<div class="w-24 h-1 bg-gradient-to-r from-primary-fixed-dim to-transparent"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+<div class="md:col-span-8 bg-surface-container-low rounded-xl p-10 flex flex-col justify-between group hover:bg-surface-container-high transition-all relative overflow-hidden border border-outline-variant/15">
+<div class="relative z-10">
+<span class="material-symbols-outlined text-4xl text-primary-fixed-dim mb-6" data-icon="bolt">bolt</span>
+<h3 class="text-3xl font-bold font-headline text-slate-900 dark:text-white mb-4">AI &amp; Automation Solutions</h3>
+<p class="text-on-surface-variant max-w-md">Propelling business productivity with customized AI workflows that learn and adapt to your unique operational environment.</p>
+</div>
+<div class="absolute right-0 bottom-0 w-1/3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[12rem]" data-icon="smart_toy">smart_toy</span>
+</div>
+</div>
+<div class="md:col-span-4 bg-surface-container-low rounded-xl p-10 group hover:bg-surface-container-high transition-all node-indicator relative border border-outline-variant/15">
+<span class="material-symbols-outlined text-4xl text-primary-fixed-dim mb-6" data-icon="integration_instructions">integration_instructions</span>
+<h3 class="text-xl font-bold font-headline text-slate-900 dark:text-white mb-4 uppercase tracking-wider">System Integration</h3>
+<p class="text-on-surface-variant text-sm">Frictionless ecosystem bridging. We connect disparate software stacks into a single, unified nervous system.</p>
+</div>
+<div class="md:col-span-4 bg-surface-container-low rounded-xl p-10 group hover:bg-surface-container-high transition-all border border-outline-variant/15">
+<span class="material-symbols-outlined text-4xl text-primary-fixed-dim mb-6" data-icon="lan">lan</span>
+<h3 class="text-xl font-bold font-headline text-slate-900 dark:text-white mb-4 uppercase tracking-wider">Digital Infrastructure</h3>
+<p class="text-on-surface-variant text-sm">Future-proof foundations built on scalable cloud architectures and robust edge computing frameworks.</p>
+</div>
+<div class="md:col-span-8 bg-surface-container-low rounded-xl p-10 flex items-center gap-12 group hover:bg-surface-container-high transition-all relative border border-outline-variant/15">
+<div class="flex-1">
+<span class="material-symbols-outlined text-4xl text-primary-fixed-dim mb-6" data-icon="query_stats">query_stats</span>
+<h3 class="text-3xl font-bold font-headline text-slate-900 dark:text-white mb-4">IT Consulting</h3>
+<p class="text-on-surface-variant">Strategic roadmaps for digital transformation, focused on maximizing ROI and operational resilience.</p>
+</div>
+<div class="hidden lg:block w-48 h-48 bg-surface-container-highest rounded-full border border-outline-variant/15 flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl text-primary/40 animate-spin" data-icon="cyclone" style="animation-duration: 10s">cyclone</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Why Choose VEIN Section -->
+<section class="py-24 bg-surface-container-lowest border border-outline-variant/15">
+<div class="max-w-[1440px] mx-auto px-12 flex flex-col lg:flex-row gap-20">
+<div class="lg:w-1/3">
+<div class="sticky top-32">
+<h2 class="text-4xl md:text-6xl font-bold font-headline tracking-tighter text-slate-900 dark:text-white mb-8">Why Intelligence Matters</h2>
+<p class="text-on-surface-variant leading-relaxed">
+                        In the age of kinetic data, static integration isn't enough. We build systems that sense, think, and evolve.
+                    </p>
+</div>
+</div>
+<div class="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16">
+<div class="space-y-4">
+<div class="flex items-center gap-4 text-primary-fixed-dim">
+<span class="text-xs font-bold font-headline">01</span>
+<div class="flex-1 h-px bg-outline-variant/30"></div>
+</div>
+<h4 class="text-2xl font-bold font-headline text-slate-900 dark:text-white">Expert Team</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Engineers and data scientists from world-class backgrounds, dedicated to solving complex architectural challenges.</p>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4 text-primary-fixed-dim">
+<span class="text-xs font-bold font-headline">02</span>
+<div class="flex-1 h-px bg-outline-variant/30"></div>
+</div>
+<h4 class="text-2xl font-bold font-headline text-slate-900 dark:text-white">Scalable Architecture</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Horizontal scalability baked into every line of code, ensuring your system grows as fast as your ambition.</p>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4 text-primary-fixed-dim">
+<span class="text-xs font-bold font-headline">03</span>
+<div class="flex-1 h-px bg-outline-variant/30"></div>
+</div>
+<h4 class="text-2xl font-bold font-headline text-slate-900 dark:text-white">AI Driven Solutions</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">We leverage neural networks and machine learning to automate high-level decision paths, not just repetitive tasks.</p>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4 text-primary-fixed-dim">
+<span class="text-xs font-bold font-headline">04</span>
+<div class="flex-1 h-px bg-outline-variant/30"></div>
+</div>
+<h4 class="text-2xl font-bold font-headline text-slate-900 dark:text-white">Custom Automation</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Bespoke workflows designed specifically for your stack, ensuring no friction in the integration process.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Tech Stack Logos -->
+<section class="py-24 bg-surface border-t border-outline-variant/5">
+<div class="max-w-[1440px] mx-auto px-12">
+<h3 class="text-center font-headline text-3xl font-bold text-slate-900 dark:text-white mb-16">The VEIN Tech Stack</h3>
+<div class="relative w-full overflow-hidden flex group py-4">
+    <div class="absolute inset-y-0 left-0 w-20 md:w-40 bg-gradient-to-r from-surface to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute inset-y-0 right-0 w-20 md:w-40 bg-gradient-to-l from-surface to-transparent z-10 pointer-events-none"></div>
+
+    <div class="flex animate-marquee group-hover:[animation-play-state:paused] items-center w-max">
+        {[1, 2].map(() => (
+            <div class="flex items-center gap-16 md:gap-32 px-8 md:px-16">
+                {techStack.map((tech) => (
+                    <div class="flex flex-col items-center gap-4 hover:scale-110 transition-transform duration-300">
+                        <span class="material-symbols-outlined text-5xl md:text-6xl text-primary/40 dark:text-primary/60 transition-colors" data-icon={tech.icon}>{tech.icon}</span>
+                        <span class="text-xs font-label uppercase tracking-widest text-slate-500 whitespace-nowrap">{tech.label}</span>
+                    </div>
+                ))}
+            </div>
+        ))}
+    </div>
+</div>
+</div>
+</section>
+</BaseLayout>

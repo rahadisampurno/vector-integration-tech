@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About Us | Vector Integration Technology</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#00677f",
+                        "primary-fixed-dim": "#4cd6ff",
+                        "inverse-on-surface": "#2d3137",
+                        "on-surface-variant": "#bac9cc",
+                        "on-primary-container": "#006178",
+                        "inverse-surface": "#dfe2eb",
+                        "on-error": "#690005",
+                        "on-tertiary-container": "#455a74",
+                        "surface-bright": "#353940",
+                        "on-primary-fixed": "#001f28",
+                        "on-secondary-container": "#adb8d3",
+                        "on-secondary-fixed-variant": "#3c475d",
+                        "on-primary-fixed-variant": "#004e60",
+                        "on-secondary": "#263046",
+                        "on-tertiary": "#1b324a",
+                        "surface-container-lowest": "#0a0e14",
+                        "primary-fixed": "#b7eaff",
+                        "tertiary-fixed-dim": "#b2c8e7",
+                        "on-primary": "#003543",
+                        "surface-container-low": "#181c22",
+                        "primary": "#d2f2ff",
+                        "on-background": "#dfe2eb",
+                        "surface-variant": "#31353c",
+                        "secondary-fixed-dim": "#bbc6e2",
+                        "surface-container-highest": "#31353c",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#10141a",
+                        "secondary-container": "#3e4960",
+                        "tertiary": "#e2edff",
+                        "surface-container-high": "#262a31",
+                        "on-surface": "#dfe2eb",
+                        "outline": "#849396",
+                        "on-secondary-fixed": "#101b30",
+                        "on-tertiary-fixed": "#031d34",
+                        "secondary-fixed": "#d7e2ff",
+                        "background": "#10141a",
+                        "on-tertiary-fixed-variant": "#334861",
+                        "surface-container": "#1c2026",
+                        "error-container": "#93000a",
+                        "primary-container": "#7bddff",
+                        "outline-variant": "#3b494c",
+                        "surface": "#10141a",
+                        "tertiary-container": "#bcd2f1",
+                        "secondary": "#bbc6e2",
+                        "surface-tint": "#4cd6ff",
+                        "tertiary-fixed": "#d1e4ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-transition {
+            background: linear-gradient(to bottom, #10141a 0%, transparent 100%);
+        }
+        .signature-gradient {
+            background: linear-gradient(135deg, #4cd6ff 0%, #006178 100%);
+        }
+        .node-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 4px;
+            background-color: #4cd6ff;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #10141a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1c2026;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container/30">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-[#10141a]/60 backdrop-blur-xl tonal-transition">
+<nav class="flex justify-between items-center max-w-[1440px] mx-auto px-12 h-20">
+<div class="text-2xl font-bold tracking-tighter text-white font-headline">
+                Vector Integration Technology
+            </div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-slate-400 hover:text-white transition-colors font-headline" href="#">Home</a>
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1 font-headline" href="#">About Us</a>
+<a class="text-slate-400 hover:text-white transition-colors font-headline" href="#">Services</a>
+<a class="text-slate-400 hover:text-white transition-colors font-headline" href="#">Solutions</a>
+<a class="text-slate-400 hover:text-white transition-colors font-headline" href="#">Portfolio</a>
+<a class="text-slate-400 hover:text-white transition-colors font-headline" href="#">Blog</a>
+<a class="text-slate-400 hover:text-white transition-colors font-headline" href="#">Contact</a>
+</div>
+<button class="signature-gradient text-on-primary-fixed font-headline px-6 py-2 rounded-lg font-bold hover:opacity-90 active:scale-95 transition-all">
+                Consult Now
+            </button>
+</nav>
+</header>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative min-h-[716px] flex items-center overflow-hidden px-12 py-24">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-30 grayscale contrast-125" data-alt="abstract digital network connection nodes and blue data streams flowing through deep space background with atmospheric lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMz5d0lqlW4oc27W7bRBblxgEZB6-5kcCBW12ktF88BDbiPHRqPr_RkxFDWSL_kzm-9mDmyGIF3mDrUxoWz5YEBk_Esnekd9yqxMDCqK2NJMC-6713iLAN249DTquknfmQMof74YsY3YowPiwY6Vrwoo5Kpa2R2tBPnmppvmRUpl8CXb1jecEIsbvrcxBFYFOQWIajcSqfjhqjp9fuK-_DtsCy_MFwO3eRLrJZxaygeLfR_qd_jHtJ0uKW0wNm0npaUCtSldy-7jU7"/>
+<div class="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-4xl">
+<span class="label-sm uppercase tracking-[0.2em] text-primary-fixed-dim font-medium mb-4 block">Architecting the Future</span>
+<h1 class="text-7xl font-bold font-headline tracking-tighter leading-none mb-8 text-white">
+                    Intelligent Systems.<br/>
+<span class="text-transparent bg-clip-text signature-gradient">Unified Progress.</span>
+</h1>
+<p class="text-xl text-on-surface-variant max-w-2xl leading-relaxed">
+                    Vector Integration Technology is a technology company focusing on developing integrated systems, AI-based automation, and digital solutions. We bridge the gap between complex infrastructure and seamless operational intelligence.
+                </p>
+</div>
+</section>
+<!-- Vision & Mission Asymmetric Grid -->
+<section class="max-w-[1440px] mx-auto px-12 py-32">
+<div class="grid grid-cols-12 gap-8">
+<!-- Vision Card -->
+<div class="col-span-12 lg:col-span-7 relative bg-surface-container-low p-12 rounded-lg overflow-hidden group">
+<div class="node-indicator"></div>
+<div class="relative z-10">
+<span class="text-primary-fixed-dim material-symbols-outlined text-4xl mb-6" data-icon="visibility">visibility</span>
+<h2 class="text-4xl font-headline font-bold text-white mb-6">Our Vision</h2>
+<p class="text-2xl text-on-surface leading-tight font-light italic">
+                            "Helping organizations transform digitally through intelligent system integration and automation."
+                        </p>
+</div>
+<div class="absolute -right-20 -bottom-20 w-80 h-80 opacity-5 group-hover:opacity-10 transition-opacity duration-700">
+<span class="material-symbols-outlined text-[300px]" data-icon="hub">hub</span>
+</div>
+</div>
+<!-- Mission Card -->
+<div class="col-span-12 lg:col-span-5 bg-surface-container p-12 rounded-lg border-l-4 border-primary-fixed-dim/20">
+<h2 class="text-3xl font-headline font-bold text-white mb-8">Our Mission</h2>
+<ul class="space-y-6">
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-fixed-dim mt-1" data-icon="account_tree">account_tree</span>
+<div>
+<span class="font-bold text-white block mb-1">Scalable Solutions</span>
+<p class="text-sm text-on-surface-variant">Building architectures that grow alongside your global ambitions.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-fixed-dim mt-1" data-icon="speed">speed</span>
+<div>
+<span class="font-bold text-white block mb-1">Business Process Optimization</span>
+<p class="text-sm text-on-surface-variant">Eliminating bottlenecks through algorithmic precision.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-fixed-dim mt-1" data-icon="integration_instructions">integration_instructions</span>
+<div>
+<span class="font-bold text-white block mb-1">Efficient Integration</span>
+<p class="text-sm text-on-surface-variant">Connecting disparate data silos into a unified nervous system.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary-fixed-dim mt-1" data-icon="psychology">psychology</span>
+<div>
+<span class="font-bold text-white block mb-1">AI &amp; Automation Adoption</span>
+<p class="text-sm text-on-surface-variant">Lowering the barrier for next-generation intelligence integration.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Core Values (VECTOR) - Bento Grid Style -->
+<section class="bg-surface-container-lowest py-32 px-12">
+<div class="max-w-[1440px] mx-auto">
+<div class="mb-16 text-center">
+<h2 class="text-5xl font-headline font-bold text-white tracking-tighter">The VECTOR Principles</h2>
+<p class="text-on-surface-variant mt-4">The core values that define every line of code we write.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- V -->
+<div class="bg-surface-container-low p-8 rounded-lg hover:bg-surface-container-high transition-colors relative overflow-hidden group">
+<div class="text-8xl font-black font-headline text-white/5 absolute -right-4 -top-4 group-hover:text-primary-fixed-dim/10 transition-colors">V</div>
+<h3 class="text-2xl font-headline font-bold text-primary-fixed-dim mb-4">Visionary</h3>
+<p class="text-on-surface-variant leading-relaxed">We look beyond the immediate requirements to build solutions that remain relevant in the decades to come.</p>
+</div>
+<!-- E -->
+<div class="bg-surface-container-low p-8 rounded-lg hover:bg-surface-container-high transition-colors relative overflow-hidden group">
+<div class="text-8xl font-black font-headline text-white/5 absolute -right-4 -top-4 group-hover:text-primary-fixed-dim/10 transition-colors">E</div>
+<h3 class="text-2xl font-headline font-bold text-primary-fixed-dim mb-4">Efficient</h3>
+<p class="text-on-surface-variant leading-relaxed">Maximum output with minimal resource overhead. Performance is not a feature; it's our baseline.</p>
+</div>
+<!-- C -->
+<div class="bg-surface-container-low p-8 rounded-lg hover:bg-surface-container-high transition-colors relative overflow-hidden group">
+<div class="text-8xl font-black font-headline text-white/5 absolute -right-4 -top-4 group-hover:text-primary-fixed-dim/10 transition-colors">C</div>
+<h3 class="text-2xl font-headline font-bold text-primary-fixed-dim mb-4">Collaborative</h3>
+<p class="text-on-surface-variant leading-relaxed">We integrate not just systems, but with your team, becoming a natural extension of your technical department.</p>
+</div>
+<!-- T -->
+<div class="bg-surface-container-low p-8 rounded-lg hover:bg-surface-container-high transition-colors relative overflow-hidden group">
+<div class="text-8xl font-black font-headline text-white/5 absolute -right-4 -top-4 group-hover:text-primary-fixed-dim/10 transition-colors">T</div>
+<h3 class="text-2xl font-headline font-bold text-primary-fixed-dim mb-4">Technology Driven</h3>
+<p class="text-on-surface-variant leading-relaxed">Utilizing the latest breakthroughs in AI and distributed computing to solve age-old business problems.</p>
+</div>
+<!-- O -->
+<div class="bg-surface-container-low p-8 rounded-lg hover:bg-surface-container-high transition-colors relative overflow-hidden group">
+<div class="text-8xl font-black font-headline text-white/5 absolute -right-4 -top-4 group-hover:text-primary-fixed-dim/10 transition-colors">O</div>
+<h3 class="text-2xl font-headline font-bold text-primary-fixed-dim mb-4">Optimization</h3>
+<p class="text-on-surface-variant leading-relaxed">Continuous improvement is hardcoded into our culture. We refine until perfection becomes efficiency.</p>
+</div>
+<!-- R -->
+<div class="bg-surface-container-low p-8 rounded-lg hover:bg-surface-container-high transition-colors relative overflow-hidden group">
+<div class="text-8xl font-black font-headline text-white/5 absolute -right-4 -top-4 group-hover:text-primary-fixed-dim/10 transition-colors">R</div>
+<h3 class="text-2xl font-headline font-bold text-primary-fixed-dim mb-4">Reliable</h3>
+<p class="text-on-surface-variant leading-relaxed">Uptime, security, and consistent performance. Systems you can trust with your most critical operations.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Glassmorphism Stats/Trust Section -->
+<section class="relative py-24 px-12 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="macro close-up of computer server circuits and flashing led lights in a dark server room environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA32xnINGepG8IKBUaYooqgf21e5zU6DXfpEM_yMBYL_ncPgI7sqaQAmuhLg-VC5jU2PteLt9HpRYT2k3PcnRpGVjfY2lriRQF0kOA9FK1q2-4QVQ609VdWm5R7Wh6WTqEu4DUIEtWvkB1CgBnFsNK3vdzmcrkDhxuWvoFbUSp-pj2oTnmWfaUgNkrCssPvCm-coGjW9DmFSNmeDLPDhBygAMIQxoRF6WeqBCrCECAufpcx253yDEda501Q9uG9fYKCw8sF-GLfTKBf"/>
+<div class="absolute inset-0 bg-surface/90"></div>
+</div>
+<div class="relative z-10 max-w-[1440px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="p-8 bg-surface-container/60 backdrop-blur-xl rounded-lg text-center border border-white/5">
+<div class="text-5xl font-headline font-bold text-white mb-2">500+</div>
+<div class="text-xs uppercase tracking-widest text-primary-fixed-dim">Systems Integrated</div>
+</div>
+<div class="p-8 bg-surface-container/60 backdrop-blur-xl rounded-lg text-center border border-white/5">
+<div class="text-5xl font-headline font-bold text-white mb-2">99.9%</div>
+<div class="text-xs uppercase tracking-widest text-primary-fixed-dim">Success Rate</div>
+</div>
+<div class="p-8 bg-surface-container/60 backdrop-blur-xl rounded-lg text-center border border-white/5">
+<div class="text-5xl font-headline font-bold text-white mb-2">12ms</div>
+<div class="text-xs uppercase tracking-widest text-primary-fixed-dim">Avg. Latency Reduced</div>
+</div>
+<div class="p-8 bg-surface-container/60 backdrop-blur-xl rounded-lg text-center border border-white/5">
+<div class="text-5xl font-headline font-bold text-white mb-2">24/7</div>
+<div class="text-xs uppercase tracking-widest text-primary-fixed-dim">Active Monitoring</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0b0e12] w-full pt-20 pb-10">
+<div class="max-w-[1440px] mx-auto px-12 grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-1">
+<div class="text-xl font-bold text-white mb-4 font-headline">Vector Integration Technology</div>
+<p class="font-['Inter'] text-sm text-slate-400 mb-6">Integrating systems for a smarter future. Precision-engineered solutions for the digital age.</p>
+</div>
+<div class="flex flex-col space-y-3">
+<h4 class="text-white font-bold mb-2">Company</h4>
+<a class="text-slate-500 hover:text-cyan-300 transition-colors hover:translate-x-1 duration-200 text-sm" href="#">Services</a>
+<a class="text-slate-500 hover:text-cyan-300 transition-colors hover:translate-x-1 duration-200 text-sm" href="#">Solutions</a>
+<a class="text-slate-500 hover:text-cyan-300 transition-colors hover:translate-x-1 duration-200 text-sm" href="#">Case Studies</a>
+</div>
+<div class="flex flex-col space-y-3">
+<h4 class="text-white font-bold mb-2">Connect</h4>
+<a class="text-slate-500 hover:text-cyan-300 transition-colors hover:translate-x-1 duration-200 text-sm" href="#">Email</a>
+<a class="text-slate-500 hover:text-cyan-300 transition-colors hover:translate-x-1 duration-200 text-sm" href="#">WhatsApp</a>
+<a class="text-slate-500 hover:text-cyan-300 transition-colors hover:translate-x-1 duration-200 text-sm" href="#">LinkedIn</a>
+</div>
+<div class="flex flex-col space-y-3">
+<h4 class="text-white font-bold mb-2">Location</h4>
+<p class="text-slate-500 text-sm leading-relaxed">
+                    Tech Corridor South,<br/>
+                    Suite 404, Vector Plaza<br/>
+                    San Francisco, CA 94103
+                </p>
+</div>
+</div>
+<div class="max-w-[1440px] mx-auto px-12 mt-20 pt-8 border-t border-white/5 flex justify-between items-center">
+<p class="font-['Inter'] text-sm text-slate-400">© 2024 Vector Integration Technology. Integrating systems for a smarter future.</p>
+<div class="flex space-x-6">
+<a class="text-slate-500 hover:text-white text-xs" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-white text-xs" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</body></html>

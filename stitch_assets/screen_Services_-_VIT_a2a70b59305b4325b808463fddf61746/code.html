@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-primary": "#00677f",
+                    "primary-fixed-dim": "#4cd6ff",
+                    "inverse-on-surface": "#2d3137",
+                    "on-surface-variant": "#bac9cc",
+                    "on-primary-container": "#006178",
+                    "inverse-surface": "#dfe2eb",
+                    "on-error": "#690005",
+                    "on-tertiary-container": "#455a74",
+                    "surface-bright": "#353940",
+                    "on-primary-fixed": "#001f28",
+                    "on-secondary-container": "#adb8d3",
+                    "on-secondary-fixed-variant": "#3c475d",
+                    "on-primary-fixed-variant": "#004e60",
+                    "on-secondary": "#263046",
+                    "on-tertiary": "#1b324a",
+                    "surface-container-lowest": "#0a0e14",
+                    "primary-fixed": "#b7eaff",
+                    "tertiary-fixed-dim": "#b2c8e7",
+                    "on-primary": "#003543",
+                    "surface-container-low": "#181c22",
+                    "primary": "#d2f2ff",
+                    "on-background": "#dfe2eb",
+                    "surface-variant": "#31353c",
+                    "secondary-fixed-dim": "#bbc6e2",
+                    "surface-container-highest": "#31353c",
+                    "on-error-container": "#ffdad6",
+                    "error": "#ffb4ab",
+                    "surface-dim": "#10141a",
+                    "secondary-container": "#3e4960",
+                    "tertiary": "#e2edff",
+                    "surface-container-high": "#262a31",
+                    "on-surface": "#dfe2eb",
+                    "outline": "#849396",
+                    "on-secondary-fixed": "#101b30",
+                    "on-tertiary-fixed": "#031d34",
+                    "secondary-fixed": "#d7e2ff",
+                    "background": "#10141a",
+                    "on-tertiary-fixed-variant": "#334861",
+                    "surface-container": "#1c2026",
+                    "error-container": "#93000a",
+                    "primary-container": "#7bddff",
+                    "outline-variant": "#3b494c",
+                    "surface": "#10141a",
+                    "tertiary-container": "#bcd2f1",
+                    "secondary": "#bbc6e2",
+                    "surface-tint": "#4cd6ff",
+                    "tertiary-fixed": "#d1e4ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-transition {
+            background: linear-gradient(to bottom, #10141a, transparent);
+        }
+        .glass-panel {
+            background: rgba(28, 32, 38, 0.6);
+            backdrop-filter: blur(20px);
+        }
+        .node-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 4px;
+            background-color: #4cd6ff;
+        }
+        .signature-gradient {
+            background: linear-gradient(135deg, #4cd6ff 0%, #006178 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-[#10141a]/60 backdrop-blur-xl tonal-transition">
+<div class="flex justify-between items-center max-w-[1440px] mx-auto px-12 h-20">
+<div class="text-2xl font-bold tracking-tighter text-white font-['Space_Grotesk']">
+                Vector Integration Technology
+            </div>
+<div class="hidden md:flex gap-8 font-['Space_Grotesk'] tracking-tight">
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Home</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">About Us</a>
+<a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Services</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Solutions</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Portfolio</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Blog</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Contact</a>
+</div>
+<button class="signature-gradient text-on-primary-fixed px-6 py-2 rounded-lg font-headline font-semibold scale-95 active:opacity-80 transition-all">
+                Consult Now
+            </button>
+</div>
+</nav>
+<main class="pt-32 pb-20">
+<!-- Hero Section -->
+<header class="max-w-[1440px] mx-auto px-12 mb-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-6">
+<span class="label-sm uppercase tracking-[0.2em] text-primary-fixed-dim font-bold">Solutions Ecosystem</span>
+<h1 class="text-6xl md:text-8xl font-headline font-bold leading-[0.9] tracking-tighter text-white">
+                    Architecting <br/><span class="text-primary-fixed-dim">Intelligence.</span>
+</h1>
+<p class="text-xl text-on-surface-variant max-w-lg leading-relaxed">
+                    We bridge the gap between raw data and actionable strategy through kinetic system integration and visionary engineering.
+                </p>
+</div>
+<div class="relative h-[400px] rounded-xl overflow-hidden glass-panel border border-outline-variant/15">
+<img class="w-full h-full object-cover opacity-60" data-alt="Abstract 3D digital landscape with glowing cyan nodes and data streams interconnected in a dark space, cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmM6HVat5qGZX41MV7RxiJY6zufHP6RV-MHHUq9-8FX-3jnm9OrFh27zodgzdfogLCQlkc-FOuYdDub1lk0Vl5katOBhf1jHh_sU1HkHdJMcfBu0r1L_4k6gDY_1JTY9OOvNr0To2GzYwa9Hj1g0RQcW4xcZ5HDYo61BX8JJAKwLtSsGLW1r1v8HcwREQaYX-EVBsDIH0P0DGSPtwaPATWwra5tmAnOV-hgKy4SRUVVet5ZNg7l5VxLg05r8izNWZ6-ep4JQArZZVT"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+</div>
+</header>
+<!-- Main Services Grid -->
+<section class="max-w-[1440px] mx-auto px-12 space-y-32">
+<!-- AI & Automation -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<div class="lg:col-span-4 space-y-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-fixed-dim text-4xl" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h2 class="text-3xl font-headline font-bold">AI &amp; Automation</h2>
+</div>
+<p class="text-on-surface-variant">Cognitive workflows that evolve with your business objectives, reducing manual friction by up to 90%.</p>
+</div>
+<div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="relative p-8 rounded-lg bg-surface-container-low hover:bg-surface-container transition-all group">
+<div class="node-indicator"></div>
+<span class="material-symbols-outlined text-primary mb-4" data-icon="account_tree">account_tree</span>
+<h3 class="text-xl font-headline font-bold mb-2">Workflow Automation</h3>
+<p class="text-sm text-on-surface-variant">Eliminate repetitive tasks through intelligent sequence mapping and trigger-based logic.</p>
+</div>
+<div class="relative p-8 rounded-lg bg-surface-container-low hover:bg-surface-container transition-all group">
+<div class="node-indicator"></div>
+<span class="material-symbols-outlined text-primary mb-4" data-icon="smart_toy">smart_toy</span>
+<h3 class="text-xl font-headline font-bold mb-2">Chatbot AI</h3>
+<p class="text-sm text-on-surface-variant">Natural language processing interfaces for 24/7 customer engagement and internal support.</p>
+</div>
+<div class="relative p-8 rounded-lg bg-surface-container-low hover:bg-surface-container transition-all group">
+<div class="node-indicator"></div>
+<span class="material-symbols-outlined text-primary mb-4" data-icon="description">description</span>
+<h3 class="text-xl font-headline font-bold mb-2">Document Processing</h3>
+<p class="text-sm text-on-surface-variant">Automated data extraction and classification from structured and unstructured documents.</p>
+</div>
+<div class="relative p-8 rounded-lg bg-surface-container-low hover:bg-surface-container transition-all group">
+<div class="node-indicator"></div>
+<span class="material-symbols-outlined text-primary mb-4" data-icon="troubleshoot">troubleshoot</span>
+<h3 class="text-xl font-headline font-bold mb-2">Decision Support</h3>
+<p class="text-sm text-on-surface-variant">Predictive analytics engines that provide real-time recommendations for complex operations.</p>
+</div>
+</div>
+</div>
+<!-- System Integration (Bento Style) -->
+<div class="space-y-12">
+<div class="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-outline-variant/15 pb-8">
+<div class="space-y-2">
+<h2 class="text-4xl font-headline font-bold">System Integration</h2>
+<p class="text-on-surface-variant">Harmonizing disparate platforms into a single, kinetic ecosystem.</p>
+</div>
+<div class="flex gap-4">
+<span class="px-4 py-1 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold uppercase tracking-widest">Enterprise Ready</span>
+<span class="px-4 py-1 rounded-full bg-primary-container text-on-primary-container text-xs font-bold uppercase tracking-widest">Real-time Sync</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-auto md:h-[500px]">
+<div class="md:col-span-2 md:row-span-2 bg-surface-container-low rounded-lg p-10 flex flex-col justify-between relative overflow-hidden">
+<div class="node-indicator"></div>
+<div>
+<span class="material-symbols-outlined text-primary-fixed-dim text-5xl mb-6" data-icon="hub">hub</span>
+<h3 class="text-2xl font-headline font-bold mb-4">API Development &amp; Management</h3>
+<p class="text-on-surface-variant max-w-xs">Custom middleware and robust REST/GraphQL endpoints designed for extreme scalability and security.</p>
+</div>
+<img class="absolute bottom-[-20%] right-[-10%] w-2/3 opacity-20 rotate-12 pointer-events-none" data-alt="Close up of a high-tech server room with glowing blue LED indicator lights and fiber optic cables" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxno0C57o6M7YUjb5dppL0_c2XNL9Dg718WoTg-c31sHzXyzxHGTfu_vBdpuIZRgb2X53ALWpcFQXNOE_CWg0_tPGorkOkShiydqrsd2zeyzGeG6BOug06VCqc0pqFagFyp1nEUAPZDpSSJkJXFuL_wyxLM5u0L5Q-qIzGU1S2AMYK99S-D3F3ODs6soA01PNDX6Yv2JiLytVbSBl3ykjyIxt26MJDf2I1nD770OeXFTiI36Onlzy5-nN9Jsrw8r3lKdizm-r_mplf"/>
+</div>
+<div class="md:col-span-2 bg-surface-container-low rounded-lg p-8 flex items-center gap-8 border-l-4 border-primary-fixed-dim">
+<div class="space-y-2">
+<h3 class="text-xl font-headline font-bold">ERP &amp; CRM Integration</h3>
+<p class="text-sm text-on-surface-variant">Synchronize Salesforce, SAP, and Oracle environments into a unified source of truth.</p>
+</div>
+<span class="material-symbols-outlined text-primary text-4xl opacity-50" data-icon="sync_alt">sync_alt</span>
+</div>
+<div class="md:col-span-2 bg-surface-container-high rounded-lg p-8 flex flex-col justify-center">
+<h3 class="text-xl font-headline font-bold mb-2">Data Synchronization</h3>
+<p class="text-sm text-on-surface-variant">Bi-directional, low-latency syncing protocols that ensure consistency across all touchpoints.</p>
+</div>
+</div>
+</div>
+<!-- Infrastructure & Software (Side-by-Side) -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+<!-- Digital Infrastructure -->
+<div class="space-y-8 p-10 bg-surface-container-low rounded-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8">
+<span class="material-symbols-outlined text-6xl text-primary opacity-10" data-icon="cloud">cloud</span>
+</div>
+<h2 class="text-3xl font-headline font-bold border-l-2 border-primary pl-6">Digital Infrastructure</h2>
+<ul class="space-y-6">
+<li class="flex gap-4 group">
+<span class="text-primary-fixed-dim font-headline font-bold">01</span>
+<div>
+<h4 class="font-bold">Cloud Migration &amp; Strategy</h4>
+<p class="text-sm text-on-surface-variant">Seamless transition to AWS, Azure, or GCP with optimized cost-to-performance ratios.</p>
+</div>
+</li>
+<li class="flex gap-4 group">
+<span class="text-primary-fixed-dim font-headline font-bold">02</span>
+<div>
+<h4 class="font-bold">DevOps &amp; CI/CD Pipelines</h4>
+<p class="text-sm text-on-surface-variant">Automating the path from code to production with zero-downtime deployment.</p>
+</div>
+</li>
+<li class="flex gap-4 group">
+<span class="text-primary-fixed-dim font-headline font-bold">03</span>
+<div>
+<h4 class="font-bold">Microservices Architecture</h4>
+<p class="text-sm text-on-surface-variant">Decoupling monolithic systems into agile, independent service components.</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- Software Development -->
+<div class="space-y-8 p-10 bg-surface-container-low rounded-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8">
+<span class="material-symbols-outlined text-6xl text-primary opacity-10" data-icon="terminal">terminal</span>
+</div>
+<h2 class="text-3xl font-headline font-bold border-l-2 border-primary-fixed-dim pl-6">Software Development</h2>
+<ul class="space-y-6">
+<li class="flex gap-4 group">
+<span class="text-primary font-headline font-bold">01</span>
+<div>
+<h4 class="font-bold">Enterprise SaaS Systems</h4>
+<p class="text-sm text-on-surface-variant">Multi-tenant platforms built for global scale and mission-critical reliability.</p>
+</div>
+</li>
+<li class="flex gap-4 group">
+<span class="text-primary font-headline font-bold">02</span>
+<div>
+<h4 class="font-bold">High-Performance Web Apps</h4>
+<p class="text-sm text-on-surface-variant">Progressive applications that deliver native-like experiences on any device.</p>
+</div>
+</li>
+<li class="flex gap-4 group">
+<span class="text-primary font-headline font-bold">03</span>
+<div>
+<h4 class="font-bold">Embedded Systems</h4>
+<p class="text-sm text-on-surface-variant">Firmware and low-level software for hardware-integrated solutions.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<!-- IT Consulting (Editorial Layout) -->
+<div class="relative bg-surface-container-lowest rounded-lg p-12 lg:p-24 border border-outline-variant/15 overflow-hidden">
+<div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16">
+<div class="space-y-8">
+<div class="inline-flex items-center gap-2 bg-primary/10 px-4 py-1 rounded-full">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-xs font-bold text-primary tracking-widest uppercase">Expert Advisory</span>
+</div>
+<h2 class="text-5xl font-headline font-bold text-white">Strategic <br/>Modernization.</h2>
+<p class="text-lg text-on-surface-variant leading-relaxed">
+                            We don't just build technology; we audit your entire operational flow to identify the exact levers for exponential growth.
+                        </p>
+<button class="bg-surface-container-highest text-white border border-primary/20 px-8 py-4 rounded-lg font-headline font-semibold hover:bg-primary/5 transition-all">
+                            View Methodology
+                        </button>
+</div>
+<div class="grid grid-cols-1 gap-6">
+<div class="p-6 rounded-lg bg-surface-container-low/50 backdrop-blur-sm border-l-2 border-primary-fixed-dim">
+<h4 class="font-bold text-white mb-2">Digital Transformation Strategy</h4>
+<p class="text-sm text-on-surface-variant">A roadmap for moving from legacy debt to futuristic efficiency.</p>
+</div>
+<div class="p-6 rounded-lg bg-surface-container-low/50 backdrop-blur-sm border-l-2 border-primary-fixed-dim">
+<h4 class="font-bold text-white mb-2">Technology Stack Recommendation</h4>
+<p class="text-sm text-on-surface-variant">Selection of the ideal languages and frameworks for your specific scale.</p>
+</div>
+<div class="p-6 rounded-lg bg-surface-container-low/50 backdrop-blur-sm border-l-2 border-primary-fixed-dim">
+<h4 class="font-bold text-white mb-2">Automation Opportunity Assessment</h4>
+<p class="text-sm text-on-surface-variant">Quantifying ROI on workflow optimization before you invest a single line of code.</p>
+</div>
+</div>
+</div>
+<!-- Decorative element -->
+<div class="absolute bottom-0 right-0 w-1/3 h-1/2 opacity-20 pointer-events-none bg-gradient-to-tl from-primary-fixed-dim to-transparent blur-3xl"></div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0b0e12] w-full pt-20 pb-10">
+<div class="max-w-[1440px] mx-auto px-12 grid grid-cols-4 gap-12">
+<div class="col-span-4 md:col-span-1">
+<div class="text-xl font-bold text-white mb-4 font-headline">Vector Integration Technology</div>
+<p class="text-slate-500 leading-relaxed font-['Inter'] text-sm">
+                    © 2024 Vector Integration Technology. Integrating systems for a smarter future.
+                </p>
+</div>
+<div class="col-span-2 md:col-span-1 space-y-4">
+<h4 class="text-white font-bold text-sm tracking-widest uppercase">Expertise</h4>
+<div class="flex flex-col gap-2">
+<a class="text-slate-500 hover:text-cyan-300 transition-colors font-['Inter'] text-sm hover:translate-x-1 transition-transform" href="#">Services</a>
+<a class="text-slate-500 hover:text-cyan-300 transition-colors font-['Inter'] text-sm hover:translate-x-1 transition-transform" href="#">Solutions</a>
+<a class="text-slate-500 hover:text-cyan-300 transition-colors font-['Inter'] text-sm hover:translate-x-1 transition-transform" href="#">Company</a>
+</div>
+</div>
+<div class="col-span-2 md:col-span-1 space-y-4">
+<h4 class="text-white font-bold text-sm tracking-widest uppercase">Connect</h4>
+<div class="flex flex-col gap-2">
+<a class="text-slate-500 hover:text-cyan-300 transition-colors font-['Inter'] text-sm hover:translate-x-1 transition-transform" href="#">Email</a>
+<a class="text-slate-500 hover:text-cyan-300 transition-colors font-['Inter'] text-sm hover:translate-x-1 transition-transform" href="#">WhatsApp</a>
+</div>
+</div>
+<div class="col-span-4 md:col-span-1 space-y-4">
+<h4 class="text-white font-bold text-sm tracking-widest uppercase">Presence</h4>
+<p class="text-slate-500 font-['Inter'] text-sm">Address: Innovation Hub, Suite 402, Silicon District</p>
+</div>
+</div>
+</footer>
+</body></html>

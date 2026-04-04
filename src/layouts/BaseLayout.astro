@@ -1,0 +1,231 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const currentPath = Astro.url.pathname;
+const corePath = currentPath.replace(/^\/en/, '') || '/';
+const lang = Astro.currentLocale || 'id';
+
+const pathDescriptions = {
+  id: {
+    '/': 'VEIN TECH adalah perusahaan teknologi berfokus pada otomatisasi berbasis AI dan solusi digital untuk efisiensi bisnis.',
+    '/about': 'Pelajari lebih lanjut tentang visi VEIN TECH dalam merancang arsitektur masa depan yang cerdas dan efisien.',
+    '/services': 'Jelajahi ekosistem layanan kami: mulai dari sistem kecerdasan buatan, migrasi cloud, hingga keamanan Zero Trust.',
+    '/solutions': 'Solusi teknologi spesifik VEIN TECH dirancang untuk menyelesaikan tantangan operasional dan komunikasi enterprise.',
+    '/portfolio': 'Lihat studi kasus dan portofolio penerapan arsitektur teknologi kami pada berbagai industri global.',
+    '/n8n-workflows': 'Unduh dan pasang alur kerja otomatisasi n8n yang khusus dirancang oleh engineer VEIN TECH.',
+    '/blog': 'Wawasan analitis terbaru, pembaruan keamanan, dan berita teknologi dari divisi kecerdasan VEIN TECH.',
+    '/contact': 'Hubungi arsitek sistem VEIN TECH hari ini untuk mengamankan konsultasi teknis infrastruktur perusahaan Anda.'
+  },
+  en: {
+    '/': 'VEIN TECH is a software enterprise focusing on AI-driven automation and seamless digital system integrations.',
+    '/about': 'Learn more about VEIN TECH\'s vision in architecting smart and efficient future infrastructures.',
+    '/services': 'Explore our services ecosystem: from AI systems and cloud migration to Zero Trust security architectures.',
+    '/solutions': 'VEIN TECH\'s specific technological solutions designed to solve logistics, communication, and enterprise operational challenges.',
+    '/portfolio': 'Review case studies and portfolios of our technological architecture implementations across global industries.',
+    '/n8n-workflows': 'Download and deploy production-ready n8n automation workflows engineered by VEIN TECH.',
+    '/blog': 'Latest analytical insights, security updates, and technology news from the VEIN TECH intelligence division.',
+    '/contact': 'Contact VEIN TECH system architects today to secure your enterprise technical infrastructure consultation.'
+  }
+};
+
+const { title, description } = Astro.props;
+const finalDescription = description || (pathDescriptions[lang] && pathDescriptions[lang][corePath]) || pathDescriptions[lang]['/'];
+
+const siteUrl = Astro.site || 'https://veintech.id';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
+
+const pathWithoutEn = currentPath.replace(/^\/en/, '');
+const idUrl = new URL(pathWithoutEn === '' ? '/' : pathWithoutEn, siteUrl);
+const enUrl = new URL(pathWithoutEn === '' ? '/en' : `/en${pathWithoutEn}`, siteUrl);
+const ogImage = new URL('/opengraph.png', siteUrl);
+
+const isActive = (path: string) => {
+    const normalizedCore = corePath.endsWith('/') && corePath !== '/' ? corePath.slice(0, -1) : corePath;
+    if (path === '/') return normalizedCore === '/';
+    return normalizedCore.startsWith(path);
+};
+
+const t = {
+  id: {
+    home: "Beranda",
+    about: "Tentang Kami",
+    services: "Layanan",
+    solutions: "Solusi",
+    portfolio: "Portofolio",
+    workflows: "Alur n8n",
+    blog: "Blog",
+    contact: "Kontak",
+    consult: "Konsultasi",
+    footerDesc: "© 2024 Vector Integration Technology. Mengotomatisasi sistem untuk masa depan yang lebih cerdas.",
+    footerCompany: "Perusahaan",
+    basePath: ""
+  },
+  en: {
+    home: "Home",
+    about: "About Us",
+    services: "Services",
+    solutions: "Solutions",
+    portfolio: "Portfolio",
+    workflows: "n8n Workflows",
+    blog: "Blog",
+    contact: "Contact",
+    consult: "Consult Now",
+    footerDesc: "© 2024 Vector Integration Technology. Integrating systems for a smarter future.",
+    footerCompany: "Company",
+    basePath: "/en"
+  }
+}[lang as 'id' | 'en'];
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="UTF-8" />
+		<script is:inline>
+			// Force Dark Mode by default logic to avoid Flash of Unstyled Content
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				return 'dark'; // Defaulting to VEIN TECH brand identity
+			})();
+			if (theme === 'light') {
+				document.documentElement.classList.remove('dark');
+			} else {
+				document.documentElement.classList.add('dark');
+			}
+			window.localStorage.setItem('theme', theme);
+		</script>
+		<meta name="description" content={finalDescription} />
+		<!-- SEO & Routing -->
+		<link rel="canonical" href={canonicalUrl} />
+		<link rel="alternate" hreflang="id" href={idUrl} />
+		<link rel="alternate" hreflang="en" href={enUrl} />
+		<link rel="alternate" hreflang="x-default" href={idUrl} />
+		<!-- OpenGraph -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:title" content={`${title} | VEIN TECH`} />
+		<meta property="og:description" content={finalDescription} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:site_name" content="VEIN TECH" />
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={canonicalUrl} />
+		<meta name="twitter:title" content={`${title} | VEIN TECH`} />
+		<meta name="twitter:description" content={finalDescription} />
+		<meta name="twitter:image" content={ogImage} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} | VEIN TECH</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+	</head>
+	<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed-dim/30">
+		<nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-[#10141a]/60 backdrop-blur-xl">
+			<div class="flex justify-between items-center max-w-[1440px] mx-auto px-6 md:px-12 h-20">
+				<a href={`${t.basePath}/`} class="flex flex-shrink-0 items-center">
+					<img src="/logo.svg" alt="VeinTech Logo" class="h-auto w-30 md:w-48" />
+				</a>
+				<div class="hidden lg:flex items-center gap-8">
+					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/`}>{t.home}</a>
+					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/about') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/about`}>{t.about}</a>
+					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/services') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/services`}>{t.services}</a>
+					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/solutions') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/solutions`}>{t.solutions}</a>
+					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/portfolio') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/portfolio`}>{t.portfolio}</a>
+					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/n8n-workflows') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/n8n-workflows`}>{t.workflows}</a>
+					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/blog') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/blog`}>{t.blog}</a>
+					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/contact') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/contact`}>{t.contact}</a>
+				</div>
+				<div class="flex items-center gap-4">
+					<div class="flex items-center gap-2 text-[10px] md:text-xs font-headline font-bold text-slate-600 dark:text-slate-400 border border-outline-variant/30 px-2 py-1 md:px-3 md:py-2 rounded-lg bg-surface-container-low">
+						<a href={corePath} class={`hover:text-slate-900 dark:hover:text-white transition-colors ${lang === 'id' ? 'text-primary-fixed-dim' : ''}`}>ID</a>
+						<span class="text-outline-variant/50">|</span>
+						<a href={`/en${corePath === '/' ? '' : corePath}`} class={`hover:text-slate-900 dark:hover:text-white transition-colors ${lang === 'en' ? 'text-primary-fixed-dim' : ''}`}>EN</a>
+					</div>
+					<button id="theme-toggle" class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 rounded-md border border-outline-variant/30 bg-surface-container-low text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors mx-1" aria-label="Toggle Theme">
+						<span class="material-symbols-outlined dark:hidden block" style="font-size: 16px;">light_mode</span>
+						<span class="material-symbols-outlined hidden dark:block" style="font-size: 16px;">dark_mode</span>
+					</button>
+					<a href={`${t.basePath}/contact`} class="bg-gradient-to-br from-primary-fixed-dim to-on-primary-container text-on-primary-fixed font-semibold px-4 py-2 md:px-6 md:py-2.5 rounded-lg hover:opacity-90 transition-all scale-95 active:opacity-80 font-headline tracking-tight inline-block">
+						{t.consult}
+					</a>
+				</div>
+			</div>
+		</nav>
+
+		<main class="min-h-screen">
+			<slot />
+		</main>
+
+		<footer class="bg-surface-container-lowest w-full pt-20 pb-10">
+			<div class="max-w-[1440px] mx-auto px-12 grid grid-cols-1 md:grid-cols-4 gap-12">
+				<div class="col-span-1 md:col-span-1">
+					<div class="text-xl font-bold text-slate-900 dark:text-white mb-4 font-headline tracking-tighter">Vector Integration Technology</div>
+					<p class="font-body text-sm text-slate-600 dark:text-slate-400 opacity-90 leading-relaxed">
+						{t.footerDesc}
+					</p>
+				</div>
+				<div>
+					<h5 class="text-slate-900 dark:text-white font-headline font-bold mb-6 text-sm uppercase tracking-[0.2em]">{t.services}</h5>
+					<ul class="space-y-4">
+						<li><a class="text-slate-500 hover:text-cyan-300 transition-colors text-sm hover:translate-x-1 inline-block transform transition-transform duration-200" href={`${t.basePath}/services`}>AI Automation</a></li>
+						<li><a class="text-slate-500 hover:text-cyan-300 transition-colors text-sm hover:translate-x-1 inline-block transform transition-transform duration-200" href={`${t.basePath}/services`}>Systems Design</a></li>
+						<li><a class="text-slate-500 hover:text-cyan-300 transition-colors text-sm hover:translate-x-1 inline-block transform transition-transform duration-200" href={`${t.basePath}/services`}>Cloud Migration</a></li>
+					</ul>
+				</div>
+				<div>
+					<h5 class="text-slate-900 dark:text-white font-headline font-bold mb-6 text-sm uppercase tracking-[0.2em]">{t.footerCompany}</h5>
+					<ul class="space-y-4">
+						<li><a class="text-slate-500 hover:text-cyan-300 transition-colors text-sm hover:translate-x-1 inline-block transform transition-transform duration-200" href={`${t.basePath}/about`}>{t.about}</a></li>
+						<li><a class="text-slate-500 hover:text-cyan-300 transition-colors text-sm hover:translate-x-1 inline-block transform transition-transform duration-200" href={`${t.basePath}/contact`}>{t.contact}</a></li>
+						<li><a class="text-slate-500 hover:text-cyan-300 transition-colors text-sm hover:translate-x-1 inline-block transform transition-transform duration-200" href={`${t.basePath}/solutions`}>{t.solutions}</a></li>
+					</ul>
+				</div>
+				<div>
+					<h5 class="text-slate-900 dark:text-white font-headline font-bold mb-6 text-sm uppercase tracking-[0.2em]">{t.contact}</h5>
+					<ul class="space-y-4">
+						<li class="flex items-center gap-3 text-slate-500 text-sm">
+							<span class="material-symbols-outlined text-xs text-cyan-500" data-icon="mail">mail</span>
+							hello@vit-tech.io
+						</li>
+						<li class="flex items-center gap-3 text-slate-500 text-sm">
+							<span class="material-symbols-outlined text-xs text-cyan-500" data-icon="call">call</span>
+							WhatsApp Support
+						</li>
+						<li class="flex items-start gap-3 text-slate-500 text-sm">
+							<span class="material-symbols-outlined text-xs text-cyan-500" data-icon="location_on">location_on</span>
+							Tech Plaza Center, 42nd Floor<br/>Innovator District
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="max-w-[1440px] mx-auto px-12 mt-20 pt-8 border-t border-outline-variant/10 flex justify-between items-center text-[10px] uppercase tracking-[0.4em] text-slate-600">
+				<span>Precision Engineering since 2012</span>
+				<div class="flex gap-6">
+					<a class="hover:text-cyan-400 transition-colors" href="#">Privacy Policy</a>
+					<a class="hover:text-cyan-400 transition-colors" href="#">Terms of Service</a>
+				</div>
+			</div>
+		</footer>
+		
+		<script is:inline>
+			const themeToggleBtn = document.getElementById('theme-toggle');
+			if (themeToggleBtn) {
+				themeToggleBtn.addEventListener('click', () => {
+					document.documentElement.classList.toggle('dark');
+					const isDark = document.documentElement.classList.contains('dark');
+					localStorage.setItem('theme', isDark ? 'dark' : 'light');
+				});
+			}
+		</script>
+	</body>
+</html>

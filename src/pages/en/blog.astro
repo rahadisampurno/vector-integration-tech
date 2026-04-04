@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Blog & Insights">
+<main class="pt-32 pb-20 px-8 max-w-7xl mx-auto">
+<!-- Hero Header -->
+<header class="mb-20">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+<div class="max-w-2xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container/30 border border-outline-variant/15 rounded-full text-primary-fixed-dim text-xs font-label tracking-widest uppercase mb-6">
+<span class="w-2 h-2 rounded-full bg-primary-fixed-dim animate-pulse"></span>
+Intelligence & Analysis
+</div>
+<h1 class="text-5xl md:text-7xl xl:text-8xl font-bold leading-[0.9] tracking-tighter font-headline md: font-bold mb-6 text-slate-900 dark:text-white">
+                        Vector <span class="text-primary-fixed-dim">Insights</span>
+</h1>
+<p class="text-on-surface-variant text-lg max-w-lg font-light leading-relaxed">
+                        Navigating the frontier of enterprise automation and integrated neural architectures through technical research and industrial strategy.
+                    </p>
+</div>
+<div class="flex gap-4 mb-2">
+<button class="w-12 h-12 flex items-center justify-center rounded-lg border border-outline-variant/30 text-on-surface-variant hover:border-primary/50 transition-all">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-lg border border-outline-variant/30 text-on-surface-variant hover:border-primary/50 transition-all">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Featured Post -->
+<article class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-low border border-outline-variant/15">
+<div class="node-indicator"></div>
+<div class="grid grid-cols-1 lg:grid-cols-2 h-full">
+<div class="relative min-h-[300px] overflow-hidden">
+<img alt="AI Visualization" class="absolute inset-0 w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" data-alt="Abstract 3D render of glowing blue neural network nodes and data pathways connecting in a dark digital void" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8g5ap4y1Mwj0NJP3NJcfZVhz_ToYY1GVErhH7UgMQesP5ReejgmhtSy2qagAQR5cskaXPURf6PoyRFVwAa5zci5mMr6djIiJNLU6AIIo7dOmpINH_E2oAaR0T33O8PBXfvXAI26ZQpCbrTK6WzvIXc7oGPs8oxavj-YmPsvIAapHq4uxy_pUOqHNtqJCKy18cvgYKzc9U4Y-sJKzUVwGqQnZrH6tf5tqqW7DsJdUVcMWFWXIpa5sr4bw4HtdPxud7i6Y07w6Nhoi8"/>
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container-low via-transparent to-transparent hidden lg:block"></div>
+</div>
+<div class="p-10 flex flex-col justify-center">
+<div class="flex gap-2 mb-4">
+<span class="bg-secondary-container/50 px-2 py-0.5 rounded text-[10px] font-bold tracking-widest uppercase text-on-secondary-container">Strategic AI</span>
+<span class="text-on-surface-variant text-[10px] font-bold tracking-widest uppercase">12 Min Read</span>
+</div>
+<h2 class="font-headline text-3xl font-bold mb-4 text-slate-900 dark:text-white group-hover:text-primary transition-colors">The Future of AI in Business</h2>
+<p class="text-on-surface-variant mb-8 line-clamp-3 font-light leading-relaxed">
+                            How synthetic intelligence layers are restructuring the fundamental architecture of modern corporate decision-making and autonomous operations.
+                        </p>
+<div class="mt-auto">
+<a class="inline-flex items-center gap-2 text-primary font-bold tracking-tight hover:gap-4 transition-all" href="#">
+                                READ ARTICLE <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</article>
+<!-- Secondary Post -->
+<article class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-low border border-outline-variant/15 p-8 flex flex-col">
+<div class="absolute top-0 right-0 w-24 h-24 opacity-10">
+<span class="material-symbols-outlined text-8xl">precision_manufacturing</span>
+</div>
+<div class="mb-6">
+<span class="bg-primary-container/20 text-primary-fixed-dim px-2 py-0.5 rounded text-[10px] font-bold tracking-widest uppercase">Automation</span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-4 leading-tight text-slate-900 dark:text-white group-hover:text-primary transition-colors">Automation in Industry</h3>
+<p class="text-on-surface-variant font-light text-sm mb-8 leading-relaxed">
+                    Analyzing the intersection of physical robotics and digital neural controllers in next-generation manufacturing hubs.
+                </p>
+<div class="mt-auto pt-6 border-t border-outline-variant/20 flex items-center justify-between">
+<span class="text-[10px] font-bold text-on-surface-variant tracking-widest uppercase">Jan 18, 2024</span>
+<a class="text-primary hover:text-slate-900 dark:hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">north_east</span>
+</a>
+</div>
+</article>
+<!-- Content Row 2 -->
+<article class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-low border border-outline-variant/15">
+<div class="aspect-video relative overflow-hidden">
+<img alt="System Integration" class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-500" data-alt="Close-up of server racks with blue LED lights blinking in a high-tech data center environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBn-H96vWv_OogF_ibP1CvBdjCB-zrWxcL6-_0Ncx7x0Gn8n2sZ89mYgI7gWkZCa1imDsyz-XQ-4MLkocnxorZYDmsC5VzekSHs2HCE26CpjgONmNMQykmxN1-BHEQTXffZT6cXg-W5zHPK4m3x-ghJkbhOfqOJRbKbaBMyTqtcG27SbTxTCYP1Hm5PO7vYJseZYL_sV9qHuV5NppvNG4EHikp7aSWqYA3bXdA6FtmIsZK9jaIDRbkL_ItEr_2rlG5UIT5LsQR7zsM"/>
+</div>
+<div class="p-8">
+<h3 class="font-headline text-xl font-bold mb-3 text-slate-900 dark:text-white group-hover:text-primary transition-colors uppercase tracking-tight">Enterprise System Integration</h3>
+<p class="text-on-surface-variant text-sm font-light mb-6">Unifying disparate legacy stacks into a singular, fluid intelligence layer.</p>
+<a class="text-xs font-bold tracking-widest text-primary-fixed-dim hover:text-slate-900 dark:hover:text-white transition-all" href="#">VIEW CASE STUDY</a>
+</div>
+</article>
+<article class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-low border border-outline-variant/15 p-10 flex flex-col justify-center">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-primary-fixed-dim/10 flex items-center justify-center text-primary-fixed-dim">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">terminal</span>
+</div>
+<div>
+<h3 class="font-headline text-2xl font-bold tracking-tight text-slate-900 dark:text-white group-hover:text-primary transition-colors">DevOps Best Practices</h3>
+<p class="text-on-surface-variant text-xs uppercase tracking-widest">Engineering Excellence</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<p class="text-on-surface-variant font-light leading-relaxed">
+                        Streamlining the deployment pipeline through automated validation and container orchestration protocols. Learn how to reduce technical debt while accelerating release velocity.
+                    </p>
+<ul class="space-y-3">
+<li class="flex items-center gap-3 text-sm text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Continuous Integration Loops
+                        </li>
+<li class="flex items-center gap-3 text-sm text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Microservices Decoupling
+                        </li>
+<li class="flex items-center gap-3 text-sm text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Automated Threat Scanning
+                        </li>
+</ul>
+</div>
+<div class="mt-8">
+<a class="inline-flex items-center gap-3 bg-surface-container-high px-5 py-2.5 rounded text-xs font-bold tracking-widest uppercase text-slate-900 dark:text-white hover:bg-primary-fixed-dim hover:text-on-primary transition-all" href="#">
+                        Explore Methodology
+                    </a>
+</div>
+</article>
+</div>
+<!-- Pagination/Load More -->
+<div class="mt-20 flex flex-col items-center">
+<button class="group flex flex-col items-center gap-4">
+<span class="text-[10px] font-bold tracking-widest uppercase text-on-surface-variant">Syncing More Articles</span>
+<div class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary group-hover:rotate-180 transition-transform duration-500">expand_more</span>
+</div>
+</button>
+</div>
+</main>
+
+<style>
+.glass-card {
+    background: rgba(28, 32, 38, 0.6);
+    backdrop-filter: blur(12px);
+}
+.node-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 4px;
+    background-color: #4cd6ff;
+}
+.tonal-transition {
+    background: linear-gradient(to bottom, transparent, rgba(24, 28, 34, 0.4));
+}
+</style>
+</BaseLayout>

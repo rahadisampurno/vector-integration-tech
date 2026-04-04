@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Contact Us | Vector Integration Technology</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-primary": "#00677f",
+            "primary-fixed-dim": "#4cd6ff",
+            "inverse-on-surface": "#2d3137",
+            "on-surface-variant": "#bac9cc",
+            "on-primary-container": "#006178",
+            "inverse-surface": "#dfe2eb",
+            "on-error": "#690005",
+            "on-tertiary-container": "#455a74",
+            "surface-bright": "#353940",
+            "on-primary-fixed": "#001f28",
+            "on-secondary-container": "#adb8d3",
+            "on-secondary-fixed-variant": "#3c475d",
+            "on-primary-fixed-variant": "#004e60",
+            "on-secondary": "#263046",
+            "on-tertiary": "#1b324a",
+            "surface-container-lowest": "#0a0e14",
+            "primary-fixed": "#b7eaff",
+            "tertiary-fixed-dim": "#b2c8e7",
+            "on-primary": "#003543",
+            "surface-container-low": "#181c22",
+            "primary": "#d2f2ff",
+            "on-background": "#dfe2eb",
+            "surface-variant": "#31353c",
+            "secondary-fixed-dim": "#bbc6e2",
+            "surface-container-highest": "#31353c",
+            "on-error-container": "#ffdad6",
+            "error": "#ffb4ab",
+            "surface-dim": "#10141a",
+            "secondary-container": "#3e4960",
+            "tertiary": "#e2edff",
+            "surface-container-high": "#262a31",
+            "on-surface": "#dfe2eb",
+            "outline": "#849396",
+            "on-secondary-fixed": "#101b30",
+            "on-tertiary-fixed": "#031d34",
+            "secondary-fixed": "#d7e2ff",
+            "background": "#10141a",
+            "on-tertiary-fixed-variant": "#334861",
+            "surface-container": "#1c2026",
+            "error-container": "#93000a",
+            "primary-container": "#7bddff",
+            "outline-variant": "#3b494c",
+            "surface": "#10141a",
+            "tertiary-container": "#bcd2f1",
+            "secondary": "#bbc6e2",
+            "surface-tint": "#4cd6ff",
+            "tertiary-fixed": "#d1e4ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "fontFamily": {
+            "headline": ["Space Grotesk"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #10141a;
+      color: #dfe2eb;
+    }
+
+    .font-headline {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .node-indicator {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background-color: #4cd6ff;
+      top: 0;
+      left: 0;
+    }
+
+    .tonal-transition {
+      background: linear-gradient(to bottom, #10141a, transparent);
+    }
+  </style>
+</head>
+
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+  <!-- TopNavBar -->
+  <nav class="fixed top-0 w-full z-50 bg-[#10141a]/60 backdrop-blur-xl tonal-transition">
+    <div class="flex justify-between items-center max-w-[1440px] mx-auto px-12 h-20">
+      <div class="text-2xl font-bold tracking-tighter text-white font-headline">Vector Integration Technology</div>
+      <div class="hidden md:flex items-center space-x-8 font-headline tracking-tight">
+        <a class="text-slate-400 hover:text-white transition-colors" href="#">Home</a>
+        <a class="text-slate-400 hover:text-white transition-colors" href="#">About Us</a>
+        <a class="text-slate-400 hover:text-white transition-colors" href="#">Services</a>
+        <a class="text-slate-400 hover:text-white transition-colors" href="#">Solutions</a>
+        <a class="text-slate-400 hover:text-white transition-colors" href="#">Portfolio</a>
+        <a class="text-slate-400 hover:text-white transition-colors" href="#">Blog</a>
+        <a class="text-cyan-400 border-b-2 border-cyan-400 pb-1" href="#">Contact</a>
+      </div>
+      <button
+        class="bg-gradient-to-br from-primary-fixed-dim to-on-primary-container text-on-primary-fixed px-6 py-2.5 rounded-lg font-bold transition-all scale-95 active:opacity-80">
+        Consult Now
+      </button>
+    </div>
+  </nav>
+  <main class="pt-32 pb-20">
+    <!-- Hero Section Asymmetry -->
+    <section class="max-w-[1440px] mx-auto px-12 mb-24">
+      <div class="grid grid-cols-12 gap-8 items-end">
+        <div class="col-span-12 lg:col-span-7">
+          <span class="text-primary-fixed-dim font-label text-sm uppercase tracking-[0.2em] mb-4 block">Get in
+            Touch</span>
+          <h1 class="text-6xl md:text-8xl font-headline font-bold leading-[0.9] tracking-tighter text-white">
+            Connect with the <br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-fixed-dim to-secondary">Future of
+              Systems.</span>
+          </h1>
+        </div>
+        <div class="col-span-12 lg:col-span-5 pb-4">
+          <p class="text-on-surface-variant text-lg max-w-md leading-relaxed">
+            Ready to integrate? Our team of architects is standing by to transform your technical infrastructure into a
+            kinetic ecosystem.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- Main Content Grid -->
+    <section class="max-w-[1440px] mx-auto px-12 grid grid-cols-1 md:grid-cols-12 gap-12">
+      <!-- Contact Form Container -->
+      <div class="md:col-span-7 lg:col-span-8 bg-surface-container-low rounded-lg p-10 relative">
+        <div class="node-indicator"></div>
+        <h2 class="text-3xl font-headline font-bold mb-8 text-white">Initiate Consultation</h2>
+        <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-2">
+            <label class="text-xs font-label uppercase tracking-widest text-slate-500">Nama</label>
+            <input
+              class="w-full bg-surface-container-lowest border-none rounded-lg p-4 focus:ring-1 focus:ring-primary-fixed-dim text-on-surface placeholder:text-slate-600 transition-all"
+              placeholder="Full Name" type="text" />
+          </div>
+          <div class="space-y-2">
+            <label class="text-xs font-label uppercase tracking-widest text-slate-500">Email</label>
+            <input
+              class="w-full bg-surface-container-lowest border-none rounded-lg p-4 focus:ring-1 focus:ring-primary-fixed-dim text-on-surface placeholder:text-slate-600 transition-all"
+              placeholder="work@company.com" type="email" />
+          </div>
+          <div class="space-y-2">
+            <label class="text-xs font-label uppercase tracking-widest text-slate-500">Perusahaan</label>
+            <input
+              class="w-full bg-surface-container-lowest border-none rounded-lg p-4 focus:ring-1 focus:ring-primary-fixed-dim text-on-surface placeholder:text-slate-600 transition-all"
+              placeholder="Organization Name" type="text" />
+          </div>
+          <div class="space-y-2">
+            <label class="text-xs font-label uppercase tracking-widest text-slate-500">Kebutuhan layanan</label>
+            <select
+              class="w-full bg-surface-container-lowest border-none rounded-lg p-4 focus:ring-1 focus:ring-primary-fixed-dim text-on-surface appearance-none transition-all">
+              <option>System Integration</option>
+              <option>Cloud Infrastructure</option>
+              <option>Data Intelligence</option>
+              <option>Cybersecurity</option>
+            </select>
+          </div>
+          <div class="md:col-span-2 space-y-2">
+            <label class="text-xs font-label uppercase tracking-widest text-slate-500">Pesan</label>
+            <textarea
+              class="w-full bg-surface-container-lowest border-none rounded-lg p-4 focus:ring-1 focus:ring-primary-fixed-dim text-on-surface placeholder:text-slate-600 transition-all"
+              placeholder="Tell us about your project challenges..." rows="5"></textarea>
+          </div>
+          <div class="md:col-span-2 pt-4">
+            <button
+              class="w-full md:w-auto bg-gradient-to-r from-primary-fixed-dim to-on-primary-container text-on-primary-fixed px-10 py-4 rounded-lg font-bold text-lg hover:brightness-110 transition-all shadow-lg shadow-primary/5">
+              Send Transmission
+            </button>
+          </div>
+        </form>
+      </div>
+      <!-- Sidebar Info -->
+      <div class="md:col-span-5 lg:col-span-4 space-y-8">
+        <!-- Contact Info Cards -->
+        <div class="bg-surface-container-low rounded-lg p-8 relative overflow-hidden">
+          <div class="node-indicator"></div>
+          <div class="relative z-10">
+            <h3 class="text-xl font-headline font-bold mb-6 text-white">Direct Communication</h3>
+            <div class="space-y-6">
+              <div class="flex items-start gap-4">
+                <div class="bg-primary-container/10 p-3 rounded-lg">
+                  <span class="material-symbols-outlined text-primary-fixed-dim">mail</span>
+                </div>
+                <div>
+                  <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-1">Email</p>
+                  <p class="text-on-surface font-medium">connect@vit-systems.com</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="bg-primary-container/10 p-3 rounded-lg">
+                  <span class="material-symbols-outlined text-primary-fixed-dim">chat</span>
+                </div>
+                <div>
+                  <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-1">WhatsApp</p>
+                  <p class="text-on-surface font-medium">+62 812-3456-7890</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="bg-primary-container/10 p-3 rounded-lg">
+                  <span class="material-symbols-outlined text-primary-fixed-dim">location_on</span>
+                </div>
+                <div>
+                  <p class="text-xs font-label uppercase tracking-widest text-slate-500 mb-1">Office Address</p>
+                  <p class="text-on-surface font-medium leading-relaxed">
+                    Vector Plaza, 42nd Floor<br />
+                    Sudirman Central Business District<br />
+                    Jakarta, Indonesia 12190
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Subtle Tech Background Ornament -->
+          <div class="absolute -bottom-10 -right-10 opacity-5 pointer-events-none">
+            <span class="material-symbols-outlined text-[160px]">hub</span>
+          </div>
+        </div>
+        <!-- Small Map Preview or Identity Card -->
+        <div class="bg-surface-container p-8 rounded-lg border border-outline-variant/10">
+          <p class="text-sm italic text-on-surface-variant leading-relaxed">
+            "VEIN transforms fragmented systems into a unified kinetic force. Our technical support is available 24/7
+            for enterprise-tier clients."
+          </p>
+          <div class="mt-4 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-slate-800 overflow-hidden">
+              <img class="w-full h-full object-cover"
+                data-alt="professional male executive portrait in dark suit with focused expression and corporate tech background"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBK54rD8iVFS4PU5Xd5x9-ZvWRgQSYdNheU3Uu86y1fz9-weRHR4YBrCkui4i_tsMgMFRkxFuEe0OOy37EJOOR7XlwLwf4799K-NXuu7LmOvDDSEU1ONBeBGcrasS_aTSGy9g1jRm-DQ3EP9DRDzqQ0Hy0owKaSPKtZz0gB9WQ6NSqKK1CjbKa8wXgWABTM_z6vyw1WwjKWCadBbMyAh8-OjNYcxEACz_anCXfRQOMEcS8WYxpCEhVy7rf-TgILlnq5IGx-tQ8KIWNW" />
+            </div>
+            <div>
+              <p class="text-sm font-bold text-white">Chief Integration Officer</p>
+              <p class="text-xs text-slate-500">Vector Integration Tech</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Map Section -->
+    <section class="max-w-[1440px] mx-auto px-12 mt-20">
+      <div class="rounded-xl overflow-hidden h-[500px] relative border border-outline-variant/10">
+        <div class="absolute inset-0 bg-surface-container-lowest flex items-center justify-center">
+          <!-- High-tech map representation -->
+          <div class="w-full h-full opacity-50 grayscale contrast-125"
+            data-alt="stylized dark monochrome map of a modern city center with neon data connection lines and digital overlays"
+            data-location="Jakarta"
+            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDqYvSgoynTvmQ1S2XrOMZp8WKqLsOtC7dj8kz-EZDzy-um1X5se50RPrF-LiaOL2wo0oVB5MfGdkizbefn1-Q1-HQ9_8N2j7OyA7AkIs_yj2BS6u84dCtb4LxhxnLqAWTwRdx_OODuhGo8vaTI932-MFlx2Er3zd87Um0l3g-bZQVbD-2LGVagdZsdnX5Y0_rOgIpouXlDUG6DnExQljFTv8_J-ZOVK7ABQCXKxsZkmTmU_KLfHQXjvLSUHMVAOGS86iClh4fj6rto'); background-size: cover; background-position: center;">
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"></div>
+          <!-- Map Pin -->
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+            <div
+              class="bg-primary-fixed-dim text-on-primary-fixed px-4 py-2 rounded-lg font-headline font-bold mb-2 shadow-2xl shadow-primary/20">
+              VEIN HEADQUARTERS
+            </div>
+            <div class="w-6 h-6 bg-primary-fixed-dim rounded-full animate-pulse flex items-center justify-center">
+              <div class="w-2 h-2 bg-on-primary-fixed rounded-full"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Floating Map Overlay -->
+        <div
+          class="absolute bottom-8 left-8 bg-surface-container-high/80 backdrop-blur-md p-6 rounded-lg max-w-xs border border-outline-variant/20">
+          <h4 class="text-white font-headline font-bold mb-2">Visit Our Lab</h4>
+          <p class="text-on-surface-variant text-sm mb-4">Experience our live system integrations in our Jakarta
+            experience center.</p>
+          <a class="text-primary-fixed-dim text-sm font-bold flex items-center gap-2 hover:translate-x-1 transition-transform"
+            href="#">
+            Get Navigation Directions
+            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- Footer -->
+  <footer class="bg-[#0b0e12] w-full pt-20 pb-10">
+    <div class="max-w-[1440px] mx-auto px-12 grid grid-cols-1 md:grid-cols-4 gap-12">
+      <div class="col-span-1">
+        <div class="text-xl font-bold text-white mb-4 font-headline tracking-tighter">Vector Integration Technology
+        </div>
+        <p class="text-slate-500 font-body text-sm leading-relaxed">
+          Engineering the digital nervous system of the modern enterprise through precision integration and kinetic data
+          intelligence.
+        </p>
+      </div>
+      <div>
+        <h4 class="text-white font-headline font-bold mb-6">Services</h4>
+        <ul class="space-y-4 text-slate-500 font-body text-sm">
+          <li><a class="hover:text-cyan-300 transition-colors hover:translate-x-1 inline-block" href="#">System
+              Integration</a></li>
+          <li><a class="hover:text-cyan-300 transition-colors hover:translate-x-1 inline-block" href="#">Legacy
+              Transformation</a></li>
+          <li><a class="hover:text-cyan-300 transition-colors hover:translate-x-1 inline-block" href="#">Cloud
+              Ecosystems</a></li>
+          <li><a class="hover:text-cyan-300 transition-colors hover:translate-x-1 inline-block" href="#">Security
+              Architecture</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-headline font-bold mb-6">Company</h4>
+        <ul class="space-y-4 text-slate-500 font-body text-sm">
+          <li><a class="hover:text-cyan-300 transition-colors hover:translate-x-1 inline-block" href="#">About Us</a>
+          </li>
+          <li><a class="hover:text-cyan-300 transition-colors hover:translate-x-1 inline-block" href="#">Career</a></li>
+          <li><a class="hover:text-cyan-300 transition-colors hover:translate-x-1 inline-block" href="#">Press Kit</a>
+          </li>
+          <li><a class="hover:text-cyan-300 transition-colors hover:translate-x-1 inline-block" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-headline font-bold mb-6">Connection</h4>
+        <ul class="space-y-4 text-slate-500 font-body text-sm">
+          <li class="flex items-center gap-2"><span class="material-symbols-outlined text-xs">mail</span>
+            connect@vit-systems.com</li>
+          <li class="flex items-center gap-2"><span class="material-symbols-outlined text-xs">chat</span> WhatsApp
+            Business</li>
+          <li class="flex items-center gap-2"><span class="material-symbols-outlined text-xs">pin_drop</span> Jakarta,
+            Indonesia</li>
+        </ul>
+      </div>
+    </div>
+    <div
+      class="max-w-[1440px] mx-auto px-12 mt-20 pt-8 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-slate-500 text-sm">© 2024 Vector Integration Technology. Integrating systems for a smarter future.
+      </p>
+      <div class="flex gap-8 text-xs font-label uppercase tracking-widest text-slate-600">
+        <a class="hover:text-primary-fixed-dim transition-colors" href="#">Privacy Policy</a>
+        <a class="hover:text-primary-fixed-dim transition-colors" href="#">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

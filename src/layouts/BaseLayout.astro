@@ -35,7 +35,6 @@ const pathDescriptions = {
     '/': 'VEINTECH adalah perusahaan teknologi berfokus pada otomatisasi berbasis AI dan solusi digital untuk efisiensi bisnis.',
     '/about': 'Pelajari lebih lanjut tentang visi VEINTECH dalam merancang arsitektur masa depan yang cerdas dan efisien.',
     '/services': 'Jelajahi ekosistem layanan kami: mulai dari sistem kecerdasan buatan, migrasi cloud, hingga keamanan Zero Trust.',
-    '/solutions': 'Solusi teknologi spesifik VEINTECH dirancang untuk menyelesaikan tantangan operasional dan komunikasi enterprise.',
     '/portfolio': 'Lihat studi kasus dan portofolio penerapan arsitektur teknologi kami pada berbagai industri global.',
     '/n8n-workflows': 'Unduh dan pasang alur kerja otomatisasi n8n yang khusus dirancang oleh engineer VEINTECH.',
     '/blog': 'Wawasan analitis terbaru, pembaruan keamanan, dan berita teknologi dari divisi kecerdasan VEINTECH.',
@@ -45,7 +44,6 @@ const pathDescriptions = {
     '/': 'VEINTECH is a software enterprise focusing on AI-driven automation and seamless digital system integrations.',
     '/about': 'Learn more about VEINTECH\'s vision in architecting smart and efficient future infrastructures.',
     '/services': 'Explore our services ecosystem: from AI systems and cloud migration to Zero Trust security architectures.',
-    '/solutions': 'VEINTECH\'s specific technological solutions designed to solve logistics, communication, and enterprise operational challenges.',
     '/portfolio': 'Review case studies and portfolios of our technological architecture implementations across global industries.',
     '/n8n-workflows': 'Download and deploy production-ready n8n automation workflows engineered by VEINTECH.',
     '/blog': 'Latest analytical insights, security updates, and technology news from the VEINTECH intelligence division.',
@@ -74,7 +72,6 @@ const t = {
     home: "Beranda",
     about: "Tentang Kami",
     services: "Layanan",
-    solutions: "Solusi",
     portfolio: "Portofolio",
     workflows: "Alur n8n",
     blog: "Blog",
@@ -88,7 +85,6 @@ const t = {
     home: "Home",
     about: "About Us",
     services: "Services",
-    solutions: "Solutions",
     portfolio: "Portfolio",
     workflows: "n8n Workflows",
     blog: "Blog",
@@ -224,7 +220,6 @@ const t = {
 							</div>
 						</div>
 					</div>
-					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/solutions') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/solutions`}>{t.solutions}</a>
 					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/portfolio') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/portfolio`}>{t.portfolio}</a>
 					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/n8n-workflows') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/n8n-workflows`}>{t.workflows}</a>
 					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/blog') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/blog`}>{t.blog}</a>
@@ -284,7 +279,6 @@ const t = {
                         </a>
                     </div>
                 </div>
-                <a class={`transition-colors ${isActive('/solutions') ? 'text-primary-fixed-dim drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-600 dark:text-slate-300'}`} href={`${t.basePath}/solutions`}>{t.solutions}</a>
                 <a class={`transition-colors ${isActive('/portfolio') ? 'text-primary-fixed-dim drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-600 dark:text-slate-300'}`} href={`${t.basePath}/portfolio`}>{t.portfolio}</a>
                 <a class={`transition-colors ${isActive('/n8n-workflows') ? 'text-primary-fixed-dim drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-600 dark:text-slate-300'}`} href={`${t.basePath}/n8n-workflows`}>{t.workflows}</a>
                 <a class={`transition-colors ${isActive('/blog') ? 'text-primary-fixed-dim drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-600 dark:text-slate-300'}`} href={`${t.basePath}/blog`}>{t.blog}</a>
@@ -322,7 +316,6 @@ const t = {
 					<ul class="space-y-4">
 						<li><a class="text-slate-500 hover:text-cyan-300 transition-colors text-sm hover:translate-x-1 inline-block transform transition-transform duration-200" href={`${t.basePath}/about`}>{t.about}</a></li>
 						<li><a class="text-slate-500 hover:text-cyan-300 transition-colors text-sm hover:translate-x-1 inline-block transform transition-transform duration-200" href={`${t.basePath}/contact`}>{t.contact}</a></li>
-						<li><a class="text-slate-500 hover:text-cyan-300 transition-colors text-sm hover:translate-x-1 inline-block transform transition-transform duration-200" href={`${t.basePath}/solutions`}>{t.solutions}</a></li>
 					</ul>
 				</div>
 				<div>

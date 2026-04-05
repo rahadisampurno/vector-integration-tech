@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const techStack = [
   { icon: 'memory', label: 'Pusat AI' },
   { icon: 'cloud', label: 'Cloud Native' },
+  { icon: 'forum', label: 'Orkestrasi API WhatsApp' },
   { icon: 'api', label: 'Integrasi API' },
   { icon: 'settings_slow_motion', label: 'Otomatisasi' },
   { icon: 'database', label: 'Rekayasa Data' },
@@ -30,9 +31,30 @@ const techStack = [
 <h1 class="text-5xl md:text-6xl xl:text-7xl font-bold leading-[1.05] tracking-tighter font-headline text-slate-900 dark:text-white break-words relative z-20">
                     Meningkatkan Produktivitas dan Efisiensi <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-fixed-dim to-on-primary-container">Alur Kerja Anda.</span>
 </h1>
-<p class="text-on-surface-variant text-lg leading-relaxed max-w-lg mt-6">
-                    VEINTECH adalah perusahaan teknologi yang berfokus pada sistem otomatisasi berbasis AI dan solusi digital untuk efisiensi bisnis.
+<p id="hero-desc-carousel" class="text-on-surface-variant text-lg leading-relaxed max-w-lg mt-6 min-h-[90px] transition-opacity duration-500">
+                    Menyatukan berbagai perangkat lunak bisnis Anda ke dalam satu alur kerja otomatis.
                 </p>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const lines = [
+            "Menyatukan berbagai perangkat lunak bisnis Anda ke dalam satu alur kerja otomatis.",
+            "Menghadirkan Kecerdasan Buatan (AI) ke dalam sistem Anda untuk operasional yang lebih cerdas.",
+            "Melindungi seluruh data perusahaan dengan pondasi keamanan siber tingkat tinggi (Zero Trust)."
+        ];
+        let i = 0;
+        const el = document.getElementById("hero-desc-carousel");
+        if(el) {
+            setInterval(() => {
+                el.style.opacity = '0';
+                setTimeout(() => {
+                    i = (i + 1) % lines.length;
+                    el.textContent = lines[i];
+                    el.style.opacity = '1';
+                }, 500); 
+            }, 4000); 
+        }
+    });
+</script>
 <div class="flex flex-wrap gap-4">
 <button class="bg-gradient-to-br from-primary-fixed-dim to-on-primary-container text-on-primary-fixed px-8 py-4 rounded-lg font-bold font-headline shadow-lg shadow-primary-fixed-dim/40 dark:shadow-primary-fixed-dim/20 transition-all hover:-translate-y-1 hover:brightness-110 flex items-center justify-center gap-2 group w-full md:w-auto">
                         Konsultasi Sekarang
@@ -47,21 +69,45 @@ const techStack = [
 <div class="absolute -inset-4 bg-primary-fixed-dim/5 blur-3xl rounded-full"></div>
 <div class="relative bg-surface-container-low border border-outline-variant/15 p-8 rounded-xl backdrop-blur-md">
 <div class="grid grid-cols-2 gap-4">
-<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-end p-6 group hover:bg-surface-container-high transition-all node-indicator relative">
-<span class="material-symbols-outlined text-primary-fixed-dim mb-4" data-icon="hub">hub</span>
-<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-xs tracking-widest">Konektivitas</span>
+<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-between p-6 group hover:bg-surface-container-high transition-all node-indicator relative">
+<div class="flex items-start justify-between w-full">
+<span class="material-symbols-outlined text-primary-fixed-dim text-2xl transform group-hover:-translate-y-1 group-hover:scale-110 transition-transform" data-icon="hub">hub</span>
+<span class="text-[10px] font-mono text-outline-variant font-bold tracking-widest opacity-50">01</span>
 </div>
-<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-end p-6 group hover:bg-surface-container-high transition-all">
-<span class="material-symbols-outlined text-primary-fixed-dim mb-4" data-icon="psychology">psychology</span>
-<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-xs tracking-widest">Kecerdasan</span>
+<div>
+<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-[11px] tracking-widest block mb-2">Konektivitas</span>
+<span class="text-[10px] text-on-surface-variant leading-relaxed block group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">Menghubungkan ratusan sistem IT menjadi satu antarmuka via API.</span>
 </div>
-<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-end p-6 group hover:bg-surface-container-high transition-all">
-<span class="material-symbols-outlined text-primary-fixed-dim mb-4" data-icon="settings_input_component">settings_input_component</span>
-<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-xs tracking-widest">Otomatisasi</span>
 </div>
-<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-end p-6 group hover:bg-surface-container-high transition-all node-indicator relative">
-<span class="material-symbols-outlined text-primary-fixed-dim mb-4" data-icon="shield">shield</span>
-<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-xs tracking-widest">Keamanan</span>
+<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-between p-6 group hover:bg-surface-container-high transition-all">
+<div class="flex items-start justify-between w-full">
+<span class="material-symbols-outlined text-primary-fixed-dim text-2xl transform group-hover:-translate-y-1 group-hover:scale-110 transition-transform" data-icon="psychology">psychology</span>
+<span class="text-[10px] font-mono text-outline-variant font-bold tracking-widest opacity-50">02</span>
+</div>
+<div>
+<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-[11px] tracking-widest block mb-2">Kecerdasan</span>
+<span class="text-[10px] text-on-surface-variant leading-relaxed block group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">Mesin AI analitik prediktif untuk keputusan bisnis presisi tinggi.</span>
+</div>
+</div>
+<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-between p-6 group hover:bg-surface-container-high transition-all">
+<div class="flex items-start justify-between w-full">
+<span class="material-symbols-outlined text-primary-fixed-dim text-2xl transform group-hover:-translate-y-1 group-hover:scale-110 transition-transform" data-icon="settings_input_component">settings_input_component</span>
+<span class="text-[10px] font-mono text-outline-variant font-bold tracking-widest opacity-50">03</span>
+</div>
+<div>
+<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-[11px] tracking-widest block mb-2">Otomatisasi</span>
+<span class="text-[10px] text-on-surface-variant leading-relaxed block group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">Menyulap tugas repetitif manual menjadi alur kerja secepat kilat.</span>
+</div>
+</div>
+<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-between p-6 group hover:bg-surface-container-high transition-all node-indicator relative">
+<div class="flex items-start justify-between w-full">
+<span class="material-symbols-outlined text-primary-fixed-dim text-2xl transform group-hover:-translate-y-1 group-hover:scale-110 transition-transform" data-icon="shield">shield</span>
+<span class="text-[10px] font-mono text-outline-variant font-bold tracking-widest opacity-50">04</span>
+</div>
+<div>
+<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-[11px] tracking-widest block mb-2">Keamanan Zero Trust</span>
+<span class="text-[10px] text-on-surface-variant leading-relaxed block group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">Infrastruktur tangguh pro-kepatuhan hukum UU PDP Indonesia.</span>
+</div>
 </div>
 </div>
 </div>

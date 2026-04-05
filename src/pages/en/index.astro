@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const techStack = [
   { icon: 'memory', label: 'AI Core' },
   { icon: 'cloud', label: 'Cloud Native' },
+  { icon: 'forum', label: 'WhatsApp API Orchestration' },
   { icon: 'api', label: 'API Integration' },
   { icon: 'settings_slow_motion', label: 'Automation' },
   { icon: 'database', label: 'Data Engineering' },
@@ -30,9 +31,30 @@ const techStack = [
 <h1 class="text-5xl md:text-6xl xl:text-7xl font-bold leading-[1.05] tracking-tighter font-headline text-slate-900 dark:text-white break-words relative z-20">
                     Increasing the Productivity and Efficiency of <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-fixed-dim to-on-primary-container">Your Workflows.</span>
 </h1>
-<p class="text-on-surface-variant text-lg leading-relaxed max-w-lg mt-6">
-                    VEINTECH is a technology company focused on AI-based automation systems and digital solutions for business efficiency.
+<p id="hero-desc-carousel-en" class="text-on-surface-variant text-lg leading-relaxed max-w-lg mt-6 min-h-[90px] transition-opacity duration-500">
+                    Unifying your disparate business software into a single, fully automated workflow.
                 </p>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const lines = [
+            "Unifying your disparate business software into a single, fully automated workflow.",
+            "Integrating Artificial Intelligence into your systems for smarter, faster operations.",
+            "Securing your entire enterprise data with high-grade cyber security foundations (Zero Trust)."
+        ];
+        let i = 0;
+        const el = document.getElementById("hero-desc-carousel-en");
+        if(el) {
+            setInterval(() => {
+                el.style.opacity = '0';
+                setTimeout(() => {
+                    i = (i + 1) % lines.length;
+                    el.textContent = lines[i];
+                    el.style.opacity = '1';
+                }, 500); 
+            }, 4000); 
+        }
+    });
+</script>
 <div class="flex flex-wrap gap-4">
 <button class="bg-gradient-to-br from-primary-fixed-dim to-on-primary-container text-on-primary-fixed px-8 py-4 rounded-lg font-bold font-headline shadow-lg shadow-primary-fixed-dim/40 dark:shadow-primary-fixed-dim/20 transition-all hover:-translate-y-1 hover:brightness-110 flex items-center justify-center gap-2 group w-full md:w-auto">
                         Konsultasi Sekarang
@@ -47,21 +69,45 @@ const techStack = [
 <div class="absolute -inset-4 bg-primary-fixed-dim/5 blur-3xl rounded-full"></div>
 <div class="relative bg-surface-container-low border border-outline-variant/15 p-8 rounded-xl backdrop-blur-md">
 <div class="grid grid-cols-2 gap-4">
-<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-end p-6 group hover:bg-surface-container-high transition-all node-indicator relative">
-<span class="material-symbols-outlined text-primary-fixed-dim mb-4" data-icon="hub">hub</span>
-<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-xs tracking-widest">Connectivity</span>
+<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-between p-6 group hover:bg-surface-container-high transition-all node-indicator relative">
+<div class="flex items-start justify-between w-full">
+<span class="material-symbols-outlined text-primary-fixed-dim text-2xl transform group-hover:-translate-y-1 group-hover:scale-110 transition-transform" data-icon="hub">hub</span>
+<span class="text-[10px] font-mono text-outline-variant font-bold tracking-widest opacity-50">01</span>
 </div>
-<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-end p-6 group hover:bg-surface-container-high transition-all">
-<span class="material-symbols-outlined text-primary-fixed-dim mb-4" data-icon="psychology">psychology</span>
-<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-xs tracking-widest">Intelligence</span>
+<div>
+<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-[11px] tracking-widest block mb-2">Connectivity</span>
+<span class="text-[10px] text-on-surface-variant leading-relaxed block group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">Synergizing fragmented IT systems into unified API endpoints.</span>
 </div>
-<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-end p-6 group hover:bg-surface-container-high transition-all">
-<span class="material-symbols-outlined text-primary-fixed-dim mb-4" data-icon="settings_input_component">settings_input_component</span>
-<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-xs tracking-widest">Automation</span>
 </div>
-<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-end p-6 group hover:bg-surface-container-high transition-all node-indicator relative">
-<span class="material-symbols-outlined text-primary-fixed-dim mb-4" data-icon="shield">shield</span>
-<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-xs tracking-widest">Security</span>
+<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-between p-6 group hover:bg-surface-container-high transition-all">
+<div class="flex items-start justify-between w-full">
+<span class="material-symbols-outlined text-primary-fixed-dim text-2xl transform group-hover:-translate-y-1 group-hover:scale-110 transition-transform" data-icon="psychology">psychology</span>
+<span class="text-[10px] font-mono text-outline-variant font-bold tracking-widest opacity-50">02</span>
+</div>
+<div>
+<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-[11px] tracking-widest block mb-2">Intelligence</span>
+<span class="text-[10px] text-on-surface-variant leading-relaxed block group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">Predictive analytical AI engines for high-precision tracking decisions.</span>
+</div>
+</div>
+<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-between p-6 group hover:bg-surface-container-high transition-all">
+<div class="flex items-start justify-between w-full">
+<span class="material-symbols-outlined text-primary-fixed-dim text-2xl transform group-hover:-translate-y-1 group-hover:scale-110 transition-transform" data-icon="settings_input_component">settings_input_component</span>
+<span class="text-[10px] font-mono text-outline-variant font-bold tracking-widest opacity-50">03</span>
+</div>
+<div>
+<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-[11px] tracking-widest block mb-2">Automation</span>
+<span class="text-[10px] text-on-surface-variant leading-relaxed block group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">Transforming manual labor into lightning-fast autonomous workflows.</span>
+</div>
+</div>
+<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-between p-6 group hover:bg-surface-container-high transition-all node-indicator relative">
+<div class="flex items-start justify-between w-full">
+<span class="material-symbols-outlined text-primary-fixed-dim text-2xl transform group-hover:-translate-y-1 group-hover:scale-110 transition-transform" data-icon="shield">shield</span>
+<span class="text-[10px] font-mono text-outline-variant font-bold tracking-widest opacity-50">04</span>
+</div>
+<div>
+<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-[11px] tracking-widest block mb-2">Zero Trust</span>
+<span class="text-[10px] text-on-surface-variant leading-relaxed block group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">Hack-resistant foundational structure compliant with data privacy laws.</span>
+</div>
 </div>
 </div>
 </div>
@@ -172,7 +218,7 @@ const techStack = [
 <!-- Tech Stack Logos -->
 <section class="py-24 bg-surface border-t border-outline-variant/5">
 <div class="max-w-[1440px] mx-auto px-12">
-<h3 class="text-center font-headline text-3xl font-bold text-slate-900 dark:text-white mb-16">The VEIN Tech Stack</h3>
+<h3 class="text-center font-headline text-3xl font-bold text-slate-900 dark:text-white mb-16">The VEINTECH Stack</h3>
 <div class="relative w-full overflow-hidden flex group py-4">
     <div class="absolute inset-y-0 left-0 w-20 md:w-40 bg-gradient-to-r from-surface to-transparent z-10 pointer-events-none"></div>
     <div class="absolute inset-y-0 right-0 w-20 md:w-40 bg-gradient-to-l from-surface to-transparent z-10 pointer-events-none"></div>

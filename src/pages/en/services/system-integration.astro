@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="System Integration | Services">
+<main class="pt-32 pb-20">
+
+    <header class="max-w-[1440px] mx-auto px-12 mb-24">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-secondary/10 border border-secondary/20 rounded-full text-secondary text-xs font-label tracking-widest uppercase mb-8">
+            <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+            Services — System Integration
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-6">
+                <h1 class="text-5xl md:text-7xl font-bold leading-[0.9] tracking-tighter font-headline text-slate-900 dark:text-white">
+                    Destroy <br/><span class="text-secondary">Data Silos.</span>
+                </h1>
+                <p class="text-xl text-on-surface-variant max-w-lg leading-relaxed font-body">
+                    Your ERP, CRM, databases, and legacy apps speak different languages. We are the translator — orchestrating all platforms into a single unified real-time ecosystem.
+                </p>
+                <div class="flex gap-4 pt-4">
+                    <a href="/en/contact" class="bg-secondary text-on-secondary px-8 py-4 rounded-xl font-headline font-bold hover:brightness-110 transition-all flex items-center gap-2">
+                        Free Integration Audit <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+                    </a>
+                    <a href="/en/services" class="border border-outline-variant/30 text-slate-600 dark:text-slate-300 px-8 py-4 rounded-xl font-headline font-bold hover:bg-surface-container-high transition-all">
+                        All Services
+                    </a>
+                </div>
+            </div>
+            <div class="relative h-[380px] rounded-2xl overflow-hidden border border-outline-variant/15 bg-surface-container-low flex items-center justify-center">
+                <div class="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent"></div>
+                <span class="material-symbols-outlined text-secondary opacity-20" style="font-size: 200px; font-variation-settings: 'FILL' 1;" data-icon="hub">hub</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="max-w-[1440px] mx-auto px-12 mb-32">
+        <div class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">Our Integration Capabilities</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-secondary to-transparent"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
+                <span class="material-symbols-outlined text-secondary text-4xl mb-5 block" data-icon="hub" style="font-variation-settings: 'FILL' 1;">hub</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">API Orchestration (REST & GraphQL)</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Connecting internal and third-party systems through a secure, well-documented API integration layer with real-time monitoring.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
+                <span class="material-symbols-outlined text-secondary text-4xl mb-5 block" data-icon="sync_alt" style="font-variation-settings: 'FILL' 1;">sync_alt</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Cross-Platform Data Synchronization</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Customer, inventory, and transaction data stays consistent across all platforms — no more discrepancies between systems.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
+                <span class="material-symbols-outlined text-secondary text-4xl mb-5 block" data-icon="settings_ethernet" style="font-variation-settings: 'FILL' 1;">settings_ethernet</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Legacy System Integration</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Even systems running for decades can be connected to your modern ecosystem without replacing your entire infrastructure.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
+                <span class="material-symbols-outlined text-secondary text-4xl mb-5 block" data-icon="webhook" style="font-variation-settings: 'FILL' 1;">webhook</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Webhook & Event-Driven Architecture</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Every system event — incoming payment, open ticket, out-of-stock — triggers the right action automatically in another system.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
+                <span class="material-symbols-outlined text-secondary text-4xl mb-5 block" data-icon="database" style="font-variation-settings: 'FILL' 1;">database</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">ETL & Data Migration</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Extract, transform, and load data from legacy sources to new systems without losing a single row — guaranteed accurate and verified.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
+                <span class="material-symbols-outlined text-secondary text-4xl mb-5 block" data-icon="monitor_heart" style="font-variation-settings: 'FILL' 1;">monitor_heart</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">System Health Monitoring</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">A 24/7 monitoring dashboard tracking all active integrations and sending instant alerts if anything fails or slows down.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-[1440px] mx-auto px-12 mb-32">
+        <div class="bg-surface-container-low border border-outline-variant/15 rounded-2xl p-12 lg:p-16">
+            <div class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">Our Integration Methodology</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-secondary to-transparent"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="flex flex-col gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-secondary/10 border border-secondary/20 flex items-center justify-center"><span class="font-headline font-bold text-secondary text-lg">01</span></div>
+                    <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white">Architecture Audit</h3>
+                    <p class="text-sm text-on-surface-variant font-body leading-relaxed">We map all your current systems, identify data blind spots, and design the most efficient integration strategy.</p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-secondary/10 border border-secondary/20 flex items-center justify-center"><span class="font-headline font-bold text-secondary text-lg">02</span></div>
+                    <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white">Integration Layer Build</h3>
+                    <p class="text-sm text-on-surface-variant font-body leading-relaxed">We build middleware, API gateways, or custom connectors that link all your systems securely and reliably.</p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-secondary/10 border border-secondary/20 flex items-center justify-center"><span class="font-headline font-bold text-secondary text-lg">03</span></div>
+                    <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white">Testing & Go-Live</h3>
+                    <p class="text-sm text-on-surface-variant font-body leading-relaxed">Every data flow is thoroughly tested before production launch, ensuring zero disruption to your business operations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-[1440px] mx-auto px-12">
+        <div class="bg-gradient-to-br from-secondary/20 to-surface-container-low border border-secondary/20 rounded-2xl p-12 text-center">
+            <h2 class="text-3xl md:text-5xl font-headline font-bold text-slate-900 dark:text-white mb-4">Stop Data Fragmentation Today</h2>
+            <p class="text-on-surface-variant mb-8 max-w-lg mx-auto">Contact us for a free infrastructure audit and discover how much efficiency has been hiding behind your data silos.</p>
+            <a href="/en/contact" class="inline-flex items-center gap-2 bg-secondary text-on-secondary px-10 py-4 rounded-xl font-headline font-bold hover:brightness-110 transition-all shadow-lg shadow-secondary/20">
+                Request Free Audit <span class="material-symbols-outlined" data-icon="search_insights">search_insights</span>
+            </a>
+        </div>
+    </section>
+
+</main>
+</BaseLayout>

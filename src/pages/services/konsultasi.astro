@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Konsultasi Bisnis & IT | Layanan">
+<main class="pt-32 pb-20">
+
+    <!-- Hero Section -->
+    <header class="max-w-[1440px] mx-auto px-12 mb-24">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-error/10 border border-error/20 rounded-full text-error text-xs font-label tracking-widest uppercase mb-8">
+            <span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+            Layanan — Konsultasi Bisnis & IT
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-6">
+                <h1 class="text-5xl md:text-7xl font-bold leading-[0.9] tracking-tighter font-headline text-slate-900 dark:text-white">
+                    Strategi <br/><span class="text-primary-fixed-dim">Yang Tepat Sasaran.</span>
+                </h1>
+                <p class="text-xl text-on-surface-variant max-w-lg leading-relaxed font-body">
+                    Teknologi terbaik sekalipun akan gagal jika strateginya keliru. Tim konsultan berpengalaman kami membantu Anda merancang peta jalan transformasi digital yang pragmatis, terukur, dan menghasilkan ROI nyata.
+                </p>
+                <div class="flex gap-4 pt-4">
+                    <a href="/contact" class="bg-primary-fixed-dim text-on-primary-fixed px-8 py-4 rounded-xl font-headline font-bold hover:brightness-110 transition-all flex items-center gap-2">
+                        Konsultasi Gratis <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+                    </a>
+                    <a href="/services" class="border border-outline-variant/30 text-slate-600 dark:text-slate-300 px-8 py-4 rounded-xl font-headline font-bold hover:bg-surface-container-high transition-all">
+                        Semua Layanan
+                    </a>
+                </div>
+            </div>
+            <div class="relative h-[380px] rounded-2xl overflow-hidden border border-outline-variant/15 bg-surface-container-low flex items-center justify-center">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary-fixed-dim/5 to-transparent"></div>
+                <span class="material-symbols-outlined text-primary-fixed-dim opacity-20" style="font-size: 200px; font-variation-settings: 'FILL' 1;" data-icon="strategy">strategy</span>
+                <div class="absolute bottom-8 left-8 right-8">
+                    <div class="bg-surface/80 backdrop-blur-md border border-outline-variant/15 rounded-xl p-4">
+                        <div class="flex items-center justify-between text-xs mb-3">
+                            <span class="text-on-surface-variant font-mono">Proyeksi Efisiensi</span>
+                            <span class="text-primary-fixed-dim font-bold">+340%</span>
+                        </div>
+                        <div class="h-2 rounded-full bg-surface-container-highest overflow-hidden">
+                            <div class="h-full rounded-full bg-gradient-to-r from-primary-fixed-dim to-secondary w-[85%]"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Feature Cards -->
+    <section class="max-w-[1440px] mx-auto px-12 mb-32">
+        <div class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">Area Konsultasi Kami</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-primary-fixed-dim to-transparent"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block" data-icon="map" style="font-variation-settings: 'FILL' 1;">map</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Peta Jalan Transformasi Digital</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Rencana bertahap yang terperinci untuk memigrasikan operasi bisnis Anda dari sistem konvensional ke ekosistem digital cerdas yang terintegrasi.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block" data-icon="search_insights" style="font-variation-settings: 'FILL' 1;">search_insights</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Audit Infrastruktur IT</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Analisis menyeluruh terhadap tumpukan teknologi yang ada — mengidentifikasi celah keamanan, potensi kegagalan, dan inefisiensi yang tersembunyi.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block" data-icon="trending_up" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Kuantifikasi ROI Otomatisasi</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Sebelum satu baris kode pun ditulis, kami menghitung proyeksi penghematan biaya dan peningkatan produktivitas yang dapat diharapkan dari automasi.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block" data-icon="shield_lock" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Kesiapan Kepatuhan UU PDP</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Penilaian dan rekomendasi untuk memastikan infrastruktur data Anda memenuhi persyaratan Undang-Undang Perlindungan Data Pribadi Indonesia.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block" data-icon="stack" style="font-variation-settings: 'FILL' 1;">stack</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Rekomendasi Tech Stack</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Pemilihan platform, bahasa pemrograman, dan arsitektur yang paling sesuai dengan skala, anggaran, dan tujuan jangka panjang bisnis Anda.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block" data-icon="groups" style="font-variation-settings: 'FILL' 1;">groups</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Pelatihan & Manajemen Perubahan</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Kami mempersiapkan tim Anda untuk mengadopsi teknologi baru dengan pelatihan terstruktur dan pendampingan selama masa transisi.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="max-w-[1440px] mx-auto px-12 mb-32">
+        <div class="bg-surface-container-low border border-outline-variant/15 rounded-2xl p-12 lg:p-16">
+            <div class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">Metodologi Konsultasi Kami</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary-fixed-dim to-transparent"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="flex flex-col gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 border border-primary-fixed-dim/20 flex items-center justify-center">
+                        <span class="font-headline font-bold text-primary-fixed-dim text-lg">01</span>
+                    </div>
+                    <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white">Diagnosis Situasi</h3>
+                    <p class="text-sm text-on-surface-variant font-body leading-relaxed">Sesi mendalam bersama pemangku kepentingan utama untuk memahami tantangan nyata, hambatan pertumbuhan, dan target bisnis yang ingin dicapai.</p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 border border-primary-fixed-dim/20 flex items-center justify-center">
+                        <span class="font-headline font-bold text-primary-fixed-dim text-lg">02</span>
+                    </div>
+                    <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white">Analisis & Perancangan Strategi</h3>
+                    <p class="text-sm text-on-surface-variant font-body leading-relaxed">Penyusunan laporan komprehensif yang mencakup temuan audit, rekomendasi prioritas, dan peta jalan implementasi yang terukur dan realistis.</p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 border border-primary-fixed-dim/20 flex items-center justify-center">
+                        <span class="font-headline font-bold text-primary-fixed-dim text-lg">03</span>
+                    </div>
+                    <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white">Pendampingan Eksekusi</h3>
+                    <p class="text-sm text-on-surface-variant font-body leading-relaxed">Kami tidak hanya memberikan laporan — kami mendampingi eksekusi, memantau kemajuan, dan menyesuaikan strategi berdasarkan hasil nyata di lapangan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="max-w-[1440px] mx-auto px-12">
+        <div class="bg-gradient-to-br from-primary-fixed-dim/20 to-surface-container-low border border-primary-fixed-dim/20 rounded-2xl p-12 text-center">
+            <h2 class="text-3xl md:text-5xl font-headline font-bold text-slate-900 dark:text-white mb-4">Mulai dengan Sesi Konsultasi Gratis</h2>
+            <p class="text-on-surface-variant mb-8 max-w-lg mx-auto">60 menit bersama konsultan kami sudah cukup untuk mengidentifikasi potensi terbesar dan hambatan utama di bisnis Anda. Gratis, tanpa komitmen.</p>
+            <a href="/contact" class="inline-flex items-center gap-2 bg-primary-fixed-dim text-on-primary-fixed px-10 py-4 rounded-xl font-headline font-bold hover:brightness-110 transition-all shadow-lg shadow-primary-fixed-dim/20">
+                Jadwalkan Sesi Gratis <span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+            </a>
+        </div>
+    </section>
+
+</main>
+</BaseLayout>

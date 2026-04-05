@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="AI & Automation | Services">
+<main class="pt-32 pb-20">
+
+    <!-- Hero Section -->
+    <header class="max-w-[1440px] mx-auto px-12 mb-24">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary-fixed-dim/10 border border-primary-fixed-dim/20 rounded-full text-primary-fixed-dim text-xs font-label tracking-widest uppercase mb-8">
+            <span class="w-2 h-2 rounded-full bg-primary-fixed-dim animate-pulse"></span>
+            Services — AI & Automation
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-6">
+                <h1 class="text-5xl md:text-7xl font-bold leading-[0.9] tracking-tighter font-headline text-slate-900 dark:text-white">
+                    Automate <br/><span class="text-primary-fixed-dim">Your Business.</span>
+                </h1>
+                <p class="text-xl text-on-surface-variant max-w-lg leading-relaxed font-body">
+                    From intelligent chatbots to cross-system workflows running on their own — we turn slow manual processes into AI-powered efficiency machines.
+                </p>
+                <div class="flex gap-4 pt-4">
+                    <a href="/en/contact" class="bg-primary-fixed-dim text-on-primary-fixed px-8 py-4 rounded-xl font-headline font-bold hover:brightness-110 transition-all flex items-center gap-2">
+                        Free Consultation <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+                    </a>
+                    <a href="/en/services" class="border border-outline-variant/30 text-slate-600 dark:text-slate-300 px-8 py-4 rounded-xl font-headline font-bold hover:bg-surface-container-high transition-all">
+                        All Services
+                    </a>
+                </div>
+            </div>
+            <div class="relative h-[380px] rounded-2xl overflow-hidden border border-outline-variant/15 bg-surface-container-low flex items-center justify-center">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary-fixed-dim/5 to-transparent"></div>
+                <span class="material-symbols-outlined text-primary-fixed-dim opacity-20" style="font-size: 200px; font-variation-settings: 'FILL' 1;" data-icon="auto_awesome">auto_awesome</span>
+                <div class="absolute bottom-8 left-8 right-8">
+                    <div class="bg-surface/80 backdrop-blur-md border border-outline-variant/15 rounded-xl p-4">
+                        <p class="text-xs text-on-surface-variant font-mono">Automated process running...</p>
+                        <div class="flex gap-2 mt-2">
+                            <div class="h-1.5 rounded-full bg-primary-fixed-dim w-2/3 animate-pulse"></div>
+                            <div class="h-1.5 rounded-full bg-secondary w-1/4 animate-pulse" style="animation-delay:0.3s"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Feature Cards -->
+    <section class="max-w-[1440px] mx-auto px-12 mb-32">
+        <div class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">What We Automate</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-primary-fixed-dim to-transparent"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block" data-icon="account_tree" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Workflow Automation (n8n)</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Integrate hundreds of business apps — WhatsApp, ERP, CRM, and email — into a single touchless workflow.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Enterprise AI Chatbot</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">LLM-powered virtual assistants that handle customer inquiries, process orders, and escalate support tickets automatically 24/7.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block" data-icon="description" style="font-variation-settings: 'FILL' 1;">description</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Intelligent Document Processing</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">OCR + AI to extract data from invoices, contracts, and unstructured PDF reports automatically, eliminating manual data entry entirely.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block" data-icon="troubleshoot" style="font-variation-settings: 'FILL' 1;">troubleshoot</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Executive Decision Support</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Predictive analytics dashboards that transform your raw business data into accurate, real-time operational decision signals.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block" data-icon="mark_chat_unread" style="font-variation-settings: 'FILL' 1;">mark_chat_unread</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">WhatsApp Business Orchestration</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Automate notifications, payment reminders, order confirmations, and customer satisfaction surveys via the official WhatsApp API.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block" data-icon="monitoring" style="font-variation-settings: 'FILL' 1;">monitoring</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Automated Monitoring & Reporting</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Weekly, monthly, and quarterly KPI reports delivered automatically to email or Slack — no spreadsheet required.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="max-w-[1440px] mx-auto px-12 mb-32">
+        <div class="bg-surface-container-low border border-outline-variant/15 rounded-2xl p-12 lg:p-16">
+            <div class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">Our Implementation Process</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary-fixed-dim to-transparent"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="flex flex-col gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 border border-primary-fixed-dim/20 flex items-center justify-center">
+                        <span class="font-headline font-bold text-primary-fixed-dim text-lg">01</span>
+                    </div>
+                    <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white">Process Mapping</h3>
+                    <p class="text-sm text-on-surface-variant font-body leading-relaxed">We interview your team and identify all manual processes that consume the most time and hold the highest automation potential.</p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-secondary/10 border border-secondary/20 flex items-center justify-center">
+                        <span class="font-headline font-bold text-secondary text-lg">02</span>
+                    </div>
+                    <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white">Design & Development</h3>
+                    <p class="text-sm text-on-surface-variant font-body leading-relaxed">We design the workflow architecture, select the best platform (n8n, Make, custom), and build a thoroughly tested automation system.</p>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-tertiary/10 border border-tertiary/20 flex items-center justify-center">
+                        <span class="font-headline font-bold text-tertiary text-lg">03</span>
+                    </div>
+                    <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white">Launch & Maintenance</h3>
+                    <p class="text-sm text-on-surface-variant font-body leading-relaxed">We launch the system, train your team, and provide ongoing maintenance support to keep your automation running at peak performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="max-w-[1440px] mx-auto px-12">
+        <div class="bg-gradient-to-br from-primary-fixed-dim/20 to-surface-container-low border border-primary-fixed-dim/20 rounded-2xl p-12 text-center">
+            <h2 class="text-3xl md:text-5xl font-headline font-bold text-slate-900 dark:text-white mb-4">Ready to Eliminate 90% of Manual Work?</h2>
+            <p class="text-on-surface-variant mb-8 max-w-lg mx-auto">Schedule a free consultation and we'll identify hidden automation opportunities in your business operations.</p>
+            <a href="/en/contact" class="inline-flex items-center gap-2 bg-primary-fixed-dim text-on-primary-fixed px-10 py-4 rounded-xl font-headline font-bold hover:brightness-110 transition-all shadow-lg shadow-primary-fixed-dim/20">
+                Schedule a Consultation <span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+            </a>
+        </div>
+    </section>
+
+</main>
+</BaseLayout>

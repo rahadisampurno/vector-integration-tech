@@ -10,6 +10,26 @@ const currentPath = Astro.url.pathname;
 const corePath = currentPath.replace(/^\/en/, '') || '/';
 const lang = Astro.currentLocale || 'id';
 
+// Mapping: ID slug → EN slug (for service sub-pages)
+const idToEn: Record<string, string> = {
+  '/services/ai-otomatisasi': '/en/services/ai-automation',
+  '/services/integrasi-sistem': '/en/services/system-integration',
+  '/services/pengembangan-software': '/en/services/software-development',
+  '/services/konsultasi': '/en/services/consulting',
+  '/services/website-umkm': '/en/services/business-website',
+};
+
+// Reverse mapping: EN slug → ID slug
+const enToId: Record<string, string> = Object.fromEntries(
+  Object.entries(idToEn).map(([id, en]) => [en.replace('/en', ''), id])
+);
+
+// Compute the correct alternate language URL
+const pathWithoutEn = currentPath.replace(/^\/en/, '') || '/';
+const normalizedPath = pathWithoutEn.endsWith('/') && pathWithoutEn !== '/' ? pathWithoutEn.slice(0, -1) : pathWithoutEn;
+const enAlternatePath = idToEn[normalizedPath] ?? `/en${pathWithoutEn === '/' ? '' : pathWithoutEn}`;
+const idAlternatePath = enToId[normalizedPath] ?? pathWithoutEn;
+
 const pathDescriptions = {
   id: {
     '/': 'VEINTECH adalah perusahaan teknologi berfokus pada otomatisasi berbasis AI dan solusi digital untuk efisiensi bisnis.',
@@ -39,9 +59,8 @@ const finalDescription = description || (pathDescriptions[lang] && pathDescripti
 const siteUrl = Astro.site || 'https://veintech.id';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
 
-const pathWithoutEn = currentPath.replace(/^\/en/, '');
-const idUrl = new URL(pathWithoutEn === '' ? '/' : pathWithoutEn, siteUrl);
-const enUrl = new URL(pathWithoutEn === '' ? '/en' : `/en${pathWithoutEn}`, siteUrl);
+const idUrl = new URL(idAlternatePath, siteUrl);
+const enUrl = new URL(enAlternatePath, siteUrl);
 const ogImage = new URL('/opengraph.png', siteUrl);
 
 const isActive = (path: string) => {
@@ -138,7 +157,73 @@ const t = {
 				<div class="hidden lg:flex items-center gap-8">
 					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/`}>{t.home}</a>
 					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/about') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/about`}>{t.about}</a>
-					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/services') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/services`}>{t.services}</a>
+					<!-- Services Mega Dropdown -->
+					<div class="relative group/services">
+						<button class={`flex items-center gap-1 font-headline tracking-tight text-sm transition-colors ${isActive('/services') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`}>
+							{t.services}
+							<span class="material-symbols-outlined transition-transform group-hover/services:rotate-180" style="font-size:14px">expand_more</span>
+						</button>
+						<!-- Mega Menu Panel -->
+						<div class="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 pointer-events-none group-hover/services:opacity-100 group-hover/services:pointer-events-auto transition-all duration-200 z-50">
+							<div class="w-[680px] bg-surface/95 dark:bg-[#10141a]/95 backdrop-blur-2xl border border-outline-variant/20 rounded-2xl p-6 shadow-2xl shadow-black/40 grid grid-cols-2 gap-3">
+								<!-- AI & Automation -->
+								<a href={lang === 'id' ? '/services/ai-otomatisasi' : '/en/services/ai-automation'} class="flex items-start gap-4 p-4 rounded-xl hover:bg-surface-container-high transition-colors group/item">
+									<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary-fixed-dim/10 flex items-center justify-center group-hover/item:bg-primary-fixed-dim/20 transition-colors">
+										<span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:20px" data-icon="auto_awesome">auto_awesome</span>
+									</div>
+									<div>
+										<p class="font-headline font-bold text-sm text-slate-900 dark:text-white mb-1">{lang === 'id' ? 'AI & Otomatisasi' : 'AI & Automation'}</p>
+										<p class="text-xs text-on-surface-variant leading-relaxed">{lang === 'id' ? 'Chatbot AI, workflow otomatis, pemrosesan dokumen.' : 'AI chatbots, automated workflows, document processing.'}</p>
+									</div>
+								</a>
+								<!-- System Integration -->
+								<a href={lang === 'id' ? '/services/integrasi-sistem' : '/en/services/system-integration'} class="flex items-start gap-4 p-4 rounded-xl hover:bg-surface-container-high transition-colors group/item">
+									<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center group-hover/item:bg-secondary/20 transition-colors">
+										<span class="material-symbols-outlined text-secondary" style="font-size:20px" data-icon="hub">hub</span>
+									</div>
+									<div>
+										<p class="font-headline font-bold text-sm text-slate-900 dark:text-white mb-1">{lang === 'id' ? 'Integrasi Sistem' : 'System Integration'}</p>
+										<p class="text-xs text-on-surface-variant leading-relaxed">{lang === 'id' ? 'Menghubungkan semua sistem IT Anda via API & orkestrasi.' : 'Connect all your IT systems via API & orchestration.'}</p>
+									</div>
+								</a>
+								<!-- Software Development -->
+								<a href={lang === 'id' ? '/services/pengembangan-software' : '/en/services/software-development'} class="flex items-start gap-4 p-4 rounded-xl hover:bg-surface-container-high transition-colors group/item">
+									<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center group-hover/item:bg-tertiary/20 transition-colors">
+										<span class="material-symbols-outlined text-tertiary" style="font-size:20px" data-icon="terminal">terminal</span>
+									</div>
+									<div>
+										<p class="font-headline font-bold text-sm text-slate-900 dark:text-white mb-1">{lang === 'id' ? 'Pengembangan Software' : 'Software Development'}</p>
+										<p class="text-xs text-on-surface-variant leading-relaxed">{lang === 'id' ? 'Website, aplikasi mobile, sistem SaaS & IoT.' : 'Websites, mobile apps, SaaS systems & IoT.'}</p>
+									</div>
+								</a>
+								<!-- Consulting -->
+								<a href={lang === 'id' ? '/services/konsultasi' : '/en/services/consulting'} class="flex items-start gap-4 p-4 rounded-xl hover:bg-surface-container-high transition-colors group/item">
+									<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-error/10 flex items-center justify-center group-hover/item:bg-error/20 transition-colors">
+										<span class="material-symbols-outlined text-error" style="font-size:20px" data-icon="strategy">strategy</span>
+									</div>
+									<div>
+										<p class="font-headline font-bold text-sm text-slate-900 dark:text-white mb-1">{lang === 'id' ? 'Konsultasi Bisnis & IT' : 'Business & IT Consulting'}</p>
+										<p class="text-xs text-on-surface-variant leading-relaxed">{lang === 'id' ? 'Strategi transformasi digital, audit infrastruktur & ROI.' : 'Digital transformation strategy, infrastructure audit & ROI.'}</p>
+									</div>
+								</a>
+								<!-- Website UMKM -->
+								<a href={lang === 'id' ? '/services/website-umkm' : '/en/services/business-website'} class="flex items-start gap-4 p-4 rounded-xl hover:bg-surface-container-high transition-colors group/item col-span-2">
+									<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-amber-400/10 flex items-center justify-center group-hover/item:bg-amber-400/20 transition-colors">
+										<span class="material-symbols-outlined text-amber-400" style="font-size:20px" data-icon="store">store</span>
+									</div>
+									<div>
+										<p class="font-headline font-bold text-sm text-slate-900 dark:text-white mb-1">{lang === 'id' ? 'Website UMKM & Bisnis' : 'UMKM & Business Website'}</p>
+										<p class="text-xs text-on-surface-variant leading-relaxed">{lang === 'id' ? 'Landing page & company profile custom — go live dalam 3 hari, termasuk hosting & domain.' : 'Custom landing pages & company profiles — go live in 3 days, hosting & domain included.'}</p>
+									</div>
+								</a>
+								<!-- Footer CTA -->
+								<div class="col-span-2 border-t border-outline-variant/15 pt-4 mt-1 flex items-center justify-between">
+									<p class="text-xs text-on-surface-variant">{lang === 'id' ? 'Butuh solusi khusus? Kami siap membantu.' : 'Need a custom solution? We are ready to help.'}</p>
+									<a href={`${t.basePath}/services`} class="text-xs font-bold font-headline text-primary-fixed-dim flex items-center gap-1 hover:gap-2 transition-all">{lang === 'id' ? 'Lihat Semua Layanan' : 'View All Services'} <span class="material-symbols-outlined" style="font-size:14px">arrow_forward</span></a>
+								</div>
+							</div>
+						</div>
+					</div>
 					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/solutions') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/solutions`}>{t.solutions}</a>
 					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/portfolio') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/portfolio`}>{t.portfolio}</a>
 					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/n8n-workflows') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/n8n-workflows`}>{t.workflows}</a>
@@ -147,9 +232,9 @@ const t = {
 				</div>
 				<div class="flex items-center gap-3 md:gap-4">
 					<div class="hidden sm:flex items-center gap-2 text-[10px] md:text-xs font-headline font-bold text-slate-600 dark:text-slate-400 border border-outline-variant/30 px-2 py-1 md:px-3 md:py-2 rounded-lg bg-surface-container-low">
-						<a href={corePath} class={`hover:text-slate-900 dark:hover:text-white transition-colors ${lang === 'id' ? 'text-primary-fixed-dim' : ''}`}>ID</a>
+						<a href={idAlternatePath} class={`hover:text-slate-900 dark:hover:text-white transition-colors ${lang === 'id' ? 'text-primary-fixed-dim' : ''}`}>ID</a>
 						<span class="text-outline-variant/50">|</span>
-						<a href={`/en${corePath === '/' ? '' : corePath}`} class={`hover:text-slate-900 dark:hover:text-white transition-colors ${lang === 'en' ? 'text-primary-fixed-dim' : ''}`}>EN</a>
+						<a href={enAlternatePath} class={`hover:text-slate-900 dark:hover:text-white transition-colors ${lang === 'en' ? 'text-primary-fixed-dim' : ''}`}>EN</a>
 					</div>
 					<button id="theme-toggle" class="flex items-center justify-center w-8 h-8 rounded-md border border-outline-variant/30 bg-surface-container-low text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors" aria-label="Toggle Theme">
 						<span class="material-symbols-outlined dark:hidden block" style="font-size: 16px;">light_mode</span>
@@ -170,7 +255,35 @@ const t = {
             <div class="flex flex-col gap-6 text-2xl font-bold font-headline tracking-tight">
                 <a class={`transition-colors ${isActive('/') ? 'text-primary-fixed-dim drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-600 dark:text-slate-300'}`} href={`${t.basePath}/`}>{t.home}</a>
                 <a class={`transition-colors ${isActive('/about') ? 'text-primary-fixed-dim drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-600 dark:text-slate-300'}`} href={`${t.basePath}/about`}>{t.about}</a>
-                <a class={`transition-colors ${isActive('/services') ? 'text-primary-fixed-dim drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-600 dark:text-slate-300'}`} href={`${t.basePath}/services`}>{t.services}</a>
+                <!-- Mobile Services Accordion -->
+                <div class="flex flex-col gap-2">
+                    <button id="mobile-services-toggle" class={`flex items-center justify-between w-full transition-colors text-left ${isActive('/services') ? 'text-primary-fixed-dim drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-600 dark:text-slate-300'}`}>
+                        {t.services}
+                        <span id="mobile-services-icon" class="material-symbols-outlined transition-transform duration-300" style="font-size:22px">expand_more</span>
+                    </button>
+                    <div id="mobile-services-list" class="hidden flex-col gap-1 pl-4 border-l border-outline-variant/20">
+                        <a href={lang === 'id' ? '/services/ai-otomatisasi' : '/en/services/ai-automation'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
+                            <span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:18px" data-icon="auto_awesome">auto_awesome</span>
+                            {lang === 'id' ? 'AI & Otomatisasi' : 'AI & Automation'}
+                        </a>
+                        <a href={lang === 'id' ? '/services/integrasi-sistem' : '/en/services/system-integration'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
+                            <span class="material-symbols-outlined text-secondary" style="font-size:18px" data-icon="hub">hub</span>
+                            {lang === 'id' ? 'Integrasi Sistem' : 'System Integration'}
+                        </a>
+                        <a href={lang === 'id' ? '/services/pengembangan-software' : '/en/services/software-development'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
+                            <span class="material-symbols-outlined text-tertiary" style="font-size:18px" data-icon="terminal">terminal</span>
+                            {lang === 'id' ? 'Pengembangan Software' : 'Software Development'}
+                        </a>
+                        <a href={lang === 'id' ? '/services/konsultasi' : '/en/services/consulting'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
+                            <span class="material-symbols-outlined text-error" style="font-size:18px" data-icon="strategy">strategy</span>
+                            {lang === 'id' ? 'Konsultasi Bisnis & IT' : 'Business & IT Consulting'}
+                        </a>
+                        <a href={lang === 'id' ? '/services/website-umkm' : '/en/services/business-website'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-amber-400 transition-colors">
+                            <span class="material-symbols-outlined text-amber-400" style="font-size:18px" data-icon="store">store</span>
+                            {lang === 'id' ? 'Website UMKM & Bisnis' : 'UMKM & Business Website'}
+                        </a>
+                    </div>
+                </div>
                 <a class={`transition-colors ${isActive('/solutions') ? 'text-primary-fixed-dim drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-600 dark:text-slate-300'}`} href={`${t.basePath}/solutions`}>{t.solutions}</a>
                 <a class={`transition-colors ${isActive('/portfolio') ? 'text-primary-fixed-dim drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-600 dark:text-slate-300'}`} href={`${t.basePath}/portfolio`}>{t.portfolio}</a>
                 <a class={`transition-colors ${isActive('/n8n-workflows') ? 'text-primary-fixed-dim drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-600 dark:text-slate-300'}`} href={`${t.basePath}/n8n-workflows`}>{t.workflows}</a>
@@ -178,9 +291,9 @@ const t = {
             </div>
             
             <div class="mt-auto mb-10 flex gap-4 text-xs font-headline font-bold text-slate-500 justify-center border-t border-outline-variant/10 pt-6">
-                <a href={corePath} class={`hover:text-slate-900 dark:hover:text-white transition-colors ${lang === 'id' ? 'text-primary-fixed-dim' : ''}`}>INDONESIA (ID)</a>
+                <a href={idAlternatePath} class={`hover:text-slate-900 dark:hover:text-white transition-colors ${lang === 'id' ? 'text-primary-fixed-dim' : ''}`}>INDONESIA (ID)</a>
                 <span class="text-outline-variant/50">|</span>
-                <a href={`/en${corePath === '/' ? '' : corePath}`} class={`hover:text-slate-900 dark:hover:text-white transition-colors ${lang === 'en' ? 'text-primary-fixed-dim' : ''}`}>ENGLISH (EN)</a>
+                <a href={enAlternatePath} class={`hover:text-slate-900 dark:hover:text-white transition-colors ${lang === 'en' ? 'text-primary-fixed-dim' : ''}`}>ENGLISH (EN)</a>
             </div>
         </div>
 
@@ -273,6 +386,26 @@ const t = {
                         mobileMenu.classList.remove('translate-x-0');
                         menuIcon.textContent = 'menu';
                         document.body.style.overflow = ''; 
+					}
+				});
+			}
+
+			// Mobile Services Accordion Toggle
+			const servicesToggle = document.getElementById('mobile-services-toggle');
+			const servicesList = document.getElementById('mobile-services-list');
+			const servicesIcon = document.getElementById('mobile-services-icon');
+
+			if (servicesToggle && servicesList && servicesIcon) {
+				servicesToggle.addEventListener('click', () => {
+					const isOpen = !servicesList.classList.contains('hidden');
+					if (isOpen) {
+						servicesList.classList.add('hidden');
+						servicesList.classList.remove('flex');
+						servicesIcon.style.transform = 'rotate(0deg)';
+					} else {
+						servicesList.classList.remove('hidden');
+						servicesList.classList.add('flex');
+						servicesIcon.style.transform = 'rotate(180deg)';
 					}
 				});
 			}

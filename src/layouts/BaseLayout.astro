@@ -12,24 +12,24 @@ const lang = Astro.currentLocale || 'id';
 
 const pathDescriptions = {
   id: {
-    '/': 'VEIN TECH adalah perusahaan teknologi berfokus pada otomatisasi berbasis AI dan solusi digital untuk efisiensi bisnis.',
-    '/about': 'Pelajari lebih lanjut tentang visi VEIN TECH dalam merancang arsitektur masa depan yang cerdas dan efisien.',
+    '/': 'VEINTECH adalah perusahaan teknologi berfokus pada otomatisasi berbasis AI dan solusi digital untuk efisiensi bisnis.',
+    '/about': 'Pelajari lebih lanjut tentang visi VEINTECH dalam merancang arsitektur masa depan yang cerdas dan efisien.',
     '/services': 'Jelajahi ekosistem layanan kami: mulai dari sistem kecerdasan buatan, migrasi cloud, hingga keamanan Zero Trust.',
-    '/solutions': 'Solusi teknologi spesifik VEIN TECH dirancang untuk menyelesaikan tantangan operasional dan komunikasi enterprise.',
+    '/solutions': 'Solusi teknologi spesifik VEINTECH dirancang untuk menyelesaikan tantangan operasional dan komunikasi enterprise.',
     '/portfolio': 'Lihat studi kasus dan portofolio penerapan arsitektur teknologi kami pada berbagai industri global.',
-    '/n8n-workflows': 'Unduh dan pasang alur kerja otomatisasi n8n yang khusus dirancang oleh engineer VEIN TECH.',
-    '/blog': 'Wawasan analitis terbaru, pembaruan keamanan, dan berita teknologi dari divisi kecerdasan VEIN TECH.',
-    '/contact': 'Hubungi arsitek sistem VEIN TECH hari ini untuk mengamankan konsultasi teknis infrastruktur perusahaan Anda.'
+    '/n8n-workflows': 'Unduh dan pasang alur kerja otomatisasi n8n yang khusus dirancang oleh engineer VEINTECH.',
+    '/blog': 'Wawasan analitis terbaru, pembaruan keamanan, dan berita teknologi dari divisi kecerdasan VEINTECH.',
+    '/contact': 'Hubungi arsitek sistem VEINTECH hari ini untuk mengamankan konsultasi teknis infrastruktur perusahaan Anda.'
   },
   en: {
-    '/': 'VEIN TECH is a software enterprise focusing on AI-driven automation and seamless digital system integrations.',
-    '/about': 'Learn more about VEIN TECH\'s vision in architecting smart and efficient future infrastructures.',
+    '/': 'VEINTECH is a software enterprise focusing on AI-driven automation and seamless digital system integrations.',
+    '/about': 'Learn more about VEINTECH\'s vision in architecting smart and efficient future infrastructures.',
     '/services': 'Explore our services ecosystem: from AI systems and cloud migration to Zero Trust security architectures.',
-    '/solutions': 'VEIN TECH\'s specific technological solutions designed to solve logistics, communication, and enterprise operational challenges.',
+    '/solutions': 'VEINTECH\'s specific technological solutions designed to solve logistics, communication, and enterprise operational challenges.',
     '/portfolio': 'Review case studies and portfolios of our technological architecture implementations across global industries.',
-    '/n8n-workflows': 'Download and deploy production-ready n8n automation workflows engineered by VEIN TECH.',
-    '/blog': 'Latest analytical insights, security updates, and technology news from the VEIN TECH intelligence division.',
-    '/contact': 'Contact VEIN TECH system architects today to secure your enterprise technical infrastructure consultation.'
+    '/n8n-workflows': 'Download and deploy production-ready n8n automation workflows engineered by VEINTECH.',
+    '/blog': 'Latest analytical insights, security updates, and technology news from the VEINTECH intelligence division.',
+    '/contact': 'Contact VEINTECH system architects today to secure your enterprise technical infrastructure consultation.'
   }
 };
 
@@ -61,7 +61,7 @@ const t = {
     blog: "Blog",
     contact: "Kontak",
     consult: "Konsultasi",
-    footerDesc: "© 2024 Vector Integration Technology. Mengotomatisasi sistem untuk masa depan yang lebih cerdas.",
+    footerDesc: "© 2024 VEINTECH. Mengotomatisasi sistem untuk masa depan yang lebih cerdas.",
     footerCompany: "Perusahaan",
     basePath: ""
   },
@@ -75,7 +75,7 @@ const t = {
     blog: "Blog",
     contact: "Contact",
     consult: "Consult Now",
-    footerDesc: "© 2024 Vector Integration Technology. Integrating systems for a smarter future.",
+    footerDesc: "© 2024 VEINTECH. Integrating systems for a smarter future.",
     footerCompany: "Company",
     basePath: "/en"
   }
@@ -92,7 +92,7 @@ const t = {
 				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
 					return localStorage.getItem('theme');
 				}
-				return 'dark'; // Defaulting to VEIN TECH brand identity
+				return 'dark'; // Defaulting to VEINTECH brand identity
 			})();
 			if (theme === 'light') {
 				document.documentElement.classList.remove('dark');
@@ -110,20 +110,20 @@ const t = {
 		<!-- OpenGraph -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonicalUrl} />
-		<meta property="og:title" content={`${title} | VEIN TECH`} />
+		<meta property="og:title" content={`${title} | VEINTECH`} />
 		<meta property="og:description" content={finalDescription} />
 		<meta property="og:image" content={ogImage} />
-		<meta property="og:site_name" content="VEIN TECH" />
+		<meta property="og:site_name" content="VEINTECH" />
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:url" content={canonicalUrl} />
-		<meta name="twitter:title" content={`${title} | VEIN TECH`} />
+		<meta name="twitter:title" content={`${title} | VEINTECH`} />
 		<meta name="twitter:description" content={finalDescription} />
 		<meta name="twitter:image" content={ogImage} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title} | VEIN TECH</title>
+		<title>{title} | VEINTECH</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -191,7 +191,7 @@ const t = {
 		<footer class="bg-surface-container-lowest w-full pt-20 pb-10">
 			<div class="max-w-[1440px] mx-auto px-12 grid grid-cols-1 md:grid-cols-4 gap-12">
 				<div class="col-span-1 md:col-span-1">
-					<div class="text-xl font-bold text-slate-900 dark:text-white mb-4 font-headline tracking-tighter">Vector Integration Technology</div>
+					<div class="text-xl font-bold text-slate-900 dark:text-white mb-4 font-headline tracking-tighter">VEINTECH</div>
 					<p class="font-body text-sm text-slate-600 dark:text-slate-400 opacity-90 leading-relaxed">
 						{t.footerDesc}
 					</p>
@@ -217,7 +217,7 @@ const t = {
 					<ul class="space-y-4">
 						<li class="flex items-center gap-3 text-slate-500 text-sm">
 							<span class="material-symbols-outlined text-xs text-cyan-500" data-icon="mail">mail</span>
-							hello@vit-tech.io
+							hello@veintech.com
 						</li>
 						<li class="flex items-center gap-3 text-slate-500 text-sm">
 							<span class="material-symbols-outlined text-xs text-cyan-500" data-icon="call">call</span>

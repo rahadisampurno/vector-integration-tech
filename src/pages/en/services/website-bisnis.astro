@@ -1,0 +1,252 @@
+---
+import ServiceCTA from '../../../components/ServiceCTA.astro';
+
+import WhyChooseUs from '../../../components/WhyChooseUs.astro';
+
+import ServiceEcosystem from '../../../components/ServiceEcosystem.astro';
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ServiceBottomSections from "../../components/ServiceBottomSections.astro";
+---
+
+<BaseLayout title="UMKM & Business Website | Services">
+<main class="pt-32 pb-20">
+
+    <!-- Hero Section -->
+    <header class="max-w-[1440px] mx-auto px-12 mb-24">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-amber-400/10 border border-amber-400/20 rounded-full text-amber-500 text-xs font-label tracking-widest uppercase mb-8">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+            Services — Business
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-6">
+                <h1 class="text-5xl md:text-7xl font-bold leading-[0.9] tracking-tighter font-headline text-slate-900 dark:text-white">
+                    UMKM & Business <br/><span class="text-amber-500">Website.</span>
+                </h1>
+                <p class="text-xl text-on-surface-variant max-w-lg leading-relaxed font-body">
+                    Professional digital presence solutions for Small Businesses and Startups. Complete packages including custom design, domain, and hosting in one price.
+                </p>
+                <div class="flex gap-4 pt-4">
+                    <a href="/en/contact" class="bg-amber-500 text-white px-8 py-4 rounded-xl font-headline font-bold hover:brightness-110 transition-all flex items-center gap-2">
+                        Free Consultation <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                    <a href="/en/services" class="border border-outline-variant/30 text-slate-600 dark:text-slate-300 px-8 py-4 rounded-xl font-headline font-bold hover:bg-surface-container-high transition-all">
+                        All Services
+                    </a>
+                </div>
+            </div>
+            <div class="relative h-[380px] rounded-2xl overflow-hidden border border-outline-variant/15 bg-surface-container-low flex items-center justify-center">
+                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover opacity-60" alt="Business Website" />
+                <div class="absolute inset-0 bg-gradient-to-br from-amber-400/20 to-transparent"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Pricing Tiers -->
+    <section class="max-w-[1440px] mx-auto px-12 mb-20">
+        <div class="mb-12 text-center">
+            <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">Choose the Right Package</h2>
+            <p class="text-on-surface-variant max-w-xl mx-auto">All packages include hosting & .com domain, fully custom design (not a template), and dedicated technical support.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- Single Page -->
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 flex flex-col gap-5 hover:border-amber-400/30 transition-all">
+                <div>
+                    <span class="text-xs font-label font-bold text-amber-500 tracking-widest uppercase">Single Page</span>
+                    <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mt-1">Landing Page</h3>
+                    <p class="text-sm text-on-surface-variant mt-1">Focused on 1 goal, maximum conversion</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-headline font-bold text-slate-900 dark:text-white">IDR 1M <span class="text-base font-normal text-on-surface-variant">starting from</span></p>
+                    <p class="text-xs text-on-surface-variant mt-1">Development time 3 days</p>
+                </div>
+                <ul class="space-y-3 flex-1">
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Exclusive Design (Non-Template)</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Free .com Domain & Pro Hosting</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Landing Page Layout (1 Page)</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Content Architecture & Basic Copy</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Standard SEO & Analytics Setup</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>WhatsApp & Inquiry Form Integration</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Multi-Language Ready</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Renewal fee: IDR 850,000/year</li>
+                </ul>
+                <div class="pt-2 border-t border-outline-variant/10">
+                    <p class="text-xs text-on-surface-variant mb-4">Best for: Product/service promos, webinar pages, app launches, short portfolios, event pages, creator link-in-bio.</p>
+                    <a href="/en/contact" class="block text-center border border-amber-400 text-amber-500 px-6 py-3 rounded-xl font-headline font-bold hover:bg-amber-400 hover:text-white transition-all text-sm">Consult Now</a>
+                </div>
+            </div>
+
+            <!-- Multi Page — highlighted -->
+            <div class="p-8 rounded-2xl bg-gradient-to-b from-amber-400/15 to-surface-container border border-amber-400/40 flex flex-col gap-5 relative">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-white text-[10px] font-label font-bold tracking-widest uppercase px-4 py-1 rounded-full">Most Popular</div>
+                <div>
+                    <span class="text-xs font-label font-bold text-amber-500 tracking-widest uppercase">Multi Page</span>
+                    <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mt-1">Company Profile</h3>
+                    <p class="text-sm text-on-surface-variant mt-1">Complete, professional business presence</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-headline font-bold text-slate-900 dark:text-white">IDR 2.8M <span class="text-base font-normal text-on-surface-variant">starting from</span></p>
+                    <p class="text-xs text-on-surface-variant mt-1">Development time starting from 3 days</p>
+                </div>
+                <ul class="space-y-3 flex-1">
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Exclusive Visuals (Business Profile)</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>High-Capacity Domain & Hosting</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Up to 5 Main Pages Included</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Advanced Persuasive Copywriting</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Lead Management via WA & Email</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>GA4 Setup & On-Page SEO</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Multi-Language Text Support</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Annual Renewal: IDR 2,500,000</li>
+                </ul>
+                <div class="pt-2 border-t border-amber-400/20">
+                    <p class="text-xs text-on-surface-variant mb-4">Best for: Businesses needing a full company profile, brands wanting to build trust, marketing teams needing service & portfolio pages.</p>
+                    <a href="/en/contact" class="block text-center bg-amber-400 text-white px-6 py-3 rounded-xl font-headline font-bold hover:brightness-110 transition-all text-sm shadow-lg shadow-amber-400/20">Consult Now</a>
+                </div>
+            </div>
+
+            <!-- Enterprise -->
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 flex flex-col gap-5 hover:border-amber-400/30 transition-all">
+                <div>
+                    <span class="text-xs font-label font-bold text-amber-500 tracking-widest uppercase">Enterprise</span>
+                    <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mt-1">Large Scale</h3>
+                    <p class="text-sm text-on-surface-variant mt-1">Full integration, complete features</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-headline font-bold text-slate-900 dark:text-white">IDR 5M <span class="text-base font-normal text-on-surface-variant">starting from</span></p>
+                    <p class="text-xs text-on-surface-variant mt-1">Development time starting from 5 days</p>
+                </div>
+                <ul class="space-y-3 flex-1">
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Premium UX Design (Non-Template)</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Priority Server & Corporate Domain</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Scalable Page Count to Fit Business</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Premium Content: Case Studies & Deep FAQ</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Varied UI Blocks & Functional Pages</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>API, CRM, & Auto-Booking Integrations</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Structured Data for Teams & Stakeholders</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Advanced Conversion & Event Tracking</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>Full Multi-Language Localization</li>
+                    <li class="flex items-start gap-3 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-amber-500 flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>SLA Technical Support & Maintenance</li>
+                </ul>
+                <div class="pt-2 border-t border-outline-variant/10">
+                    <p class="text-xs text-on-surface-variant mb-4">Best for: Large-scale businesses with many pages, multiple stakeholders, marketing/CRM tool integrations, consistent brand standards.</p>
+                    <a href="/en/contact" class="block text-center border border-amber-400 text-amber-500 px-6 py-3 rounded-xl font-headline font-bold hover:bg-amber-400 hover:text-white transition-all text-sm">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Grid -->
+    <section class="max-w-[1440px] mx-auto px-12 mb-20">
+        <div class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">Digital Packages</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-amber-400 to-transparent"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
+                <span class="material-symbols-outlined text-amber-500 text-4xl mb-5 block">business</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Company Profile</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Elegant websites to build customer trust and showcase your business portfolio.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
+                <span class="material-symbols-outlined text-amber-500 text-4xl mb-5 block">devices</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Responsive Design</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Website layouts that automatically adapt to smartphones, tablets, or computers.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
+                <span class="material-symbols-outlined text-amber-500 text-4xl mb-5 block">search</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">SEO Optimized</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Search engine friendly website structures so your business is easily found on Google.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Content Section -->
+    <section class="max-w-[1440px] mx-auto px-12 mb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+            <!-- Left: Benefits -->
+            <div class="space-y-12">
+                <div>
+                    <h2 class="text-3xl font-headline font-bold text-slate-900 dark:text-white mb-6">Boost Your Business Credibility</h2>
+                    <p class="text-on-surface-variant leading-relaxed mb-8">In the digital age, your website is the face of your business. We help UMKM and local businesses appear professional with websites that are fast and easy to manage.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-amber-400/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-amber-500">speed</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">Super Fast Loading</h4>
+                                <p class="text-sm text-on-surface-variant">We use Astro technology to ensure your website loads instantly, enhancing visitor satisfaction.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-amber-400/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-amber-500">edit_note</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">Easy to Update</h4>
+                                <p class="text-sm text-on-surface-variant">An intuitive admin panel allows you to change website content without any coding skills.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-amber-400/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-amber-500">support</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">Technical Support</h4>
+                                <p class="text-sm text-on-surface-variant">Our team is ready to help if you encounter technical hurdles or want to add new features.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Service Packages -->
+            <div class="bg-slate-50 dark:bg-white/5 rounded-3xl p-10 border border-outline-variant/10">
+                <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mb-8 text-center">What Do You Get?</h3>
+                <div class="space-y-6">
+                    <div class="flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-white/5 border border-outline-variant/10">
+                        <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        <span class="text-slate-700 dark:text-slate-300">Free .com / .id Domain (1 Year)</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-white/5 border border-outline-variant/10">
+                        <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        <span class="text-slate-700 dark:text-slate-300">High Performance Cloud Hosting</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-white/5 border border-outline-variant/10">
+                        <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        <span class="text-slate-700 dark:text-slate-300">Secure SSL Certificate (HTTPS)</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-white/5 border border-outline-variant/10">
+                        <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        <span class="text-slate-700 dark:text-slate-300">WhatsApp Chat Integration</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-white/5 border border-outline-variant/10">
+                        <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        <span class="text-slate-700 dark:text-slate-300">Custom Business Email (name@yourbusiness.com)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <ServiceEcosystem title="Ecosystem & Deep Integration" description="Our solutions are perfectly designed to connect seamlessly with your existing applications and technology infrastructure." />
+
+    <WhyChooseUs title="Why Choose VeinTech?" subtitle="Our approach isn't just about writing code. We deliver end-to-end business solutions that guarantee ROI, security, and long-term scalability." />
+
+
+    <!-- Premium CTA Component -->
+    <ServiceCTA 
+        title="Go Digital Now, Reach More Customers."
+        description="Don't let competitors get ahead of you. Build your professional digital presence today."
+        ctaText="Free Website Consultation"
+        ctaLink="/en/contact"
+    />
+
+    <ServiceBottomSections currentSlug="website-bisnis" />
+
+</main>
+</BaseLayout>

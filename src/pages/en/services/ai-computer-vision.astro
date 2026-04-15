@@ -1,0 +1,161 @@
+---
+import ServiceCTA from '../../../components/ServiceCTA.astro';
+
+import WhyChooseUs from '../../../components/WhyChooseUs.astro';
+
+import ServiceEcosystem from '../../../components/ServiceEcosystem.astro';
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ServiceBottomSections from "../../components/ServiceBottomSections.astro";
+---
+
+<BaseLayout title="AI Computer Vision | Services">
+<main class="pt-32 pb-20">
+
+    <!-- Hero Section -->
+    <header class="max-w-[1440px] mx-auto px-12 mb-24">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary-fixed-dim/10 border border-primary-fixed-dim/20 rounded-full text-primary-fixed-dim text-xs font-label tracking-widest uppercase mb-8">
+            <span class="w-2 h-2 rounded-full bg-primary-fixed-dim animate-pulse"></span>
+            Services — AI & Automation
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-6">
+                <h1 class="text-5xl md:text-7xl font-bold leading-[0.9] tracking-tighter font-headline text-slate-900 dark:text-white">
+                    AI Computer <br/><span class="text-primary-fixed-dim">Vision.</span>
+                </h1>
+                <p class="text-xl text-on-surface-variant max-w-lg leading-relaxed font-body">
+                    Intelligent visual analysis using Deep Learning algorithms for security, asset monitoring, and real-time business operational optimization.
+                </p>
+                <div class="flex gap-4 pt-4">
+                    <a href="/en/contact" class="bg-primary-fixed-dim text-on-primary-fixed px-8 py-4 rounded-xl font-headline font-bold hover:brightness-110 transition-all flex items-center gap-2">
+                        Free Consultation <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                    <a href="/en/services" class="border border-outline-variant/30 text-slate-600 dark:text-slate-300 px-8 py-4 rounded-xl font-headline font-bold hover:bg-surface-container-high transition-all">
+                        All Services
+                    </a>
+                </div>
+            </div>
+            <div class="relative h-[380px] rounded-2xl overflow-hidden border border-outline-variant/15 bg-surface-container-low flex items-center justify-center">
+                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover opacity-60" alt="AI Computer Vision" />
+                <div class="absolute inset-0 bg-gradient-to-br from-primary-fixed-dim/20 to-transparent"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Feature Grid -->
+    <section class="max-w-[1440px] mx-auto px-12 mb-20">
+        <div class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">Applied Vision Solutions</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-primary-fixed-dim to-transparent"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block">face</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Facial Recognition</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Contactless attendance and biometric access control systems with high accuracy and anti-spoofing.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block">category</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Object Detection & Classification</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Automatically count products in warehouses or detect production defects on assembly lines.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block">security</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Smart Security Monitoring</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Analyze suspicious behavior from CCTV and send instant notifications to security teams during incidents.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Content Section -->
+    <section class="max-w-[1440px] mx-auto px-12 mb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+            <!-- Left: Benefits -->
+            <div class="space-y-12">
+                <div>
+                    <h2 class="text-3xl font-headline font-bold text-slate-900 dark:text-white mb-6">Why Your Business Needs AI Vision?</h2>
+                    <p class="text-on-surface-variant leading-relaxed mb-8">In a fast-paced digital era, manual visual data processing is no longer efficient. Computer Vision provides digital "eyes" for your system to work faster and more accurately.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary-fixed-dim">speed</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">Operational Efficiency</h4>
+                                <p class="text-sm text-on-surface-variant">Automate repetitive visual tasks, freeing up human resources to focus on strategic work.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary-fixed-dim">precision_manufacturing</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">Tireless Accuracy</h4>
+                                <p class="text-sm text-on-surface-variant">AI works 24/7 with a consistent level of accuracy, minimizing human error in inspections.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary-fixed-dim">insights</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">Data-Driven Insights</h4>
+                                <p class="text-sm text-on-surface-variant">Turn video footage into actionable analytical data for business decision-making.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Process/Workflow -->
+            <div class="bg-slate-50 dark:bg-white/5 rounded-3xl p-10 border border-outline-variant/10">
+                <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mb-8 text-center">Our Implementation Workflow</h3>
+                <div class="space-y-8 relative">
+                    <div class="absolute left-6 top-0 bottom-0 w-0.5 bg-outline-variant/20 hidden md:block"></div>
+                    
+                    <div class="flex gap-6 relative">
+                        <div class="w-12 h-12 rounded-full bg-primary-fixed-dim text-white flex items-center justify-center font-bold shrink-0 z-10">1</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-1">Audit & Consultation</h4>
+                            <p class="text-sm text-on-surface-variant">We analyze your camera infrastructure and determine the most impactful use-cases.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 relative">
+                        <div class="w-12 h-12 rounded-full bg-primary-fixed-dim text-white flex items-center justify-center font-bold shrink-0 z-10">2</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-1">AI Model Training</h4>
+                            <p class="text-sm text-on-surface-variant">Development of Deep Learning models customized specifically for your unique business datasets.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 relative">
+                        <div class="w-12 h-12 rounded-full bg-primary-fixed-dim text-white flex items-center justify-center font-bold shrink-0 z-10">3</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-1">System Integration</h4>
+                            <p class="text-sm text-on-surface-variant">Deployment of AI models into existing workflows, including dashboard and notification integration.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <ServiceEcosystem title="Ecosystem & Deep Integration" description="Our solutions are perfectly designed to connect seamlessly with your existing applications and technology infrastructure." />
+
+    <WhyChooseUs title="Why Choose VeinTech?" subtitle="Our approach isn't just about writing code. We deliver end-to-end business solutions that guarantee ROI, security, and long-term scalability." />
+
+
+    <!-- Premium CTA Component -->
+    <ServiceCTA 
+        title="Transform Visuals into Strategic Data."
+        description="Ready to implement visual intelligence in your business? Contact our engineering team for a solution demo."
+        ctaText="Schedule a Demo Now"
+        ctaLink="/en/contact"
+    />
+
+    <ServiceBottomSections currentSlug="ai-computer-vision" />
+
+</main>
+</BaseLayout>

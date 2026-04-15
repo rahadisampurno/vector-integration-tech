@@ -1,5 +1,12 @@
 ---
+import ServiceCTA from '../../components/ServiceCTA.astro';
+
+import WhyChooseUs from '../../components/WhyChooseUs.astro';
+
+import ServiceEcosystem from '../../components/ServiceEcosystem.astro';
+
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceBottomSections from '../../components/ServiceBottomSections.astro';
 ---
 
 <BaseLayout title="AI & Otomatisasi | Layanan">
@@ -36,7 +43,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
                         <p class="text-xs text-on-surface-variant font-mono">Proses otomatis berjalan...</p>
                         <div class="flex gap-2 mt-2">
                             <div class="h-1.5 rounded-full bg-primary-fixed-dim w-2/3 animate-pulse"></div>
-                            <div class="h-1.5 rounded-full bg-secondary w-1/4 animate-pulse" style="animation-delay:0.3s"></div>
+                            <div class="h-1.5 rounded-full bg-primary-fixed-dim w-1/4 animate-pulse" style="animation-delay:0.3s"></div>
                         </div>
                     </div>
                 </div>
@@ -45,7 +52,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </header>
 
     <!-- Feature Cards -->
-    <section class="max-w-[1440px] mx-auto px-12 mb-32">
+    <section class="max-w-[1440px] mx-auto px-12 mb-20">
         <div class="mb-12">
             <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">Apa yang Kami Otomatiskan</h2>
             <div class="w-20 h-1 bg-gradient-to-r from-primary-fixed-dim to-transparent"></div>
@@ -85,7 +92,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </section>
 
     <!-- How It Works -->
-    <section class="max-w-[1440px] mx-auto px-12 mb-32">
+    <section class="max-w-[1440px] mx-auto px-12 mb-20">
         <div class="bg-surface-container-low border border-outline-variant/15 rounded-2xl p-12 lg:p-16">
             <div class="mb-12">
                 <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">Proses Implementasi Kami</h2>
@@ -100,15 +107,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
                     <p class="text-sm text-on-surface-variant font-body leading-relaxed">Kami mewawancarai tim Anda dan mengidentifikasi semua proses manual yang memakan waktu paling banyak dan paling berpotensi untuk diotomatiskan.</p>
                 </div>
                 <div class="flex flex-col gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-secondary/10 border border-secondary/20 flex items-center justify-center">
-                        <span class="font-headline font-bold text-secondary text-lg">02</span>
+                    <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 border border-primary-fixed-dim/20 flex items-center justify-center">
+                        <span class="font-headline font-bold text-primary-fixed-dim text-lg">02</span>
                     </div>
                     <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white">Perancangan & Pengembangan</h3>
                     <p class="text-sm text-on-surface-variant font-body leading-relaxed">Kami merancang arsitektur workflow, memilih platform terbaik (n8n, Make, kustom), dan membangun sistem otomatisasi yang teruji secara menyeluruh.</p>
                 </div>
                 <div class="flex flex-col gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-tertiary/10 border border-tertiary/20 flex items-center justify-center">
-                        <span class="font-headline font-bold text-tertiary text-lg">03</span>
+                    <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 border border-primary-fixed-dim/20 flex items-center justify-center">
+                        <span class="font-headline font-bold text-primary-fixed-dim text-lg">03</span>
                     </div>
                     <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white">Peluncuran & Pemeliharaan</h3>
                     <p class="text-sm text-on-surface-variant font-body leading-relaxed">Kami meluncurkan sistem, melatih tim Anda, dan memberikan dukungan pemeliharaan berkelanjutan agar otomatisasi bekerja optimal setiap saat.</p>
@@ -117,16 +124,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
     </section>
 
-    <!-- CTA Banner -->
-    <section class="max-w-[1440px] mx-auto px-12">
-        <div class="bg-gradient-to-br from-primary-fixed-dim/20 to-surface-container-low border border-primary-fixed-dim/20 rounded-2xl p-12 text-center">
-            <h2 class="text-3xl md:text-5xl font-headline font-bold text-slate-900 dark:text-white mb-4">Siap Mengurangi 90% Pekerjaan Manual?</h2>
-            <p class="text-on-surface-variant mb-8 max-w-lg mx-auto">Jadwalkan sesi konsultasi gratis dan kami akan mengidentifikasi peluang otomatisasi tersembunyi di bisnis Anda.</p>
-            <a href="/contact" class="inline-flex items-center gap-2 bg-primary-fixed-dim text-on-primary-fixed px-10 py-4 rounded-xl font-headline font-bold hover:brightness-110 transition-all shadow-lg shadow-primary-fixed-dim/20">
-                Jadwalkan Konsultasi <span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
-            </a>
-        </div>
-    </section>
+    <ServiceEcosystem />
+
+    <WhyChooseUs />
+
+
+    <!-- Premium CTA Component -->
+    <ServiceCTA 
+        title="Siap Mengurangi 90% Pekerjaan Manual?"
+        description="Jadwalkan sesi konsultasi gratis dan kami akan mengidentifikasi peluang otomatisasi tersembunyi di bisnis Anda."
+        ctaText="Jadwalkan Konsultasi"
+        
+    />
+
+    <ServiceBottomSections currentSlug="ai-otomatisasi" />
 
 </main>
 </BaseLayout>

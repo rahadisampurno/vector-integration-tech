@@ -1,0 +1,161 @@
+---
+import ServiceCTA from '../../components/ServiceCTA.astro';
+
+import WhyChooseUs from '../../components/WhyChooseUs.astro';
+
+import ServiceEcosystem from '../../components/ServiceEcosystem.astro';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceBottomSections from '../../components/ServiceBottomSections.astro';
+---
+
+<BaseLayout title="Mobile App Development | Layanan">
+<main class="pt-32 pb-20">
+
+    <!-- Hero Section -->
+    <header class="max-w-[1440px] mx-auto px-12 mb-24">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary-fixed-dim/10 border border-primary-fixed-dim/20 rounded-full text-primary-fixed-dim text-xs font-label tracking-widest uppercase mb-8">
+            <span class="w-2 h-2 rounded-full bg-primary-fixed-dim animate-pulse"></span>
+            Layanan — Pengembangan
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-6">
+                <h1 class="text-5xl md:text-7xl font-bold leading-[0.9] tracking-tighter font-headline text-slate-900 dark:text-white">
+                    Mobile App <br/><span class="text-primary-fixed-dim">Development.</span>
+                </h1>
+                <p class="text-xl text-on-surface-variant max-w-lg leading-relaxed font-body">
+                    Pengembangan aplikasi native iOS dan Android yang fokus pada User Experience (UX) intuitif dan performa tinggi di berbagai perangkat.
+                </p>
+                <div class="flex gap-4 pt-4">
+                    <a href="/contact" class="bg-primary-fixed-dim text-white px-8 py-4 rounded-xl font-headline font-bold hover:brightness-110 transition-all flex items-center gap-2">
+                        Konsultasi Gratis <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                    <a href="/services" class="border border-outline-variant/30 text-slate-600 dark:text-slate-300 px-8 py-4 rounded-xl font-headline font-bold hover:bg-surface-container-high transition-all">
+                        Semua Layanan
+                    </a>
+                </div>
+            </div>
+            <div class="relative h-[380px] rounded-2xl overflow-hidden border border-outline-variant/15 bg-surface-container-low flex items-center justify-center">
+                <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover opacity-60" alt="Mobile Development" />
+                <div class="absolute inset-0 bg-gradient-to-br from-primary-fixed-dim/20 to-transparent"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Feature Grid -->
+    <section class="max-w-[1440px] mx-auto px-12 mb-20">
+        <div class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">Solusi Mobile</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-primary-fixed-dim to-transparent"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block">phone_iphone</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">iOS & Android Native</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Membangun aplikasi dengan performa maksimal menggunakan teknologi native terbaru.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block">brush</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">UI/UX Design</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Desain antarmuka yang modern dan pengalaman pengguna yang mulus untuk meningkatkan retensi pengguna.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block">published_with_changes</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Update & Maintenance</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Dukungan berkelanjutan untuk memastikan aplikasi Anda selalu kompatibel dengan OS versi terbaru.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Content Section -->
+    <section class="max-w-[1440px] mx-auto px-12 mb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+            <!-- Left: Benefits -->
+            <div class="space-y-12">
+                <div>
+                    <h2 class="text-3xl font-headline font-bold text-slate-900 dark:text-white mb-6">Aplikasi Mobile yang Menunjang Bisnis</h2>
+                    <p class="text-on-surface-variant leading-relaxed mb-8">Hadirkan bisnis Anda langsung ke dalam genggaman pelanggan. Kami membangun aplikasi mobile yang tidak hanya indah dipandang, tapi juga memiliki performa yang tangguh dan stabil.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary-fixed-dim">touch_app</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">UX yang Intuitif</h4>
+                                <p class="text-sm text-on-surface-variant">Memastikan pengguna dapat menavigasi aplikasi dengan mudah dan mencapai tujuan mereka tanpa hambatan.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary-fixed-dim">speed</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">Performa Tanpa Kompromi</h4>
+                                <p class="text-sm text-on-surface-variant">Optimasi kode dan manajemen memori untuk memastikan aplikasi berjalan cepat dan hemat baterai.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary-fixed-dim">notifications_active</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">Engage dengan Notifikasi</h4>
+                                <p class="text-sm text-on-surface-variant">Gunakan push notifications untuk tetap terhubung dengan pelanggan dan meningkatkan engagement.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Workflow -->
+            <div class="bg-slate-50 dark:bg-white/5 rounded-3xl p-10 border border-outline-variant/10">
+                <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mb-8 text-center">Proses Pengembangan</h3>
+                <div class="space-y-8 relative">
+                    <div class="absolute left-6 top-0 bottom-0 w-0.5 bg-outline-variant/20 hidden md:block"></div>
+                    
+                    <div class="flex gap-6 relative">
+                        <div class="w-12 h-12 rounded-full bg-primary-fixed-dim text-white flex items-center justify-center font-bold shrink-0 z-10">1</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-1">User Journey Mapping</h4>
+                            <p class="text-sm text-on-surface-variant">Merancang alur perjalanan pengguna dari awal hingga akhir di dalam aplikasi.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 relative">
+                        <div class="w-12 h-12 rounded-full bg-primary-fixed-dim text-white flex items-center justify-center font-bold shrink-0 z-10">2</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-1">Sprints & Coding</h4>
+                            <p class="text-sm text-on-surface-variant">Tahap implementasi fitur secara bertahap dengan feedback loop yang cepat.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 relative">
+                        <div class="w-12 h-12 rounded-full bg-primary-fixed-dim text-white flex items-center justify-center font-bold shrink-0 z-10">3</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-1">Beta Testing & Store Launch</h4>
+                            <p class="text-sm text-on-surface-variant">Pengujian oleh pengguna terbatas sebelum peluncuran resmi di App Store & Play Store.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <ServiceEcosystem />
+
+    <WhyChooseUs />
+
+
+    <!-- Premium CTA Component -->
+    <ServiceCTA 
+        title="Hadirkan Bisnis Anda di Genggaman Pelanggan."
+        description="Siap membangun aplikasi mobile yang revolusioner? Konsultasikan ide Anda dengan tim ahli kami."
+        ctaText="Mulai Project Mobile Anda"
+        
+    />
+
+    <ServiceBottomSections currentSlug="mobile-app-dev" />
+
+</main>
+</BaseLayout>

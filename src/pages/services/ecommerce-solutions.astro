@@ -1,0 +1,162 @@
+---
+import ServiceCTA from '../../components/ServiceCTA.astro';
+
+import WhyChooseUs from '../../components/WhyChooseUs.astro';
+
+import ServiceEcosystem from '../../components/ServiceEcosystem.astro';
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceBottomSections from '../../components/ServiceBottomSections.astro';
+---
+
+<BaseLayout title="E-commerce Solutions | Layanan">
+<main class="pt-32 pb-20">
+
+    <!-- Hero Section -->
+    <header class="max-w-[1440px] mx-auto px-12 mb-24">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary-fixed-dim/10 border border-primary-fixed-dim/20 rounded-full text-primary-fixed-dim text-xs font-label tracking-widest uppercase mb-8">
+            <span class="w-2 h-2 rounded-full bg-primary-fixed-dim animate-pulse"></span>
+            Layanan — Bisnis
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-6">
+                <h1 class="text-5xl md:text-7xl font-bold leading-[0.9] tracking-tighter font-headline text-slate-900 dark:text-white">
+                    E-commerce <br/><span class="text-primary-fixed-dim">Solutions.</span>
+                </h1>
+                <p class="text-xl text-on-surface-variant max-w-lg leading-relaxed font-body">
+                    Bangun toko online kustom Anda sendiri dengan sistem pembayaran terintegrasi, manajemen inventaris, dan dashboard analitik penjualan yang canggih.
+                </p>
+                <div class="flex gap-4 pt-4">
+                    <a href="/contact" class="bg-primary-fixed-dim text-on-primary-fixed px-8 py-4 rounded-xl font-headline font-bold hover:brightness-110 transition-all flex items-center gap-2">
+                        Konsultasi Gratis <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                    <a href="/services" class="border border-outline-variant/30 text-slate-600 dark:text-slate-300 px-8 py-4 rounded-xl font-headline font-bold hover:bg-surface-container-high transition-all">
+                        Semua Layanan
+                    </a>
+                </div>
+            </div>
+            <div class="relative h-[380px] rounded-2xl overflow-hidden border border-outline-variant/15 bg-surface-container-low flex items-center justify-center">
+                <img src="https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover opacity-60" alt="E-commerce" />
+                <div class="absolute inset-0 bg-gradient-to-br from-primary-fixed-dim/20 to-transparent"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Feature Grid -->
+    <section class="max-w-[1440px] mx-auto px-12 mb-20">
+        <div class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">Fitur Toko Online</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-primary-fixed-dim to-transparent"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block">payments</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Payment Gateway</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Integrasi otomatis dengan berbagai metode pembayaran (VA, E-wallet, Kartu Kredit) yang aman.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block">inventory_2</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Inventory Management</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Kelola stok produk Anda secara real-time dengan notifikasi otomatis saat stok menipis.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block">local_shipping</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Logistik Terintegrasi</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Cek ongkir otomatis dan lacak pengiriman pesanan langsung dari dashboard toko Anda.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Content Section -->
+    <section class="max-w-[1440px] mx-auto px-12 mb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+            <!-- Left: Benefits -->
+            <div class="space-y-12">
+                <div>
+                    <h2 class="text-3xl font-headline font-bold text-slate-900 dark:text-white mb-6">Toko Online yang Bekerja untuk Anda</h2>
+                    <p class="text-on-surface-variant leading-relaxed mb-8">Jangan batasi penjualan Anda hanya di marketplace. Miliki platform e-commerce kustom yang memberikan kontrol penuh atas brand dan data pelanggan Anda.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary-fixed-dim">monitoring</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">Analitik Penjualan Mendalam</h4>
+                                <p class="text-sm text-on-surface-variant">Pahami perilaku pembeli Anda dengan dashboard laporan yang komprehensif untuk strategi marketing yang lebih baik.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary-fixed-dim">security</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">Keamanan Transaksi</h4>
+                                <p class="text-sm text-on-surface-variant">Perlindungan data pelanggan dan enkripsi transaksi untuk membangun kepercayaan pembeli.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary-fixed-dim">mobile_friendly</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">Mobile-First Experience</h4>
+                                <p class="text-sm text-on-surface-variant">Karena mayoritas pembeli menggunakan smartphone, toko online kami dioptimalkan untuk pengalaman mobile yang mulus.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Features List -->
+            <div class="bg-slate-50 dark:bg-white/5 rounded-3xl p-10 border border-outline-variant/10">
+                <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mb-8 text-center">Fitur Unggulan Lainnya</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-center gap-3 p-3 rounded-lg bg-white dark:bg-white/5 border border-outline-variant/10">
+                        <span class="material-symbols-outlined text-primary-fixed-dim text-sm">confirmation_number</span>
+                        <span class="text-xs text-slate-700 dark:text-slate-300">Sistem Kupon & Diskon</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 rounded-lg bg-white dark:bg-white/5 border border-outline-variant/10">
+                        <span class="material-symbols-outlined text-primary-fixed-dim text-sm">reviews</span>
+                        <span class="text-xs text-slate-700 dark:text-slate-300">Review & Rating Produk</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 rounded-lg bg-white dark:bg-white/5 border border-outline-variant/10">
+                        <span class="material-symbols-outlined text-primary-fixed-dim text-sm">account_circle</span>
+                        <span class="text-xs text-slate-700 dark:text-slate-300">Manajemen Member</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 rounded-lg bg-white dark:bg-white/5 border border-outline-variant/10">
+                        <span class="material-symbols-outlined text-primary-fixed-dim text-sm">mail</span>
+                        <span class="text-xs text-slate-700 dark:text-slate-300">Email Marketing Otomatis</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 rounded-lg bg-white dark:bg-white/5 border border-outline-variant/10">
+                        <span class="material-symbols-outlined text-primary-fixed-dim text-sm">category</span>
+                        <span class="text-xs text-slate-700 dark:text-slate-300">Variasi Produk (Warna/Size)</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 rounded-lg bg-white dark:bg-white/5 border border-outline-variant/10">
+                        <span class="material-symbols-outlined text-primary-fixed-dim text-sm">list_alt</span>
+                        <span class="text-xs text-slate-700 dark:text-slate-300">Ekspor Laporan ke Excel</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <ServiceEcosystem />
+
+    <WhyChooseUs />
+
+
+    <!-- Premium CTA Component -->
+    <ServiceCTA 
+        title="Mulai Berjualan Secara Profesional."
+        description="Siap meningkatkan skala penjualan Anda? Mari bangun toko online yang tangguh untuk bisnis Anda."
+        ctaText="Konsultasi Toko Online Gratis"
+        
+    />
+
+    <ServiceBottomSections currentSlug="ecommerce-solutions" />
+
+</main>
+</BaseLayout>

@@ -143,16 +143,72 @@ const t = {
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+		<style is:global>
+			.animate-reveal {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+			.animate-reveal.revealed {
+				animation: reveal-up 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+			}
+			.group-hover\/services\:opacity-100 .animate-reveal {
+				animation: reveal-up 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+			}
+			@keyframes reveal-up {
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+			.delay-75 { animation-delay: 75ms; }
+			.delay-100 { animation-delay: 100ms; }
+			.delay-150 { animation-delay: 150ms; }
+			.delay-200 { animation-delay: 200ms; }
+			.delay-250 { animation-delay: 250ms; }
+
+			/* Custom Scrollbar */
+			.custom-scrollbar::-webkit-scrollbar {
+				width: 5px;
+			}
+			.custom-scrollbar::-webkit-scrollbar-track {
+				background: transparent;
+			}
+			.custom-scrollbar::-webkit-scrollbar-thumb {
+				background: rgba(76, 214, 255, 0.2);
+				border-radius: 10px;
+			}
+			.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+				background: rgba(76, 214, 255, 0.4);
+			}
+		</style>
 	</head>
 	<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed-dim/30">
-		<nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-[#10141a]/60 backdrop-blur-xl">
+		<nav id="main-nav" class="fixed top-0 w-full z-50 transition-all duration-500 bg-transparent border-b border-transparent">
 			<div class="flex justify-between items-center max-w-[1440px] mx-auto px-6 md:px-12 h-20">
 				<a href={`${t.basePath}/`} class="flex flex-shrink-0 items-center">
 					<img src="/logo.svg" alt="VeinTech Logo" class="h-auto w-30 md:w-48" />
 				</a>
 				<div class="hidden lg:flex items-center gap-8">
 					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/`}>{t.home}</a>
-					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/about') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/about`}>{t.about}</a>
+					<!-- Company Dropdown -->
+					<div class="relative group/company">
+						<button class={`flex items-center gap-1 font-headline tracking-tight text-sm transition-colors ${(isActive('/about') || isActive('/contact')) ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`}>
+							{t.footerCompany}
+							<span class="material-symbols-outlined transition-transform group-hover/company:rotate-180" style="font-size:14px">expand_more</span>
+						</button>
+						<div class="absolute top-full left-0 pt-6 opacity-0 pointer-events-none group-hover/company:opacity-100 group-hover/company:pointer-events-auto transition-all duration-300 z-50">
+							<div class="w-56 bg-white/95 dark:bg-[#0a0d14]/95 backdrop-blur-2xl border border-outline-variant/15 rounded-2xl shadow-2xl p-2 flex flex-col gap-1 transform scale-95 group-hover/company:scale-100 origin-top transition-transform duration-300">
+								<a href={`${t.basePath}/about`} class={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-headline tracking-tight transition-all ${isActive('/about') ? 'bg-primary-fixed-dim/10 text-primary-fixed-dim font-bold' : 'text-slate-600 dark:text-slate-300 hover:bg-surface-container-high hover:text-primary-fixed-dim'}`}>
+									<span class="material-symbols-outlined" style="font-size:18px">info</span>
+									{t.about}
+								</a>
+								<a href={`${t.basePath}/contact`} class={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-headline tracking-tight transition-all ${isActive('/contact') ? 'bg-primary-fixed-dim/10 text-primary-fixed-dim font-bold' : 'text-slate-600 dark:text-slate-300 hover:bg-surface-container-high hover:text-primary-fixed-dim'}`}>
+									<span class="material-symbols-outlined" style="font-size:18px">mail</span>
+									{t.contact}
+								</a>
+							</div>
+						</div>
+					</div>
 					<!-- Services Mega Dropdown -->
 					<div class="relative group/services">
 						<button class={`flex items-center gap-1 font-headline tracking-tight text-sm transition-colors ${isActive('/services') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`}>
@@ -160,62 +216,232 @@ const t = {
 							<span class="material-symbols-outlined transition-transform group-hover/services:rotate-180" style="font-size:14px">expand_more</span>
 						</button>
 						<!-- Mega Menu Panel -->
-						<div class="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 pointer-events-none group-hover/services:opacity-100 group-hover/services:pointer-events-auto transition-all duration-200 z-50">
-							<div class="w-[680px] bg-surface/95 dark:bg-[#10141a]/95 backdrop-blur-2xl border border-outline-variant/20 rounded-2xl p-6 shadow-2xl shadow-black/40 grid grid-cols-2 gap-3">
-								<!-- AI & Automation -->
-								<a href={lang === 'id' ? '/services/ai-otomatisasi' : '/en/services/ai-automation'} class="flex items-start gap-4 p-4 rounded-xl hover:bg-surface-container-high transition-colors group/item">
-									<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary-fixed-dim/10 flex items-center justify-center group-hover/item:bg-primary-fixed-dim/20 transition-colors">
-										<span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:20px" data-icon="auto_awesome">auto_awesome</span>
+						<div class="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 pointer-events-none group-hover/services:opacity-100 group-hover/services:pointer-events-auto transition-all duration-300 z-50">
+							<div class="w-[1100px] bg-white/95 dark:bg-[#0a0d14]/95 backdrop-blur-2xl border border-outline-variant/15 rounded-2xl shadow-2xl shadow-black/40 overflow-hidden flex transform scale-95 group-hover/services:scale-100 transition-transform duration-300 origin-top">
+								<!-- Left Sidebar: Categories -->
+								<div class="w-72 bg-slate-50/50 dark:bg-white/5 border-r border-outline-variant/10 p-8">
+									<div class="mb-8">
+										<h4 class="text-[10px] font-mono font-bold tracking-[0.2em] text-slate-500 dark:text-slate-400 uppercase mb-4 opacity-80">{lang === 'id' ? 'Kategori Layanan' : 'Service Categories'}</h4>
+										<div class="space-y-1">
+											<button data-filter="all" class="mega-menu-filter w-full flex items-center justify-between px-4 py-3 rounded-xl bg-primary-fixed-dim/10 text-primary-fixed-dim font-headline font-bold text-sm group/cat transition-all hover:brightness-110 active-filter">
+												{lang === 'id' ? 'Semua Produk' : 'All Products'}
+												<span class="material-symbols-outlined text-xs group-hover/cat:translate-x-1 transition-transform"></span>
+											</button>
+											<button data-filter="ai-automation" class="mega-menu-filter w-full flex items-center justify-between px-4 py-3 rounded-xl text-slate-600 dark:text-slate-300 font-headline font-medium text-sm hover:bg-surface-container-high transition-colors group/cat text-left">
+												{lang === 'id' ? 'AI & Otomatisasi' : 'AI & Automation'}
+												<span class="material-symbols-outlined text-xs group-hover/cat:translate-x-1 transition-transform"></span>
+											</button>
+											<button data-filter="infrastructure" class="mega-menu-filter w-full flex items-center justify-between px-4 py-3 rounded-xl text-slate-600 dark:text-slate-300 font-headline font-medium text-sm hover:bg-surface-container-high transition-colors group/cat text-left">
+												{lang === 'id' ? 'Infrastruktur Cloud' : 'Cloud Infrastructure'}
+												<span class="material-symbols-outlined text-xs group-hover/cat:translate-x-1 transition-transform"></span>
+											</button>
+											<button data-filter="development" class="mega-menu-filter w-full flex items-center justify-between px-4 py-3 rounded-xl text-slate-600 dark:text-slate-300 font-headline font-medium text-sm hover:bg-surface-container-high transition-colors group/cat text-left">
+												{lang === 'id' ? 'Pengembangan Digital' : 'Digital Development'}
+												<span class="material-symbols-outlined text-xs group-hover/cat:translate-x-1 transition-transform"></span>
+											</button>
+										</div>
 									</div>
+
 									<div>
-										<p class="font-headline font-bold text-sm text-slate-900 dark:text-white mb-1">{lang === 'id' ? 'AI & Otomatisasi' : 'AI & Automation'}</p>
-										<p class="text-xs text-on-surface-variant leading-relaxed">{lang === 'id' ? 'Chatbot AI, workflow otomatis, pemrosesan dokumen.' : 'AI chatbots, automated workflows, document processing.'}</p>
+										<h4 class="text-[10px] font-mono font-bold tracking-[0.2em] text-slate-500 dark:text-slate-400 uppercase mb-4 opacity-80">{lang === 'id' ? 'Tipe Bisnis' : 'Business Types'}</h4>
+										<div class="space-y-1">
+											<button data-filter="enterprise" class="mega-menu-filter w-full flex items-center justify-between px-4 py-3 rounded-xl text-slate-600 dark:text-slate-300 font-headline font-medium text-sm hover:bg-surface-container-high transition-colors group/cat text-left">
+												Enterprise
+												<span class="material-symbols-outlined text-xs group-hover/cat:translate-x-1 transition-transform"></span>
+											</button>
+											<button data-filter="business" class="mega-menu-filter w-full flex items-center justify-between px-4 py-3 rounded-xl text-slate-600 dark:text-slate-300 font-headline font-medium text-sm hover:bg-surface-container-high transition-colors group/cat text-left">
+												UMKM / Startup
+												<span class="material-symbols-outlined text-xs group-hover/cat:translate-x-1 transition-transform"></span>
+											</button>
+										</div>
 									</div>
-								</a>
-								<!-- System Integration -->
-								<a href={lang === 'id' ? '/services/integrasi-sistem' : '/en/services/system-integration'} class="flex items-start gap-4 p-4 rounded-xl hover:bg-surface-container-high transition-colors group/item">
-									<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center group-hover/item:bg-secondary/20 transition-colors">
-										<span class="material-symbols-outlined text-secondary" style="font-size:20px" data-icon="hub">hub</span>
+								</div>
+
+								<!-- Right Content: Grid -->
+								<div class="flex-1 flex flex-col h-[600px] bg-white dark:bg-[#0a0d14]">
+									<div class="p-10 pb-4">
+										<div class="flex items-center justify-between mb-8 pb-4 border-b border-outline-variant/10">
+											<h4 class="text-2xl font-headline font-bold text-slate-900 dark:text-white" id="mega-menu-title">{lang === 'id' ? 'Semua Produk & Layanan' : 'All Products & Services'}</h4>
+											<span class="text-xs text-slate-500 dark:text-slate-400 font-mono font-bold px-3 py-1 bg-slate-100 dark:bg-white/5 rounded-full border border-outline-variant/10"><span id="mega-menu-count">9</span> {lang === 'id' ? 'Layanan Tersedia' : 'Services Available'}</span>
+										</div>
 									</div>
-									<div>
-										<p class="font-headline font-bold text-sm text-slate-900 dark:text-white mb-1">{lang === 'id' ? 'Integrasi Sistem' : 'System Integration'}</p>
-										<p class="text-xs text-on-surface-variant leading-relaxed">{lang === 'id' ? 'Menghubungkan semua sistem IT Anda via API & orkestrasi.' : 'Connect all your IT systems via API & orchestration.'}</p>
+									
+									<div class="flex-1 overflow-y-auto p-10 pt-0 custom-scrollbar">
+										<div class="grid grid-cols-3 gap-6" id="mega-menu-grid">
+											<!-- AI Computer Vision -->
+											<a href={lang === 'id' ? '/services/ai-computer-vision' : '/en/services/ai-computer-vision'} data-category="ai-automation enterprise" class="service-card group/item flex flex-col bg-slate-50 dark:bg-white/5 border border-outline-variant/10 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-1 transition-all duration-500 animate-reveal">
+												<div class="h-40 relative overflow-hidden flex items-end p-4">
+													<img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="AI Computer Vision" />
+													<div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
+														<p class="text-[11px] text-white/90 leading-relaxed line-clamp-3 mb-3 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">{lang === 'id' ? 'Analisis visual cerdas untuk keamanan dan operasional bisnis.' : 'Intelligent visual analysis for business security and operations.'}</p>
+														<div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-[10px] uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
+															{lang === 'id' ? 'Selengkapnya' : 'Learn More'}
+															<span class="material-symbols-outlined text-xs">arrow_forward</span>
+														</div>
+													</div>
+													<span class="relative z-10 text-[9px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-2 py-1 rounded-lg group-hover/item:opacity-0 transition-opacity">AI & AUTOMATION</span>
+												</div>
+												<div class="p-5 flex-1 flex flex-col bg-white dark:bg-transparent">
+													<h5 class="font-headline font-bold text-xs text-slate-900 dark:text-white group-hover/item:text-primary-fixed-dim transition-colors leading-snug whitespace-normal">AI Computer Vision</h5>
+												</div>
+											</a>
+
+											<!-- Chatbot AI & NLP -->
+											<a href={lang === 'id' ? '/services/chatbot-ai' : '/en/services/chatbot-ai'} data-category="ai-automation business" class="service-card group/item flex flex-col bg-slate-50 dark:bg-white/5 border border-outline-variant/10 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-1 transition-all duration-500 animate-reveal delay-75">
+												<div class="h-40 relative overflow-hidden flex items-end p-4">
+													<img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="Chatbot AI" />
+													<div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
+														<p class="text-[11px] text-white/90 leading-relaxed line-clamp-3 mb-3 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">{lang === 'id' ? 'Asisten virtual cerdas untuk layanan pelanggan 24/7 otomatis.' : 'Smart virtual assistants for 24/7 automated customer service.'}</p>
+														<div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-[10px] uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
+															{lang === 'id' ? 'Selengkapnya' : 'Learn More'}
+															<span class="material-symbols-outlined text-xs">arrow_forward</span>
+														</div>
+													</div>
+													<span class="relative z-10 text-[9px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-2 py-1 rounded-lg group-hover/item:opacity-0 transition-opacity">AI & AUTOMATION</span>
+												</div>
+												<div class="p-5 flex-1 flex flex-col bg-white dark:bg-transparent">
+													<h5 class="font-headline font-bold text-xs text-slate-900 dark:text-white group-hover/item:text-primary-fixed-dim transition-colors leading-snug whitespace-normal">Chatbot AI & NLP</h5>
+												</div>
+											</a>
+
+											<!-- System Integration API -->
+											<a href={lang === 'id' ? '/services/integrasi-api' : '/en/services/integrasi-api'} data-category="infrastructure enterprise" class="service-card group/item flex flex-col bg-slate-50 dark:bg-white/5 border border-outline-variant/10 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-1 transition-all duration-500 animate-reveal delay-100">
+												<div class="h-40 relative overflow-hidden flex items-end p-4">
+													<img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="API Integration" />
+													<div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
+														<p class="text-[11px] text-white/90 leading-relaxed line-clamp-3 mb-3 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">{lang === 'id' ? 'Menyatukan ekosistem software Anda ke dalam alur kerja otomatis.' : 'Unifying your software ecosystem into automated workflows.'}</p>
+														<div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-[10px] uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
+															{lang === 'id' ? 'Selengkapnya' : 'Learn More'}
+															<span class="material-symbols-outlined text-xs">arrow_forward</span>
+														</div>
+													</div>
+													<span class="relative z-10 text-[9px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-2 py-1 rounded-lg group-hover/item:opacity-0 transition-opacity">INFRASTRUCTURE</span>
+												</div>
+												<div class="p-5 flex-1 flex flex-col bg-white dark:bg-transparent">
+													<h5 class="font-headline font-bold text-xs text-slate-900 dark:text-white group-hover/item:text-primary-fixed-dim transition-colors leading-snug whitespace-normal">Integrasi Sistem API</h5>
+												</div>
+											</a>
+
+											<!-- Cyber Security -->
+											<a href={lang === 'id' ? '/services/cyber-security' : '/en/services/cyber-security'} data-category="infrastructure enterprise" class="service-card group/item flex flex-col bg-slate-50 dark:bg-white/5 border border-outline-variant/10 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-1 transition-all duration-500 animate-reveal delay-150">
+												<div class="h-40 relative overflow-hidden flex items-end p-4">
+													<img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="Cyber Security" />
+													<div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
+														<p class="text-[11px] text-white/90 leading-relaxed line-clamp-3 mb-3 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">{lang === 'id' ? 'Perlindungan data perusahaan dengan standar keamanan tingkat tinggi.' : 'Enterprise data protection with high-level security standards.'}</p>
+														<div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-[10px] uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
+															{lang === 'id' ? 'Selengkapnya' : 'Learn More'}
+															<span class="material-symbols-outlined text-xs">arrow_forward</span>
+														</div>
+													</div>
+													<span class="relative z-10 text-[9px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-2 py-1 rounded-lg group-hover/item:opacity-0 transition-opacity">INFRASTRUCTURE</span>
+												</div>
+												<div class="p-5 flex-1 flex flex-col bg-white dark:bg-transparent">
+													<h5 class="font-headline font-bold text-xs text-slate-900 dark:text-white group-hover/item:text-primary-fixed-dim transition-colors leading-snug whitespace-normal">Cyber Security & Zero Trust</h5>
+												</div>
+											</a>
+
+											<!-- SaaS & Web Dev -->
+											<a href={lang === 'id' ? '/services/saas-web-dev' : '/en/services/saas-web-dev'} data-category="development business enterprise" class="service-card group/item flex flex-col bg-slate-50 dark:bg-white/5 border border-outline-variant/10 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-1 transition-all duration-500 animate-reveal delay-200">
+												<div class="h-40 relative overflow-hidden flex items-end p-4">
+													<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="Web Development" />
+													<div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
+														<p class="text-[11px] text-white/90 leading-relaxed line-clamp-3 mb-3 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">{lang === 'id' ? 'Membangun aplikasi web dan platform SaaS kustom berskala tinggi.' : 'Building custom web apps and high-scale SaaS platforms.'}</p>
+														<div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-[10px] uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
+															{lang === 'id' ? 'Selengkapnya' : 'Learn More'}
+															<span class="material-symbols-outlined text-xs">arrow_forward</span>
+														</div>
+													</div>
+													<span class="relative z-10 text-[9px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-2 py-1 rounded-lg group-hover/item:opacity-0 transition-opacity">DEVELOPMENT</span>
+												</div>
+												<div class="p-5 flex-1 flex flex-col bg-white dark:bg-transparent">
+													<h5 class="font-headline font-bold text-xs text-slate-900 dark:text-white group-hover/item:text-primary-fixed-dim transition-colors leading-snug whitespace-normal">SaaS & Web Development</h5>
+												</div>
+											</a>
+
+											<!-- Mobile App Dev -->
+											<a href={lang === 'id' ? '/services/mobile-app-dev' : '/en/services/mobile-app-dev'} data-category="development business enterprise" class="service-card group/item flex flex-col bg-slate-50 dark:bg-white/5 border border-outline-variant/10 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-1 transition-all duration-500 animate-reveal delay-300">
+												<div class="h-40 relative overflow-hidden flex items-end p-4">
+													<img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="Mobile Development" />
+													<div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
+														<p class="text-[11px] text-white/90 leading-relaxed line-clamp-3 mb-3 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">{lang === 'id' ? 'Aplikasi iOS dan Android yang intuitif dan berperforma tinggi.' : 'Intuitive and high-performance iOS and Android applications.'}</p>
+														<div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-[10px] uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
+															{lang === 'id' ? 'Selengkapnya' : 'Learn More'}
+															<span class="material-symbols-outlined text-xs">arrow_forward</span>
+														</div>
+													</div>
+													<span class="relative z-10 text-[9px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-2 py-1 rounded-lg group-hover/item:opacity-0 transition-opacity">DEVELOPMENT</span>
+												</div>
+												<div class="p-5 flex-1 flex flex-col bg-white dark:bg-transparent">
+													<h5 class="font-headline font-bold text-xs text-slate-900 dark:text-white group-hover/item:text-primary-fixed-dim transition-colors leading-snug whitespace-normal">Mobile App Development</h5>
+												</div>
+											</a>
+
+											<!-- IT Audit & Architecture -->
+											<a href={lang === 'id' ? '/services/audit-it' : '/en/services/audit-it'} data-category="consulting enterprise" class="service-card group/item flex flex-col bg-slate-50 dark:bg-white/5 border border-outline-variant/10 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-1 transition-all duration-500 animate-reveal delay-[350ms]">
+												<div class="h-40 relative overflow-hidden flex items-end p-4">
+													<img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="IT Audit" />
+													<div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
+														<p class="text-[11px] text-white/90 leading-relaxed line-clamp-3 mb-3 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">{lang === 'id' ? 'Audit menyeluruh dan desain arsitektur IT untuk efisiensi biaya.' : 'Thorough audits and IT architecture design for cost efficiency.'}</p>
+														<div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-[10px] uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
+															{lang === 'id' ? 'Selengkapnya' : 'Learn More'}
+															<span class="material-symbols-outlined text-xs">arrow_forward</span>
+														</div>
+													</div>
+													<span class="relative z-10 text-[9px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-2 py-1 rounded-lg group-hover/item:opacity-0 transition-opacity">CONSULTING</span>
+												</div>
+												<div class="p-5 flex-1 flex flex-col bg-white dark:bg-transparent">
+													<h5 class="font-headline font-bold text-xs text-slate-900 dark:text-white group-hover/item:text-primary-fixed-dim transition-colors leading-snug whitespace-normal">Arsitektur & Audit IT</h5>
+												</div>
+											</a>
+
+											<!-- Website UMKM & Bisnis -->
+											<a href={lang === 'id' ? '/services/website-bisnis' : '/en/services/website-bisnis'} data-category="business" class="service-card group/item flex flex-col bg-slate-50 dark:bg-white/5 border border-outline-variant/10 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-1 transition-all duration-500 animate-reveal delay-[400ms]">
+												<div class="h-40 relative overflow-hidden flex items-end p-4">
+													<img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="Business Website" />
+													<div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
+														<p class="text-[11px] text-white/90 leading-relaxed line-clamp-3 mb-3 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">{lang === 'id' ? 'Paket website siap pakai lengkap dengan hosting dan domain.' : 'Ready-to-use website packages with hosting and domain.'}</p>
+														<div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-[10px] uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
+															{lang === 'id' ? 'Selengkapnya' : 'Learn More'}
+															<span class="material-symbols-outlined text-xs">arrow_forward</span>
+														</div>
+													</div>
+													<span class="relative z-10 text-[9px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-2 py-1 rounded-lg group-hover/item:opacity-0 transition-opacity">BUSINESS</span>
+												</div>
+												<div class="p-5 flex-1 flex flex-col bg-white dark:bg-transparent">
+													<h5 class="font-headline font-bold text-xs text-slate-900 dark:text-white group-hover/item:text-primary-fixed-dim transition-colors leading-snug whitespace-normal">Website UMKM & Bisnis</h5>
+												</div>
+											</a>
+
+											<!-- E-commerce Solutions -->
+											<a href={lang === 'id' ? '/services/ecommerce-solutions' : '/en/services/ecommerce-solutions'} data-category="business" class="service-card group/item flex flex-col bg-slate-50 dark:bg-white/5 border border-outline-variant/10 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-1 transition-all duration-500 animate-reveal delay-[450ms]">
+												<div class="h-40 relative overflow-hidden flex items-end p-4">
+													<img src="https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="E-commerce" />
+													<div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
+														<p class="text-[11px] text-white/90 leading-relaxed line-clamp-3 mb-3 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">{lang === 'id' ? 'Platform toko online kustom untuk memperluas jangkauan bisnis Anda.' : 'Custom online store platforms to expand your business reach.'}</p>
+														<div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-[10px] uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
+															{lang === 'id' ? 'Selengkapnya' : 'Learn More'}
+															<span class="material-symbols-outlined text-xs">arrow_forward</span>
+														</div>
+													</div>
+													<span class="relative z-10 text-[9px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-2 py-1 rounded-lg group-hover/item:opacity-0 transition-opacity">BUSINESS</span>
+												</div>
+												<div class="p-5 flex-1 flex flex-col bg-white dark:bg-transparent">
+													<h5 class="font-headline font-bold text-xs text-slate-900 dark:text-white group-hover/item:text-primary-fixed-dim transition-colors leading-snug whitespace-normal">E-commerce Solutions</h5>
+												</div>
+											</a>
+										</div>
 									</div>
-								</a>
-								<!-- Software Development -->
-								<a href={lang === 'id' ? '/services/pengembangan-software' : '/en/services/software-development'} class="flex items-start gap-4 p-4 rounded-xl hover:bg-surface-container-high transition-colors group/item">
-									<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center group-hover/item:bg-tertiary/20 transition-colors">
-										<span class="material-symbols-outlined text-tertiary" style="font-size:20px" data-icon="terminal">terminal</span>
+
+									<div class="p-10 pt-4 border-t border-outline-variant/10 flex items-center justify-between">
+										<div class="flex items-center gap-3">
+											<div class="w-2 h-2 rounded-full bg-primary-fixed-dim animate-pulse"></div>
+											<p class="text-[11px] text-slate-600 dark:text-slate-400 font-medium">{lang === 'id' ? 'Butuh solusi kustom? Tim arsitek kami siap membantu mewujudkannya.' : 'Need a custom solution? Our architectural team is ready to help.'}</p>
+										</div>
+										<a href={`${t.basePath}/services`} class="text-xs font-bold font-headline text-primary-fixed-dim flex items-center gap-2 group/all hover:gap-3 transition-all">
+											{lang === 'id' ? 'Lihat Semua Layanan' : 'View All Services'}
+											<span class="material-symbols-outlined text-sm">arrow_forward</span>
+										</a>
 									</div>
-									<div>
-										<p class="font-headline font-bold text-sm text-slate-900 dark:text-white mb-1">{lang === 'id' ? 'Pengembangan Software' : 'Software Development'}</p>
-										<p class="text-xs text-on-surface-variant leading-relaxed">{lang === 'id' ? 'Website, aplikasi mobile, sistem SaaS & IoT.' : 'Websites, mobile apps, SaaS systems & IoT.'}</p>
-									</div>
-								</a>
-								<!-- Consulting -->
-								<a href={lang === 'id' ? '/services/konsultasi' : '/en/services/consulting'} class="flex items-start gap-4 p-4 rounded-xl hover:bg-surface-container-high transition-colors group/item">
-									<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-error/10 flex items-center justify-center group-hover/item:bg-error/20 transition-colors">
-										<span class="material-symbols-outlined text-error" style="font-size:20px" data-icon="strategy">strategy</span>
-									</div>
-									<div>
-										<p class="font-headline font-bold text-sm text-slate-900 dark:text-white mb-1">{lang === 'id' ? 'Konsultasi Bisnis & IT' : 'Business & IT Consulting'}</p>
-										<p class="text-xs text-on-surface-variant leading-relaxed">{lang === 'id' ? 'Strategi transformasi digital, audit infrastruktur & ROI.' : 'Digital transformation strategy, infrastructure audit & ROI.'}</p>
-									</div>
-								</a>
-								<!-- Website UMKM -->
-								<a href={lang === 'id' ? '/services/website-umkm' : '/en/services/business-website'} class="flex items-start gap-4 p-4 rounded-xl hover:bg-surface-container-high transition-colors group/item col-span-2">
-									<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-amber-400/10 flex items-center justify-center group-hover/item:bg-amber-400/20 transition-colors">
-										<span class="material-symbols-outlined text-amber-400" style="font-size:20px" data-icon="store">store</span>
-									</div>
-									<div>
-										<p class="font-headline font-bold text-sm text-slate-900 dark:text-white mb-1">{lang === 'id' ? 'Website UMKM & Bisnis' : 'UMKM & Business Website'}</p>
-										<p class="text-xs text-on-surface-variant leading-relaxed">{lang === 'id' ? 'Landing page & company profile custom — go live dalam 3 hari, termasuk hosting & domain.' : 'Custom landing pages & company profiles — go live in 3 days, hosting & domain included.'}</p>
-									</div>
-								</a>
-								<!-- Footer CTA -->
-								<div class="col-span-2 border-t border-outline-variant/15 pt-4 mt-1 flex items-center justify-between">
-									<p class="text-xs text-on-surface-variant">{lang === 'id' ? 'Butuh solusi khusus? Kami siap membantu.' : 'Need a custom solution? We are ready to help.'}</p>
-									<a href={`${t.basePath}/services`} class="text-xs font-bold font-headline text-primary-fixed-dim flex items-center gap-1 hover:gap-2 transition-all">{lang === 'id' ? 'Lihat Semua Layanan' : 'View All Services'} <span class="material-symbols-outlined" style="font-size:14px">arrow_forward</span></a>
 								</div>
 							</div>
 						</div>
@@ -223,7 +449,6 @@ const t = {
 					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/portfolio') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/portfolio`}>{t.portfolio}</a>
 					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/n8n-workflows') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/n8n-workflows`}>{t.workflows}</a>
 					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/blog') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/blog`}>{t.blog}</a>
-					<a class={`font-headline tracking-tight text-sm transition-colors ${isActive('/contact') ? 'text-primary-fixed-dim font-bold drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-400 hover:text-white'}`} href={`${t.basePath}/contact`}>{t.contact}</a>
 				</div>
 				<div class="flex items-center gap-3 md:gap-4">
 					<div class="hidden sm:flex items-center gap-2 text-[10px] md:text-xs font-headline font-bold text-slate-600 dark:text-slate-400 border border-outline-variant/30 px-2 py-1 md:px-3 md:py-2 rounded-lg bg-surface-container-low">
@@ -235,9 +460,6 @@ const t = {
 						<span class="material-symbols-outlined dark:hidden block" style="font-size: 16px;">light_mode</span>
 						<span class="material-symbols-outlined hidden dark:block" style="font-size: 16px;">dark_mode</span>
 					</button>
-					<a href={`${t.basePath}/contact`} class="bg-gradient-to-br from-primary-fixed-dim to-on-primary-container text-on-primary-fixed font-semibold px-4 py-2 md:px-6 md:py-2.5 rounded-lg hover:opacity-90 transition-all font-headline tracking-tight text-xs md:text-sm whitespace-nowrap">
-						{t.consult}
-					</a>
                     <button id="mobile-menu-btn" class="lg:hidden flex items-center justify-center text-slate-800 dark:text-slate-200" aria-label="Open Mobile Menu">
                         <span id="menu-icon" class="material-symbols-outlined transition-all" style="font-size: 28px;">menu</span>
                     </button>
@@ -249,7 +471,23 @@ const t = {
         <div id="mobile-menu" class="fixed inset-0 z-40 bg-surface/98 dark:bg-[#10141a]/98 backdrop-blur-3xl flex flex-col pt-24 px-8 transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden">
             <div class="flex flex-col gap-6 text-2xl font-bold font-headline tracking-tight">
                 <a class={`transition-colors ${isActive('/') ? 'text-primary-fixed-dim drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-600 dark:text-slate-300'}`} href={`${t.basePath}/`}>{t.home}</a>
-                <a class={`transition-colors ${isActive('/about') ? 'text-primary-fixed-dim drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-600 dark:text-slate-300'}`} href={`${t.basePath}/about`}>{t.about}</a>
+                <!-- Mobile Company Accordion -->
+                <div class="flex flex-col gap-2">
+                    <button id="mobile-company-toggle" class={`flex items-center justify-between w-full transition-colors text-left ${(isActive('/about') || isActive('/contact')) ? 'text-primary-fixed-dim drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-600 dark:text-slate-300'}`}>
+                        {t.footerCompany}
+                        <span id="mobile-company-icon" class="material-symbols-outlined transition-transform duration-300" style="font-size:22px">expand_more</span>
+                    </button>
+                    <div id="mobile-company-list" class="hidden flex-col gap-1 pl-4 border-l border-outline-variant/20">
+                        <a href={`${t.basePath}/about`} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
+                            <span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:18px">info</span>
+                            {t.about}
+                        </a>
+                        <a href={`${t.basePath}/contact`} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
+                            <span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:18px">mail</span>
+                            {t.contact}
+                        </a>
+                    </div>
+                </div>
                 <!-- Mobile Services Accordion -->
                 <div class="flex flex-col gap-2">
                     <button id="mobile-services-toggle" class={`flex items-center justify-between w-full transition-colors text-left ${isActive('/services') ? 'text-primary-fixed-dim drop-shadow-[0_0_12px_rgba(76,214,255,0.4)]' : 'text-slate-600 dark:text-slate-300'}`}>
@@ -257,25 +495,41 @@ const t = {
                         <span id="mobile-services-icon" class="material-symbols-outlined transition-transform duration-300" style="font-size:22px">expand_more</span>
                     </button>
                     <div id="mobile-services-list" class="hidden flex-col gap-1 pl-4 border-l border-outline-variant/20">
-                        <a href={lang === 'id' ? '/services/ai-otomatisasi' : '/en/services/ai-automation'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
+                        <a href={lang === 'id' ? '/services/ai-computer-vision' : '/en/services/ai-computer-vision'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
                             <span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:18px" data-icon="auto_awesome">auto_awesome</span>
-                            {lang === 'id' ? 'AI & Otomatisasi' : 'AI & Automation'}
+                            {lang === 'id' ? 'AI Computer Vision' : 'AI Computer Vision'}
                         </a>
-                        <a href={lang === 'id' ? '/services/integrasi-sistem' : '/en/services/system-integration'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
-                            <span class="material-symbols-outlined text-secondary" style="font-size:18px" data-icon="hub">hub</span>
-                            {lang === 'id' ? 'Integrasi Sistem' : 'System Integration'}
+                        <a href={lang === 'id' ? '/services/chatbot-ai' : '/en/services/chatbot-ai'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
+                            <span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:18px" data-icon="forum">forum</span>
+                            {lang === 'id' ? 'Chatbot AI & NLP' : 'Chatbot AI & NLP'}
                         </a>
-                        <a href={lang === 'id' ? '/services/pengembangan-software' : '/en/services/software-development'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
-                            <span class="material-symbols-outlined text-tertiary" style="font-size:18px" data-icon="terminal">terminal</span>
-                            {lang === 'id' ? 'Pengembangan Software' : 'Software Development'}
+                        <a href={lang === 'id' ? '/services/integrasi-api' : '/en/services/integrasi-api'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
+                            <span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:18px" data-icon="hub">hub</span>
+                            {lang === 'id' ? 'Integrasi Sistem API' : 'System Integration API'}
                         </a>
-                        <a href={lang === 'id' ? '/services/konsultasi' : '/en/services/consulting'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
-                            <span class="material-symbols-outlined text-error" style="font-size:18px" data-icon="strategy">strategy</span>
-                            {lang === 'id' ? 'Konsultasi Bisnis & IT' : 'Business & IT Consulting'}
+                        <a href={lang === 'id' ? '/services/cyber-security' : '/en/services/cyber-security'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
+                            <span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:18px" data-icon="verified_user">verified_user</span>
+                            {lang === 'id' ? 'Cyber Security & Zero Trust' : 'Cyber Security & Zero Trust'}
                         </a>
-                        <a href={lang === 'id' ? '/services/website-umkm' : '/en/services/business-website'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-amber-400 transition-colors">
-                            <span class="material-symbols-outlined text-amber-400" style="font-size:18px" data-icon="store">store</span>
+                        <a href={lang === 'id' ? '/services/saas-web-dev' : '/en/services/saas-web-dev'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
+                            <span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:18px" data-icon="terminal">terminal</span>
+                            {lang === 'id' ? 'SaaS & Web Development' : 'SaaS & Web Development'}
+                        </a>
+                        <a href={lang === 'id' ? '/services/mobile-app-dev' : '/en/services/mobile-app-dev'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
+                            <span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:18px" data-icon="smartphone">smartphone</span>
+                            {lang === 'id' ? 'Mobile App Development' : 'Mobile App Development'}
+                        </a>
+                        <a href={lang === 'id' ? '/services/audit-it' : '/en/services/audit-it'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
+                            <span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:18px" data-icon="strategy">strategy</span>
+                            {lang === 'id' ? 'Arsitektur & Audit IT' : 'Architecture & IT Audit'}
+                        </a>
+                        <a href={lang === 'id' ? '/services/website-bisnis' : '/en/services/website-bisnis'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
+                            <span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:18px" data-icon="store">store</span>
                             {lang === 'id' ? 'Website UMKM & Bisnis' : 'UMKM & Business Website'}
+                        </a>
+                        <a href={lang === 'id' ? '/services/ecommerce-solutions' : '/en/services/ecommerce-solutions'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
+                            <span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:18px" data-icon="shopping_cart">shopping_cart</span>
+                            {lang === 'id' ? 'E-commerce Solutions' : 'E-commerce Solutions'}
                         </a>
                     </div>
                 </div>
@@ -345,6 +599,23 @@ const t = {
 			</div>
 		</footer>
 		
+		<!-- Floating Action Buttons -->
+		<div class="fixed bottom-6 right-6 md:right-10 flex items-stretch z-50 shadow-2xl shadow-black/30 rounded-md overflow-hidden group/fab">
+			<!-- Hubungi Kami (WhatsApp) -->
+			<a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 px-4 py-3 bg-[#242b35] dark:bg-[#1a202a] hover:bg-[#2c3440] dark:hover:bg-[#242b36] transition-colors border-r border-[#10151c]/20">
+				<span class="text-[10px] md:text-xs font-bold text-white tracking-widest font-headline">{lang === 'id' ? 'HUBUNGI KAMI' : 'CONTACT US'}</span>
+				<div class="w-5 h-5 bg-[#25D366] rounded-full flex items-center justify-center transform group-hover/fab:rotate-12 transition-transform shadow-md shadow-[#25D366]/20">
+					<svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+						<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.052 0C5.495 0 .16 5.333.158 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.332 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+					</svg>
+				</div>
+			</a>
+			<!-- Scroll to Top -->
+			<button id="scroll-to-top" class="flex items-center justify-center px-3 bg-[#e2e8f0] hover:bg-white text-slate-900 transition-all opacity-0 pointer-events-none w-[42px]">
+				<span class="material-symbols-outlined leading-none" style="font-size: 22px;">expand_less</span>
+			</button>
+		</div>
+
 		<script is:inline>
 			const themeToggleBtn = document.getElementById('theme-toggle');
 			if (themeToggleBtn) {
@@ -402,6 +673,131 @@ const t = {
 					}
 				});
 			}
+
+			// Mobile Company Accordion Toggle
+			const companyToggle = document.getElementById('mobile-company-toggle');
+			const companyList = document.getElementById('mobile-company-list');
+			const companyIcon = document.getElementById('mobile-company-icon');
+
+			if (companyToggle && companyList && companyIcon) {
+				companyToggle.addEventListener('click', () => {
+					const isOpen = !companyList.classList.contains('hidden');
+					if (isOpen) {
+						companyList.classList.add('hidden');
+						companyList.classList.remove('flex');
+						companyIcon.style.transform = 'rotate(0deg)';
+					} else {
+						companyList.classList.remove('hidden');
+						companyList.classList.add('flex');
+						companyIcon.style.transform = 'rotate(180deg)';
+					}
+				});
+			}
+
+			// Navbar and FAB Scroll Logic
+			const mainNav = document.getElementById('main-nav');
+			const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+			const handleScroll = () => {
+				const isScrolled = window.scrollY > 20;
+				if (isScrolled) {
+					mainNav.classList.remove('bg-transparent', 'border-transparent');
+					mainNav.classList.add('bg-surface/90', 'dark:bg-[#0a0d14]/80', 'backdrop-blur-2xl', 'border-outline-variant/10', 'shadow-lg', 'shadow-black/5');
+				} else {
+					mainNav.classList.add('bg-transparent', 'border-transparent');
+					mainNav.classList.remove('bg-surface/90', 'dark:bg-[#0a0d14]/80', 'backdrop-blur-2xl', 'border-outline-variant/10', 'shadow-lg', 'shadow-black/5');
+				}
+
+				if (scrollToTopBtn) {
+					if (window.scrollY > 400) {
+						scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+					} else {
+						scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+					}
+				}
+			};
+
+			window.addEventListener('scroll', handleScroll);
+			// Run once on load
+			handleScroll();
+
+			if (scrollToTopBtn) {
+				scrollToTopBtn.addEventListener('click', () => {
+					window.scrollTo({ top: 0, behavior: 'smooth' });
+				});
+			}
+
+			// Mega Menu Filtering Logic
+			const filterButtons = document.querySelectorAll('.mega-menu-filter');
+			const serviceCards = document.querySelectorAll('.service-card');
+			const menuTitle = document.getElementById('mega-menu-title');
+			const menuCount = document.getElementById('mega-menu-count');
+
+			filterButtons.forEach(btn => {
+				btn.addEventListener('click', () => {
+					const filterValue = btn.getAttribute('data-filter');
+					
+					// Update active state
+					filterButtons.forEach(b => {
+						b.classList.remove('bg-primary-fixed-dim/10', 'text-primary-fixed-dim', 'active-filter');
+						b.classList.add('text-slate-600', 'dark:text-slate-300');
+					});
+					btn.classList.add('bg-primary-fixed-dim/10', 'text-primary-fixed-dim', 'active-filter');
+					btn.classList.remove('text-slate-600', 'dark:text-slate-300');
+
+					// Filter cards with fade effect
+					let count = 0;
+					serviceCards.forEach(card => {
+						const categories = card.getAttribute('data-category').split(' ');
+						if (filterValue === 'all' || categories.includes(filterValue)) {
+							card.style.display = 'flex';
+							setTimeout(() => {
+								card.style.opacity = '1';
+								card.style.transform = 'translateY(0)';
+							}, 10);
+							count++;
+						} else {
+							card.style.opacity = '0';
+							card.style.transform = 'translateY(10px)';
+							setTimeout(() => {
+								card.style.display = 'none';
+							}, 300);
+						}
+					});
+
+					// Update title and count
+					if (menuTitle) {
+						menuTitle.textContent = btn.innerText.trim();
+					}
+					if (menuCount) {
+						menuCount.textContent = count;
+					}
+				});
+			});
+
+			// Global Intersection Observer for scroll animations
+			const observerOptions = {
+				root: null,
+				rootMargin: '0px',
+				threshold: 0.15
+			};
+
+			const observer = new IntersectionObserver((entries, observer) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('revealed');
+						observer.unobserve(entry.target);
+					}
+				});
+			}, observerOptions);
+
+			// Observe elements outside mega-menu that need animation
+			document.querySelectorAll('.animate-reveal').forEach((el) => {
+				// Don't observe mega menu items as they use hover logic
+				if (!el.closest('.group\\/services')) {
+					observer.observe(el);
+				}
+			});
 		</script>
 	</body>
 </html>

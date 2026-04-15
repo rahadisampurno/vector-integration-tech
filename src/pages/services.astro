@@ -3,217 +3,295 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Layanan | Ekosistem Solusi">
-<main class="pt-32 pb-20">
-<!-- Hero Section -->
-<header class="max-w-[1440px] mx-auto px-12 mb-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-<div class="space-y-6">
-<div class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container/30 border border-outline-variant/15 rounded-full text-primary-fixed-dim text-xs font-label tracking-widest uppercase mb-6">
-<span class="w-2 h-2 rounded-full bg-primary-fixed-dim animate-pulse"></span>
-Ekosistem Solusi
-</div>
-<h1 class="text-5xl md:text-7xl xl:text-8xl font-bold leading-[0.9] tracking-tighter md: font-headline font-bold text-slate-900 dark:text-white">
-                    Merancang <br/><span class="text-primary-fixed-dim">Kecerdasan.</span>
-</h1>
-<p class="text-xl text-on-surface-variant max-w-lg leading-relaxed font-body">
-                    Kami menjembatani kesenjangan antara data mentah dengan strategi siap tindak lanjut melalui integrasi sistem kinetik dan otomatisasi.
+    <main class="pt-32 pb-20">
+        <!-- Hero Section -->
+        <header class="max-w-[1440px] mx-auto px-12 mb-24 text-center">
+            <div class="space-y-6 max-w-3xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary-fixed-dim-container/30 border border-outline-variant/15 rounded-full text-primary-fixed-dim text-xs font-label tracking-widest uppercase mb-6 animate-reveal">
+                    <span class="w-2 h-2 rounded-full bg-primary-fixed-dim animate-pulse"></span>
+                    Ekosistem Solusi Terpadu
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold leading-[1.1] tracking-tighter font-headline text-slate-900 dark:text-white animate-reveal delay-75">
+                    Katalog Lengkap <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-fixed-dim to-on-primary-container">Layanan Kami.</span>
+                </h1>
+                <p class="text-xl text-on-surface-variant leading-relaxed font-body animate-reveal delay-150">
+                    Jelajahi berbagai solusi teknologi mulai dari AI tingkat lanjut hingga pengembangan infrastruktur digital yang dirancang untuk mempercepat pertumbuhan bisnis Anda.
                 </p>
-</div>
-<div class="relative h-[400px] rounded-xl overflow-hidden glass-panel border border-outline-variant/15">
-<img class="w-full h-full object-cover opacity-60" data-alt="Abstract 3D digital landscape with glowing cyan nodes and data streams interconnected in a dark space, cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmM6HVat5qGZX41MV7RxiJY6zufHP6RV-MHHUq9-8FX-3jnm9OrFh27zodgzdfogLCQlkc-FOuYdDub1lk0Vl5katOBhf1jHh_sU1HkHdJMcfBu0r1L_4k6gDY_1JTY9OOvNr0To2GzYwa9Hj1g0RQcW4xcZ5HDYo61BX8JJAKwLtSsGLW1r1v8HcwREQaYX-EVBsDIH0P0DGSPtwaPATWwra5tmAnOV-hgKy4SRUVVet5ZNg7l5VxLg05r8izNWZ6-ep4JQArZZVT"/>
-<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
-</div>
-</header>
-<!-- Main Services Grid -->
-<section class="max-w-[1440px] mx-auto px-12 space-y-32">
-<!-- AI & Automation -->
-<div id="ai-otomatisasi" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start scroll-mt-28">
-<div class="lg:col-span-4 space-y-4">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary-fixed-dim text-4xl" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
-<h2 class="text-3xl font-headline font-bold text-slate-900 dark:text-white">AI &amp; Otomatisasi</h2>
-</div>
-<p class="text-on-surface-variant font-body">Alur kerja kognitif yang berevolusi dengan tujuan bisnis Anda, mengurangi gesekan manual dalam pekerjaan hingga 90%.</p>
-</div>
-<div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-<div class="relative p-8 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all group border border-outline-variant/15">
-<div class="node-indicator"></div>
-<span class="material-symbols-outlined text-primary mb-4" data-icon="account_tree">account_tree</span>
-<h3 class="text-xl font-headline font-bold mb-2 text-slate-900 dark:text-white">Otomatisasi Alur Kerja</h3>
-<p class="text-sm text-on-surface-variant font-body">Hilangkan tugas manual berulang dengan menggunakan logika pemrograman berbantu robot yang cerdas.</p>
-</div>
-<div class="relative p-8 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all group border border-outline-variant/15">
-<div class="node-indicator"></div>
-<span class="material-symbols-outlined text-primary mb-4" data-icon="smart_toy">smart_toy</span>
-<h3 class="text-xl font-headline font-bold mb-2 text-slate-900 dark:text-white">Chatbot AI</h3>
-<p class="text-sm text-on-surface-variant font-body">Antarmuka pemrosesan bahasa alami (NLP) ramah pelanggan untuk bantuan non-stop 24/7 dan dukungan internal tim perusahaan.</p>
-</div>
-<div class="relative p-8 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all group border border-outline-variant/15">
-<div class="node-indicator"></div>
-<span class="material-symbols-outlined text-primary mb-4" data-icon="description">description</span>
-<h3 class="text-xl font-headline font-bold mb-2 text-slate-900 dark:text-white">Pemrosesan Dokumen</h3>
-<p class="text-sm text-on-surface-variant font-body">Ekstraksi dokumen kertas & pengkasifikasian format data otomatis dari lampiran PDF tidak terstruktur.</p>
-</div>
-<div class="relative p-8 rounded-xl bg-surface-container-low hover:bg-surface-container transition-all group border border-outline-variant/15">
-<div class="node-indicator"></div>
-<span class="material-symbols-outlined text-primary mb-4" data-icon="troubleshoot">troubleshoot</span>
-<h3 class="text-xl font-headline font-bold mb-2 text-slate-900 dark:text-white">Dukungan Keputusan Eksekutif</h3>
-<p class="text-sm text-on-surface-variant font-body">Mesin layanan sistem analitik prediktif kompleks yang mememberikan sinyal rekomendasi keputusan operasional penting.</p>
-</div>
-</div>
-</div>
-<!-- System Integration (Bento Style) -->
-<div id="integrasi-sistem" class="space-y-12 scroll-mt-28">
-<div class="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-outline-variant/15 pb-8">
-<div class="space-y-2">
-<h2 class="text-4xl font-headline font-bold text-slate-900 dark:text-white">Integrasi Sistem</h2>
-<p class="text-on-surface-variant font-body">Mensinergikan platform yang berbeda ke dalam titik ekosistem kinetik terpusat tunggal.</p>
-</div>
-<div class="flex gap-4">
-<span class="px-4 py-1 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold uppercase tracking-widest font-label">Siap Untuk Perusahaan</span>
-<span class="px-4 py-1 rounded-full bg-primary-container text-on-primary-container text-xs font-bold uppercase tracking-widest font-label">Sinkronisasi Real-Time</span>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-auto md:h-[500px]">
-<div class="md:col-span-2 md:row-span-2 bg-surface-container-low rounded-xl p-10 flex flex-col justify-between relative overflow-hidden border border-outline-variant/15">
-<div class="node-indicator"></div>
-<div>
-<span class="material-symbols-outlined text-primary-fixed-dim text-5xl mb-6" data-icon="hub">hub</span>
-<h3 class="text-2xl font-headline font-bold mb-4 text-slate-900 dark:text-white">Pengembangan &amp; Manajemen API</h3>
-<p class="text-on-surface-variant max-w-xs font-body">Middleware kustom dan jaringan REST/GraphQL yang kuat dirancang khusus untuk memenuhi standar skalabilitas serta keamanan tingkat maksimal.</p>
-</div>
-<img class="absolute bottom-[-20%] right-[-10%] w-2/3 opacity-20 rotate-12 pointer-events-none filter drop-shadow-2xl" data-alt="Close up of a high-tech server room with glowing blue LED indicator lights and fiber optic cables" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxno0C57o6M7YUjb5dppL0_c2XNL9Dg718WoTg-c31sHzXyzxHGTfu_vBdpuIZRgb2X53ALWpcFQXNOE_CWg0_tPGorkOkShiydqrsd2zeyzGeG6BOug06VCqc0pqFagFyp1nEUAPZDpSSJkJXFuL_wyxLM5u0L5Q-qIzGU1S2AMYK99S-D3F3ODs6soA01PNDX6Yv2JiLytVbSBl3ykjyIxt26MJDf2I1nD770OeXFTiI36Onlzy5-nN9Jsrw8r3lKdizm-r_mplf"/>
-</div>
-<div class="md:col-span-2 bg-surface-container-low rounded-xl p-8 flex items-center gap-8 border-l-4 border-primary-fixed-dim border border-outline-variant/15">
-<div class="space-y-2">
-<h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white">Integrasi ERP &amp; CRM</h3>
-<p class="text-sm text-on-surface-variant font-body">Sinkronisasi lingkungan Salesforce, SAP, dan Oracle ke dalam sistem manajemen inti pusat.</p>
-</div>
-<span class="material-symbols-outlined text-primary text-4xl opacity-50" data-icon="sync_alt">sync_alt</span>
-</div>
-<div class="md:col-span-2 bg-surface-container-high rounded-lg p-8 flex flex-col justify-center border border-outline-variant/10">
-<h3 class="text-xl font-headline font-bold mb-2 text-slate-900 dark:text-white">Sinkronisasi Data</h3>
-<p class="text-sm text-on-surface-variant font-body">Protokol sinkronisasi bolak-balik dengan latensi sangat rendah untuk kelancaran ekosistem.</p>
-</div>
-</div>
-</div>
-<!-- Infrastructure & Software (Side-by-Side) -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-<!-- Digital Infrastructure -->
-<div class="space-y-8 p-10 bg-surface-container-low rounded-xl relative overflow-hidden border border-outline-variant/15">
-<div class="absolute top-0 right-0 p-8">
-<span class="material-symbols-outlined text-6xl text-primary opacity-10" data-icon="cloud">cloud</span>
-</div>
-<h2 class="text-3xl font-headline font-bold text-slate-900 dark:text-white border-l-2 border-primary pl-6">Infrastruktur Digital</h2>
-<ul class="space-y-6">
-<li class="flex gap-4 group">
-<span class="text-primary-fixed-dim font-headline font-bold border-b border-primary/20 leading-none h-fit">01</span>
-<div>
-<h4 class="font-bold text-slate-900 dark:text-white font-headline">Migrasi Cloud &amp; Strategi</h4>
-<p class="text-sm text-on-surface-variant font-body">Transisi lancar ke ekosistem AWS, Azure, atau platform GCP dengan rasio perbandingan harga yang lebih rendah.</p>
-</div>
-</li>
-<li class="flex gap-4 group">
-<span class="text-primary-fixed-dim font-headline font-bold border-b border-primary/20 leading-none h-fit">02</span>
-<div>
-<h4 class="font-bold text-slate-900 dark:text-white font-headline">Siklus Kehidupan DevOps &amp; CI/CD</h4>
-<p class="text-sm text-on-surface-variant font-body">Mengotomatisasi perizinan jalan sistem tanpa harus mengganggu ekosistem perangkat lunak.</p>
-</div>
-</li>
-<li class="flex gap-4 group">
-<span class="text-primary-fixed-dim font-headline font-bold border-b border-primary/20 leading-none h-fit">03</span>
-<div>
-<h4 class="font-bold text-slate-900 dark:text-white font-headline">Arsitektur Layanan Mikro</h4>
-<p class="text-sm text-on-surface-variant font-body">Memisahkan sistem monolitik agar menjadi komponen microservices yang ringkas tanpa gangguan komunal.</p>
-</div>
-</li>
-</ul>
-</div>
-<!-- Software Development -->
-<div id="pengembangan-software" class="space-y-8 p-10 bg-surface-container-low rounded-xl relative overflow-hidden border border-outline-variant/15 scroll-mt-28">
-<div class="absolute top-0 right-0 p-8">
-<span class="material-symbols-outlined text-6xl text-primary opacity-10" data-icon="terminal">terminal</span>
-</div>
-<h2 class="text-3xl font-headline font-bold text-slate-900 dark:text-white border-l-2 border-primary-fixed-dim pl-6">Pengembangan Perangkat Lunak</h2>
-<ul class="space-y-6">
-<li class="flex gap-4 group">
-<span class="text-primary font-headline font-bold border-b border-primary/20 leading-none h-fit">01</span>
-<div>
-<h4 class="font-bold text-slate-900 dark:text-white font-headline">Sistem SaaS Perusahaan</h4>
-<p class="text-sm text-on-surface-variant font-body">Pengembangan Perangkat Lunak kustom menggunakan kerangka arsitektur teraman tingkat komersial.</p>
-</div>
-</li>
-<li class="flex gap-4 group">
-<span class="text-primary font-headline font-bold border-b border-primary/20 leading-none h-fit">02</span>
-<div>
-<h4 class="font-bold text-slate-900 dark:text-white font-headline">Pembuatan Website &amp; Aplikasi Mobile</h4>
-<p class="text-sm text-on-surface-variant font-body">Pengembangan platform web interaktif dan aplikasi native iOS/Android dengan arsitektur berstandar tinggi.</p>
-</div>
-</li>
-<li class="flex gap-4 group">
-<span class="text-primary font-headline font-bold border-b border-primary/20 leading-none h-fit">03</span>
-<div>
-<h4 class="font-bold text-slate-900 dark:text-white font-headline">Sistem Tertanam (IoT)</h4>
-<p class="text-sm text-on-surface-variant font-body">Pengembangan firmware hardware kustom dari Raspberry Pi hingga sensor otomatisasi tingkat lanjut.</p>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<!-- IT Consulting (Editorial Layout) -->
-<div id="konsultasi" class="relative bg-surface-container-lowest rounded-xl p-12 lg:p-24 border border-outline-variant/15 overflow-hidden scroll-mt-28">
-<div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16">
-<div class="space-y-8">
-<div class="inline-flex items-center gap-2 bg-primary/10 px-4 py-1 rounded-full">
-<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-<span class="text-xs font-bold text-primary tracking-widest uppercase font-label">Nasihat Sistematis</span>
-</div>
-<h2 class="text-5xl font-headline font-bold text-slate-900 dark:text-white leading-none">Konsultasi <br/>Bisnis &amp; IT.</h2>
-<p class="text-lg text-on-surface-variant leading-relaxed font-body">
-                            Kami tidak hanya membangun infrastruktur; Kami menganalisis arsitektur sistem anda dan menentukan jalur untuk meningkatkan eskalasi performa Anda.
-                        </p>
-<button class="bg-surface-container-highest text-slate-900 dark:text-white border border-primary/20 px-8 py-4 rounded-lg font-headline font-semibold hover:bg-primary/5 transition-all">
-                            Lihat Metodologi Audit
-                        </button>
-</div>
-<div class="grid grid-cols-1 gap-6">
-<div class="p-6 rounded-xl bg-surface-container-low/50 backdrop-blur-sm border-l-2 border-primary-fixed-dim hover:bg-surface-container-low transition-colors border border-outline-variant/15">
-<h4 class="font-bold text-slate-900 dark:text-white mb-2 font-headline">Strategi Transformasi Digital</h4>
-<p class="text-sm text-on-surface-variant font-body">Peta jalan untuk mendorong pergerakan skala sistem konvensional lama ke kerangka terintegrasi cerdas terbaru yang mulus.</p>
-</div>
-<div class="p-6 rounded-xl bg-surface-container-low/50 backdrop-blur-sm border-l-2 border-primary-fixed-dim hover:bg-surface-container-low transition-colors border border-outline-variant/15">
-<h4 class="font-bold text-slate-900 dark:text-white mb-2 font-headline">Rekomendasi Tumpukan Teknologi</h4>
-<p class="text-sm text-on-surface-variant font-body">Penyelekisan kerangka kerja mana yang paling menjanjikan pengembalian modal IT tercepat untuk perusahaan dan korporat Anda.</p>
-</div>
-<div class="p-6 rounded-xl bg-surface-container-low/50 backdrop-blur-sm border-l-2 border-primary-fixed-dim hover:bg-surface-container-low transition-colors border border-outline-variant/15">
-<h4 class="font-bold text-slate-900 dark:text-white mb-2 font-headline">Penilaian Peluang Otomatisasi Tersembunyi</h4>
-<p class="text-sm text-on-surface-variant font-body">Mengkuantifikasi persentase target peningkatan bisnis (ROI) pada investasi otomatisasi Anda bahkan sebelum perancangan purwarupa (prototype).</p>
-</div>
-</div>
-</div>
-<!-- Decorative element -->
-<div class="absolute bottom-0 right-0 w-1/3 h-1/2 opacity-20 pointer-events-none bg-gradient-to-tl from-primary-fixed-dim to-transparent blur-3xl"></div>
-</div>
-</section>
-</main>
+            </div>
+        </header>
+
+        <!-- Services Grid -->
+        <section class="max-w-[1440px] mx-auto px-12">
+            <!-- Filter Bar -->
+            <div class="flex flex-wrap justify-center gap-3 mb-16 animate-reveal delay-200">
+                <button data-filter="all" class="service-filter-btn px-6 py-2.5 rounded-full bg-primary-fixed-dim/10 text-primary-fixed-dim font-headline font-bold text-sm border border-primary-fixed-dim/20 transition-all active-filter">
+                    Semua Layanan
+                </button>
+                <button data-filter="ai-automation" class="service-filter-btn px-6 py-2.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 font-headline font-bold text-sm border border-outline-variant/10 hover:border-primary-fixed-dim/30 transition-all">
+                    AI & Otomatisasi
+                </button>
+                <button data-filter="infrastructure" class="service-filter-btn px-6 py-2.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 font-headline font-bold text-sm border border-outline-variant/10 hover:border-primary-fixed-dim/30 transition-all">
+                    Infrastruktur Cloud
+                </button>
+                <button data-filter="development" class="service-filter-btn px-6 py-2.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 font-headline font-bold text-sm border border-outline-variant/10 hover:border-primary-fixed-dim/30 transition-all">
+                    Pengembangan Digital
+                </button>
+                <button data-filter="enterprise" class="service-filter-btn px-6 py-2.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 font-headline font-bold text-sm border border-outline-variant/10 hover:border-primary-fixed-dim/30 transition-all">
+                    Enterprise
+                </button>
+                <button data-filter="business" class="service-filter-btn px-6 py-2.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 font-headline font-bold text-sm border border-outline-variant/10 hover:border-amber-400/30 transition-all">
+                    UMKM & Startup
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="services-grid">
+                <!-- AI Computer Vision -->
+                <a href="/services/ai-computer-vision" data-category="ai-automation enterprise" class="service-card group/item flex flex-col bg-white dark:bg-white/5 border border-outline-variant/10 rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-2 transition-all duration-500 animate-reveal delay-100">
+                    <div class="h-64 relative overflow-hidden flex items-end p-8">
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="AI Computer Vision" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <p class="text-sm text-white/90 leading-relaxed mb-4 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">Analisis visual cerdas menggunakan algoritma Deep Learning untuk keamanan, pemantauan aset, dan optimasi operasional bisnis secara real-time.</p>
+                            <div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-xs uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
+                                Selengkapnya
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                        <span class="relative z-10 text-[10px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-3 py-1.5 rounded-xl group-hover/item:opacity-0 transition-opacity">AI & AUTOMATION</span>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col bg-white dark:bg-transparent">
+                        <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mb-3 group-hover/item:text-primary-fixed-dim transition-colors">AI Computer Vision</h3>
+                        <p class="text-on-surface-variant text-sm leading-relaxed whitespace-normal leading-tight">Solusi visi komputer cerdas untuk optimasi operasional bisnis secara real-time.</p>
+                    </div>
+                </a>
+
+                <!-- Chatbot AI & NLP -->
+                <a href="/services/chatbot-ai" data-category="ai-automation business" class="service-card group/item flex flex-col bg-white dark:bg-white/5 border border-outline-variant/10 rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-2 transition-all duration-500 animate-reveal delay-150">
+                    <div class="h-64 relative overflow-hidden flex items-end p-8">
+                        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="Chatbot AI" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <p class="text-sm text-white/90 leading-relaxed mb-4 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">Asisten virtual yang mampu memahami bahasa manusia secara alami untuk menangani keluhan pelanggan, automasi sales, dan efisiensi helpdesk 24/7.</p>
+                            <div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-xs uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
+                                Selengkapnya
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                        <span class="relative z-10 text-[10px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-3 py-1.5 rounded-xl group-hover/item:opacity-0 transition-opacity">AI & AUTOMATION</span>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col bg-white dark:bg-transparent">
+                        <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mb-3 group-hover/item:text-primary-fixed-dim transition-colors">Chatbot AI & NLP</h3>
+                        <p class="text-on-surface-variant text-sm leading-relaxed whitespace-normal leading-tight">Asisten virtual cerdas untuk layanan pelanggan 24/7 otomatis.</p>
+                    </div>
+                </a>
+
+                <!-- System Integration API -->
+                <a href="/services/integrasi-api" data-category="infrastructure enterprise" class="service-card group/item flex flex-col bg-white dark:bg-white/5 border border-outline-variant/10 rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-2 transition-all duration-500 animate-reveal delay-200">
+                    <div class="h-64 relative overflow-hidden flex items-end p-8">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="API Integration" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <p class="text-sm text-white/90 leading-relaxed mb-4 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">Menghubungkan aplikasi pihak ketiga, database, dan sistem internal Anda melalui pipeline API yang aman dan terorkestrasi secara sempurna.</p>
+                            <div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-xs uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
+                                Selengkapnya
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                        <span class="relative z-10 text-[10px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-3 py-1.5 rounded-xl group-hover/item:opacity-0 transition-opacity">INFRASTRUCTURE</span>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col bg-white dark:bg-transparent">
+                        <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mb-3 group-hover/item:text-primary-fixed-dim transition-colors">Integrasi Sistem API</h3>
+                        <p class="text-on-surface-variant text-sm leading-relaxed whitespace-normal leading-tight">Menyatukan ekosistem software Anda ke dalam alur kerja otomatis.</p>
+                    </div>
+                </a>
+
+                <!-- Cyber Security -->
+                <a href="/services/cyber-security" data-category="infrastructure enterprise" class="service-card group/item flex flex-col bg-white dark:bg-white/5 border border-outline-variant/10 rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-2 transition-all duration-500 animate-reveal delay-[250ms]">
+                    <div class="h-64 relative overflow-hidden flex items-end p-8">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="Cyber Security" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <p class="text-sm text-white/90 leading-relaxed mb-4 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">Melindungi infrastruktur digital Anda dengan arsitektur Zero Trust, audit keamanan berkala, dan sistem pertahanan berlapis terhadap ancaman siber.</p>
+                            <div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-xs uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
+                                Selengkapnya
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                        <span class="relative z-10 text-[10px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-3 py-1.5 rounded-xl group-hover/item:opacity-0 transition-opacity">INFRASTRUCTURE</span>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col bg-white dark:bg-transparent">
+                        <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mb-3 group-hover/item:text-primary-fixed-dim transition-colors">Cyber Security & Zero Trust</h3>
+                        <p class="text-on-surface-variant text-sm leading-relaxed whitespace-normal leading-tight">Perlindungan data perusahaan dengan standar keamanan tingkat tinggi.</p>
+                    </div>
+                </a>
+
+                <!-- SaaS & Web Dev -->
+                <a href="/services/saas-web-dev" data-category="development business enterprise" class="service-card group/item flex flex-col bg-white dark:bg-white/5 border border-outline-variant/10 rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-2 transition-all duration-500 animate-reveal delay-[300ms]">
+                    <div class="h-64 relative overflow-hidden flex items-end p-8">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="Web Development" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <p class="text-sm text-white/90 leading-relaxed mb-4 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">Merancang dan membangun platform SaaS berbasis web yang responsif, cepat, dan siap diskalakan sesuai pertumbuhan pengguna global Anda.</p>
+                            <div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-xs uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
+                                Selengkapnya
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                        <span class="relative z-10 text-[10px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-3 py-1.5 rounded-xl group-hover/item:opacity-0 transition-opacity">DEVELOPMENT</span>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col bg-white dark:bg-transparent">
+                        <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mb-3 group-hover/item:text-primary-fixed-dim transition-colors">SaaS & Web Development</h3>
+                        <p class="text-on-surface-variant text-sm leading-relaxed whitespace-normal leading-tight">Membangun aplikasi web dan platform SaaS kustom berskala tinggi.</p>
+                    </div>
+                </a>
+
+                <!-- Mobile App Dev -->
+                <a href="/services/mobile-app-dev" data-category="development business enterprise" class="service-card group/item flex flex-col bg-white dark:bg-white/5 border border-outline-variant/10 rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-2 transition-all duration-500 animate-reveal delay-[350ms]">
+                    <div class="h-64 relative overflow-hidden flex items-end p-8">
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="Mobile Development" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <p class="text-sm text-white/90 leading-relaxed mb-4 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">Pengembangan aplikasi native iOS dan Android yang fokus pada User Experience (UX) intuitif dan performa tinggi di berbagai perangkat.</p>
+                            <div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-xs uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
+                                Selengkapnya
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                        <span class="relative z-10 text-[10px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-3 py-1.5 rounded-xl group-hover/item:opacity-0 transition-opacity">DEVELOPMENT</span>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col bg-white dark:bg-transparent">
+                        <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mb-3 group-hover/item:text-primary-fixed-dim transition-colors">Mobile App Development</h3>
+                        <p class="text-on-surface-variant text-sm leading-relaxed whitespace-normal leading-tight">Aplikasi iOS dan Android yang intuitif dan berperforma tinggi.</p>
+                    </div>
+                </a>
+
+                <!-- IT Audit & Architecture -->
+                <a href="/services/audit-it" data-category="consulting enterprise" class="service-card group/item flex flex-col bg-white dark:bg-white/5 border border-outline-variant/10 rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-2 transition-all duration-500 animate-reveal delay-[400ms]">
+                    <div class="h-64 relative overflow-hidden flex items-end p-8">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="IT Audit" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <p class="text-sm text-white/90 leading-relaxed mb-4 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">Audit mendalam terhadap infrastruktur IT Anda untuk menemukan potensi efisiensi biaya, celah keamanan, dan mendesain ulang arsitektur untuk masa depan.</p>
+                            <div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-xs uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
+                                Selengkapnya
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                        <span class="relative z-10 text-[10px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-3 py-1.5 rounded-xl group-hover/item:opacity-0 transition-opacity">CONSULTING</span>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col bg-white dark:bg-transparent">
+                        <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mb-3 group-hover/item:text-primary-fixed-dim transition-colors">Arsitektur & Audit IT</h3>
+                        <p class="text-on-surface-variant text-sm leading-relaxed whitespace-normal leading-tight">Audit menyeluruh and desain arsitektur IT untuk efisiensi biaya.</p>
+                    </div>
+                </a>
+
+                <!-- Website UMKM & Bisnis -->
+                <a href="/services/website-bisnis" data-category="business" class="service-card group/item flex flex-col bg-white dark:bg-white/5 border border-outline-variant/10 rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-amber-400/10 hover:-translate-y-2 transition-all duration-500 animate-reveal delay-[450ms]">
+                    <div class="h-64 relative overflow-hidden flex items-end p-8">
+                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="Business Website" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <p class="text-sm text-white/90 leading-relaxed mb-4 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">Solusi kehadiran digital profesional untuk UMKM dan Startup. Paket lengkap yang mencakup desain kustom, domain, dan hosting dalam satu harga.</p>
+                            <div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-xs uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
+                                Selengkapnya
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                        <span class="relative z-10 text-[10px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-3 py-1.5 rounded-xl group-hover/item:opacity-0 transition-opacity">BUSINESS</span>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col bg-white dark:bg-transparent">
+                        <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mb-3 group-hover/item:text-primary-fixed-dim transition-colors">Website UMKM & Bisnis</h3>
+                        <p class="text-on-surface-variant text-sm leading-relaxed whitespace-normal leading-tight">Paket website siap pakai lengkap dengan hosting dan domain.</p>
+                    </div>
+                </a>
+
+                <!-- E-commerce Solutions -->
+                <a href="/services/ecommerce-solutions" data-category="business" class="service-card group/item flex flex-col bg-white dark:bg-white/5 border border-outline-variant/10 rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-amber-400/10 hover:-translate-y-2 transition-all duration-500 animate-reveal delay-[500ms]">
+                    <div class="h-64 relative overflow-hidden flex items-end p-8">
+                        <img src="https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="E-commerce" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                            <p class="text-sm text-white/90 leading-relaxed mb-4 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">Bangun toko online kustom Anda sendiri dengan sistem pembayaran terintegrasi, manajemen inventaris, dan dashboard analitik penjualan yang canggih.</p>
+                            <div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-xs uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
+                                Selengkapnya
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </div>
+                        </div>
+                        <span class="relative z-10 text-[10px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-3 py-1.5 rounded-xl group-hover/item:opacity-0 transition-opacity">BUSINESS</span>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col bg-white dark:bg-transparent">
+                        <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mb-3 group-hover/item:text-primary-fixed-dim transition-colors">E-commerce Solutions</h3>
+                        <p class="text-on-surface-variant text-sm leading-relaxed whitespace-normal leading-tight">Platform toko online kustom untuk memperluas jangkauan bisnis Anda.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="max-w-[1440px] mx-auto px-12 mt-32">
+            <div class="bg-gradient-to-br from-primary-fixed-dim to-on-primary-container rounded-[2rem] p-12 lg:p-24 text-center space-y-8 animate-reveal">
+                <h2 class="text-4xl md:text-6xl font-headline font-bold text-white tracking-tighter">
+                    Siap Mengakselerasi Bisnis Anda?
+                </h2>
+                <p class="text-white/80 text-xl max-w-2xl mx-auto font-body">
+                    Diskusikan kebutuhan spesifik Anda dengan tim arsitek teknologi kami dan temukan solusi yang tepat untuk skala bisnis Anda.
+                </p>
+                <div class="flex flex-wrap justify-center gap-6 pt-4">
+                    <a href="/contact" class="bg-white text-primary-fixed-dim px-10 py-5 rounded-2xl font-bold font-headline hover:-translate-y-1 transition-all shadow-xl shadow-black/20">
+                        Konsultasi Gratis Sekarang
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+</BaseLayout>
+
+<script is:inline>
+    // Services Page Filtering Logic
+    const filterButtons = document.querySelectorAll('.service-filter-btn');
+    const serviceCards = document.querySelectorAll('.service-card');
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filterValue = btn.getAttribute('data-filter');
+            
+            // Update active state
+            filterButtons.forEach(b => {
+                b.classList.remove('bg-primary-fixed-dim/10', 'text-primary-fixed-dim', 'border-primary-fixed-dim/20', 'active-filter');
+                b.classList.add('bg-slate-100', 'dark:bg-white/5', 'text-slate-600', 'dark:text-slate-300', 'border-outline-variant/10');
+            });
+            
+            btn.classList.add('bg-primary-fixed-dim/10', 'text-primary-fixed-dim', 'border-primary-fixed-dim/20', 'active-filter');
+            btn.classList.remove('bg-slate-100', 'dark:bg-white/5', 'text-slate-600', 'dark:text-slate-300', 'border-outline-variant/10');
+
+            // Filter cards with fade effect
+            serviceCards.forEach(card => {
+                const categories = card.getAttribute('data-category').split(' ');
+                if (filterValue === 'all' || categories.includes(filterValue)) {
+                    card.style.display = 'flex';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 10);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 400);
+                }
+            });
+        });
+    });
+</script>
 
 <style>
-.tonal-transition {
-    background: linear-gradient(to bottom, #10141a, transparent);
-}
-.glass-panel {
-    background: rgba(28, 32, 38, 0.6);
-    backdrop-filter: blur(20px);
-}
-.node-indicator {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 4px;
-    background-color: #4cd6ff;
-}
-.signature-gradient {
-    background: linear-gradient(135deg, #4cd6ff 0%, #006178 100%);
-}
+    .animate-reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: reveal-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    @keyframes reveal-up {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .delay-75 { animation-delay: 75ms; }
+    .delay-100 { animation-delay: 100ms; }
+    .delay-150 { animation-delay: 150ms; }
+    .delay-200 { animation-delay: 200ms; }
 </style>
-</BaseLayout>

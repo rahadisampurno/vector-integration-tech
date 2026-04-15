@@ -30,6 +30,10 @@ const techStack = [
     width: 100%;
     height: 100%;
     object-fit: cover;
+    opacity: 0.45;
+  }
+
+  .dark .hero-video-bg video {
     opacity: 0.55;
   }
 
@@ -39,9 +43,15 @@ const techStack = [
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(to bottom, var(--color-surface, #0a0d14) 0%, transparent 22%, transparent 70%, var(--color-surface, #0a0d14) 100%),
-      linear-gradient(to right,  rgba(10,13,20,0.82) 0%, rgba(10,13,20,0.30) 55%, rgba(10,13,20,0.10) 100%);
+      linear-gradient(to bottom, var(--color-surface) 0%, transparent 22%, transparent 70%, var(--color-surface) 100%),
+      linear-gradient(to right,  var(--color-surface) 0%, color-mix(in srgb, var(--color-surface) 40%, transparent) 55%, transparent 100%);
     pointer-events: none;
+  }
+
+  .dark .hero-video-bg::after {
+    background:
+      linear-gradient(to bottom, var(--color-surface) 0%, transparent 22%, transparent 70%, var(--color-surface) 100%),
+      linear-gradient(to right,  rgba(10,13,20,0.82) 0%, rgba(10,13,20,0.30) 55%, rgba(10,13,20,0.10) 100%);
   }
 
   /* Scanline subtle noise texture overlay for cinematic depth */
@@ -87,8 +97,32 @@ const techStack = [
 
   @keyframes video-fade-in {
     from { opacity: 0; }
+    to   { opacity: 0.45; }
+  }
+
+  .dark @keyframes video-fade-in {
+    from { opacity: 0; }
     to   { opacity: 0.55; }
   }
+
+  /* ── Text Animations ── */
+  .animate-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: reveal-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  @keyframes reveal-up {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .delay-100 { animation-delay: 0.1s; }
+  .delay-200 { animation-delay: 0.2s; }
+  .delay-300 { animation-delay: 0.3s; }
+  .delay-400 { animation-delay: 0.4s; }
 </style>
 
 <!-- Hero Section -->
@@ -105,22 +139,22 @@ const techStack = [
       aria-hidden="true"
     >
       <!-- Primary: WebM (best compression, fastest on Chrome/Firefox) -->
-      <source src="https://videos.pexels.com/video-files/3141208/3141208-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+      <source src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4" type="video/mp4" />
       <!-- Fallback: lower resolution -->
-      <source src="https://videos.pexels.com/video-files/3141208/3141208-hd_1920_1080_25fps.mp4" type="video/mp4" />
+      <source src="https://videos.pexels.com/video-files/3129957/3129957-hd_1920_1080_25fps.mp4" type="video/mp4" />
     </video>
     <div class="hero-glow-orb"></div>
   </div>
-<div class="relative z-10 max-w-[1440px] mx-auto px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
-<div class="space-y-8">
-<div class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container/30 border border-outline-variant/15 rounded-full text-primary-fixed-dim text-xs font-label tracking-widest uppercase">
+<div class="relative z-10 max-w-[1440px] mx-auto px-12 flex items-center w-full">
+<div class="space-y-8 max-w-2xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container/30 border border-outline-variant/15 rounded-full text-primary-fixed-dim text-xs font-label tracking-widest uppercase animate-reveal">
 <span class="w-2 h-2 rounded-full bg-primary-fixed-dim animate-pulse"></span>
                     Sekarang Mengintegrasikan Sistem Masa Depan
                 </div>
-<h1 class="text-5xl md:text-6xl xl:text-7xl font-bold leading-[1.05] tracking-tighter font-headline text-slate-900 dark:text-white break-words relative z-20">
+<h1 class="text-5xl md:text-6xl xl:text-7xl font-bold leading-[1.05] tracking-tighter font-headline text-slate-900 dark:text-white break-words relative z-20 animate-reveal delay-100">
                     Meningkatkan Produktivitas dan Efisiensi <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-fixed-dim to-on-primary-container">Alur Kerja Anda.</span>
 </h1>
-<p id="hero-desc-carousel" class="text-on-surface-variant text-lg leading-relaxed max-w-lg mt-6 min-h-[90px] transition-opacity duration-500">
+<p id="hero-desc-carousel" class="text-on-surface-variant text-lg leading-relaxed max-w-lg mt-6 min-h-[90px] transition-opacity duration-500 animate-reveal delay-200">
                     Menyatukan berbagai perangkat lunak bisnis Anda ke dalam satu alur kerja otomatis.
                 </p>
 <script>
@@ -144,7 +178,7 @@ const techStack = [
         }
     });
 </script>
-<div class="flex flex-wrap gap-4">
+<div class="flex flex-wrap gap-4 animate-reveal delay-300">
 <button class="bg-gradient-to-br from-primary-fixed-dim to-on-primary-container text-on-primary-fixed px-8 py-4 rounded-lg font-bold font-headline shadow-lg shadow-primary-fixed-dim/40 dark:shadow-primary-fixed-dim/20 transition-all hover:-translate-y-1 hover:brightness-110 flex items-center justify-center gap-2 group w-full md:w-auto">
                         Konsultasi Sekarang
                         <span class="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
@@ -152,53 +186,6 @@ const techStack = [
 <a href="/services" class="bg-surface-container-highest border border-primary/15 text-slate-900 dark:text-white font-bold px-8 py-4 rounded-lg hover:bg-surface-container-high transition-all flex items-center justify-center">
                         Lihat Layanan
                     </a>
-</div>
-</div>
-<div class="hidden lg:block relative">
-<div class="absolute -inset-4 bg-primary-fixed-dim/5 blur-3xl rounded-full"></div>
-<div class="relative bg-surface-container-low border border-outline-variant/15 p-8 rounded-xl backdrop-blur-md">
-<div class="grid grid-cols-2 gap-4">
-<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-between p-6 group hover:bg-surface-container-high transition-all node-indicator relative">
-<div class="flex items-start justify-between w-full">
-<span class="material-symbols-outlined text-primary-fixed-dim text-2xl transform group-hover:-translate-y-1 group-hover:scale-110 transition-transform" data-icon="hub">hub</span>
-<span class="text-[10px] font-mono text-outline-variant font-bold tracking-widest opacity-50">01</span>
-</div>
-<div>
-<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-[11px] tracking-widest block mb-2">Konektivitas</span>
-<span class="text-[10px] text-on-surface-variant leading-relaxed block group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">Menghubungkan ratusan sistem IT menjadi satu antarmuka via API.</span>
-</div>
-</div>
-<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-between p-6 group hover:bg-surface-container-high transition-all">
-<div class="flex items-start justify-between w-full">
-<span class="material-symbols-outlined text-primary-fixed-dim text-2xl transform group-hover:-translate-y-1 group-hover:scale-110 transition-transform" data-icon="psychology">psychology</span>
-<span class="text-[10px] font-mono text-outline-variant font-bold tracking-widest opacity-50">02</span>
-</div>
-<div>
-<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-[11px] tracking-widest block mb-2">Kecerdasan</span>
-<span class="text-[10px] text-on-surface-variant leading-relaxed block group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">Mesin AI analitik prediktif untuk keputusan bisnis presisi tinggi.</span>
-</div>
-</div>
-<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-between p-6 group hover:bg-surface-container-high transition-all">
-<div class="flex items-start justify-between w-full">
-<span class="material-symbols-outlined text-primary-fixed-dim text-2xl transform group-hover:-translate-y-1 group-hover:scale-110 transition-transform" data-icon="settings_input_component">settings_input_component</span>
-<span class="text-[10px] font-mono text-outline-variant font-bold tracking-widest opacity-50">03</span>
-</div>
-<div>
-<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-[11px] tracking-widest block mb-2">Otomatisasi</span>
-<span class="text-[10px] text-on-surface-variant leading-relaxed block group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">Menyulap tugas repetitif manual menjadi alur kerja secepat kilat.</span>
-</div>
-</div>
-<div class="aspect-square bg-surface-container-highest/50 rounded-lg flex flex-col justify-between p-6 group hover:bg-surface-container-high transition-all node-indicator relative">
-<div class="flex items-start justify-between w-full">
-<span class="material-symbols-outlined text-primary-fixed-dim text-2xl transform group-hover:-translate-y-1 group-hover:scale-110 transition-transform" data-icon="shield">shield</span>
-<span class="text-[10px] font-mono text-outline-variant font-bold tracking-widest opacity-50">04</span>
-</div>
-<div>
-<span class="font-headline font-bold text-slate-900 dark:text-white uppercase text-[11px] tracking-widest block mb-2">Keamanan Zero Trust</span>
-<span class="text-[10px] text-on-surface-variant leading-relaxed block group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">Infrastruktur tangguh pro-kepatuhan hukum UU PDP Indonesia.</span>
-</div>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -401,4 +388,5 @@ const techStack = [
 </div>
 </div>
 </section>
+
 </BaseLayout>

@@ -1,0 +1,61 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+const { 
+  title = "Mengapa Memilih VeinTech?",
+  subtitle = "Pendekatan kami bukan sekadar menulis kode, tapi memberikan solusi bisnis end-to-end yang menjamin ROI, keamanan, dan skalabilitas jangka panjang."
+} = Astro.props;
+---
+
+<section class="max-w-[1440px] mx-auto px-12 mb-20">
+    <div class="bg-surface-container-low border border-outline-variant/15 rounded-3xl p-12 lg:p-16 relative overflow-hidden">
+        <!-- Decorative Background -->
+        <div class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-primary-fixed-dim/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 bg-secondary-fixed-dim/5 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="text-center mb-16 relative z-10">
+            <h2 class="text-3xl lg:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-4 animate-reveal">{title}</h2>
+            <p class="text-on-surface-variant max-w-2xl mx-auto animate-reveal delay-75">{subtitle}</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+            <!-- Reason 1 -->
+            <div class="flex flex-col animate-reveal delay-100 group">
+                <div class="w-14 h-14 rounded-2xl bg-white dark:bg-white/5 border border-outline-variant/20 flex items-center justify-center mb-6 group-hover:-translate-y-1 group-hover:shadow-lg group-hover:shadow-primary-fixed-dim/10 transition-all">
+                    <span class="material-symbols-outlined text-primary-fixed-dim text-2xl">workspace_premium</span>
+                </div>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Enterprise-Grade Quality</h3>
+                <p class="text-sm text-on-surface-variant leading-relaxed">Framework dan arsitektur yang kami gunakan setara dengan standar tech-giant untuk menjamin performa tanpa kompromi.</p>
+            </div>
+
+            <!-- Reason 2 -->
+            <div class="flex flex-col animate-reveal delay-150 group">
+                <div class="w-14 h-14 rounded-2xl bg-white dark:bg-white/5 border border-outline-variant/20 flex items-center justify-center mb-6 group-hover:-translate-y-1 group-hover:shadow-lg group-hover:shadow-primary-fixed-dim/10 transition-all">
+                    <span class="material-symbols-outlined text-primary-fixed-dim text-2xl">verified_user</span>
+                </div>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Keamanan Bersertifikasi</h3>
+                <p class="text-sm text-on-surface-variant leading-relaxed">Penerapan enkripsi end-to-end, regulasi UU PDP, dan zero-trust architecture pada setiap layer aplikasi.</p>
+            </div>
+
+            <!-- Reason 3 -->
+            <div class="flex flex-col animate-reveal delay-200 group">
+                <div class="w-14 h-14 rounded-2xl bg-white dark:bg-white/5 border border-outline-variant/20 flex items-center justify-center mb-6 group-hover:-translate-y-1 group-hover:shadow-lg group-hover:shadow-primary-fixed-dim/10 transition-all">
+                    <span class="material-symbols-outlined text-primary-fixed-dim text-2xl">support_agent</span>
+                </div>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Dedicated Support 24/7</h3>
+                <p class="text-sm text-on-surface-variant leading-relaxed">Tim khusus selalu siap sedia untuk memelihara dan memastikan sistem Anda beroperasi stabil tanpa ada downtime.</p>
+            </div>
+
+            <!-- Reason 4 -->
+            <div class="flex flex-col animate-reveal delay-250 group">
+                <div class="w-14 h-14 rounded-2xl bg-white dark:bg-white/5 border border-outline-variant/20 flex items-center justify-center mb-6 group-hover:-translate-y-1 group-hover:shadow-lg group-hover:shadow-primary-fixed-dim/10 transition-all">
+                    <span class="material-symbols-outlined text-primary-fixed-dim text-2xl">query_stats</span>
+                </div>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Fokus Pada ROI Bisnis</h3>
+                <p class="text-sm text-on-surface-variant leading-relaxed">Kami mencegah over-engineering. Setiap fitur dikembangkan untuk menekan biaya operasional atau meningkatkan omset Anda.</p>
+            </div>
+        </div>
+    </div>
+</section>

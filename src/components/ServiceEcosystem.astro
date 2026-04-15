@@ -1,0 +1,138 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const currentPath = Astro.url.pathname;
+const corePath = currentPath.replace(/^\/en/, '') || '/';
+const normalizedCorePath = corePath.endsWith('/') && corePath !== '/' ? corePath.slice(0, -1) : corePath;
+const lang = Astro.currentLocale || 'id';
+
+const customDescriptions: Record<string, { id: string, en: string }> = {
+  '/services/chatbot-ai': {
+    id: "Chatbot AI kami dirancang untuk terhubung langsung dengan platform komunikasi omnichannel dan CRM yang sudah tim Anda gunakan.",
+    en: "Our AI chatbot is designed to connect directly with the omnichannel communication platforms and CRMs your team already uses."
+  },
+  '/services/ai-computer-vision': {
+    id: "Sistem vision kami terintegrasi mulus dengan infrastruktur kamera CCTV, VMS, dan sistem kontrol akses yang sudah berjalan di fasilitas Anda.",
+    en: "Our vision system integrates seamlessly with the CCTV camera infrastructure, VMS, and access control systems already running at your facilities."
+  },
+  '/services/ai-otomatisasi': {
+    id: "Otomatisasi kami berlabuh dengan aman ke dalam infrastruktur cloud dan tumpukan aplikasi Anda, mengonversi data menjadi eksekusi instan.",
+    en: "Our automation anchors securely into your cloud infrastructure and application stack, converting data into instant execution."
+  },
+  '/services/cyber-security': {
+    id: "Protokol keamanan Zero Trust kami diterapkan pada layer cloud provider (AWS/GCP) hingga server klien tanpa mengganggu alur produktivitas internal.",
+    en: "Our Zero Trust security protocols are deployed from the cloud provider layer to client servers without disrupting internal productivity workflows."
+  },
+  '/services/pengembangan-software': {
+    id: "Arsitektur produk yang kami bangun sanggup mengakomodasi teknologi database terstandarisasi industri atau integrasi vendor pihak ketiga dengan mulus.",
+    en: "The product architecture we build is capable of seamlessly accommodating industry-standard database technologies and third-party vendor integrations."
+  },
+  '/services/saas-web-dev': {
+    id: "Aplikasi SaaS Anda akan ditopang oleh teknologi performa tinggi dan dirancang mudah berkomunikasi dengan sistem API payment gateway apa pun.",
+    en: "Your SaaS application will be backed by high-performance technologies natively designed to communicate easily with any payment gateway API."
+  },
+  '/services/mobile-app-dev': {
+    id: "Aplikasi mobile native kami sepenuhnya siap terkoneksi ke backend internal perusahaan, penyimpanan cloud, maupun mesin analytics pihak ketiga Anda.",
+    en: "Our native mobile applications are fully ready to connect to your enterprise's internal backend, cloud storage, or third-party analytics engines."
+  },
+  '/services/integrasi-sistem': {
+    id: "Misi utama kami adalah meleburkan pangkalan data silo, software ERP usang, dan platform terpisah ke satu kesatuan infrastruktur terpusat.",
+    en: "Our core mission is to merge siloed databases, legacy ERP software, and disparate cloud platforms into a single, centralized infrastructure unit."
+  },
+  '/services/integrasi-api': {
+    id: "Menyediakan pipeline data seketika dan super aman antara ekosistem aplikasi internal Anda dengan ratusan layanan API publik dan perbankan.",
+    en: "Delivering instant and highly secure data pipelines between your internal enterprise ecosystem and hundreds of public and banking API services."
+  },
+  '/services/ecommerce-solutions': {
+    id: "Platform eCommerce Anda tersinkronisasi murni dengan ekosistem manajemen inventaris internal, sistem POS, serta gerbang pembayaran mutakhir.",
+    en: "Your eCommerce platform syncs organically with your internal inventory management ecosystem, POS systems, and cutting-edge payment gateways."
+  },
+  '/services/audit-it': {
+    id: "Audit komprehensif kami mensyaratkan perombakan desain strategis agar sinkron sepenuhnya dengan kebutuhan software dan standar hardware saat ini.",
+    en: "Our comprehensive audit dictates strategic design overhauls to ensure your system aligns entirely with modern software and hardware requirements."
+  },
+  '/services/konsultasi': {
+    id: "Peta jalan rekomendasi digital kami selalu diarahkan untuk memaksimalkan utilitas dari komponen arsitektur cloud dan aplikasi yang sudah ada.",
+    en: "Our digital roadmap recommendations are consistently geared toward maximizing the utility of the cloud architecture constraints you've established."
+  },
+  'default': {
+    id: "Solusi kami dirancang untuk terhubung secara mulus dengan spesifikasi infrastruktur teknologi dan aplikasi bisnis yang sudah Anda gunakan.",
+    en: "Our solutions are perfectly designed to connect seamlessly with your existing applications and technology infrastructure."
+  }
+};
+
+const defaultTitle = lang === 'en' ? "Ecosystem & Deep Integration" : "Ekosistem & Integrasi Mendalam";
+const { 
+  title = defaultTitle 
+} = Astro.props;
+
+// Compute description directly from the path mapping instead of props to enforce relevancy
+const computedDescription = customDescriptions[normalizedCorePath] 
+  ? customDescriptions[normalizedCorePath][lang] 
+  : customDescriptions['default'][lang];
+
+const techLogos = [
+  { name: 'AWS', icon: 'cloud' },
+  { name: 'Google Cloud', icon: 'backup' },
+  { name: 'Microsoft Azure', icon: 'cloud_sync' },
+  { name: 'WhatsApp', icon: 'chat' },
+  { name: 'Salesforce', icon: 'leaderboard' },
+  { name: 'Zendesk', icon: 'support_agent' },
+  { name: 'Docker', icon: 'view_in_ar' },
+  { name: 'Kubernetes', icon: 'device_hub' },
+  { name: 'Node.js', icon: 'javascript' },
+  { name: 'Python', icon: 'data_object' },
+  { name: 'PostgreSQL', icon: 'database' },
+  { name: 'Redis', icon: 'memory' }
+];
+
+// Double the array for marquee effect
+const marqueeItems = [...techLogos, ...techLogos];
+---
+
+<section class="max-w-[1440px] mx-auto px-12 mb-20">
+    <div class="text-center mb-12">
+        <h2 class="text-3xl font-headline font-bold text-slate-900 dark:text-white mb-4">{title}</h2>
+        <p class="text-on-surface-variant max-w-2xl mx-auto">{computedDescription}</p>
+    </div>
+
+    <!-- Marquee Container -->
+    <div class="relative overflow-hidden flex items-center bg-surface-container-low border border-outline-variant/15 rounded-3xl p-8">
+        <!-- Left & Right Gradient Masks -->
+        <div class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[var(--app-surface-container-low)] to-transparent z-10"></div>
+        <div class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[var(--app-surface-container-low)] to-transparent z-10"></div>
+        
+        <!-- Marquee Content -->
+        <div class="flex gap-12 animate-marquee whitespace-nowrap items-center hover:[animation-play-state:paused]">
+            {marqueeItems.map((tech) => (
+                <div class="flex items-center gap-3 shrink-0 group opacity-70 hover:opacity-100 transition-opacity cursor-default">
+                    <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 text-primary-fixed-dim flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">{tech.icon}</span>
+                    </div>
+                    <span class="font-headline font-bold text-slate-700 dark:text-slate-300">{tech.name}</span>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(-50% - 1.5rem)); /* Move half distance (accounting for gap) */ }
+    }
+    .animate-marquee {
+        animation: marquee 25s linear infinite;
+        width: max-content;
+    }
+    /* Ensure dynamic background colors map correctly for the mask */
+    :root {
+        --app-surface-container-low: #f8fafc; /* light mode */
+    }
+    :root.dark {
+        --app-surface-container-low: #111827; /* dark mode or whatever tailwind maps to */
+    }
+</style>

@@ -1,0 +1,161 @@
+---
+import ServiceCTA from '../../../components/ServiceCTA.astro';
+
+import WhyChooseUs from '../../../components/WhyChooseUs.astro';
+
+import ServiceEcosystem from '../../../components/ServiceEcosystem.astro';
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ServiceBottomSections from "../../components/ServiceBottomSections.astro";
+---
+
+<BaseLayout title="Chatbot AI & NLP | Services">
+<main class="pt-32 pb-20">
+
+    <!-- Hero Section -->
+    <header class="max-w-[1440px] mx-auto px-12 mb-24">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary-fixed-dim/10 border border-primary-fixed-dim/20 rounded-full text-primary-fixed-dim text-xs font-label tracking-widest uppercase mb-8">
+            <span class="w-2 h-2 rounded-full bg-primary-fixed-dim animate-pulse"></span>
+            Services — AI & Automation
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-6">
+                <h1 class="text-5xl md:text-7xl font-bold leading-[0.9] tracking-tighter font-headline text-slate-900 dark:text-white">
+                    Chatbot AI <br/><span class="text-primary-fixed-dim">& NLP.</span>
+                </h1>
+                <p class="text-xl text-on-surface-variant max-w-lg leading-relaxed font-body">
+                    Smart virtual assistants capable of understanding natural human language to handle customer complaints, automate sales, and drive 24/7 helpdesk efficiency.
+                </p>
+                <div class="flex gap-4 pt-4">
+                    <a href="/en/contact" class="bg-primary-fixed-dim text-on-primary-fixed px-8 py-4 rounded-xl font-headline font-bold hover:brightness-110 transition-all flex items-center gap-2">
+                        Free Consultation <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                    <a href="/en/services" class="border border-outline-variant/30 text-slate-600 dark:text-slate-300 px-8 py-4 rounded-xl font-headline font-bold hover:bg-surface-container-high transition-all">
+                        All Services
+                    </a>
+                </div>
+            </div>
+            <div class="relative h-[380px] rounded-2xl overflow-hidden border border-outline-variant/15 bg-surface-container-low flex items-center justify-center">
+                <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover opacity-60" alt="Chatbot AI" />
+                <div class="absolute inset-0 bg-gradient-to-br from-primary-fixed-dim/20 to-transparent"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Feature Grid -->
+    <section class="max-w-[1440px] mx-auto px-12 mb-20">
+        <div class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">Key Chatbot Features</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-primary-fixed-dim to-transparent"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block">chat</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Omnichannel Integration</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Connect your chatbot to WhatsApp, Telegram, Website, and social media in one centralized dashboard.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block">psychology</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Advanced NLP</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Understand user intent and conversation context, not just keywords, for more human-like responses.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block">hub</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Transaction Automation</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Chatbots can process orders, check shipping status, and even perform payments directly within the chat.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Content Section -->
+    <section class="max-w-[1440px] mx-auto px-12 mb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+            <!-- Left: Benefits -->
+            <div class="space-y-12">
+                <div>
+                    <h2 class="text-3xl font-headline font-bold text-slate-900 dark:text-white mb-6">Why Your Business Needs Chatbot AI?</h2>
+                    <p class="text-on-surface-variant leading-relaxed mb-8">Customers expect instant responses. Our Chatbot AI allows your business to provide 24/7 service without exponentially increasing your support team.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary-fixed-dim">support_agent</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">Instant 24/7 Response</h4>
+                                <p class="text-sm text-on-surface-variant">Handle thousands of conversations simultaneously with no wait time, whenever customers contact you.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary-fixed-dim">savings</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">Operational Cost Efficiency</h4>
+                                <p class="text-sm text-on-surface-variant">Reduce customer service costs by up to 30% by automating frequently asked questions.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary-fixed-dim">trending_up</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">Increased Sales Conversion</h4>
+                                <p class="text-sm text-on-surface-variant">Proactive chatbots can guide website visitors to become potential prospects or buyers automatically.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Implementation Flow -->
+            <div class="bg-slate-50 dark:bg-white/5 rounded-3xl p-10 border border-outline-variant/10">
+                <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mb-8 text-center">Implementation Steps</h3>
+                <div class="space-y-8 relative">
+                    <div class="absolute left-6 top-0 bottom-0 w-0.5 bg-outline-variant/20 hidden md:block"></div>
+                    
+                    <div class="flex gap-6 relative">
+                        <div class="w-12 h-12 rounded-full bg-primary-fixed-dim text-white flex items-center justify-center font-bold shrink-0 z-10">1</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-1">Knowledge Base Analysis</h4>
+                            <p class="text-sm text-on-surface-variant">We collect FAQ data and operational documents to train the chatbot's brain.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 relative">
+                        <div class="w-12 h-12 rounded-full bg-primary-fixed-dim text-white flex items-center justify-center font-bold shrink-0 z-10">2</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-1">Conversation Flow Design</h4>
+                            <p class="text-sm text-on-surface-variant">Designing natural and effective conversation scenarios to achieve your business goals.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 relative">
+                        <div class="w-12 h-12 rounded-full bg-primary-fixed-dim text-white flex items-center justify-center font-bold shrink-0 z-10">3</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-1">Go-Live & Monitoring</h4>
+                            <p class="text-sm text-on-surface-variant">Deployment to your chosen channels and regular performance monitoring.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <ServiceEcosystem title="Ecosystem & Deep Integration" description="Our solutions are perfectly designed to connect seamlessly with your existing applications and technology infrastructure." />
+
+    <WhyChooseUs title="Why Choose VeinTech?" subtitle="Our approach isn't just about writing code. We deliver end-to-end business solutions that guarantee ROI, security, and long-term scalability." />
+
+
+    <!-- Premium CTA Component -->
+    <ServiceCTA 
+        title="Automate Your Customer Service Now."
+        description="Don't keep your customers waiting. Start using a smart virtual assistant for your business today."
+        ctaText="Get a Free Consultation"
+        ctaLink="/en/contact"
+    />
+
+    <ServiceBottomSections currentSlug="chatbot-ai" />
+
+</main>
+</BaseLayout>

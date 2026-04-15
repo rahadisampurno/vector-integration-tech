@@ -1,5 +1,12 @@
 ---
+import ServiceCTA from '../../components/ServiceCTA.astro';
+
+import WhyChooseUs from '../../components/WhyChooseUs.astro';
+
+import ServiceEcosystem from '../../components/ServiceEcosystem.astro';
+
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceBottomSections from '../../components/ServiceBottomSections.astro';
 ---
 
 <BaseLayout title="Pengembangan Software | Layanan">
@@ -7,20 +14,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
     <!-- Hero Section -->
     <header class="max-w-[1440px] mx-auto px-12 mb-24">
-        <div class="inline-flex items-center gap-2 px-3 py-1 bg-tertiary/10 border border-tertiary/20 rounded-full text-tertiary text-xs font-label tracking-widest uppercase mb-8">
-            <span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary-fixed-dim/10 border border-primary-fixed-dim/20 rounded-full text-primary-fixed-dim text-xs font-label tracking-widest uppercase mb-8">
+            <span class="w-2 h-2 rounded-full bg-primary-fixed-dim animate-pulse"></span>
             Layanan — Pengembangan Software
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div class="space-y-6">
                 <h1 class="text-5xl md:text-7xl font-bold leading-[0.9] tracking-tighter font-headline text-slate-900 dark:text-white">
-                    Wujudkan <br/><span class="text-tertiary">Produk Digital.</span>
+                    Wujudkan <br/><span class="text-primary-fixed-dim">Produk Digital.</span>
                 </h1>
                 <p class="text-xl text-on-surface-variant max-w-lg leading-relaxed font-body">
                     Dari website yang memukau hingga aplikasi mobile yang intuitif dan sistem SaaS berstandar enterprise — kami membangun produk digital yang skalabel, aman, dan siap bertahan jangka panjang.
                 </p>
                 <div class="flex gap-4 pt-4">
-                    <a href="/contact" class="bg-tertiary text-on-tertiary px-8 py-4 rounded-xl font-headline font-bold hover:brightness-110 transition-all flex items-center gap-2">
+                    <a href="/contact" class="bg-primary-fixed-dim text-on-primary-fixed px-8 py-4 rounded-xl font-headline font-bold hover:brightness-110 transition-all flex items-center gap-2">
                         Diskusikan Proyek <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
                     </a>
                     <a href="/services" class="border border-outline-variant/30 text-slate-600 dark:text-slate-300 px-8 py-4 rounded-xl font-headline font-bold hover:bg-surface-container-high transition-all">
@@ -29,12 +36,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
                 </div>
             </div>
             <div class="relative h-[380px] rounded-2xl overflow-hidden border border-outline-variant/15 bg-surface-container-low flex items-center justify-center">
-                <div class="absolute inset-0 bg-gradient-to-br from-tertiary/5 to-transparent"></div>
-                <span class="material-symbols-outlined text-tertiary opacity-20" style="font-size: 200px; font-variation-settings: 'FILL' 1;" data-icon="terminal">terminal</span>
+                <div class="absolute inset-0 bg-gradient-to-br from-primary-fixed-dim/5 to-transparent"></div>
+                <span class="material-symbols-outlined text-primary-fixed-dim opacity-20" style="font-size: 200px; font-variation-settings: 'FILL' 1;" data-icon="terminal">terminal</span>
                 <div class="absolute bottom-8 left-8 right-8">
                     <div class="bg-surface/80 backdrop-blur-md border border-outline-variant/15 rounded-xl p-4 font-mono text-xs">
                         <p class="text-on-surface-variant">$ npm run build</p>
-                        <p class="text-tertiary">✓ Build completed in 1.2s</p>
+                        <p class="text-primary-fixed-dim">✓ Build completed in 1.2s</p>
                         <p class="text-on-surface-variant/50">→ deploying to production...</p>
                     </div>
                 </div>
@@ -43,39 +50,39 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </header>
 
     <!-- Feature Cards -->
-    <section class="max-w-[1440px] mx-auto px-12 mb-32">
+    <section class="max-w-[1440px] mx-auto px-12 mb-20">
         <div class="mb-12">
             <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">Apa yang Kami Bangun</h2>
-            <div class="w-20 h-1 bg-gradient-to-r from-tertiary to-transparent"></div>
+            <div class="w-20 h-1 bg-gradient-to-r from-primary-fixed-dim to-transparent"></div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
-                <span class="material-symbols-outlined text-tertiary text-4xl mb-5 block" data-icon="language" style="font-variation-settings: 'FILL' 1;">language</span>
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block" data-icon="language" style="font-variation-settings: 'FILL' 1;">language</span>
                 <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Website Perusahaan & Landing Page</h3>
                 <p class="text-sm text-on-surface-variant font-body leading-relaxed">Desain modern, cepat, dan SEO-friendly yang mencerminkan profesionalisme brand Anda dan mengkonversi pengunjung menjadi prospek aktif.</p>
             </div>
             <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
-                <span class="material-symbols-outlined text-tertiary text-4xl mb-5 block" data-icon="phone_android" style="font-variation-settings: 'FILL' 1;">phone_android</span>
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block" data-icon="phone_android" style="font-variation-settings: 'FILL' 1;">phone_android</span>
                 <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Aplikasi Mobile iOS & Android</h3>
                 <p class="text-sm text-on-surface-variant font-body leading-relaxed">Aplikasi native dan cross-platform yang responsif, intuitif, dan siap dipublikasikan ke App Store maupun Google Play dengan performa tinggi.</p>
             </div>
             <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
-                <span class="material-symbols-outlined text-tertiary text-4xl mb-5 block" data-icon="cloud_done" style="font-variation-settings: 'FILL' 1;">cloud_done</span>
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block" data-icon="cloud_done" style="font-variation-settings: 'FILL' 1;">cloud_done</span>
                 <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Sistem SaaS Perusahaan</h3>
                 <p class="text-sm text-on-surface-variant font-body leading-relaxed">Platform Software-as-a-Service dengan arsitektur multi-tenant, manajemen subscription, dan infrastruktur cloud yang siap untuk ribuan pengguna.</p>
             </div>
             <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
-                <span class="material-symbols-outlined text-tertiary text-4xl mb-5 block" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
                 <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Dashboard & Sistem Manajemen Internal</h3>
                 <p class="text-sm text-on-surface-variant font-body leading-relaxed">Panel administrasi kustom, sistem HR, manajemen inventaris, atau ERP yang dirancang khusus sesuai alur kerja unik perusahaan Anda.</p>
             </div>
             <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
-                <span class="material-symbols-outlined text-tertiary text-4xl mb-5 block" data-icon="memory" style="font-variation-settings: 'FILL' 1;">memory</span>
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block" data-icon="memory" style="font-variation-settings: 'FILL' 1;">memory</span>
                 <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Sistem Tertanam & IoT</h3>
                 <p class="text-sm text-on-surface-variant font-body leading-relaxed">Firmware dan perangkat lunak untuk perangkat keras kustom — dari sensor industri hingga gateway IoT yang terhubung ke cloud.</p>
             </div>
             <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all">
-                <span class="material-symbols-outlined text-tertiary text-4xl mb-5 block" data-icon="api" style="font-variation-settings: 'FILL' 1;">api</span>
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block" data-icon="api" style="font-variation-settings: 'FILL' 1;">api</span>
                 <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Backend API & Layanan Mikro</h3>
                 <p class="text-sm text-on-surface-variant font-body leading-relaxed">Arsitektur backend yang modular, terdokumentasi lengkap, dan siap dihubungkan ke aplikasi mobile, web, atau sistem pihak ketiga manapun.</p>
             </div>
@@ -83,30 +90,30 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </section>
 
     <!-- How It Works -->
-    <section class="max-w-[1440px] mx-auto px-12 mb-32">
+    <section class="max-w-[1440px] mx-auto px-12 mb-20">
         <div class="bg-surface-container-low border border-outline-variant/15 rounded-2xl p-12 lg:p-16">
             <div class="mb-12">
                 <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">Proses Pengembangan Kami</h2>
-                <div class="w-20 h-1 bg-gradient-to-r from-tertiary to-transparent"></div>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary-fixed-dim to-transparent"></div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="flex flex-col gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-tertiary/10 border border-tertiary/20 flex items-center justify-center">
-                        <span class="font-headline font-bold text-tertiary text-lg">01</span>
+                    <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 border border-primary-fixed-dim/20 flex items-center justify-center">
+                        <span class="font-headline font-bold text-primary-fixed-dim text-lg">01</span>
                     </div>
                     <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white">Discovery & Arsitektur</h3>
                     <p class="text-sm text-on-surface-variant font-body leading-relaxed">Kami mendiskusikan visi produk, kebutuhan pengguna, dan persyaratan bisnis Anda untuk merancang cetak biru teknis yang tepat sasaran.</p>
                 </div>
                 <div class="flex flex-col gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-tertiary/10 border border-tertiary/20 flex items-center justify-center">
-                        <span class="font-headline font-bold text-tertiary text-lg">02</span>
+                    <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 border border-primary-fixed-dim/20 flex items-center justify-center">
+                        <span class="font-headline font-bold text-primary-fixed-dim text-lg">02</span>
                     </div>
                     <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white">Pengembangan Iteratif</h3>
                     <p class="text-sm text-on-surface-variant font-body leading-relaxed">Menggunakan metodologi Agile dengan sprint 2 mingguan — Anda melihat kemajuan nyata setiap dua pekan dan memberikan masukan langsung.</p>
                 </div>
                 <div class="flex flex-col gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-tertiary/10 border border-tertiary/20 flex items-center justify-center">
-                        <span class="font-headline font-bold text-tertiary text-lg">03</span>
+                    <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 border border-primary-fixed-dim/20 flex items-center justify-center">
+                        <span class="font-headline font-bold text-primary-fixed-dim text-lg">03</span>
                     </div>
                     <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white">Pengujian & Peluncuran</h3>
                     <p class="text-sm text-on-surface-variant font-body leading-relaxed">QA menyeluruh termasuk pengujian keamanan, performa, dan kompatibilitas perangkat, diikuti dengan peluncuran dan dukungan pasca-rilis.</p>
@@ -115,16 +122,22 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
     </section>
 
-    <!-- CTA Banner -->
-    <section class="max-w-[1440px] mx-auto px-12">
-        <div class="bg-gradient-to-br from-tertiary/20 to-surface-container-low border border-tertiary/20 rounded-2xl p-12 text-center">
-            <h2 class="text-3xl md:text-5xl font-headline font-bold text-slate-900 dark:text-white mb-4">Punya Ide? Mari Wujudkan Bersama.</h2>
-            <p class="text-on-surface-variant mb-8 max-w-lg mx-auto">Ceritakan produk yang ingin Anda bangun. Kami akan memberikan estimasi dan roadmap yang jelas, tanpa biaya konsultasi awal.</p>
-            <a href="/contact" class="inline-flex items-center gap-2 bg-tertiary text-on-tertiary px-10 py-4 rounded-xl font-headline font-bold hover:brightness-110 transition-all shadow-lg shadow-tertiary/20">
-                Diskusikan Proyek Anda <span class="material-symbols-outlined" data-icon="design_services">design_services</span>
-            </a>
-        </div>
-    </section>
+    
+
+    <ServiceEcosystem />
+
+    <WhyChooseUs />
+
+
+    <!-- Premium CTA Component -->
+    <ServiceCTA 
+        title="Punya Ide? Mari Wujudkan Bersama."
+        description="Ceritakan produk yang ingin Anda bangun. Kami akan memberikan estimasi dan roadmap yang jelas, tanpa biaya konsultasi awal."
+        ctaText="Diskusikan Proyek Sekarang"
+        
+    />
+
+    <ServiceBottomSections currentSlug="pengembangan-software" />
 
 </main>
 </BaseLayout>

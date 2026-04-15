@@ -1,0 +1,188 @@
+---
+/**
+ * FAQ.astro
+ * Component for Frequently Asked Questions with multi-language support.
+ */
+
+const lang = Astro.currentLocale || 'id';
+
+const content = {
+  id: {
+    title: "Pertanyaan yang Sering Diajukan",
+    subtitle: "FAQ",
+    items: [
+      {
+        q: "Apa saja layanan utama yang ditawarkan oleh VeinTech?",
+        a: "VeinTech menawarkan ekosistem solusi digital lengkap, mulai dari pengembangan perangkat lunak kustom, aplikasi mobile (iOS & Android), integrasi sistem API, solusi AI & Otomatisasi, hingga audit infrastruktur IT dan keamanan siber."
+      },
+      {
+        q: "Bagaimana solusi AI dan Otomatisasi VeinTech dapat membantu bisnis saya?",
+        a: "Kami membangun alur kerja otomatis yang cerdas untuk mengurangi tugas repetitif, meningkatkan akurasi data, dan memberikan wawasan prediktif, sehingga tim Anda bisa fokus pada strategi pertumbuhan bisnis."
+      },
+      {
+        q: "Apakah VeinTech melayani pembuatan aplikasi mobile dan website custom?",
+        a: "Ya, kami spesialis dalam membangun aplikasi mobile performa tinggi dan platform web/SaaS yang skalabel, dirancang khusus untuk memenuhi kebutuhan unik operasional bisnis Anda."
+      },
+      {
+        q: "Seberapa aman data perusahaan saya saat menggunakan layanan integrasi sistem?",
+        a: "Keamanan adalah prioritas kami. Kami menerapkan arsitektur Zero Trust dan enkripsi tingkat tinggi dalam setiap integrasi sistem untuk memastikan data perusahaan Anda tetap terlindungi dan mematuhi standar privasi."
+      },
+      {
+        q: "Apakah VeinTech menyediakan layanan audit infrastruktur IT?",
+        a: "Tentu. Kami menyediakan layanan audit menyeluruh untuk menganalisis efisiensi, keamanan, dan skalabilitas sistem IT Anda saat ini, serta memberikan rekomendasi perbaikan berbasis ROI."
+      },
+      {
+        q: "Bagaimana proses konsultasi IT di VeinTech dimulai?",
+        a: "Proses dimulai dengan sesi konsultasi gratis untuk memahami tantangan bisnis Anda. Tim arsitek sistem kami kemudian akan merancang peta jalan teknologi yang paling sesuai dengan tujuan strategis Anda."
+      },
+      {
+        q: "Berapa lama waktu yang dibutuhkan untuk mengintegrasikan AI Chatbot ke dalam sistem yang sudah ada?",
+        a: "Waktu integrasi bervariasi tergantung pada kompleksitas sistem Anda, namun biasanya chatbot AI dasar dapat diintegrasikan dan mulai beroperasi dalam waktu 2 hingga 4 minggu."
+      }
+    ]
+  },
+  en: {
+    title: "Frequently Asked Questions",
+    subtitle: "FAQ",
+    items: [
+      {
+        q: "What are the main services offered by VeinTech?",
+        a: "VeinTech offers a complete ecosystem of digital solutions, ranging from custom software development, mobile applications (iOS & Android), API system integration, AI & Automation solutions, to IT infrastructure audits and cybersecurity."
+      },
+      {
+        q: "How can VeinTech's AI and Automation solutions help my business?",
+        a: "We build smart automated workflows to reduce repetitive tasks, improve data accuracy, and provide predictive insights, so your team can focus on business growth strategies."
+      },
+      {
+        q: "Does VeinTech provide mobile application and custom website development?",
+        a: "Yes, we specialize in building high-performance mobile apps and scalable web/SaaS platforms, specifically designed to meet your unique business operational needs."
+      },
+      {
+        q: "How secure is my company data when using system integration services?",
+        a: "Security is our priority. We implement Zero Trust architecture and high-level encryption in every system integration to ensure your company data remains protected and complies with privacy standards."
+      },
+      {
+        q: "Does VeinTech provide IT infrastructure audit services?",
+        a: "Certainly. We provide comprehensive audit services to analyze the efficiency, security, and scalability of your current IT systems, and provide ROI-based improvement recommendations."
+      },
+      {
+        q: "How does the IT consultation process at VeinTech begin?",
+        a: "The process begins with a free consultation session to understand your business challenges. Our system architecture team will then design a technology roadmap that best fits your strategic goals."
+      },
+      {
+        q: "How long does it take to integrate an AI Chatbot into an existing system?",
+        a: "Integration time varies depending on the complexity of your system, but typically a basic AI chatbot can be integrated and operational within 2 to 4 weeks."
+      }
+    ]
+  }
+}[lang as 'id' | 'en'];
+---
+
+<section class="py-24 bg-surface border-t border-outline-variant/10">
+    <div class="max-w-[1440px] mx-auto px-6 md:px-12">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-xs font-mono font-bold tracking-[0.3em] text-primary-fixed-dim uppercase mb-4 block animate-reveal">{content.subtitle}</span>
+                <h2 class="text-3xl md:text-5xl font-headline font-bold text-slate-900 dark:text-white tracking-tight animate-reveal delay-75">{content.title}</h2>
+            </div>
+
+            <div class="space-y-4">
+                {content.items.map((item, index) => (
+                    <div class="faq-item group border border-outline-variant/15 rounded-2xl bg-surface-container-low hover:bg-surface-container-high transition-all duration-300 animate-reveal" style={`animation-delay: ${100 + (index * 50)}ms`}>
+                        <button class="faq-trigger w-full flex items-center justify-between p-6 md:p-8 text-left focus:outline-none">
+                            <span class="text-base md:text-lg font-headline font-bold text-slate-900 dark:text-white group-hover:text-primary-fixed-dim transition-colors pr-8">
+                                {item.q}
+                            </span>
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-surface-container-highest border border-outline-variant/20 flex items-center justify-center transition-all duration-300 group-hover:border-primary-fixed-dim/30">
+                                <span class="material-symbols-outlined text-xl text-slate-500 dark:text-slate-400 faq-icon transition-transform duration-300 group-hover:text-primary-fixed-dim">
+                                    add
+                                </span>
+                            </div>
+                        </button>
+                        <div class="faq-answer overflow-hidden transition-all duration-300 max-h-0 opacity-0">
+                            <div class="px-6 pb-6 md:px-8 md:pb-8">
+                                <div class="w-full h-px bg-outline-variant/10 mb-6"></div>
+                                <p class="text-on-surface-variant leading-relaxed text-sm md:text-base">
+                                    {item.a}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+</section>
+
+<script is:inline>
+    function initFAQ() {
+        const items = document.querySelectorAll('.faq-item');
+        
+        items.forEach(item => {
+            const trigger = item.querySelector('.faq-trigger');
+            const answer = item.querySelector('.faq-answer');
+            const icon = item.querySelector('.faq-icon');
+            
+            trigger.addEventListener('click', () => {
+                const isOpen = !answer.classList.contains('max-h-0');
+                
+                // Close all other items
+                items.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        const otherAnswer = otherItem.querySelector('.faq-answer');
+                        const otherIcon = otherItem.querySelector('.faq-icon');
+                        otherAnswer.classList.add('max-h-0', 'opacity-0');
+                        otherAnswer.style.maxHeight = '0px';
+                        otherIcon.textContent = 'add';
+                        otherIcon.style.transform = 'rotate(0deg)';
+                        otherItem.classList.remove('bg-surface-container-highest', 'border-primary-fixed-dim/30');
+                    }
+                });
+                
+                // Toggle current item
+                if (isOpen) {
+                    answer.classList.add('max-h-0', 'opacity-0');
+                    answer.style.maxHeight = '0px';
+                    icon.textContent = 'add';
+                    icon.style.transform = 'rotate(0deg)';
+                    item.classList.remove('bg-surface-container-highest', 'border-primary-fixed-dim/30');
+                } else {
+                    answer.classList.remove('max-h-0', 'opacity-0');
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                    icon.textContent = 'remove';
+                    icon.style.transform = 'rotate(180deg)';
+                    item.classList.add('bg-surface-container-highest', 'border-primary-fixed-dim/30');
+                }
+            });
+        });
+    }
+
+    // Run on initial load
+    initFAQ();
+
+    // Re-run if using view transitions or client-side navigation (if any)
+    document.addEventListener('astro:page-load', initFAQ);
+</script>
+
+<style>
+    .faq-answer {
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in-out;
+    }
+    
+    .faq-icon {
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
+    }
+
+    .animate-reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: reveal-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    @keyframes reveal-up {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

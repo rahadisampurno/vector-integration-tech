@@ -1,0 +1,161 @@
+---
+import ServiceCTA from '../../../components/ServiceCTA.astro';
+
+import WhyChooseUs from '../../../components/WhyChooseUs.astro';
+
+import ServiceEcosystem from '../../../components/ServiceEcosystem.astro';
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ServiceBottomSections from "../../components/ServiceBottomSections.astro";
+---
+
+<BaseLayout title="SaaS & Web Development | Services">
+<main class="pt-32 pb-20">
+
+    <!-- Hero Section -->
+    <header class="max-w-[1440px] mx-auto px-12 mb-24">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary-fixed-dim/10 border border-primary-fixed-dim/20 rounded-full text-primary-fixed-dim text-xs font-label tracking-widest uppercase mb-8">
+            <span class="w-2 h-2 rounded-full bg-primary-fixed-dim animate-pulse"></span>
+            Services — Development
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-6">
+                <h1 class="text-5xl md:text-7xl font-bold leading-[0.9] tracking-tighter font-headline text-slate-900 dark:text-white">
+                    SaaS & Web <br/><span class="text-primary-fixed-dim">Development.</span>
+                </h1>
+                <p class="text-xl text-on-surface-variant max-w-lg leading-relaxed font-body">
+                    Designing and building web-based SaaS platforms that are responsive, fast, and ready to scale with your global user growth.
+                </p>
+                <div class="flex gap-4 pt-4">
+                    <a href="/en/contact" class="bg-primary-fixed-dim text-white px-8 py-4 rounded-xl font-headline font-bold hover:brightness-110 transition-all flex items-center gap-2">
+                        Free Consultation <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                    <a href="/en/services" class="border border-outline-variant/30 text-slate-600 dark:text-slate-300 px-8 py-4 rounded-xl font-headline font-bold hover:bg-surface-container-high transition-all">
+                        All Services
+                    </a>
+                </div>
+            </div>
+            <div class="relative h-[380px] rounded-2xl overflow-hidden border border-outline-variant/15 bg-surface-container-low flex items-center justify-center">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover opacity-60" alt="SaaS Development" />
+                <div class="absolute inset-0 bg-gradient-to-br from-primary-fixed-dim/20 to-transparent"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Feature Grid -->
+    <section class="max-w-[1440px] mx-auto px-12 mb-20">
+        <div class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">Development Services</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-primary-fixed-dim to-transparent"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block">web</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Custom Web Apps</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Custom web applications with complex features built specifically for your business needs.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block">layers</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Multi-tenant Architecture</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Secure database and system design to support thousands of tenants in a single SaaS platform.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
+                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block">speed</span>
+                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Performance & Scalability</h3>
+                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Optimization of load speeds and system capability to handle traffic spikes without issues.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Content Section -->
+    <section class="max-w-[1440px] mx-auto px-12 mb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
+            <!-- Left: Benefits -->
+            <div class="space-y-12">
+                <div>
+                    <h2 class="text-3xl font-headline font-bold text-slate-900 dark:text-white mb-6">Building Robust SaaS Platforms</h2>
+                    <p class="text-on-surface-variant leading-relaxed mb-8">Turn your business idea into a ready-to-use digital product. We use the latest technologies to ensure your application is fast, secure, and easy to manage.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary-fixed-dim">devices</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">Modern & Responsive UI/UX</h4>
+                                <p class="text-sm text-on-surface-variant">Intuitive interface design that works perfectly on various device screen sizes.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary-fixed-dim">code</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">Clean Code & Documentation</h4>
+                                <p class="text-sm text-on-surface-variant">Neat and well-documented code writing facilitates future development.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-primary-fixed-dim">cloud_upload</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">CI/CD & DevOps</h4>
+                                <p class="text-sm text-on-surface-variant">Deployment automation to ensure new features can be released quickly and without bugs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Process -->
+            <div class="bg-slate-50 dark:bg-white/5 rounded-3xl p-10 border border-outline-variant/10">
+                <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mb-8 text-center">Development Phases</h3>
+                <div class="space-y-8 relative">
+                    <div class="absolute left-6 top-0 bottom-0 w-0.5 bg-outline-variant/20 hidden md:block"></div>
+                    
+                    <div class="flex gap-6 relative">
+                        <div class="w-12 h-12 rounded-full bg-primary-fixed-dim text-white flex items-center justify-center font-bold shrink-0 z-10">1</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-1">Prototyping & Design</h4>
+                            <p class="text-sm text-on-surface-variant">Creation of wireframes and high-fidelity designs (UI) before the coding stage.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 relative">
+                        <div class="w-12 h-12 rounded-full bg-primary-fixed-dim text-white flex items-center justify-center font-bold shrink-0 z-10">2</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-1">Agile Development</h4>
+                            <p class="text-sm text-on-surface-variant">Development in short sprints to ensure transparent and adaptive progress.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 relative">
+                        <div class="w-12 h-12 rounded-full bg-primary-fixed-dim text-white flex items-center justify-center font-bold shrink-0 z-10">3</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white mb-1">QA & Launch</h4>
+                            <p class="text-sm text-on-surface-variant">Thorough functionality and security testing before the official launch.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <ServiceEcosystem title="Ecosystem & Deep Integration" description="Our solutions are perfectly designed to connect seamlessly with your existing applications and technology infrastructure." />
+
+    <WhyChooseUs title="Why Choose VeinTech?" subtitle="Our approach isn't just about writing code. We deliver end-to-end business solutions that guarantee ROI, security, and long-term scalability." />
+
+
+    <!-- Premium CTA Component -->
+    <ServiceCTA 
+        title="Realize Your Dream SaaS Platform."
+        description="From raw ideas to products ready for commercialization. Let's build the digital future together."
+        ctaText="Start a Project Discussion"
+        ctaLink="/en/contact"
+    />
+
+    <ServiceBottomSections currentSlug="saas-web-dev" />
+
+</main>
+</BaseLayout>

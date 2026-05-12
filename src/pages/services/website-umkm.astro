@@ -7,10 +7,12 @@ import ServiceEcosystem from '../../components/ServiceEcosystem.astro';
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ServiceBottomSections from '../../components/ServiceBottomSections.astro';
+import FlashSaleBanner from '../../components/FlashSaleBanner.astro';
 ---
 
 <BaseLayout title="Website UMKM & Bisnis | Layanan">
-<main class="pt-32 pb-20">
+<FlashSaleBanner />
+<main class="pt-20 pb-20">
 
     <!-- Hero Section -->
     <header class="max-w-[1440px] mx-auto px-12 mb-24">
@@ -75,8 +77,11 @@ import ServiceBottomSections from '../../components/ServiceBottomSections.astro'
                     <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mt-1">Landing Page</h3>
                     <p class="text-sm text-on-surface-variant mt-1">Fokus 1 tujuan, konversi maksimal</p>
                 </div>
-                <div>
-                    <p class="text-3xl font-headline font-bold text-slate-900 dark:text-white">Rp 1jt <span class="text-base font-normal text-on-surface-variant">mulai dari</span></p>
+                <div id="pricing">
+                    <div class="flex items-baseline gap-2">
+                        <p class="text-3xl font-headline font-bold text-red-600">Rp 500rb</p>
+                        <p class="text-sm text-on-surface-variant line-through opacity-50">Rp 1jt</p>
+                    </div>
                     <p class="text-xs text-on-surface-variant mt-1">Development time 3 hari</p>
                 </div>
                 <ul class="space-y-3 flex-1">
@@ -130,7 +135,10 @@ import ServiceBottomSections from '../../components/ServiceBottomSections.astro'
                     <p class="text-sm text-on-surface-variant mt-1">Company profile lengkap</p>
                 </div>
                 <div>
-                    <p class="text-3xl font-headline font-bold text-slate-900 dark:text-white">Rp 2,8jt <span class="text-base font-normal text-on-surface-variant">mulai dari</span></p>
+                    <div class="flex items-baseline gap-2">
+                        <p class="text-3xl font-headline font-bold text-red-600">Rp 1,4jt</p>
+                        <p class="text-sm text-on-surface-variant line-through opacity-50">Rp 2,8jt</p>
+                    </div>
                     <p class="text-xs text-on-surface-variant mt-1">Development time mulai dari 3 hari</p>
                 </div>
                 <ul class="space-y-3 flex-1">
@@ -183,7 +191,10 @@ import ServiceBottomSections from '../../components/ServiceBottomSections.astro'
                     <p class="text-sm text-on-surface-variant mt-1">Integrasi penuh, fitur lengkap</p>
                 </div>
                 <div>
-                    <p class="text-3xl font-headline font-bold text-slate-900 dark:text-white">Rp 5jt <span class="text-base font-normal text-on-surface-variant">mulai dari</span></p>
+                    <div class="flex items-baseline gap-2">
+                        <p class="text-3xl font-headline font-bold text-red-600">Rp 2,5jt</p>
+                        <p class="text-sm text-on-surface-variant line-through opacity-50">Rp 5jt</p>
+                    </div>
                     <p class="text-xs text-on-surface-variant mt-1">Development time mulai dari 5 hari</p>
                 </div>
                 <ul class="space-y-3 flex-1">

@@ -286,8 +286,29 @@ const t = {
 												</div>
 											</a>
 
+											<!-- Website UMKM & Bisnis -->
+											<a href={lang === 'id' ? '/services/website-bisnis' : '/en/services/website-bisnis'} data-category="business" class="service-card group/item flex flex-col bg-slate-50 dark:bg-white/5 border border-outline-variant/10 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-1 transition-all duration-500 animate-reveal delay-75">
+												<div class="h-40 relative overflow-hidden flex items-end p-4">
+													<img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="Business Website" />
+													<div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
+														<p class="text-[11px] text-white/90 leading-relaxed line-clamp-3 mb-3 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">{lang === 'id' ? 'Paket website siap pakai lengkap dengan hosting dan domain.' : 'Ready-to-use website packages with hosting and domain.'}</p>
+														<div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-[10px] uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
+															{lang === 'id' ? 'Selengkapnya' : 'Learn More'}
+															<span class="material-symbols-outlined text-xs">arrow_forward</span>
+														</div>
+													</div>
+													<span class="relative z-10 text-[9px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-2 py-1 rounded-lg group-hover/item:opacity-0 transition-opacity">BUSINESS</span>
+												</div>
+												<div class="p-5 flex-1 flex flex-col bg-white dark:bg-transparent">
+													<div class="flex items-center justify-between gap-2">
+														<h5 class="font-headline font-bold text-xs text-slate-900 dark:text-white group-hover/item:text-primary-fixed-dim transition-colors leading-snug whitespace-normal">Website UMKM & Bisnis</h5>
+														<span class="bg-red-600 text-[8px] font-black text-white px-1.5 py-0.5 rounded-md animate-pulse">50% OFF</span>
+													</div>
+												</div>
+											</a>
+
 											<!-- Chatbot AI & NLP -->
-											<a href={lang === 'id' ? '/services/chatbot-ai' : '/en/services/chatbot-ai'} data-category="ai-automation business" class="service-card group/item flex flex-col bg-slate-50 dark:bg-white/5 border border-outline-variant/10 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-1 transition-all duration-500 animate-reveal delay-75">
+											<a href={lang === 'id' ? '/services/chatbot-ai' : '/en/services/chatbot-ai'} data-category="ai-automation business" class="service-card group/item flex flex-col bg-slate-50 dark:bg-white/5 border border-outline-variant/10 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-1 transition-all duration-500 animate-reveal delay-100">
 												<div class="h-40 relative overflow-hidden flex items-end p-4">
 													<img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="Chatbot AI" />
 													<div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
@@ -305,7 +326,7 @@ const t = {
 											</a>
 
 											<!-- System Integration API -->
-											<a href={lang === 'id' ? '/services/integrasi-api' : '/en/services/integrasi-api'} data-category="infrastructure enterprise" class="service-card group/item flex flex-col bg-slate-50 dark:bg-white/5 border border-outline-variant/10 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-1 transition-all duration-500 animate-reveal delay-100">
+											<a href={lang === 'id' ? '/services/integrasi-api' : '/en/services/integrasi-api'} data-category="infrastructure enterprise" class="service-card group/item flex flex-col bg-slate-50 dark:bg-white/5 border border-outline-variant/10 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-1 transition-all duration-500 animate-reveal delay-150">
 												<div class="h-40 relative overflow-hidden flex items-end p-4">
 													<img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="API Integration" />
 													<div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
@@ -391,27 +412,6 @@ const t = {
 												</div>
 												<div class="p-5 flex-1 flex flex-col bg-white dark:bg-transparent">
 													<h5 class="font-headline font-bold text-xs text-slate-900 dark:text-white group-hover/item:text-primary-fixed-dim transition-colors leading-snug whitespace-normal">Arsitektur & Audit IT</h5>
-												</div>
-											</a>
-
-											<!-- Website UMKM & Bisnis -->
-											<a href={lang === 'id' ? '/services/website-bisnis' : '/en/services/website-bisnis'} data-category="business" class="service-card group/item flex flex-col bg-slate-50 dark:bg-white/5 border border-outline-variant/10 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary-fixed-dim/10 hover:-translate-y-1 transition-all duration-500 animate-reveal delay-[400ms]">
-												<div class="h-40 relative overflow-hidden flex items-end p-4">
-													<img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700 opacity-80 dark:opacity-60" alt="Business Website" />
-													<div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
-														<p class="text-[11px] text-white/90 leading-relaxed line-clamp-3 mb-3 transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-75">{lang === 'id' ? 'Paket website siap pakai lengkap dengan hosting dan domain.' : 'Ready-to-use website packages with hosting and domain.'}</p>
-														<div class="flex items-center gap-2 text-primary-fixed-dim font-bold text-[10px] uppercase tracking-wider transform translate-y-4 group-hover/item:translate-y-0 transition-transform duration-500 delay-150">
-															{lang === 'id' ? 'Selengkapnya' : 'Learn More'}
-															<span class="material-symbols-outlined text-xs">arrow_forward</span>
-														</div>
-													</div>
-													<span class="relative z-10 text-[9px] font-mono font-bold tracking-widest text-white uppercase bg-primary-fixed-dim/80 backdrop-blur-md px-2 py-1 rounded-lg group-hover/item:opacity-0 transition-opacity">BUSINESS</span>
-												</div>
-												<div class="p-5 flex-1 flex flex-col bg-white dark:bg-transparent">
-													<div class="flex items-center justify-between gap-2">
-														<h5 class="font-headline font-bold text-xs text-slate-900 dark:text-white group-hover/item:text-primary-fixed-dim transition-colors leading-snug whitespace-normal">Website UMKM & Bisnis</h5>
-														<span class="bg-red-600 text-[8px] font-black text-white px-1.5 py-0.5 rounded-md animate-pulse">50% OFF</span>
-													</div>
 												</div>
 											</a>
 
@@ -502,6 +502,13 @@ const t = {
                             <span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:18px" data-icon="auto_awesome">auto_awesome</span>
                             {lang === 'id' ? 'AI Computer Vision' : 'AI Computer Vision'}
                         </a>
+                        <a href={lang === 'id' ? '/services/website-bisnis' : '/en/services/website-bisnis'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
+                            <span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:18px" data-icon="store">store</span>
+                            <span class="flex items-center gap-2">
+                                {lang === 'id' ? 'Website UMKM & Bisnis' : 'UMKM & Business Website'}
+                                <span class="bg-red-600 text-[10px] font-black text-white px-2 py-0.5 rounded-lg animate-pulse">SALE</span>
+                            </span>
+                        </a>
                         <a href={lang === 'id' ? '/services/chatbot-ai' : '/en/services/chatbot-ai'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
                             <span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:18px" data-icon="forum">forum</span>
                             {lang === 'id' ? 'Chatbot AI & NLP' : 'Chatbot AI & NLP'}
@@ -525,13 +532,6 @@ const t = {
                         <a href={lang === 'id' ? '/services/audit-it' : '/en/services/audit-it'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
                             <span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:18px" data-icon="strategy">strategy</span>
                             {lang === 'id' ? 'Arsitektur & Audit IT' : 'Architecture & IT Audit'}
-                        </a>
-                        <a href={lang === 'id' ? '/services/website-bisnis' : '/en/services/website-bisnis'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
-                            <span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:18px" data-icon="store">store</span>
-                            <span class="flex items-center gap-2">
-                                {lang === 'id' ? 'Website UMKM & Bisnis' : 'UMKM & Business Website'}
-                                <span class="bg-red-600 text-[10px] font-black text-white px-2 py-0.5 rounded-lg animate-pulse">SALE</span>
-                            </span>
                         </a>
                         <a href={lang === 'id' ? '/services/ecommerce-solutions' : '/en/services/ecommerce-solutions'} class="flex items-center gap-3 py-3 text-base font-normal text-slate-500 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors">
                             <span class="material-symbols-outlined text-primary-fixed-dim" style="font-size:18px" data-icon="shopping_cart">shopping_cart</span>

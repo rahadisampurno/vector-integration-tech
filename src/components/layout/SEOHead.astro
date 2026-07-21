@@ -7,7 +7,7 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description, ogImage = '/opengraph.png' } = Astro.props;
+const { title, description, ogImage = '/logo.png' } = Astro.props;
 const lang = Astro.currentLocale || 'id';
 
 const siteUrl = Astro.site || 'https://veintech.id';

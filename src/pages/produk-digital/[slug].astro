@@ -3,8 +3,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProdukDetailContent from '../../components/produk-digital/ProdukDetailContent.astro';
 
 const { slug } = Astro.params;
+
+// Default image for VeinTools Desktop (you can make this dynamic if loading from DB)
+const ogImage = slug === 'veintools-desktop' ? '/veintools_logo.png' : undefined;
 ---
 
-<BaseLayout title="Detail Produk Digital - VeinTech">
+<BaseLayout title="Detail Produk Digital - VeinTech" ogImage={ogImage}>
   <ProdukDetailContent slug={slug} locale="id" />
 </BaseLayout>

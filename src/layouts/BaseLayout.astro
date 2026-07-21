@@ -6,6 +6,7 @@ import Footer from '../components/layout/Footer.astro';
 interface Props {
 	title: string;
 	description?: string;
+	ogImage?: string;
 }
 
 const currentPath = Astro.url.pathname;
@@ -53,7 +54,7 @@ const pathDescriptions = {
   }
 };
 
-const { title, description } = Astro.props;
+const { title, description, ogImage } = Astro.props;
 const finalDescription = description || (pathDescriptions[lang] && pathDescriptions[lang][corePath]) || pathDescriptions[lang]['/'];
 
 const siteUrl = Astro.site || 'https://veintech.id';
@@ -61,7 +62,6 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
 
 const idUrl = new URL(idAlternatePath, siteUrl);
 const enUrl = new URL(enAlternatePath, siteUrl);
-const ogImage = new URL('/opengraph.png', siteUrl);
 
 const isActive = (path: string) => {
     const normalizedCore = corePath.endsWith('/') && corePath !== '/' ? corePath.slice(0, -1) : corePath;
@@ -104,7 +104,7 @@ const t = {
 <!doctype html>
 <html lang={lang}>
 	<head>
-		<SEOHead title={title} description={finalDescription} />
+		<SEOHead title={title} description={finalDescription} ogImage={ogImage} />
 		<style is:global>
 			.animate-reveal {
 				opacity: 0;

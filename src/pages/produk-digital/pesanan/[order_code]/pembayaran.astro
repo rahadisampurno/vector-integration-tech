@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import PembayaranContent from '../../../../components/produk-digital/PembayaranContent.astro';
+
+const { order_code } = Astro.params;
+---
+
+<BaseLayout title="Instruksi Pembayaran - VeinTech">
+  <PembayaranContent orderCode={order_code} locale="id" />
+</BaseLayout>

@@ -1,0 +1,166 @@
+---
+import { db } from '../../db';
+import { orders, products, downloadAccesses } from '../../db/schema';
+import { eq } from 'drizzle-orm';
+
+const { orderCode } = Astro.props;
+
+if (!orderCode) {
+  return Astro.redirect('/produk-digital/cari-pesanan');
+}
+
+const order = db.select().from(orders).where(eq(orders.order_code, orderCode)).get();
+
+if (!order) {
+  return Astro.redirect('/produk-digital/cari-pesanan');
+}
+
+const product = db.select().from(products).where(eq(products.id, order.product_id)).get();
+const access = db.select().from(downloadAccesses).where(eq(downloadAccesses.order_id, order.id)).get();
+
+// Status Mapping
+const statusLabels = {
+  DRAFT: 'Pesanan dibuat',
+  WAITING_PAYMENT: 'Menunggu pembayaran',
+  PAYMENT_CONFIRMATION_SENT: 'Konfirmasi dikirim',
+  PAYMENT_REVIEW: 'Pembayaran sedang diperiksa',
+  PAID: 'Pembayaran diterima',
+  DOWNLOAD_READY: 'Produk siap diunduh',
+  WAITING_LICENSE: 'Menunggu lisensi',
+  COMPLETED: 'Selesai',
+  EXPIRED: 'Kedaluwarsa',
+  CANCELLED: 'Dibatalkan',
+  REJECTED: 'Pembayaran belum dapat diverifikasi'
+};
+
+const timelineSteps = [
+  { key: 'WAITING_PAYMENT', label: 'Menunggu pembayaran' },
+  { key: 'PAYMENT_CONFIRMATION_SENT', label: 'Konfirmasi dikirim' },
+  { key: 'PAYMENT_REVIEW', label: 'Sedang diperiksa' },
+  { key: 'PAID', label: 'Pembayaran diterima' },
+  { key: 'DOWNLOAD_READY', label: 'Siap diunduh' },
+  { key: 'WAITING_LICENSE', label: 'Lisensi diproses' }
+];
+
+let currentIndex = timelineSteps.findIndex(s => s.key === order.status);
+// If status is beyond WAITING_LICENSE or an error state
+if (order.status === 'COMPLETED') currentIndex = 5;
+const isErrorState = ['EXPIRED', 'CANCELLED', 'REJECTED'].includes(order.status);
+---
+
+<section class="pt-32 pb-24 bg-surface min-h-screen text-on-surface">
+  <div class="max-w-3xl mx-auto px-6 md:px-12">
+    
+    <div class="mb-12 border-b border-outline-variant/30 pb-8">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+        <div>
+          <h1 class="text-3xl font-headline font-bold mb-1">Status Pesanan</h1>
+          <p class="text-on-surface-variant text-sm">Nomor Pesanan: <span class="font-bold text-on-surface">{order.order_code}</span></p>
+        </div>
+        <div class="bg-surface-container-high px-4 py-2 rounded-xl text-center">
+          <p class="text-xs text-on-surface-variant uppercase font-bold tracking-wide mb-1">Status Saat Ini</p>
+          <p class={`font-bold ${isErrorState ? 'text-red-600' : 'text-blue-700'}`}>{statusLabels[order.status] || order.status}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline UI -->
+    <div class="bg-surface-container p-6 md:p-10 rounded-2xl border border-outline-variant/30 mb-8 shadow-sm">
+      <h2 class="text-xl font-bold mb-8">Alur Pesanan</h2>
+      
+      <div class="relative">
+        <!-- Vertical Line (Desktop & Mobile) -->
+        <div class="absolute left-4 md:left-[1.3rem] top-2 bottom-2 w-0.5 bg-outline-variant/30"></div>
+        
+        <div class="space-y-8 relative">
+          {timelineSteps.map((step, index) => {
+            const isCompleted = !isErrorState && (currentIndex >= index || ['PAID', 'DOWNLOAD_READY', 'WAITING_LICENSE', 'COMPLETED'].includes(order.status));
+            const isCurrent = !isErrorState && currentIndex === index;
+            const isFuture = !isCompleted && !isCurrent;
+            
+            return (
+              <div class="flex items-start gap-4 md:gap-6 relative z-10">
+                <!-- Node icon -->
+                <div class={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center border-2 flex-shrink-0 transition-colors ${isCompleted ? 'bg-primary text-on-primary border-primary' : isCurrent ? 'bg-blue-100 text-blue-700 border-blue-600' : 'bg-surface text-slate-400 border-outline-variant'}`}>
+                  {isCompleted ? (
+                    <span class="material-symbols-outlined text-sm md:text-base">check</span>
+                  ) : isCurrent ? (
+                    <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-blue-600 animate-pulse"></div>
+                  ) : (
+                    <span class="text-xs font-bold">{index + 1}</span>
+                  )}
+                </div>
+                <!-- Content -->
+                <div class={`pt-1 md:pt-2 ${isFuture ? 'text-slate-500' : 'text-on-surface'}`}>
+                  <h3 class={`font-bold ${isCurrent ? 'text-lg' : 'text-base'}`}>{step.label}</h3>
+                  {isCurrent && index === 0 && (
+                    <p class="text-sm text-on-surface-variant mt-1 mb-3">Silakan selesaikan transfer dan konfirmasi pembayaran Anda.</p>
+                  )}
+                  {isCurrent && index === 0 && (
+                     <a href={`/produk-digital/pesanan/${order.order_code}/pembayaran`} class="inline-block bg-primary text-on-primary text-sm font-bold py-2 px-4 rounded-lg hover:bg-primary/90 transition-colors shadow-sm">
+                      Lihat Instruksi Pembayaran
+                    </a>
+                  )}
+                  {isCurrent && index === 2 && (
+                    <p class="text-sm text-on-surface-variant mt-1">Admin kami sedang memverifikasi bukti transfer Anda. Mohon ditunggu.</p>
+                  )}
+                  {isCompleted && index === 4 && (
+                    <div class="mt-3">
+                      <p class="text-sm text-on-surface-variant mb-2">Akses ke produk Anda sudah siap. Kode dan tautan unduhan juga telah dikirim via WhatsApp.</p>
+                      {access?.raw_token ? (
+                        <a href={`/download/${access.raw_token}`} class="inline-block bg-primary text-on-primary text-sm font-bold py-2 px-4 rounded-lg hover:bg-primary/90 transition-colors shadow-sm">
+                          Buka Halaman Akses
+                        </a>
+                      ) : (
+                        <button disabled class="inline-block bg-slate-200 text-slate-500 text-sm font-bold py-2 px-4 rounded-lg cursor-not-allowed">
+                          Silakan Cek WhatsApp Anda
+                        </button>
+                      )}
+                    </div>
+                  )}
+                  {isCurrent && index === 5 && (
+                    <div class="mt-3 bg-blue-50 border border-blue-200 p-4 rounded-xl">
+                      <p class="text-sm text-blue-800 font-medium mb-3">Silakan instal aplikasi VeinTools Desktop yang telah diunduh, lalu ikuti petunjuk berikut:</p>
+                      <ol class="text-sm text-blue-700 list-decimal pl-4 mb-4 space-y-1">
+                        <li>Buka aplikasi VeinTools Desktop di komputer Anda.</li>
+                        <li>Salin <strong>Kode Perangkat (App ID)</strong> yang ditampilkan.</li>
+                        <li>Kirimkan kode tersebut kepada Admin kami.</li>
+                      </ol>
+                      <a href={`https://wa.me/6287787290712?text=${encodeURIComponent(`Halo Admin, pesanan saya ${order.order_code} sudah diunduh. Berikut adalah Kode Perangkat (App ID) saya untuk pembuatan lisensi:\n\n[TULIS APP ID ANDA DI SINI]`)}`} target="_blank" class="inline-flex items-center gap-2 bg-green-600 text-white text-sm font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition-colors shadow-sm">
+                        <span class="material-symbols-outlined text-sm">chat</span> Kirim via WhatsApp
+                      </a>
+                    </div>
+                  )}
+                  {isCompleted && index === 5 && order.status === 'COMPLETED' && (
+                    <div class="mt-3">
+                      <p class="text-sm text-green-700 font-bold mb-2">Lisensi Anda telah siap!</p>
+                      {order.license_url ? (
+                        <a href={order.license_url} download class="inline-flex items-center gap-2 bg-primary text-on-primary text-sm font-bold py-2 px-4 rounded-lg hover:bg-primary/90 transition-colors shadow-sm">
+                          <span class="material-symbols-outlined text-sm">download</span> Unduh File Lisensi
+                        </a>
+                      ) : (
+                        <p class="text-sm text-slate-500">File lisensi tidak ditemukan, hubungi admin.</p>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+    
+    <!-- Product Summary -->
+    <div class="bg-surface-container p-6 rounded-2xl border border-outline-variant/30 flex items-center gap-4">
+      <div class="w-16 h-16 bg-surface border border-outline-variant/50 rounded-lg overflow-hidden flex-shrink-0">
+        <img src={product?.thumbnail_url} alt={product?.name} class="w-full h-full object-cover" />
+      </div>
+      <div>
+        <h4 class="font-bold">{product?.name}</h4>
+        <p class="text-sm text-on-surface-variant">{product?.category}</p>
+      </div>
+    </div>
+
+  </div>
+</section>

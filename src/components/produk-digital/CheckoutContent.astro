@@ -1,0 +1,119 @@
+---
+import { db } from '../../db';
+import { products, orders } from '../../db/schema';
+import { eq } from 'drizzle-orm';
+import { randomBytes } from 'node:crypto';
+
+const { slug, errorMessage } = Astro.props;
+
+let product = {
+  id: 'test-product',
+  slug: 'veintools-desktop',
+  name: 'VeinTools Desktop',
+  category: 'Aplikasi Desktop',
+  regular_price: 199000,
+  thumbnail_url: '/veintools_logo.png'
+};
+
+if (slug) {
+  const dbProduct = db.select().from(products).where(eq(products.slug, slug)).get();
+  if (dbProduct) {
+    product = dbProduct as any;
+  }
+}
+---
+
+<section class="pt-32 pb-24 bg-surface min-h-screen text-on-surface">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12">
+    <div class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-headline font-bold mb-2">Form Pemesanan</h1>
+      <p class="text-on-surface-variant">Lengkapi data di bawah ini untuk melanjutkan pesanan Anda.</p>
+    </div>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-20">
+      
+      <!-- Form Section -->
+      <div class="lg:col-span-2">
+        {errorMessage && (
+          <div class="bg-red-500/10 border border-red-500/50 text-red-600 p-4 rounded-xl mb-6">
+            {errorMessage}
+          </div>
+        )}
+        
+        <form method="POST" class="bg-surface-container p-6 md:p-8 rounded-2xl border border-outline-variant/30 space-y-6">
+          <h2 class="text-xl font-headline font-bold border-b border-outline-variant/30 pb-4">Data Pembeli</h2>
+          
+          <div>
+            <label for="customer_name" class="block text-sm font-medium mb-2">Nama Lengkap *</label>
+            <input type="text" id="customer_name" name="customer_name" required class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-colors" placeholder="Masukkan nama lengkap Anda" />
+          </div>
+          
+          <div>
+            <label for="business_name" class="block text-sm font-medium mb-2">Nama Usaha (Opsional)</label>
+            <input type="text" id="business_name" name="business_name" class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-colors" placeholder="Masukkan nama usaha atau brand Anda" />
+          </div>
+          
+          <div>
+            <label for="referral_code" class="block text-sm font-medium mb-2">Kode Referal (Opsional)</label>
+            <input type="text" id="referral_code" name="referral_code" class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-colors uppercase" placeholder="Jika ada, masukkan kode dari tim marketing" />
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label for="whatsapp" class="block text-sm font-medium mb-2">Nomor WhatsApp *</label>
+              <input type="tel" id="whatsapp" name="whatsapp" required class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-colors" placeholder="Contoh: 081234567890" />
+            </div>
+            
+            <div>
+              <label for="email" class="block text-sm font-medium mb-2">Email Aktif *</label>
+              <input type="email" id="email" name="email" required class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-colors" placeholder="Email untuk notifikasi" />
+            </div>
+          </div>
+          
+          <div class="pt-6 border-t border-outline-variant/30">
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" required class="mt-1 w-5 h-5 rounded border-outline-variant/50 text-primary-fixed focus:ring-primary-fixed" />
+              <span class="text-sm text-on-surface-variant">Saya menyetujui syarat dan ketentuan yang berlaku dan memastikan data yang saya masukkan sudah benar.</span>
+            </label>
+          </div>
+          
+          <button type="submit" class="w-full bg-primary text-on-primary font-bold py-4 rounded-xl hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
+            Lanjut ke Pembayaran
+          </button>
+        </form>
+      </div>
+      
+      <!-- Summary Section -->
+      <div class="lg:col-span-1">
+        <div class="bg-surface-container p-6 rounded-2xl border border-outline-variant/30 sticky top-28">
+          <h2 class="text-xl font-headline font-bold border-b border-outline-variant/30 pb-4 mb-4">Ringkasan Pesanan</h2>
+          
+          <div class="flex gap-4 mb-6">
+            <img src={product.thumbnail_url} alt={product.name} class="w-20 h-20 object-cover rounded-lg" />
+            <div>
+              <h3 class="font-bold">{product.name}</h3>
+              <p class="text-sm text-slate-500 font-medium">{product.category}</p>
+            </div>
+          </div>
+          
+          <div class="space-y-3 text-sm mb-6 border-b border-outline-variant/30 pb-6">
+            <div class="flex justify-between">
+              <span class="text-on-surface-variant">Harga Produk</span>
+              <span>Rp {product.regular_price.toLocaleString('id-ID')}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-on-surface-variant">Kode Unik</span>
+              <span class="text-green-600 font-medium">Diakumulasikan di halaman selanjutnya</span>
+            </div>
+          </div>
+          
+          <div class="flex justify-between items-center font-bold text-lg">
+            <span>Subtotal</span>
+            <span>Rp {product.regular_price.toLocaleString('id-ID')}</span>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>

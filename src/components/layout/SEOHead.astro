@@ -1,0 +1,104 @@
+---
+import { formatSEOTitle, computeAlternatePaths } from '../../utils/seo';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, description, ogImage = '/opengraph.png' } = Astro.props;
+const lang = Astro.currentLocale || 'id';
+
+const siteUrl = Astro.site || 'https://veintech.id';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
+
+const { idPath, enPath } = computeAlternatePaths(Astro.url.pathname);
+const idUrl = new URL(idPath, siteUrl);
+const enUrl = new URL(enPath, siteUrl);
+const ogImageUrl = new URL(ogImage, siteUrl);
+
+const defaultDesc = lang === 'id' 
+  ? 'VEINTECH — Technology Partner for Business Growth. Membangun sistem digital, AI & otomatisasi, dan arsitektur enterprise yang aman dan scalable.'
+  : 'VEINTECH — Technology Partner for Business Growth. Building secure, scalable enterprise software, AI automation, and cloud architecture.';
+
+const finalDescription = description || defaultDesc;
+const finalTitle = formatSEOTitle(title);
+---
+
+<meta charset="UTF-8" />
+<script is:inline>
+  const theme = (() => {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      return localStorage.getItem('theme');
+    }
+    return 'dark';
+  })();
+  if (theme === 'light') {
+    document.documentElement.classList.remove('dark');
+  } else {
+    document.documentElement.classList.add('dark');
+  }
+  window.localStorage.setItem('theme', theme);
+</script>
+<meta name="description" content={finalDescription} />
+<link rel="canonical" href={canonicalUrl} />
+<link rel="alternate" hreflang="id" href={idUrl} />
+<link rel="alternate" hreflang="en" href={enUrl} />
+<link rel="alternate" hreflang="x-default" href={idUrl} />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={finalTitle} />
+<meta property="og:description" content={finalDescription} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:site_name" content="VEINTECH" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalUrl} />
+<meta name="twitter:title" content={finalTitle} />
+<meta name="twitter:description" content={finalDescription} />
+<meta name="twitter:image" content={ogImageUrl} />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="generator" content={Astro.generator} />
+<title>{finalTitle}</title>
+
+<!-- JSON-LD Structured Data for SEO & GEO (AI Engine Optimization) -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      "name": "VEINTECH",
+      "legalName": "PT Vector Integration Tech",
+      "url": siteUrl,
+      "logo": `${siteUrl}/favicon.svg`,
+      "description": finalDescription,
+      "foundingDate": "2021",
+      "areaServed": ["ID", "Global"],
+      "knowsAbout": [
+        "Artificial Intelligence",
+        "System Integration",
+        "Cloud FinOps",
+        "Software Engineering",
+        "Zero Trust Cybersecurity"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      "url": siteUrl,
+      "name": "VEINTECH — Technology Partner for Business Growth",
+      "publisher": { "@id": `${siteUrl}/#organization` },
+      "inLanguage": [lang]
+    }
+  ]
+})} />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />

@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProdukDetailContent from '../../components/produk-digital/ProdukDetailContent.astro';
+
+const { slug } = Astro.params;
+---
+
+<BaseLayout title="Detail Produk Digital - VeinTech">
+  <ProdukDetailContent slug={slug} locale="id" />
+</BaseLayout>

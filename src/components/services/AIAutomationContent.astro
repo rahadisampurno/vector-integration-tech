@@ -1,0 +1,117 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+
+interface Props {
+  locale?: 'id' | 'en';
+}
+
+const lang = Astro.props.locale || Astro.currentLocale || 'id';
+
+const t = lang === 'id' ? {
+  title: "LLM, RAG & AI Workflow Automation",
+  subtitle: "Membangun sistem kecerdasan buatan terverifikasi yang mengotomatisasi pengambilan keputusan, triase informasi, dan alur kerja operasional perusahaan secara mandiri 24/7.",
+  category: "AUTOMATE",
+  badge: "Production-Ready AI Architecture",
+  specs: [
+    { label: "AI Engine Architecture", value: "Hybrid Retrieval-Augmented Generation (RAG) + Fine-Tuned LLM" },
+    { label: "Vector Database", value: "PostgreSQL pgvector / Milvus High-Availability Cluster" },
+    { label: "Context Window & Guardrails", value: "Up to 128k Token Context + LlamaGuard / Enterprise Hallucination Filters" },
+    { label: "Data Isolation", value: "Strict Tenant Isolation (Zero Training on Enterprise Proprietary Data)" },
+    { label: "Average Response Latency", value: "< 450ms (Streaming Token Response)" }
+  ],
+  deliverables: [
+    "Arsitektur RAG & Vector Database terisolasi di cloud enterprise Anda",
+    "Pipeline pengindeksan otomatis (Ingestion Engine) untuk PDF, DOCX, DB SQL, & API internal",
+    "AI Guardrail & Filter Evaluasi Hallucinaton (RAGAS Benchmarking)",
+    "Dashboard Observability & Token Cost Monitoring real-time",
+    "Dokumentasi lengkap dan pelatihan tim operasional"
+  ],
+  flow: [
+    { step: "01", title: "Data Ingestion & Chunking", desc: "Dokumen internal diproses, dibersihkan, dan dikonversi menjadi embedding vektor semantik." },
+    { step: "02", title: "Vector Retrieval (RAG)", desc: "Pencarian konteks relevan secara akurat berdasarkan query pengguna dengan reranking hybrid." },
+    { step: "03", title: "LLM Orchestration", desc: "Model bahasa merangkum jawaban berdasarkan bukti fakta konteks internal (tanpa halusinasi)." },
+    { step: "04", title: "Guardrails & Verification", desc: "Filter keamanan memvalidasi kepatuhan kebijakan sebelum respons dikirimkan ke pengguna." }
+  ],
+  useCasesTitle: "Kasus Penggunaan Enterprise Terverifikasi",
+  useCases: [
+    { name: "Autonomous Operational Ticketing Triage", desc: "Mengklasifikasikan, memprioritaskan, dan merespons ribuan tiket gangguan IT atau layanan pelanggan dalam hitungan detik." },
+    { name: "Enterprise Knowledge Base Intelligence", desc: "Pencarian regulasi hukum, SOP operasional, dan kontrak perusahaan ribuan halaman dengan kutipan sumber yang akurat." },
+    { name: "Supply Chain Decision & Risk Alert", desc: "Memantau anomali stok dan memicu peringatan pesanan ulang secara otomatis kepada pemasok." }
+  ]
+} : {
+  title: "LLM, RAG & AI Workflow Automation",
+  subtitle: "Building verified artificial intelligence systems that automate decision-making, internal knowledge retrieval, and enterprise workflows 24/7.",
+  category: "AUTOMATE",
+  badge: "Production-Ready AI Architecture",
+  specs: [
+    { label: "AI Engine Architecture", value: "Hybrid Retrieval-Augmented Generation (RAG) + Fine-Tuned LLM" },
+    { label: "Vector Database", value: "PostgreSQL pgvector / Milvus High-Availability Cluster" },
+    { label: "Context Window & Guardrails", value: "Up to 128k Token Context + LlamaGuard / Enterprise Hallucination Filters" },
+    { label: "Data Isolation", value: "Strict Tenant Isolation (Zero Training on Enterprise Proprietary Data)" },
+    { label: "Average Response Latency", value: "< 450ms (Streaming Token Response)" }
+  ],
+  deliverables: [
+    "Private RAG Architecture & Vector Database deployed in your enterprise VPC",
+    "Automated Data Ingestion Pipeline for PDF, DOCX, SQL DB, and internal APIs",
+    "Production Guardrails & Hallucination Evaluation Suite (RAGAS Benchmarking)",
+    "Real-time Token Cost & Inference Observability Dashboard",
+    "Full Architectural Blueprint & Operational Engineering Handover"
+  ],
+  flow: [
+    { step: "01", title: "Data Ingestion & Chunking", desc: "Proprietary documents are parsed, cleaned, and converted into high-precision vector embeddings." },
+    { step: "02", title: "Vector Retrieval (RAG)", desc: "Semantic hybrid search retrieves only accurate internal context fragments." },
+    { step: "03", title: "LLM Orchestration", desc: "Language model synthesizes verified answers strictly grounded in retrieved factual context." },
+    { step: "04", title: "Guardrails & Verification", desc: "Security policies and PII redaction filters validate responses before dispatching." }
+  ],
+  useCasesTitle: "Verified Enterprise Use Cases",
+  useCases: [
+    { name: "Autonomous Operational Ticketing Triage", desc: "Classifying, routing, and diagnosing thousands of incoming IT or customer tickets instantly." },
+    { name: "Enterprise Legal & SOP Search Engine", desc: "Interrogating thousands of regulatory pages, contracts, and internal SOPs with exact source citation." },
+    { name: "Automated Supply Chain Anomaly Agent", desc: "Monitoring inventory anomalies and executing automated purchase re-order workflows." }
+  ]
+};
+---
+
+<ServiceLayout
+  title={t.title}
+  subtitle={t.subtitle}
+  category={t.category}
+  badge={t.badge}
+  specs={t.specs}
+  deliverables={t.deliverables}
+  architectureFlow={t.flow}
+>
+  <div class="space-y-16">
+    <!-- Value Proposition -->
+    <div class="max-w-3xl space-y-4">
+      <h2 class="text-2xl sm:text-3xl font-bold font-headline text-slate-900 dark:text-white">
+        {lang === 'id' ? 'Mengapa AI Production-Ready Berbeda dari Demo LLM Biasa' : 'Why Production-Ready AI Differs from Generic LLM Demos'}
+      </h2>
+      <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+        {lang === 'id'
+          ? 'Banyak perusahaan mencoba mengadopsi AI namun terhenti pada tahap prototipe karena masalah halusinasi, kebocoran data sensitif, dan biaya API yang tidak terkontrol. VEINTECH merancang arsitektur AI dengan pagar pengaman (guardrails) ketat, isolasi data pribadi, dan evaluasi empiris agar sistem aman dijalankan di lingkungan produksi berbeban tinggi.'
+          : 'Many enterprises stall at proof-of-concept AI due to hallucinations, security risks, and unpredictable token spend. VEINTECH builds production-ready AI pipelines with rigorous guardrails, deterministic retrieval verification, and enterprise VPC isolation.'}
+      </p>
+    </div>
+
+    <!-- Verified Use Cases -->
+    <div class="space-y-8">
+      <h3 class="text-xl font-bold font-headline text-slate-900 dark:text-white flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary-fixed-dim">verified</span>
+        <span>{t.useCasesTitle}</span>
+      </h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {t.useCases.map((uc) => (
+          <div class="p-6 rounded-2xl bg-surface-container-low border border-outline-variant/15 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <span class="text-xs font-mono font-bold text-primary-fixed-dim uppercase tracking-wider">DEPLOYED USE CASE</span>
+              <h4 class="font-headline font-bold text-base text-slate-900 dark:text-white">{uc.name}</h4>
+              <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{uc.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</ServiceLayout>

@@ -1,0 +1,557 @@
+---
+import { db } from '../../db';
+import { products } from '../../db/schema';
+import { eq } from 'drizzle-orm';
+
+const { slug, locale } = Astro.props;
+
+// Default dummy for testing
+let product = {
+  slug: 'veintools-desktop',
+  name: 'VeinTools Desktop',
+  short_description: 'Asisten bisnis offline untuk membantu UMKM menghitung HPP, membuat invoice, mencatat kas, dan menggunakan berbagai alat bisnis.',
+  description: 'VeinTools Desktop adalah aplikasi yang dirancang khusus untuk mempermudah operasional harian UMKM. Tidak perlu koneksi internet (offline), mudah digunakan, dan ringan.',
+  category: 'Aplikasi Desktop',
+  regular_price: 199000,
+  sale_price: null,
+  thumbnail_url: '/veintools_logo.png'
+};
+
+if (slug) {
+  const dbProduct = db.select().from(products).where(eq(products.slug, slug)).get();
+  if (dbProduct) {
+    product = dbProduct as any;
+  } else if (slug !== 'veintools-desktop') {
+    return Astro.redirect('/produk-digital');
+  }
+}
+
+const checkoutUrl = `/produk-digital/${product.slug}/pesan`;
+---
+
+{product.slug === 'veintools-desktop' ? (
+  <div class="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
+    
+    <!-- Top Header (AppSumo Style) -->
+    <div class="max-w-[1200px] mx-auto px-6 pt-32 pb-8 border-b border-slate-200 dark:border-slate-800">
+       <div class="flex flex-col md:flex-row md:items-center gap-6">
+          <div class="w-20 h-20 md:w-24 md:h-24 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center justify-center p-3 shadow-sm flex-shrink-0">
+             <img src={product.thumbnail_url} alt={product.name} class="w-full h-full object-contain" />
+          </div>
+          <div>
+             <div class="mb-3">
+               <span class="inline-flex items-center gap-2 text-blue-700 dark:text-blue-300 font-bold text-xs md:text-sm tracking-widest uppercase bg-blue-50 dark:bg-blue-900/30 px-3 py-1.5 rounded border border-blue-200 dark:border-blue-800/50 shadow-sm">
+                 <span class="material-symbols-outlined text-sm">build</span> 25+ Tools dalam 1 Aplikasi
+               </span>
+             </div>
+             <h1 class="text-4xl md:text-5xl lg:text-6xl font-headline font-black mb-4 text-slate-900 dark:text-white leading-tight">
+               {product.name}
+             </h1>
+             <h2 class="text-lg md:text-xl text-slate-600 dark:text-slate-400 font-medium max-w-3xl mb-4">
+               Kotak peralatan bisnis offline terlengkap. Dapatkan <strong>lebih dari 25+ tools cerdas</strong> dalam satu aplikasi untuk mempermudah operasional harian UMKM.
+             </h2>
+             <div class="flex flex-wrap items-center gap-4 text-sm font-bold">
+               <div class="flex items-center gap-1 text-yellow-500">
+                 <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                 <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                 <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                 <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+                 <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+               </div>
+               <span class="text-blue-600 dark:text-blue-400 font-medium">1.250+ total download</span>
+               <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-md text-xs font-black uppercase tracking-wider border border-yellow-200">Lisensi 1 Tahun</span>
+             </div>
+          </div>
+       </div>
+    </div>
+
+    <!-- MAIN 2-COLUMN LAYOUT -->
+    <div class="max-w-[1200px] mx-auto px-6 py-12 flex flex-col lg:flex-row gap-12 relative">
+      
+      <!-- LEFT CONTENT (Story, Images, Features) -->
+      <div class="w-full lg:w-[65%]">
+        
+        <!-- Image Gallery -->
+        <div class="mb-12">
+          <div class="aspect-video bg-slate-100 dark:bg-slate-800 rounded-2xl mb-4 overflow-hidden border border-slate-200 dark:border-slate-700 shadow-sm relative group">
+             <img id="main-preview-img" src="/produk/veintools/photoproduk.png" class="w-full h-full object-cover transition-transform duration-700" alt="Main Preview" />
+             
+             <!-- Arrows -->
+             <button id="prev-slide" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 dark:bg-black/60 rounded-full flex items-center justify-center text-slate-900 dark:text-white shadow-lg opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white dark:hover:bg-black z-10">
+               <span class="material-symbols-outlined">chevron_left</span>
+             </button>
+             <button id="next-slide" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/80 dark:bg-black/60 rounded-full flex items-center justify-center text-slate-900 dark:text-white shadow-lg opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white dark:hover:bg-black z-10">
+               <span class="material-symbols-outlined">chevron_right</span>
+             </button>
+          </div>
+          <div id="gallery-thumbnails" class="flex gap-4 overflow-x-auto pb-4 snap-x custom-scrollbar">
+             <img src="/produk/veintools/photoproduk.png" class="gallery-thumb w-32 md:w-40 aspect-video rounded-xl border-2 border-blue-500 object-cover cursor-pointer snap-start flex-shrink-0 shadow-sm" alt="Thumbnail 0" data-index="0" />
+             <img src="/produk/veintools/photoproduk1.png" class="gallery-thumb w-32 md:w-40 aspect-video rounded-xl border border-slate-200 dark:border-slate-700 hover:border-slate-400 object-cover cursor-pointer snap-start flex-shrink-0 shadow-sm" alt="Thumbnail 1" data-index="1" />
+             <img src="/produk/veintools/photoproduk2.png" class="gallery-thumb w-32 md:w-40 aspect-video rounded-xl border border-slate-200 dark:border-slate-700 hover:border-slate-400 object-cover cursor-pointer snap-start flex-shrink-0 shadow-sm" alt="Thumbnail 2" data-index="2" />
+             <img src="/produk/veintools/photoproduk3.png" class="gallery-thumb w-32 md:w-40 aspect-video rounded-xl border border-slate-200 dark:border-slate-700 hover:border-slate-400 object-cover cursor-pointer snap-start flex-shrink-0 shadow-sm" alt="Thumbnail 3" data-index="3" />
+             <img src="/produk/veintools/photoproduk4.png" class="gallery-thumb w-32 md:w-40 aspect-video rounded-xl border border-slate-200 dark:border-slate-700 hover:border-slate-400 object-cover cursor-pointer snap-start flex-shrink-0 shadow-sm" alt="Thumbnail 4" data-index="4" />
+             <img src="/produk/veintools/photoproduk5.png" class="gallery-thumb w-32 md:w-40 aspect-video rounded-xl border border-slate-200 dark:border-slate-700 hover:border-slate-400 object-cover cursor-pointer snap-start flex-shrink-0 shadow-sm" alt="Thumbnail 5" data-index="5" />
+             <img src="/produk/veintools/photoproduk6.png" class="gallery-thumb w-32 md:w-40 aspect-video rounded-xl border border-slate-200 dark:border-slate-700 hover:border-slate-400 object-cover cursor-pointer snap-start flex-shrink-0 shadow-sm" alt="Thumbnail 6" data-index="6" />
+             <img src="/produk/veintools/photoproduk7.png" class="gallery-thumb w-32 md:w-40 aspect-video rounded-xl border border-slate-200 dark:border-slate-700 hover:border-slate-400 object-cover cursor-pointer snap-start flex-shrink-0 shadow-sm" alt="Thumbnail 7" data-index="7" />
+             <img src="/produk/veintools/photoproduk8.png" class="gallery-thumb w-32 md:w-40 aspect-video rounded-xl border border-slate-200 dark:border-slate-700 hover:border-slate-400 object-cover cursor-pointer snap-start flex-shrink-0 shadow-sm" alt="Thumbnail 8" data-index="8" />
+          </div>
+        </div>
+        
+        <!-- Use Case Tags -->
+        <div class="flex flex-wrap gap-8 mb-12 pb-10 border-b border-slate-200 dark:border-slate-800">
+           <div>
+              <h4 class="text-xs text-slate-500 font-bold uppercase tracking-widest mb-3">Terbaik Untuk</h4>
+              <div class="flex flex-wrap gap-2 text-sm font-medium">
+                <span class="bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">Pemilik UMKM</span>
+                <span class="bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">Warung & Toko</span>
+                <span class="bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">Pengecer / Reseller</span>
+              </div>
+           </div>
+           <div>
+              <h4 class="text-xs text-slate-500 font-bold uppercase tracking-widest mb-3">Alternatif Dari</h4>
+              <div class="flex flex-wrap gap-2 text-sm font-medium">
+                <span class="bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 flex items-center gap-1">Excel & Spreadsheets</span>
+                <span class="bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 flex items-center gap-1">Buku Kas Manual</span>
+              </div>
+           </div>
+        </div>
+
+        <!-- The "Story" Overview (Long-form sales copy) -->
+        <div class="prose prose-slate dark:prose-invert prose-lg max-w-none text-slate-700 dark:text-slate-300 leading-relaxed mb-16">
+           <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">Ringkasan Produk</h3>
+           
+           <p class="text-xl font-medium leading-relaxed text-slate-800 dark:text-slate-200 mb-8 border-l-4 border-blue-500 pl-6 bg-blue-50/50 dark:bg-blue-900/10 py-2">
+             Tinggalkan cara manual. Hitung HPP, buat invoice, dan catat pembukuan dengan satu aplikasi desktop offline yang aman dan terjangkau untuk 1 tahun penuh.
+           </p>
+           
+           <p class="mb-6">
+             Menjalankan bisnis skala UMKM dengan mengandalkan Microsoft Excel atau bahkan buku tulis manual seringkali berakhir berantakan. Anda harus menghafal rumus, data rawan hilang, susah melacak keuntungan pasti, dan tampilan invoice yang tidak profesional.
+           </p>
+           
+           <p class="mb-10">
+             VeinTools Desktop dirancang khusus untuk memecahkan masalah tersebut. Kami menghadirkan antarmuka (UI) yang sangat bersahabat sehingga siapa pun, bahkan yang awam teknologi sekalipun, bisa langsung menggunakannya.
+           </p>
+           
+           <!-- Embedded Inline Image -->
+           <figure class="my-12">
+             <img src="/produk/veintools/photoproduk2.png" class="w-full rounded-2xl shadow-md border border-slate-200 dark:border-slate-700" alt="HPP Feature" />
+             <figcaption class="text-center text-sm text-slate-500 mt-4">Kalkulator HPP: Masukkan bahan baku Anda, dan biarkan aplikasi menghitung sisanya.</figcaption>
+           </figure>
+
+           <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-16 mb-8">Daftar Fitur Lengkap VeinTools (Lebih dari 25+ Tools!)</h3>
+           
+           <p class="mb-8">Kami mengemas lusinan *tools* operasional yang biasanya terpisah-pisah ke dalam satu aplikasi ringan. Berikut adalah daftar seluruh fitur yang akan Anda dapatkan:</p>
+           
+           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+             
+             <!-- Keuangan & Analisa -->
+             <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+               <h4 class="font-bold text-lg text-slate-900 dark:text-white mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-blue-500">account_balance_wallet</span> Keuangan & Analisa</h4>
+               <ul class="space-y-2 text-sm font-medium m-0 pl-0 list-none text-slate-700 dark:text-slate-300">
+                 <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> HPP & Harga Jual</li>
+                 <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Buku Kas Sederhana</li>
+                 <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Target Omzet & Prediksi</li>
+                 <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Profit & ROI Simulator</li>
+                 <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Margin vs Markup</li>
+                 <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Titik Impas (BEP)</li>
+                 <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Biaya Marketplace</li>
+                 <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Reminder Piutang</li>
+                 <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Reminder Hutang Usaha</li>
+               </ul>
+             </div>
+             
+             <!-- Inventori & Dokumen -->
+             <div class="space-y-8">
+               <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+                 <h4 class="font-bold text-lg text-slate-900 dark:text-white mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-blue-500">inventory_2</span> Inventori & Produk</h4>
+                 <ul class="space-y-2 text-sm font-medium m-0 pl-0 list-none text-slate-700 dark:text-slate-300">
+                   <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Reminder Stok Menipis</li>
+                   <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Direktori Supplier</li>
+                   <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Generator SKU Otomatis</li>
+                 </ul>
+               </div>
+               
+               <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+                 <h4 class="font-bold text-lg text-slate-900 dark:text-white mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-blue-500">description</span> Generator Dokumen</h4>
+                 <ul class="space-y-2 text-sm font-medium m-0 pl-0 list-none text-slate-700 dark:text-slate-300">
+                   <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Buat Invoice & Tagihan</li>
+                   <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Quotation Penawaran</li>
+                   <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Kuitansi Pembayaran</li>
+                   <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Riwayat & Ekspor Data</li>
+                 </ul>
+               </div>
+             </div>
+             
+             <!-- Pemasaran & Promo -->
+             <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+               <h4 class="font-bold text-lg text-slate-900 dark:text-white mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-blue-500">campaign</span> Pemasaran & Promo</h4>
+               <ul class="space-y-2 text-sm font-medium m-0 pl-0 list-none text-slate-700 dark:text-slate-300">
+                 <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Kalender Promo & Event</li>
+                 <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> QR & Link WhatsApp</li>
+                 <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Watermark Foto Produk</li>
+                 <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Resize Foto Marketplace</li>
+               </ul>
+             </div>
+             
+             <!-- Utilitas & Pengaturan -->
+             <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+               <h4 class="font-bold text-lg text-slate-900 dark:text-white mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-blue-500">build</span> Utilitas & Pengaturan</h4>
+               <ul class="space-y-2 text-sm font-medium m-0 pl-0 list-none text-slate-700 dark:text-slate-300">
+                 <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Barcode Generator</li>
+                 <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Cetak Label Produk & Rak</li>
+                 <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Cetak Struk Thermal</li>
+                 <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> To-Do List Bisnis</li>
+                 <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Backup & Restore Data</li>
+                 <li class="flex items-center gap-2"><span class="text-green-500 text-lg">✓</span> Profil Usaha & Rekening</li>
+               </ul>
+             </div>
+             
+           </div>
+
+           <!-- Embedded Inline Image -->
+           <figure class="my-12">
+             <img src="/produk/veintools/photoproduk6.png" class="w-full rounded-2xl shadow-md border border-slate-200 dark:border-slate-700" alt="Invoice Feature" />
+           </figure>
+           
+           <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-12 mb-6">Data 100% Milik Anda, Tanpa Internet</h3>
+           
+           <p class="mb-6">
+             Kami memahami bahwa privasi data bisnis sangat penting. VeinTools bekerja <strong>sepenuhnya offline</strong>. Database disimpan langsung di laptop/PC Anda, bukan di *cloud server* pihak ketiga. Artinya, tidak ada yang bisa mengintip data penjualan Anda.
+           </p>
+           
+           <p class="font-bold text-lg text-blue-600 dark:text-blue-400 mt-10">
+             Dapatkan lisensi resmi 1 Tahun ke VeinTools Desktop hari ini!
+           </p>
+        </div>
+        
+        <!-- Accordion / FAQ Area -->
+        <div class="mt-16 pt-12 border-t border-slate-200 dark:border-slate-800">
+           <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8">Pertanyaan Sering Diajukan</h3>
+           <div class="space-y-4">
+             <details class="bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700 group">
+               <summary class="font-bold text-lg px-6 py-5 cursor-pointer list-none flex justify-between items-center text-slate-900 dark:text-white">
+                 Apakah aplikasi ini butuh internet?
+                 <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+               </summary>
+               <div class="px-6 pb-6 text-slate-600 dark:text-slate-400">
+                 Tidak. Setelah instalasi dan aktivasi awal, VeinTools bekerja 100% offline tanpa koneksi internet sama sekali.
+               </div>
+             </details>
+             <details class="bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700 group">
+               <summary class="font-bold text-lg px-6 py-5 cursor-pointer list-none flex justify-between items-center text-slate-900 dark:text-white">
+                 Bisakah saya memindahkan lisensi ke laptop baru?
+                 <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+               </summary>
+               <div class="px-6 pb-6 text-slate-600 dark:text-slate-400">
+                 Ya, 1 Lisensi berlaku untuk 1 PC aktif. Jika Anda mengganti perangkat, Anda dapat memohon pemindahan lisensi kepada admin kami.
+               </div>
+             </details>
+           </div>
+        </div>
+
+      </div>
+      
+      <!-- RIGHT SIDEBAR (Sticky Pricing Widget - AppSumo Style) -->
+      <div class="w-full lg:w-[35%]">
+         <div class="sticky top-28 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-2xl p-6 z-20 max-h-[calc(100vh-12rem)] overflow-y-auto">
+            
+            <div class="mb-4">
+              <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-black uppercase tracking-wider">Lisensi 1 Tahun</span>
+            </div>
+            
+            <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 rounded-xl p-4 mb-6">
+               <div class="text-center mb-3">
+                 <span class="text-[11px] font-bold uppercase tracking-wider text-red-600 dark:text-red-400 flex items-center justify-center gap-1">
+                    <span class="material-symbols-outlined text-sm">schedule</span> Harga Promo Berakhir Dalam:
+                 </span>
+               </div>
+               <div class="flex justify-center gap-2 text-center">
+                 <div class="bg-white dark:bg-slate-800 rounded border border-red-100 dark:border-red-800/50 w-[3.25rem] py-1.5 shadow-sm">
+                   <div id="cd-days" class="text-lg font-black text-slate-900 dark:text-white leading-none mb-1">00</div>
+                   <div class="text-[9px] uppercase font-bold text-slate-500 leading-none">Hari</div>
+                 </div>
+                 <div class="bg-white dark:bg-slate-800 rounded border border-red-100 dark:border-red-800/50 w-[3.25rem] py-1.5 shadow-sm">
+                   <div id="cd-hours" class="text-lg font-black text-slate-900 dark:text-white leading-none mb-1">00</div>
+                   <div class="text-[9px] uppercase font-bold text-slate-500 leading-none">Jam</div>
+                 </div>
+                 <div class="bg-white dark:bg-slate-800 rounded border border-red-100 dark:border-red-800/50 w-[3.25rem] py-1.5 shadow-sm">
+                   <div id="cd-mins" class="text-lg font-black text-slate-900 dark:text-white leading-none mb-1">00</div>
+                   <div class="text-[9px] uppercase font-bold text-slate-500 leading-none">Mnt</div>
+                 </div>
+                 <div class="bg-white dark:bg-slate-800 rounded border border-red-100 dark:border-red-800/50 w-[3.25rem] py-1.5 shadow-sm">
+                   <div id="cd-secs" class="text-lg font-black text-slate-900 dark:text-white leading-none mb-1">00</div>
+                   <div class="text-[9px] uppercase font-bold text-slate-500 leading-none">Dtk</div>
+                 </div>
+               </div>
+            </div>
+            
+            <div class="flex flex-wrap items-baseline gap-2 mb-6">
+              <h3 class="text-4xl lg:text-4xl font-black text-slate-900 dark:text-white leading-none tracking-tight whitespace-nowrap">Rp{product.regular_price.toLocaleString('id-ID')}</h3>
+              <span class="text-lg text-slate-400 line-through whitespace-nowrap">Rp576.000</span>
+            </div>
+            
+            <a href={checkoutUrl} class="block w-full bg-[#1c1c1c] dark:bg-white text-white dark:text-[#1c1c1c] text-center font-bold text-lg py-5 rounded-xl hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors mb-4 shadow-lg shadow-black/10 dark:shadow-white/10">
+               Beli Sekarang
+            </a>
+            
+            <p class="text-sm text-center text-slate-500 dark:text-slate-400 mb-8 font-medium">Akses penuh selama 12 bulan. Garansi aman.</p>
+            
+            <div class="border-t border-slate-200 dark:border-slate-700 pt-6">
+              <h4 class="font-bold text-lg mb-6 text-slate-900 dark:text-white">Syarat & Ketentuan Lisensi Deal Ini:</h4>
+              <ul class="space-y-4 text-sm font-medium text-slate-700 dark:text-slate-300">
+                 <li class="flex items-start gap-3">
+                   <span class="material-symbols-outlined text-green-500 text-lg shrink-0 mt-0.5">check</span> 
+                   <span class="flex-1">Akses lisensi penuh 1 Tahun ke VeinTools Desktop</span>
+                 </li>
+                 <li class="flex items-start gap-3">
+                   <span class="material-symbols-outlined text-green-500 text-lg shrink-0 mt-0.5">check</span> 
+                   <span class="flex-1">Termasuk semua update minor di masa mendatang</span>
+                 </li>
+                 <li class="flex items-start gap-3">
+                   <span class="material-symbols-outlined text-green-500 text-lg shrink-0 mt-0.5">check</span> 
+                   <span class="flex-1">Lisensi resmi untuk 1 Perangkat Komputer/Laptop</span>
+                 </li>
+                 <li class="flex items-start gap-3">
+                   <span class="material-symbols-outlined text-green-500 text-lg shrink-0 mt-0.5">check</span> 
+                   <span class="flex-1">Berjalan di sistem operasi Windows 10 & 11</span>
+                 </li>
+                 <li class="flex items-start gap-3">
+                   <span class="material-symbols-outlined text-green-500 text-lg shrink-0 mt-0.5">check</span> 
+                   <span class="flex-1">Dukungan teknis langsung via WhatsApp Admin</span>
+                 </li>
+                 <li class="flex items-start gap-3 mt-6">
+                   <span class="material-symbols-outlined text-slate-400 text-lg shrink-0 mt-0.5">local_shipping</span> 
+                   <span class="text-slate-500 flex-1">Produk digital: Lisensi dan link installer akan langsung dikirim setelah pembayaran.</span>
+                 </li>
+              </ul>
+            </div>
+            
+         </div>
+      </div>
+
+      <!-- Lightbox Modal -->
+      <div id="lightbox-modal" class="fixed inset-0 z-50 hidden bg-black/95 flex-col md:flex-row backdrop-blur-md">
+        <button id="close-lightbox" class="absolute top-4 right-4 md:top-6 md:right-8 z-50 text-white hover:text-slate-300 transition-colors p-2 bg-white/10 hover:bg-white/20 rounded-full border border-white/20 backdrop-blur-sm">
+          <span class="material-symbols-outlined text-3xl">close</span>
+        </button>
+        
+        <div class="w-full md:w-[75%] h-[65vh] md:h-full flex items-center justify-center p-4 md:p-12 relative select-none">
+           <img id="lightbox-main-img" src="/produk/veintools/photoproduk.png" class="max-w-full max-h-full object-contain drop-shadow-2xl rounded-xl" alt="Lightbox Preview" />
+           
+           <button id="lightbox-prev" class="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors border border-white/20 backdrop-blur-md">
+             <span class="material-symbols-outlined text-2xl">chevron_left</span>
+           </button>
+           <button id="lightbox-next" class="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors border border-white/20 backdrop-blur-md">
+             <span class="material-symbols-outlined text-2xl">chevron_right</span>
+           </button>
+        </div>
+
+        <div class="w-full md:w-[25%] h-[35vh] md:h-full bg-slate-900 border-t md:border-t-0 md:border-l border-slate-800 p-4 md:p-6 overflow-y-auto custom-scrollbar flex flex-row md:flex-col gap-3">
+           <h3 class="text-white font-bold mb-1 hidden md:block uppercase tracking-wider text-sm">Galeri Produk</h3>
+           <img src="/produk/veintools/photoproduk.png" class="lightbox-thumb w-28 md:w-full aspect-video rounded-lg object-cover cursor-pointer flex-shrink-0 border-2 border-transparent hover:border-slate-500 transition-all opacity-50 hover:opacity-100" />
+           <img src="/produk/veintools/photoproduk1.png" class="lightbox-thumb w-28 md:w-full aspect-video rounded-lg object-cover cursor-pointer flex-shrink-0 border-2 border-transparent hover:border-slate-500 transition-all opacity-50 hover:opacity-100" />
+           <img src="/produk/veintools/photoproduk2.png" class="lightbox-thumb w-28 md:w-full aspect-video rounded-lg object-cover cursor-pointer flex-shrink-0 border-2 border-transparent hover:border-slate-500 transition-all opacity-50 hover:opacity-100" />
+           <img src="/produk/veintools/photoproduk3.png" class="lightbox-thumb w-28 md:w-full aspect-video rounded-lg object-cover cursor-pointer flex-shrink-0 border-2 border-transparent hover:border-slate-500 transition-all opacity-50 hover:opacity-100" />
+           <img src="/produk/veintools/photoproduk4.png" class="lightbox-thumb w-28 md:w-full aspect-video rounded-lg object-cover cursor-pointer flex-shrink-0 border-2 border-transparent hover:border-slate-500 transition-all opacity-50 hover:opacity-100" />
+           <img src="/produk/veintools/photoproduk5.png" class="lightbox-thumb w-28 md:w-full aspect-video rounded-lg object-cover cursor-pointer flex-shrink-0 border-2 border-transparent hover:border-slate-500 transition-all opacity-50 hover:opacity-100" />
+           <img src="/produk/veintools/photoproduk6.png" class="lightbox-thumb w-28 md:w-full aspect-video rounded-lg object-cover cursor-pointer flex-shrink-0 border-2 border-transparent hover:border-slate-500 transition-all opacity-50 hover:opacity-100" />
+           <img src="/produk/veintools/photoproduk7.png" class="lightbox-thumb w-28 md:w-full aspect-video rounded-lg object-cover cursor-pointer flex-shrink-0 border-2 border-transparent hover:border-slate-500 transition-all opacity-50 hover:opacity-100" />
+           <img src="/produk/veintools/photoproduk8.png" class="lightbox-thumb w-28 md:w-full aspect-video rounded-lg object-cover cursor-pointer flex-shrink-0 border-2 border-transparent hover:border-slate-500 transition-all opacity-50 hover:opacity-100" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+) : (
+  <!-- Standard View untuk Produk Lainnya (Jika ada di masa depan) -->
+  <section class="pt-32 pb-24 bg-surface min-h-screen text-on-surface">
+    <div class="max-w-[1440px] mx-auto px-6 md:px-12">
+      <!-- Breadcrumb -->
+      <nav class="mb-8 text-sm font-medium text-slate-500">
+        <a href="/produk-digital" class="hover:text-primary-fixed transition-colors">Produk Digital</a>
+        <span class="mx-2">/</span>
+        <span class="text-on-surface">{product.name}</span>
+      </nav>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+        <!-- Image Section -->
+        <div class="space-y-6">
+          <div class="aspect-[4/3] rounded-3xl overflow-hidden bg-surface-container border border-outline-variant/30 p-6 flex justify-center items-center">
+            <img src={product.thumbnail_url} alt={product.name} class="max-w-full max-h-full object-contain" />
+          </div>
+        </div>
+        
+        <!-- Content Section -->
+        <div class="flex flex-col justify-center">
+          <div class="mb-4">
+            <span class="bg-primary/10 text-primary-fixed-dim text-sm font-bold px-3 py-1 rounded-full">{product.category}</span>
+          </div>
+          
+          <h1 class="text-4xl md:text-5xl font-headline font-bold mb-4">{product.name}</h1>
+          <p class="text-on-surface-variant text-lg mb-8 leading-relaxed">{product.description || product.short_description}</p>
+          
+          <div class="bg-surface-container p-6 rounded-2xl mb-8 border border-outline-variant/30">
+            <div class="flex items-end gap-4 mb-2">
+              <span class="text-4xl font-headline font-bold">Rp {product.regular_price.toLocaleString('id-ID')}</span>
+            </div>
+          </div>
+          
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href={checkoutUrl} class="flex-1 text-center bg-primary text-on-primary font-bold py-4 px-6 rounded-xl hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
+              Pesan Sekarang
+            </a>
+            <a href={`https://wa.me/6287787290712?text=${encodeURIComponent(`Halo Admin VeinTech,\n\nSaya ingin bertanya tentang produk:\n\nNama Produk: ${product.name}\nHarga: Rp${product.regular_price.toLocaleString('id-ID')}\n\nMohon dibantu informasinya.`)}`} target="_blank" rel="noopener noreferrer" class="flex-1 text-center bg-surface-container-high text-on-surface font-bold py-4 px-6 rounded-xl hover:bg-surface-container-highest transition-colors border border-outline-variant/50">
+              Tanya Admin
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+)}
+
+<script>
+  function startCountdown() {
+    const daysEl = document.getElementById('cd-days');
+    const hoursEl = document.getElementById('cd-hours');
+    const minsEl = document.getElementById('cd-mins');
+    const secsEl = document.getElementById('cd-secs');
+    
+    if (!daysEl) return;
+
+    // Set countdown to end of tomorrow for FOMO effect
+    let endDate = new Date();
+    endDate.setHours(23, 59, 59, 999);
+    endDate.setDate(endDate.getDate() + 1); // 1 day from today midnight
+
+    const updateTimer = () => {
+      const now = new Date().getTime();
+      const distance = endDate.getTime() - now;
+
+      if (distance < 0) return;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      daysEl.innerText = days.toString().padStart(2, '0');
+      hoursEl.innerText = hours.toString().padStart(2, '0');
+      minsEl.innerText = minutes.toString().padStart(2, '0');
+      secsEl.innerText = seconds.toString().padStart(2, '0');
+    };
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+  }
+  
+  // Gallery Logic
+  function initGallery() {
+    const mainImg = document.getElementById('main-preview-img');
+    const prevBtn = document.getElementById('prev-slide');
+    const nextBtn = document.getElementById('next-slide');
+    const thumbs = document.querySelectorAll('.gallery-thumb');
+    
+    // Lightbox elements
+    const lightboxModal = document.getElementById('lightbox-modal');
+    const lightboxMainImg = document.getElementById('lightbox-main-img');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+    const lightboxThumbs = document.querySelectorAll('.lightbox-thumb');
+    const closeLightbox = document.getElementById('close-lightbox');
+    
+    if (!mainImg || !thumbs.length) return;
+    
+    let currentIndex = 0;
+    
+    const updateGallery = (index) => {
+      // Bounds
+      if (index < 0) index = thumbs.length - 1;
+      if (index >= thumbs.length) index = 0;
+      
+      currentIndex = index;
+      
+      // Update main image src
+      mainImg.src = thumbs[currentIndex].src;
+      
+      if(lightboxMainImg) {
+         lightboxMainImg.src = thumbs[currentIndex].src;
+      }
+      
+      // Update active state of page thumbnails
+      thumbs.forEach((th, i) => {
+        if (i === currentIndex) {
+          th.classList.add('border-blue-500', 'border-2');
+          th.classList.remove('border-slate-200', 'dark:border-slate-700', 'border');
+        } else {
+          th.classList.remove('border-blue-500', 'border-2');
+          th.classList.add('border-slate-200', 'dark:border-slate-700', 'border');
+        }
+      });
+      
+      // Update active state of lightbox thumbnails
+      lightboxThumbs.forEach((th, i) => {
+         if (i === currentIndex) {
+            th.classList.add('border-blue-500', 'opacity-100');
+            th.classList.remove('border-transparent', 'opacity-50');
+         } else {
+            th.classList.remove('border-blue-500', 'opacity-100');
+            th.classList.add('border-transparent', 'opacity-50');
+         }
+      });
+      
+      // Scroll thumb into view smoothly if possible
+      if (thumbs[currentIndex].scrollIntoView) {
+        thumbs[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+      if (lightboxThumbs[currentIndex] && lightboxThumbs[currentIndex].scrollIntoView) {
+        lightboxThumbs[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    };
+
+    thumbs.forEach((th, i) => {
+      th.addEventListener('click', () => updateGallery(i));
+    });
+    
+    if(lightboxThumbs.length > 0) {
+       lightboxThumbs.forEach((th, i) => {
+         th.addEventListener('click', () => updateGallery(i));
+       });
+    }
+    
+    if (prevBtn) prevBtn.addEventListener('click', () => updateGallery(currentIndex - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => updateGallery(currentIndex + 1));
+    if (lightboxPrev) lightboxPrev.addEventListener('click', () => updateGallery(currentIndex - 1));
+    if (lightboxNext) lightboxNext.addEventListener('click', () => updateGallery(currentIndex + 1));
+    
+    // Open Lightbox
+    mainImg.parentElement.addEventListener('click', (e) => {
+       if(e.target.closest('button')) return; // Ignore if clicked on arrows
+       if(lightboxModal) {
+         lightboxModal.classList.remove('hidden');
+         lightboxModal.classList.add('flex');
+         document.body.style.overflow = 'hidden'; // disable page scroll
+         updateGallery(currentIndex); // ensure sync
+       }
+    });
+    
+    // Close Lightbox
+    if(closeLightbox) {
+       closeLightbox.addEventListener('click', () => {
+         lightboxModal.classList.add('hidden');
+         lightboxModal.classList.remove('flex');
+         document.body.style.overflow = '';
+       });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initGallery();
+    startCountdown();
+  });
+  
+  document.addEventListener('astro:page-load', () => {
+    initGallery();
+    startCountdown();
+  });
+</script>

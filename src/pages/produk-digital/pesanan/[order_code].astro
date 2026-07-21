@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import StatusPesananContent from '../../../components/produk-digital/StatusPesananContent.astro';
+
+const { order_code } = Astro.params;
+---
+
+<BaseLayout title="Status Pesanan - VeinTech">
+  <StatusPesananContent orderCode={order_code} locale="id" />
+</BaseLayout>

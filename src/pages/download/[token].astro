@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DownloadContent from '../../components/produk-digital/DownloadContent.astro';
+
+const { token } = Astro.params;
+---
+
+<BaseLayout title="Unduh Produk Digital - VeinTech">
+  <DownloadContent token={token} />
+</BaseLayout>

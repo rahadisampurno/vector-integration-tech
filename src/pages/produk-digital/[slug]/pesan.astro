@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CheckoutContent from '../../../components/produk-digital/CheckoutContent.astro';
+import { db } from '../../../db';
+import { products, orders } from '../../../db/schema';
+import { eq } from 'drizzle-orm';
+import { randomBytes } from 'node:crypto';
+
+const { slug } = Astro.params;
+let errorMessage = '';
+
+if (Astro.request.method === 'POST') {
+  try {
+    const data = await Astro.request.formData();
+    const name = data.get('customer_name')?.toString() || '';
+    const whatsapp = data.get('whatsapp')?.toString() || '';
+    const email = data.get('email')?.toString() || '';
+    const businessName = data.get('business_name')?.toString() || '';
+    const referralCode = data.get('referral_code')?.toString() || '';
+    
+    if (!name || !whatsapp || !email) {
+      throw new Error('Nama, WhatsApp, dan Email wajib diisi.');
+    }
+    
+    // Normalize WhatsApp (08x -> 628x)
+    let normalizedWa = whatsapp.replace(/\D/g, '');
+    if (normalizedWa.startsWith('08')) {
+      normalizedWa = '628' + normalizedWa.substring(2);
+    } else if (normalizedWa.startsWith('8')) {
+      normalizedWa = '628' + normalizedWa.substring(1);
+    }
+    
+    let product = {
+      id: 'test-product',
+      slug: 'veintools-desktop',
+      name: 'VeinTools Desktop',
+      category: 'Aplikasi Desktop',
+      regular_price: 199000,
+      thumbnail_url: '/veintools_logo.png'
+    };
+
+    if (slug) {
+      const dbProduct = db.select().from(products).where(eq(products.slug, slug)).get();
+      if (dbProduct) {
+        product = dbProduct as any;
+      }
+    }
+    
+    // Generate order code VD-YYYYMMDD-XXXXXX
+    const date = new Date();
+    const dateStr = date.toISOString().split('T')[0].replace(/-/g, '');
+    const randomStr = randomBytes(3).toString('hex').toUpperCase();
+    const orderCode = `VD-${dateStr}-${randomStr}`;
+    
+    // Kode unik
+    const uniqueAmount = Math.floor(Math.random() * 900) + 100;
+    const totalAmount = product.regular_price + uniqueAmount;
+    
+    // Ensure product exists in DB to prevent foreign key constraint error
+    const existingProduct = db.select().from(products).where(eq(products.id, product.id)).get();
+    if (!existingProduct) {
+       db.insert(products).values({
+         id: product.id,
+         slug: product.slug,
+         name: product.name,
+         category: product.category,
+         regular_price: product.regular_price,
+         thumbnail_url: product.thumbnail_url,
+         created_at: new Date()
+       }).run();
+    }
+    
+    // Save order
+    db.insert(orders).values({
+      id: crypto.randomUUID(),
+      order_code: orderCode,
+      product_id: product.id,
+      customer_name: name,
+      whatsapp: normalizedWa,
+      email: email,
+      business_name: businessName,
+      referral_code: referralCode || null,
+      total_amount: totalAmount,
+      status: 'WAITING_PAYMENT',
+      created_at: new Date()
+    }).run();
+    
+    return Astro.redirect(`/produk-digital/pesanan/${orderCode}/pembayaran`);
+  } catch (error) {
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+  }
+}
+---
+
+<BaseLayout title="Pesan Produk Digital - VeinTech">
+  <CheckoutContent slug={slug} locale="id" errorMessage={errorMessage} />
+</BaseLayout>

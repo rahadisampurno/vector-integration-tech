@@ -1,0 +1,201 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+export interface CaseMetric {
+  val: string;
+  label: string;
+}
+
+export interface ArchitectureStep {
+  step: string;
+  title: string;
+  desc: string;
+}
+
+interface Props {
+  title: string;
+  clientIndustry: string;
+  summary: string;
+  challenge: string;
+  solution: string;
+  outcome: string;
+  metrics?: CaseMetric[];
+  techStack?: string[];
+  architectureFlow?: ArchitectureStep[];
+}
+
+const {
+  title,
+  clientIndustry,
+  summary,
+  challenge,
+  solution,
+  outcome,
+  metrics = [],
+  techStack = [],
+  architectureFlow = []
+} = Astro.props;
+
+const lang = Astro.currentLocale || 'id';
+---
+
+<BaseLayout title={`${title} | VEINTECH Case Study`} description={summary}>
+
+  <!-- Header Section -->
+  <header class="pt-36 pb-20 bg-surface border-b border-outline-variant/15 text-on-surface">
+    <div class="max-w-[1440px] mx-auto px-6 md:px-12">
+      <nav class="flex items-center gap-2 text-xs font-mono text-slate-500 mb-6">
+        <a href={lang === 'id' ? '/' : '/en'} class="hover:text-primary-fixed-dim transition-colors">{lang === 'id' ? 'Beranda' : 'Home'}</a>
+        <span>/</span>
+        <a href={lang === 'id' ? '/portfolio' : '/en/portfolio'} class="hover:text-primary-fixed-dim transition-colors">{lang === 'id' ? 'Studi Kasus' : 'Case Studies'}</a>
+        <span>/</span>
+        <span class="text-slate-400 truncate">{title}</span>
+      </nav>
+
+      <div class="max-w-4xl space-y-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-primary-fixed-dim/15 text-primary-fixed-dim border border-primary-fixed-dim/30">
+          <span>{clientIndustry}</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-headline tracking-tighter leading-tight text-slate-900 dark:text-white">
+          {title}
+        </h1>
+
+        <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-body">
+          {summary}
+        </p>
+
+        <!-- Tech Stack Tags -->
+        {techStack.length > 0 && (
+          <div class="flex flex-wrap items-center gap-2 pt-2">
+            <span class="text-xs font-mono uppercase text-slate-500 mr-2">TECH STACK:</span>
+            {techStack.map((tech) => (
+              <span class="px-2.5 py-1 rounded bg-surface-container-low border border-outline-variant/20 text-xs font-mono text-slate-700 dark:text-slate-300">
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  </header>
+
+  <!-- Key Outcome Metrics Bar -->
+  {metrics.length > 0 && (
+    <section class="py-12 bg-surface-container-lowest border-b border-outline-variant/15">
+      <div class="max-w-[1440px] mx-auto px-6 md:px-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {metrics.map((m) => (
+            <div class="p-6 rounded-xl bg-surface-container-low border border-outline-variant/15 flex flex-col justify-between">
+              <span class="text-3xl sm:text-4xl font-bold font-headline text-primary-fixed-dim tracking-tight">{m.val}</span>
+              <span class="text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400 mt-2">{m.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Challenge / Solution / Outcome Grid -->
+  <section class="py-20 bg-surface border-b border-outline-variant/15">
+    <div class="max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Challenge -->
+      <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 space-y-4">
+        <div class="flex items-center gap-2 text-xs font-mono font-bold text-rose-500 uppercase tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+          <span>{lang === 'id' ? '01. TANTANGAN BISNIS' : '01. THE CHALLENGE'}</span>
+        </div>
+        <h3 class="text-xl font-bold font-headline text-slate-900 dark:text-white">
+          {lang === 'id' ? 'Kompleksitas & Batasan Awal' : 'Complexity & Initial Bottlenecks'}
+        </h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+          {challenge}
+        </p>
+      </div>
+
+      <!-- Solution Architecture -->
+      <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 space-y-4">
+        <div class="flex items-center gap-2 text-xs font-mono font-bold text-primary-fixed-dim uppercase tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-primary-fixed-dim"></span>
+          <span>{lang === 'id' ? '02. REKAYASA ARSITEKTUR' : '02. ENGINEERING SOLUTION'}</span>
+        </div>
+        <h3 class="text-xl font-bold font-headline text-slate-900 dark:text-white">
+          {lang === 'id' ? 'Solusi & Implementasi Teknis' : 'Architecture & Technical Implementation'}
+        </h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+          {solution}
+        </p>
+      </div>
+
+      <!-- Measurable Outcome -->
+      <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 space-y-4">
+        <div class="flex items-center gap-2 text-xs font-mono font-bold text-emerald-500 uppercase tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>{lang === 'id' ? '03. HASIL TERUKUR' : '03. MEASURABLE OUTCOME'}</span>
+        </div>
+        <h3 class="text-xl font-bold font-headline text-slate-900 dark:text-white">
+          {lang === 'id' ? 'Dampak Operasional & ROI' : 'Business Impact & Performance ROI'}
+        </h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+          {outcome}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architectural Pipeline / Flow -->
+  {architectureFlow.length > 0 && (
+    <section class="py-24 bg-surface-container-lowest border-b border-outline-variant/15">
+      <div class="max-w-[1440px] mx-auto px-6 md:px-12">
+        <div class="mb-12">
+          <div class="text-xs font-mono font-bold text-primary-fixed-dim uppercase tracking-widest mb-2">
+            SYSTEM ARCHITECTURE BLUEPRINT
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold font-headline text-slate-900 dark:text-white">
+            {lang === 'id' ? 'Alur Eksekusi & Pemrosesan Sistem' : 'System Execution & Processing Pipeline'}
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {architectureFlow.map((step) => (
+            <div class="p-6 rounded-xl bg-surface border border-outline-variant/15 space-y-3">
+              <span class="text-xs font-mono font-bold text-primary-fixed-dim">{step.step}</span>
+              <h3 class="font-headline font-bold text-base text-slate-900 dark:text-white">{step.title}</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Main Content Slot for In-Depth Diagrams/Breakdowns -->
+  <section class="py-20 bg-surface">
+    <div class="max-w-[1440px] mx-auto px-6 md:px-12">
+      <slot />
+    </div>
+  </section>
+
+  <!-- Consultation Call to Action -->
+  <section class="py-24 bg-surface-container-lowest border-t border-outline-variant/15">
+    <div class="max-w-[1440px] mx-auto px-6 md:px-12 text-center max-w-3xl space-y-6">
+      <h2 class="text-3xl sm:text-4xl font-bold font-headline tracking-tighter text-slate-900 dark:text-white">
+        {lang === 'id'
+          ? 'Ingin Menerapkan Arsitektur Serupa untuk Organisasi Anda?'
+          : 'Looking to Implement a Similar Architecture for Your Enterprise?'}
+      </h2>
+      <p class="text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+        {lang === 'id'
+          ? 'Konsultasikan tantangan bisnis Anda dengan tim arsitek sistem kami untuk mendapatkan analisis teknis dan estimasi implementasi.'
+          : 'Discuss your operational bottleneck with our system architects for deep technical diagnosis and deployment options.'}
+      </p>
+      <div class="pt-4">
+        <a href={lang === 'id' ? '/contact' : '/en/contact'} class="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-primary-fixed-dim hover:brightness-110 text-on-primary-fixed font-headline font-bold text-base shadow-lg shadow-primary-fixed-dim/20 transition-all">
+          <span>{lang === 'id' ? 'Jadwalkan Konsultasi Arsitektur' : 'Schedule Architectural Consultation'}</span>
+          <span class="material-symbols-outlined text-base">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

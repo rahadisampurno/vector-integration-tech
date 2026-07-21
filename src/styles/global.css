@@ -200,4 +200,9 @@
   .tonal-transition {
     background: linear-gradient(to bottom, #10141a, transparent);
   }
+  .focus-enterprise {
+    outline: 2px solid var(--color-primary-fixed-dim);
+    outline-offset: 2px;
+  }
 }
+

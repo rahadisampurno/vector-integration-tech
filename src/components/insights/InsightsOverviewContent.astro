@@ -1,0 +1,134 @@
+---
+interface Props {
+  locale?: 'id' | 'en';
+}
+
+const lang = Astro.props.locale || Astro.currentLocale || 'id';
+
+const t = lang === 'id' ? {
+  badge: "PUSAT WAWASAN & DOKUMEN ARSITEKTUR",
+  title: "Wawasan Teknis & Rekayasa Sistem VEINTECH",
+  subtitle: "Riset rekayasa perangkat lunak, praktik terbaik arsitektur cloud, serta panduan implementasi AI terverifikasi langsung dari tim Principal Engineer kami.",
+  articles: [
+    {
+      slug: "/insights/rag-vs-finetuning-enterprise",
+      category: "AI ARCHITECTURE",
+      readTime: "10 MENIT BACA",
+      date: "Juli 2026",
+      title: "RAG vs Fine-Tuning di Lingkungan Produksi: Arsitektur Mana yang Tepat untuk Enterprise AI?",
+      summary: "Mengapa banyak implementasi LLM korporat gagal akibat pemilihan strategi pemelajaran model yang keliru. Panduan empiris memilih antara Retrieval-Augmented Generation (RAG) dan Fine-Tuning."
+    },
+    {
+      slug: "/insights/zero-trust-microservices",
+      category: "CYBERSECURITY",
+      readTime: "8 MENIT BACA",
+      date: "Juni 2026",
+      title: "Checklist Implementasi Zero Trust Architecture pada Lingkungan Kubernetes & Microservices",
+      summary: "Langkah pengerasan jaringan antar servis menggunakan Mutual TLS (mTLS), kebijakan otorisasi berlapis, dan proteksi rahasia kredensial pada Amazon EKS."
+    },
+    {
+      slug: "/insights/high-concurrency-postgres",
+      category: "DATABASE & SCALE",
+      readTime: "12 MENIT BACA",
+      date: "Mei 2026",
+      title: "Mengeliminasi N+1 Queries & Strategi Indeksing PostgreSQL untuk Sistem Beban Tinggi",
+      summary: "Cara mendiagnosis bottleneck kueri database, merancang index B-tree yang presisi, serta mengelola connection pooling untuk sistem dengan puluhan ribu request per detik."
+    }
+  ]
+} : {
+  badge: "ENGINEERING KNOWLEDGE CENTER & RESEARCH",
+  title: "VEINTECH Engineering Insights & Architecture Deep Dives",
+  subtitle: "Peer-reviewed software engineering research, cloud architecture patterns, and verified AI deployment benchmarks straight from our Principal Engineering leadership.",
+  articles: [
+    {
+      slug: "/en/insights/rag-vs-finetuning-enterprise",
+      category: "AI ARCHITECTURE",
+      readTime: "10 MIN READ",
+      date: "July 2026",
+      title: "RAG vs Fine-Tuning in Production: Which Architecture Wins for Enterprise AI?",
+      summary: "Why many enterprise LLM projects stall due to incorrect domain adaptation strategies. Empirical comparison of Retrieval-Augmented Generation versus Fine-Tuning."
+    },
+    {
+      slug: "/en/insights/zero-trust-microservices",
+      category: "CYBERSECURITY",
+      readTime: "8 MIN READ",
+      date: "June 2026",
+      title: "Zero Trust Architecture Checklist for Production Kubernetes & Microservices",
+      summary: "Step-by-step service mesh hardening using Mutual TLS (mTLS), least-privilege RBAC policies, and Vault secret management in Amazon EKS."
+    },
+    {
+      slug: "/en/insights/high-concurrency-postgres",
+      category: "DATABASE & SCALE",
+      readTime: "12 MIN READ",
+      date: "May 2026",
+      title: "Eliminating N+1 Queries & Advanced PostgreSQL Indexing for High-Concurrency Systems",
+      summary: "How to diagnose query bottlenecks, structure composite B-tree indexes, and optimize connection pooling for 10,000+ requests per second."
+    }
+  ]
+};
+---
+
+<!-- Header Section -->
+<header class="pt-32 pb-20 bg-surface border-b border-outline-variant/15 text-on-surface">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12">
+    <!-- Breadcrumbs -->
+    <nav class="flex items-center gap-2 text-xs font-mono text-slate-500 mb-6">
+      <a href={lang === 'id' ? '/' : '/en'} class="hover:text-primary-fixed-dim transition-colors">{lang === 'id' ? 'Beranda' : 'Home'}</a>
+      <span>/</span>
+      <span class="text-slate-400">{lang === 'id' ? 'Wawasan Teknis' : 'Insights'}</span>
+    </nav>
+
+    <div class="max-w-4xl space-y-6">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-primary-fixed-dim/15 text-primary-fixed-dim border border-primary-fixed-dim/30">
+        <span>{t.badge}</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-headline tracking-tighter leading-tight text-slate-900 dark:text-white">
+        {t.title}
+      </h1>
+
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-body">
+        {t.subtitle}
+      </p>
+    </div>
+  </div>
+</header>
+
+<!-- Articles Grid -->
+<section class="py-24 bg-surface-container-lowest">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {t.articles.map((art) => (
+        <a
+          href={art.slug}
+          class="group p-8 rounded-2xl bg-surface border border-outline-variant/15 hover:border-primary-fixed-dim/50 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
+        >
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold px-2.5 py-1 rounded bg-primary-fixed-dim/15 text-primary-fixed-dim border border-primary-fixed-dim/30">
+                {art.category}
+              </span>
+              <span class="text-xs font-mono text-slate-500">{art.date}</span>
+            </div>
+
+            <h2 class="text-xl sm:text-2xl font-bold font-headline text-slate-900 dark:text-white group-hover:text-primary-fixed-dim transition-colors leading-snug">
+              {art.title}
+            </h2>
+
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              {art.summary}
+            </p>
+          </div>
+
+          <div class="pt-8 mt-8 border-t border-outline-variant/15 flex items-center justify-between text-xs font-bold font-headline text-primary-fixed-dim">
+            <span>{art.readTime}</span>
+            <span class="flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              <span>{lang === 'id' ? 'Baca Artikel' : 'Read Deep Dive'}</span>
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

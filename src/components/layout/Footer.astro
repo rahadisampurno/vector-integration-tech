@@ -1,0 +1,130 @@
+---
+import { computeAlternatePaths } from '../../utils/seo';
+
+const lang = Astro.currentLocale || 'id';
+const { idPath, enPath } = computeAlternatePaths(Astro.url.pathname);
+
+const t = lang === 'id' ? {
+  tagline: "Technology Partner for Business Growth. Merancang, membangun, dan memodernisasi sistem digital high-availability & AI production-ready.",
+  services: "Layanan Ekosistem",
+  company: "Perusahaan",
+  contactTitle: "Kontak & Konsultasi",
+  address: "Tech Center & Architecture Lab, Jakarta Raya",
+  rights: "© 2026 VEINTECH. All Rights Reserved. Engineered for Scale.",
+  basePath: ""
+} : {
+  tagline: "Technology Partner for Business Growth. Architecting, building, and modernizing secure digital systems & production-ready AI.",
+  services: "Service Ecosystem",
+  company: "Company",
+  contactTitle: "Contact & Consultation",
+  address: "Tech Center & Architecture Lab, Jakarta Raya",
+  rights: "© 2026 VEINTECH. All Rights Reserved. Engineered for Scale.",
+  basePath: "/en"
+};
+---
+
+<footer class="bg-surface-container-lowest w-full pt-20 pb-12 border-t border-outline-variant/15 text-on-surface">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-12">
+    <!-- Brand Info -->
+    <div class="md:col-span-4 space-y-4">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl font-bold font-headline tracking-tighter text-slate-900 dark:text-white">VEINTECH</span>
+        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-primary-fixed-dim/15 text-primary-fixed-dim border border-primary-fixed-dim/30">ENTERPRISE</span>
+      </div>
+      <p class="font-body text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm">
+        {t.tagline}
+      </p>
+      <div class="pt-2 flex items-center gap-3">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
+        <span class="text-xs font-mono text-slate-500">Systems Operational & Secure</span>
+      </div>
+    </div>
+
+    <!-- Services Column -->
+    <div class="md:col-span-3">
+      <h5 class="text-slate-900 dark:text-white font-headline font-bold mb-6 text-xs uppercase tracking-[0.2em]">{t.services}</h5>
+      <ul class="space-y-3">
+        <li>
+          <a class="text-slate-600 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors text-sm flex items-center gap-2" href={`${t.basePath}/services/pengembangan-software`}>
+            Custom Software & Web App
+          </a>
+        </li>
+        <li>
+          <a class="text-slate-600 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors text-sm flex items-center gap-2" href={`${t.basePath}/services/ai-otomatisasi`}>
+            AI, LLM & Workflow Automation
+          </a>
+        </li>
+        <li>
+          <a class="text-slate-600 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors text-sm flex items-center gap-2" href={`${t.basePath}/services/integrasi-sistem`}>
+            System Integration & API
+          </a>
+        </li>
+        <li>
+          <a class="text-slate-600 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors text-sm flex items-center gap-2" href={`${t.basePath}/services/cyber-security`}>
+            Cybersecurity & Zero Trust
+          </a>
+        </li>
+        <li>
+          <a class="text-slate-600 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors text-sm flex items-center gap-2" href={`${t.basePath}/services/audit-it`}>
+            Enterprise Architecture Audit
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Company Column -->
+    <div class="md:col-span-2">
+      <h5 class="text-slate-900 dark:text-white font-headline font-bold mb-6 text-xs uppercase tracking-[0.2em]">{t.company}</h5>
+      <ul class="space-y-3">
+        <li>
+          <a class="text-slate-600 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors text-sm" href={`${t.basePath}/about`}>
+            {lang === 'id' ? 'Tentang Kami' : 'About Us'}
+          </a>
+        </li>
+        <li>
+          <a class="text-slate-600 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors text-sm" href={`${t.basePath}/portfolio`}>
+            {lang === 'id' ? 'Studi Kasus' : 'Case Studies'}
+          </a>
+        </li>
+        <li>
+          <a class="text-slate-600 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors text-sm" href={`${t.basePath}/blog`}>
+            {lang === 'id' ? 'Wawasan & Artikel' : 'Insights'}
+          </a>
+        </li>
+        <li>
+          <a class="text-slate-600 dark:text-slate-400 hover:text-primary-fixed-dim transition-colors text-sm" href={`${t.basePath}/contact`}>
+            {lang === 'id' ? 'Konsultasi Proyek' : 'Start Project'}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Contact & Direct Inquiry -->
+    <div class="md:col-span-3">
+      <h5 class="text-slate-900 dark:text-white font-headline font-bold mb-6 text-xs uppercase tracking-[0.2em]">{t.contactTitle}</h5>
+      <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+        <li class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-base text-primary-fixed-dim">mail</span>
+          <span>hello@veintech.id</span>
+        </li>
+        <li class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-base text-primary-fixed-dim">chat</span>
+          <span>WhatsApp Engineering Consultation</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="material-symbols-outlined text-base text-primary-fixed-dim mt-0.5">location_on</span>
+          <span>{t.address}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12 mt-16 pt-8 border-t border-outline-variant/15 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-slate-500">
+    <div>{t.rights}</div>
+    <div class="flex items-center gap-4">
+      <a href={idPath} class={`hover:text-primary-fixed-dim transition-colors ${lang === 'id' ? 'text-primary-fixed-dim font-bold' : ''}`}>ID</a>
+      <span>/</span>
+      <a href={enPath} class={`hover:text-primary-fixed-dim transition-colors ${lang === 'en' ? 'text-primary-fixed-dim font-bold' : ''}`}>EN</a>
+    </div>
+  </div>
+</footer>

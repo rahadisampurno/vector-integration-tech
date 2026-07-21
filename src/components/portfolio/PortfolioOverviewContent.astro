@@ -1,0 +1,194 @@
+---
+interface Props {
+  locale?: 'id' | 'en';
+}
+
+const lang = Astro.props.locale || Astro.currentLocale || 'id';
+
+const t = lang === 'id' ? {
+  badge: "STUDI KASUS & REKAYASA ARSITEKTUR",
+  title: "Bukti Nyata Penyelesaian Kompleksitas Sistem",
+  subtitle: "Pelajari bagaimana arsitektur perangkat lunak, otomatisasi AI, dan keamanan Zero Trust yang kami bangun mampu mentransformasi operasi bisnis pada skala produksi.",
+  cases: [
+    {
+      slug: "/portfolio/ai-operational-ticketing",
+      tag: "AI AUTOMATION & RAG",
+      industry: "Enterprise Telecommunications",
+      title: "AI Operational Ticketing & Resolution Engine",
+      summary: "Penerapan arsitektur RAG + LLM Classifier untuk mengotomatisasi triase, diagnosis, dan eskalasi ribuan tiket gangguan jaringan setiap jam.",
+      impactLabel: "AKURASI TRIASE SLA",
+      impactVal: "94.8%",
+      techs: ["PostgreSQL pgvector", "Python / FastAPI", "Fine-Tuned LLM", "LangChain / RAG"]
+    },
+    {
+      slug: "/portfolio/logistics-api-gateway",
+      tag: "API & DISTRIBUTED SYSTEMS",
+      industry: "Supply Chain & Logistics Hub",
+      title: "Core API Gateway & Multi-ERP Synchronization Engine",
+      summary: "Penyatuan 14 sistem ERP lama dan Warehouse Management System (WMS) dalam satu lapisan event-driven dengan toleransi kesalahan tinggi.",
+      impactLabel: "RATA-RATA LATENSI API",
+      impactVal: "< 14ms",
+      techs: ["Golang", "Apache Kafka", "Kong API Gateway", "Redis Cluster"]
+    },
+    {
+      slug: "/portfolio/fintech-zero-trust-audit",
+      tag: "CYBERSECURITY & FINOPS",
+      industry: "Financial Services / FinTech",
+      title: "Zero Trust Architecture Hardening & Cloud Cost Optimization",
+      summary: "Audit keamanan menyeluruh dan refactoring arsitektur cloud untuk melindungi transaksi finansial berbeban tinggi sekaligus memangkas biaya infrastruktur AWS.",
+      impactLabel: "EFISIENSI BIAYA CLOUD",
+      impactVal: "38.5%",
+      techs: ["Kubernetes (EKS)", "Zero Trust mTLS", "PostgreSQL Tuning", "Terraform DevOps"]
+    }
+  ],
+  statsTitle: "Dampak Eksekusi Rekayasa Secara Keseluruhan",
+  stats: [
+    { val: "10M+", label: "Permintaan API Harian Diproses Tanpa Kegagalan" },
+    { val: "99.99%", label: "Target Uptime Arsitektur Enterprise" },
+    { val: "< 15ms", label: "Rata-rata Latensi Gateway Terdistribusi" },
+    { val: "80%", label: "Akselerasi Pengambilan Keputusan Operasional AI" }
+  ]
+} : {
+  badge: "VERIFIED CASE STUDIES & ARCHITECTURAL OUTCOMES",
+  title: "Proven Engineering Outcomes Solving Real Bottlenecks",
+  subtitle: "Explore how clean software architecture, verified production AI, and Zero Trust security transform operational efficiency at production scale.",
+  cases: [
+    {
+      slug: "/en/portfolio/ai-operational-ticketing",
+      tag: "AI AUTOMATION & RAG",
+      industry: "Enterprise Telecommunications",
+      title: "AI Operational Ticketing & Resolution Engine",
+      summary: "Architecting a production RAG + LLM Classifier pipeline to triage, diagnose, and route thousands of incoming network outage tickets hourly.",
+      impactLabel: "TRIAGE ACCURACY SLA",
+      impactVal: "94.8%",
+      techs: ["PostgreSQL pgvector", "Python / FastAPI", "Fine-Tuned LLM", "LangChain / RAG"]
+    },
+    {
+      slug: "/en/portfolio/logistics-api-gateway",
+      tag: "API & DISTRIBUTED SYSTEMS",
+      industry: "Supply Chain & Logistics Hub",
+      title: "Core API Gateway & Multi-ERP Synchronization Engine",
+      summary: "Unifying 14 legacy ERP instances and Warehouse Management Systems (WMS) into a resilient event-driven synchronization layer.",
+      impactLabel: "AVERAGE API LATENCY",
+      impactVal: "< 14ms",
+      techs: ["Golang", "Apache Kafka", "Kong API Gateway", "Redis Cluster"]
+    },
+    {
+      slug: "/en/portfolio/fintech-zero-trust-audit",
+      tag: "CYBERSECURITY & FINOPS",
+      industry: "Financial Services / FinTech",
+      title: "Zero Trust Architecture Hardening & Cloud FinOps Optimization",
+      summary: "Comprehensive vulnerability auditing and cloud architecture refactoring to secure high-volume financial transactions while reducing AWS spend.",
+      impactLabel: "CLOUD COST REDUCTION",
+      impactVal: "38.5%",
+      techs: ["Kubernetes (EKS)", "Zero Trust mTLS", "PostgreSQL Tuning", "Terraform DevOps"]
+    }
+  ],
+  statsTitle: "Aggregate Engineering Execution Metrics",
+  stats: [
+    { val: "10M+", label: "Daily API Requests Handled Without Downtime" },
+    { val: "99.99%", label: "Production Architecture Uptime Target" },
+    { val: "< 15ms", label: "Average Distributed Gateway Latency" },
+    { val: "80%", label: "Acceleration in AI Operational Triage Speed" }
+  ]
+};
+---
+
+<!-- Header Section -->
+<header class="pt-32 pb-20 bg-surface border-b border-outline-variant/15 text-on-surface">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12">
+    <nav class="flex items-center gap-2 text-xs font-mono text-slate-500 mb-6">
+      <a href={lang === 'id' ? '/' : '/en'} class="hover:text-primary-fixed-dim transition-colors">{lang === 'id' ? 'Beranda' : 'Home'}</a>
+      <span>/</span>
+      <span class="text-slate-400">{lang === 'id' ? 'Studi Kasus' : 'Case Studies'}</span>
+    </nav>
+
+    <div class="max-w-4xl space-y-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-primary-fixed-dim/15 text-primary-fixed-dim border border-primary-fixed-dim/30">
+        <span>{t.badge}</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-headline tracking-tighter leading-tight text-slate-900 dark:text-white">
+        {t.title}
+      </h1>
+
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-body">
+        {t.subtitle}
+      </p>
+    </div>
+  </div>
+</header>
+
+<!-- Case Studies Grid -->
+<section class="py-24 bg-surface-container-lowest">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12 space-y-12">
+    {t.cases.map((cs) => (
+      <a href={cs.slug} class="group block p-8 sm:p-10 rounded-2xl bg-surface border border-outline-variant/15 hover:border-primary-fixed-dim/50 hover:-translate-y-1 transition-all duration-300">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <!-- Left Content -->
+          <div class="lg:col-span-8 space-y-4">
+            <div class="flex flex-wrap items-center gap-3">
+              <span class="text-xs font-mono font-bold px-2.5 py-1 rounded bg-primary-fixed-dim/15 text-primary-fixed-dim border border-primary-fixed-dim/30">
+                {cs.tag}
+              </span>
+              <span class="text-xs font-mono text-slate-500 uppercase">
+                {cs.industry}
+              </span>
+            </div>
+
+            <h2 class="text-2xl sm:text-3xl font-bold font-headline text-slate-900 dark:text-white group-hover:text-primary-fixed-dim transition-colors">
+              {cs.title}
+            </h2>
+
+            <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+              {cs.summary}
+            </p>
+
+            <div class="flex flex-wrap items-center gap-2 pt-2">
+              {cs.techs.map((tech) => (
+                <span class="px-2.5 py-1 rounded bg-surface-container-low border border-outline-variant/20 text-xs font-mono text-slate-700 dark:text-slate-300">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Right Impact Badge -->
+          <div class="lg:col-span-4 flex lg:justify-end">
+            <div class="p-6 rounded-xl bg-surface-container-low border border-outline-variant/15 w-full sm:w-auto text-left sm:text-right flex flex-col justify-between min-w-[200px]">
+              <div>
+                <span class="text-4xl sm:text-5xl font-bold font-headline text-primary-fixed-dim tracking-tight block">
+                  {cs.impactVal}
+                </span>
+                <span class="text-[11px] font-mono uppercase tracking-wider text-slate-500 block mt-1">
+                  {cs.impactLabel}
+                </span>
+              </div>
+              <div class="mt-6 pt-4 border-t border-outline-variant/15 flex items-center justify-between sm:justify-end gap-2 text-xs font-bold font-headline text-primary-fixed-dim">
+                <span>{lang === 'id' ? 'Bedah Arsitektur' : 'Architecture Deep Dive'}</span>
+                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<!-- Aggregate Engineering Metrics Section -->
+<section class="py-20 bg-surface border-t border-outline-variant/15">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12">
+    <h2 class="text-xs font-mono font-bold tracking-[0.2em] text-slate-500 uppercase text-center mb-12">
+      {t.statsTitle}
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      {t.stats.map((st) => (
+        <div class="p-6 rounded-xl bg-surface-container-low border border-outline-variant/15 text-center">
+          <span class="text-3xl sm:text-4xl font-bold font-headline text-slate-900 dark:text-white block mb-2">{st.val}</span>
+          <span class="text-xs font-mono uppercase text-slate-600 dark:text-slate-400">{st.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

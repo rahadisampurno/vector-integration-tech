@@ -9,6 +9,9 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://veintech.id',
   output: 'server',
+  security: {
+    checkOrigin: false
+  },
   adapter: node({
     mode: 'standalone'
   }),

@@ -11,7 +11,7 @@
     "preview": "astro preview",
     "test": "vitest run",
     "astro": "astro",
-    "start": "node server.js"
+    "start": "node dist/server/entry.mjs"
   },
   "dependencies": {
     "@astrojs/node": "^11.0.2",

@@ -2,16 +2,13 @@
   "name": "purple-light",
   "type": "module",
   "version": "0.0.1",
-  "engines": {
-    "node": ">=22.12.0"
-  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "test": "vitest run",
     "astro": "astro",
-    "start": "node dist/server/entry.mjs"
+    "start": "HOST=0.0.0.0 node dist/server/entry.mjs"
   },
   "dependencies": {
     "@astrojs/node": "^11.0.2",

@@ -1,0 +1,147 @@
+import { T as createAstro, g as addAttribute, m as maybeRenderHead, u as renderTemplate } from "./server_B0MT1nrk.mjs";
+import { t as createComponent } from "./compiler_DnNyo6ID.mjs";
+//#region src/components/about/AboutContent.astro
+createAstro("https://veintech.id");
+var $$AboutContent = createComponent(($$result, $$props, $$slots) => {
+	const Astro = $$result.createAstro($$props, $$slots);
+	Astro.self = $$AboutContent;
+	const lang = Astro.props.locale || Astro.currentLocale || "id";
+	const t = lang === "id" ? {
+		badge: "TENTANG VEINTECH",
+		title: "Engineering-Driven Technology Company",
+		subtitle: "Kami bukan sekadar software house konvensional. VEINTECH adalah mitra teknologi strategis yang merancang arsitektur sistem tangguh, otomatisasi AI terukur, dan keunggulan digital jangka panjang.",
+		philosophyTitle: "Filosofi Rekayasa Kami",
+		philosophySub: "Mengapa pendekatan rekayasa fundamental jauh lebih unggul dibandingkan solusi instan.",
+		principlesTitle: "Prinsip Rekayasa VECTOR",
+		principlesSub: "Enam fondasi budaya teknis yang melekat pada setiap baris kode dan arsitektur yang kami bangun.",
+		comparisonTitle: "Software House Generik vs. VEINTECH Engineering",
+		comparisonSub: "Perbandingan standar arsitektur dan kualitas eksekusi proyek digital Anda.",
+		standardsTitle: "Standar Keunggulan Tim & Eksekusi",
+		standardsSub: "Komitmen nyata terhadap integritas intelektual, keamanan, dan kualitas kode.",
+		ctaTitle: "Ingin Membangun Sistem Digital Bersama Tim Arsitek Kami?",
+		ctaSub: "Konsultasikan visi teknis atau tantangan arsitektur yang dihadapi organisasi Anda."
+	} : {
+		badge: "ABOUT VEINTECH",
+		title: "Engineering-Driven Technology Company",
+		subtitle: "We go far beyond traditional agencies. VEINTECH is a strategic engineering authority architecting resilient software systems, verifiable AI automations, and scalable digital foundations.",
+		philosophyTitle: "Our Engineering Philosophy",
+		philosophySub: "Why disciplined systems engineering outperforms superficial template shortcuts.",
+		principlesTitle: "VECTOR Engineering Principles",
+		principlesSub: "The six cultural pillars embedded in every line of code and architecture we ship.",
+		comparisonTitle: "Conventional Agencies vs. VEINTECH Engineering",
+		comparisonSub: "How our architectural rigor protects your investment and accelerates growth.",
+		standardsTitle: "Engineering Team & Delivery Standards",
+		standardsSub: "Uncompromised commitment to clean code, IP ownership, and Zero Trust security.",
+		ctaTitle: "Ready to Architect Your Digital Ecosystem With Us?",
+		ctaSub: "Speak directly with our principal architects about your technical ambition or bottlenecks."
+	};
+	const vectorPrinciples = lang === "id" ? [
+		{
+			letter: "V",
+			title: "Visionary Architecture",
+			desc: "Merancang sistem dengan memperhitungkan evolusi beban dan fitur hingga 5-10 tahun ke depan."
+		},
+		{
+			letter: "E",
+			title: "Empirical Efficiency",
+			desc: "Mengutamakan kecepatan eksekusi, latensi rendah, serta pemanfaatan sumber daya server yang optimal."
+		},
+		{
+			letter: "C",
+			title: "Collaborative Synergy",
+			desc: "Bekerja transparan sebagai ekstensi langsung dari tim engineering internal atau manajemen bisnis Anda."
+		},
+		{
+			letter: "T",
+			title: "Technical Depth",
+			desc: "Menguasai fundamental komputasi, basis data terdistribusi, dan AI produksi—bukan sekadar tren sesaat."
+		},
+		{
+			letter: "O",
+			title: "Relentless Optimization",
+			desc: "Terus menyempurnakan performa, mengeliminasi technical debt, dan memangkas biaya infrastruktur cloud."
+		},
+		{
+			letter: "R",
+			title: "Rock-Solid Reliability",
+			desc: "Menjamin ketersediaan tinggi (High Availability), toleransi kesalahan, dan perlindungan Zero Trust."
+		}
+	] : [
+		{
+			letter: "V",
+			title: "Visionary Architecture",
+			desc: "Blueprinting systems designed to scale seamlessly across 5 to 10 years of feature and load growth."
+		},
+		{
+			letter: "E",
+			title: "Empirical Efficiency",
+			desc: "Prioritizing deterministic performance, low latency, and optimal server resource utilization."
+		},
+		{
+			letter: "C",
+			title: "Collaborative Synergy",
+			desc: "Operating transparently as a seamless extension of your internal technical or executive team."
+		},
+		{
+			letter: "T",
+			title: "Technical Depth",
+			desc: "Mastering distributed databases, concurrency, and verified AI—never chasing superficial fads."
+		},
+		{
+			letter: "O",
+			title: "Relentless Optimization",
+			desc: "Continuously refactoring performance bottlenecks and reducing recurring cloud infrastructure waste."
+		},
+		{
+			letter: "R",
+			title: "Rock-Solid Reliability",
+			desc: "Enforcing High Availability, automated fault tolerance, and military-grade Zero Trust security."
+		}
+	];
+	const comparisonData = lang === "id" ? [
+		{
+			aspect: "Arsitektur Kode & Desain",
+			conventional: "Menggunakan template generik atau CMS berlapis plugin berat yang lambat dan rapuh.",
+			veintech: "Clean Domain-Driven Design (DDD) modular yang type-safe, cepat, dan mudah dikembangkan."
+		},
+		{
+			aspect: "Implementasi AI & Otomatisasi",
+			conventional: "Sekadar membungkus prompt ChatGPT tanpa pemahaman halusinasi atau keamanan data.",
+			veintech: "Arsitektur RAG produksi terverifikasi dengan evaluasi akurasi dan isolasi data pribadi."
+		},
+		{
+			aspect: "Standar Keamanan Sistem",
+			conventional: "Keamanan diperiksa di akhir atau diabaikan, meninggalkan kerentanan fatal.",
+			veintech: "Zero Trust by Design: enkripsi mTLS, audit otentikasi berlapis, dan OWASP compliance."
+		},
+		{
+			aspect: "Kepemilikan Kode & IP",
+			conventional: "Klien sering terikat vendor lock-in atau kode yang tidak terdokumentasi.",
+			veintech: "100% Hak Kekayaan Intelektual (IP) milik klien disertai dokumentasi arsitektur lengkap."
+		}
+	] : [
+		{
+			aspect: "Code Architecture & Design",
+			conventional: "Relying on heavy generic templates or convoluted plugin stacks that slow down under load.",
+			veintech: "Clean, modular Domain-Driven Design (DDD) with strict typing and high test coverage."
+		},
+		{
+			aspect: "AI & Automation Scope",
+			conventional: "Superficial prompt wrappers prone to hallucinations and data privacy leaks.",
+			veintech: "Verified production RAG architecture with empirical accuracy benchmarks and VPC isolation."
+		},
+		{
+			aspect: "Security & Hardening",
+			conventional: "Security treated as an afterthought, exposing APIs and credentials to breaches.",
+			veintech: "Zero Trust by Design: automated mTLS, least-privilege RBAC, and OWASP compliance."
+		},
+		{
+			aspect: "Code Ownership & IP",
+			conventional: "Vendor lock-in or obfuscated codebases that are impossible to maintain independently.",
+			veintech: "100% Intellectual Property (IP) transfer with complete engineering blueprints."
+		}
+	];
+	return renderTemplate`${maybeRenderHead($$result)}<!-- Header Section --><header class="pt-32 pb-24 bg-surface border-b border-outline-variant/15 text-on-surface"><div class="max-w-[1440px] mx-auto px-6 md:px-12"><!-- Breadcrumbs --><nav class="flex items-center gap-2 text-xs font-mono text-slate-500 mb-6"><a${addAttribute(lang === "id" ? "/" : "/en", "href")} class="hover:text-primary-fixed-dim transition-colors">${lang === "id" ? "Beranda" : "Home"}</a><span>/</span><span class="text-slate-400">${lang === "id" ? "Tentang Kami" : "About Us"}</span></nav><div class="max-w-4xl space-y-6"><div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-primary-fixed-dim/15 text-primary-fixed-dim border border-primary-fixed-dim/30"><span>${t.badge}</span></div><h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-headline tracking-tighter leading-tight text-slate-900 dark:text-white">${t.title}</h1><p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-body">${t.subtitle}</p></div></div></header><!-- Engineering Philosophy Section --><section class="py-24 bg-surface-container-lowest border-b border-outline-variant/15"><div class="max-w-[1440px] mx-auto px-6 md:px-12"><div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"><div class="lg:col-span-6 space-y-6"><h2 class="text-3xl sm:text-4xl font-bold font-headline tracking-tighter text-slate-900 dark:text-white">${t.philosophyTitle}</h2><p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed">${lang === "id" ? "Kami mendirikan VEINTECH karena melihat kesenjangan nyata di industri teknologi: terlalu banyak proyek perangkat lunak gagal bukan karena kurangnya ide, melainkan akibat lemahnya fondasi rekayasa sistem. Kode yang berantakan, arsitektur yang tidak dapat diskalakan, serta keamanan yang diabaikan." : "VEINTECH was founded to solve a systemic flaw in the technology services industry: digital projects rarely fail from a lack of ideas—they fail from poor software engineering discipline. Tangled codebases, unscalable architectures, and fragile integrations stall business momentum."}</p><p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed">${lang === "id" ? "Sebagai perusahaan yang digerakkan oleh disiplin engineering, kami menempatkan arsitektur bersih, keandalan tinggi, dan hasil bisnis yang terukur sebagai standar utama dalam setiap solusi yang kami ciptakan." : "As an engineering-driven company, we place clean architecture, high reliability, and measurable business outcomes at the center of every system we engineer."}</p></div><div class="lg:col-span-6"><div class="p-8 sm:p-10 rounded-2xl bg-surface border border-outline-variant/20 shadow-xl space-y-6"><div class="flex items-center gap-3 border-b border-outline-variant/15 pb-4"><span class="w-3 h-3 rounded-full bg-primary-fixed-dim"></span><span class="text-xs font-mono font-bold uppercase tracking-wider text-slate-500">VEINTECH ARCHITECTURAL PROMISE</span></div><blockquote class="text-lg sm:text-xl font-headline font-semibold text-slate-800 dark:text-slate-100 italic leading-relaxed">${lang === "id" ? "\"Kami tidak sekadar menulis kode. Kami merekayasa aset teknologi yang mendongkrak efisiensi dan melindungi masa depan bisnis Anda.\"" : "\"We do not merely write code. We architect mission-critical technology assets that compound in value and secure your digital future.\""}</blockquote></div></div></div></div></section><!-- VECTOR Engineering Principles --><section class="py-24 bg-surface border-b border-outline-variant/15"><div class="max-w-[1440px] mx-auto px-6 md:px-12"><div class="max-w-3xl mb-16"><h2 class="text-3xl sm:text-4xl font-bold font-headline tracking-tighter text-slate-900 dark:text-white mb-4">${t.principlesTitle}</h2><p class="text-base text-slate-600 dark:text-slate-400 leading-relaxed">${t.principlesSub}</p></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">${vectorPrinciples.map((item) => renderTemplate`<div class="group p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:border-primary-fixed-dim/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between relative overflow-hidden"><div class="space-y-4 relative z-10"><span class="text-xs font-mono font-bold text-primary-fixed-dim">PRINCIPLE :: ${item.letter}</span><h3 class="text-xl font-bold font-headline text-slate-900 dark:text-white group-hover:text-primary-fixed-dim transition-colors">${item.title}</h3><p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">${item.desc}</p></div><div class="absolute right-3 bottom-1 text-7xl font-black font-headline text-slate-900/5 dark:text-white/5 pointer-events-none group-hover:text-primary-fixed-dim/10 transition-colors">${item.letter}</div></div>`)}</div></div></section><!-- Why Engineering-Driven Matters (Interactive Comparison Table) --><section class="py-24 bg-surface-container-lowest border-b border-outline-variant/15"><div class="max-w-[1440px] mx-auto px-6 md:px-12"><div class="max-w-3xl mb-16"><h2 class="text-3xl sm:text-4xl font-bold font-headline tracking-tighter text-slate-900 dark:text-white mb-4">${t.comparisonTitle}</h2><p class="text-base text-slate-600 dark:text-slate-400 leading-relaxed">${t.comparisonSub}</p></div><div class="grid grid-cols-1 gap-6">${comparisonData.map((row) => renderTemplate`<div class="grid grid-cols-1 lg:grid-cols-12 rounded-2xl border border-outline-variant/20 overflow-hidden bg-surface"><!-- Aspect Header --><div class="lg:col-span-3 p-6 sm:p-8 bg-surface-container-low flex items-center border-b lg:border-b-0 lg:border-r border-outline-variant/15"><h3 class="font-headline font-bold text-base text-slate-900 dark:text-white">${row.aspect}</h3></div><!-- Conventional Agency --><div class="lg:col-span-4 p-6 sm:p-8 bg-rose-500/5 border-b lg:border-b-0 lg:border-r border-outline-variant/15 flex flex-col justify-center space-y-2"><span class="text-[11px] font-mono font-bold text-rose-500 uppercase tracking-wider">${lang === "id" ? "PENDEKATAN GENERIK / KONVENSIONAL" : "CONVENTIONAL AGENCY SHORTCUT"}</span><p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${row.conventional}</p></div><!-- VEINTECH Engineering --><div class="lg:col-span-5 p-6 sm:p-8 bg-emerald-500/5 flex flex-col justify-center space-y-2"><span class="text-[11px] font-mono font-bold text-emerald-500 uppercase tracking-wider flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">verified</span><span>VEINTECH ENGINEERING STANDARD</span></span><p class="text-sm font-medium text-slate-800 dark:text-slate-200 leading-relaxed">${row.veintech}</p></div></div>`)}</div></div></section><!-- Team & Leadership Standards --><section class="py-24 bg-surface border-b border-outline-variant/15"><div class="max-w-[1440px] mx-auto px-6 md:px-12"><div class="max-w-3xl mb-16"><h2 class="text-3xl sm:text-4xl font-bold font-headline tracking-tighter text-slate-900 dark:text-white mb-4">${t.standardsTitle}</h2><p class="text-base text-slate-600 dark:text-slate-400 leading-relaxed">${t.standardsSub}</p></div><div class="grid grid-cols-1 md:grid-cols-3 gap-8"><div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 space-y-4"><span class="material-symbols-outlined text-primary-fixed-dim text-3xl">architecture</span><h3 class="text-xl font-bold font-headline text-slate-900 dark:text-white">${lang === "id" ? "Principal Engineer & Architect Led" : "Principal Engineer & Architect Led"}</h3><p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">${lang === "id" ? "Setiap proyek dipimpin langsung oleh arsitek sistem senior dengan rekam jejak teruji dalam merancang sistem berkapasitas tinggi." : "Every project is directly overseen by seasoned principal system architects with verifiable enterprise track records."}</p></div><div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 space-y-4"><span class="material-symbols-outlined text-primary-fixed-dim text-3xl">policy</span><h3 class="text-xl font-bold font-headline text-slate-900 dark:text-white">${lang === "id" ? "100% Kepemilikan Hak Intelektual" : "100% Client Intellectual Property"}</h3><p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">${lang === "id" ? "Perusahaan Anda memegang penuh kepemilikan source code, dokumentasi, dan hak intelektual sistem sejak hari pertama peluncuran." : "Your organization retains full, unencumbered ownership of all source code, architecture blueprints, and intellectual property."}</p></div><div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 space-y-4"><span class="material-symbols-outlined text-primary-fixed-dim text-3xl">verified_user</span><h3 class="text-xl font-bold font-headline text-slate-900 dark:text-white">${lang === "id" ? "Jaminan Mutu & Keamanan Zero Trust" : "Zero Trust Quality Assurance"}</h3><p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">${lang === "id" ? "Setiap rilis melewati pemantauan keamanan otomatis, audit kerentanan, dan pengujian regresi ketat sebelum menyentuh lingkungan produksi." : "Every release passes automated security checks, vulnerability scans, and rigorous regression testing before production rollout."}</p></div></div></div></section><!-- Final Consultation CTA --><section class="py-24 bg-surface-container-lowest"><div class="max-w-[1440px] mx-auto px-6 md:px-12 text-center max-w-3xl space-y-6"><h2 class="text-3xl sm:text-4xl font-bold font-headline tracking-tighter text-slate-900 dark:text-white">${t.ctaTitle}</h2><p class="text-base text-slate-600 dark:text-slate-400 leading-relaxed">${t.ctaSub}</p><div class="pt-4"><a${addAttribute(lang === "id" ? "/contact" : "/en/contact", "href")} class="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-primary-fixed-dim hover:brightness-110 text-on-primary-fixed font-headline font-bold text-base shadow-lg shadow-primary-fixed-dim/20 transition-all"><span>${lang === "id" ? "Diskusikan Proyek Anda" : "Initiate Project Consultation"}</span><span class="material-symbols-outlined text-base">arrow_forward</span></a></div></div></section>`;
+}, "/Users/telkomdev-rahadi/Documents/VeinTech/Web/src/components/about/AboutContent.astro", void 0);
+//#endregion
+export { $$AboutContent as t };

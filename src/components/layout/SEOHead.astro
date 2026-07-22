@@ -32,7 +32,7 @@ const finalTitle = formatSEOTitle(title);
     if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
       return localStorage.getItem('theme');
     }
-    return 'dark';
+    return 'light';
   })();
   if (theme === 'light') {
     document.documentElement.classList.remove('dark');

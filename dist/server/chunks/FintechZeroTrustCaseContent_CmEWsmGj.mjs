@@ -1,0 +1,131 @@
+import { T as createAstro, i as renderComponent, u as renderTemplate } from "./server_B0MT1nrk.mjs";
+import { t as createComponent } from "./compiler_DnNyo6ID.mjs";
+import { t as $$CaseStudyLayout } from "./CaseStudyLayout_3iHfK3ol.mjs";
+//#region src/components/portfolio/FintechZeroTrustCaseContent.astro
+createAstro("https://veintech.id");
+var $$FintechZeroTrustCaseContent = createComponent(($$result, $$props, $$slots) => {
+	const Astro = $$result.createAstro($$props, $$slots);
+	Astro.self = $$FintechZeroTrustCaseContent;
+	const t = (Astro.props.locale || Astro.currentLocale || "id") === "id" ? {
+		title: "Zero Trust Architecture Hardening & Cloud FinOps Optimization",
+		clientIndustry: "Financial Services / FinTech Platform",
+		summary: "Audit keamanan menyeluruh, pengerasan arsitektur Zero Trust, serta restrukturisasi infrastruktur AWS Kubernetes untuk platform transaksi finansial berbeban tinggi.",
+		challenge: "Perusahaan FinTech pemroses transaksi pembayaran mengalami lonjakan biaya infrastruktur AWS bulanan hingga 180% seiring pertumbuhan pengguna, disertai peringatan kerentanan pada audit regulasi perbankan tahunan.",
+		solution: "VEINTECH melakukan audit keamanan lapisan aplikasi dan jaringan, menerapkan otentikasi Mutual TLS (mTLS) antar microservice, serta merefaktor arsitektur query database dan autoscaling pada Amazon EKS.",
+		outcome: "Tagihan infrastruktur AWS berkurang 38.5% setiap bulan. Seluruh temuan kerentanan berhasil ditutup 100% dan lolos sertifikasi audit keamanan perbankan tanpa catatan.",
+		metrics: [
+			{
+				val: "38.5%",
+				label: "Pemangkasan Biaya Infrastruktur AWS Bulanan"
+			},
+			{
+				val: "100%",
+				label: "Kepatuhan Audit Keamanan & OWASP Top 10"
+			},
+			{
+				val: "4.5x",
+				label: "Peningkatan Throughput Query Database"
+			},
+			{
+				val: "Zero",
+				label: "Insiden Kebocoran atau Gangguan Layanan"
+			}
+		],
+		techStack: [
+			"Kubernetes (AWS EKS)",
+			"Istio Service Mesh (mTLS)",
+			"PostgreSQL Tuning",
+			"Terraform DevOps",
+			"Vault Security"
+		],
+		flow: [
+			{
+				step: "01",
+				title: "Security & FinOps Audit",
+				desc: "Pemeriksaan metrik pemakaian resource dan pemetaan celah otorisasi microservices."
+			},
+			{
+				step: "02",
+				title: "Service Mesh Hardening",
+				desc: "Enkripsi komunikasi antar servis dengan Istio mTLS dan batas kebijakan akses ketat."
+			},
+			{
+				step: "03",
+				title: "Database & Cache Tuning",
+				desc: "Pengindeksan ulang tabel transaksi PostgreSQL dan eliminasi query N+1."
+			},
+			{
+				step: "04",
+				title: "Rightsized Autoscaling",
+				desc: "Penyesuaian parameter Horizontal Pod Autoscaler (HPA) berdasarkan beban nyata."
+			}
+		]
+	} : {
+		title: "Zero Trust Architecture Hardening & Cloud FinOps Optimization",
+		clientIndustry: "Financial Services / FinTech Platform",
+		summary: "End-to-end security audit, Zero Trust hardening, and AWS Kubernetes infrastructure restructuring for a high-concurrency payment transaction platform.",
+		challenge: "A fast-growing FinTech payment processor experienced a 180% surge in monthly AWS bills while facing compliance audit warnings during annual banking security reviews.",
+		solution: "VEINTECH executed an exhaustive network and application vulnerability audit, implemented Mutual TLS (mTLS) microservice encryption via Istio, and refactored database query access and Kubernetes autoscaling.",
+		outcome: "Monthly AWS infrastructure spend dropped by 38.5%. All vulnerability findings were remediated 100%, passing annual banking compliance certification with zero flags.",
+		metrics: [
+			{
+				val: "38.5%",
+				label: "Recurring Monthly AWS Infrastructure Savings"
+			},
+			{
+				val: "100%",
+				label: "Remediation of High & Critical Security Findings"
+			},
+			{
+				val: "4.5x",
+				label: "Increase in Database Query Throughput"
+			},
+			{
+				val: "Zero",
+				label: "Unplanned Downtime During Migration"
+			}
+		],
+		techStack: [
+			"Kubernetes (AWS EKS)",
+			"Istio Service Mesh (mTLS)",
+			"PostgreSQL Tuning",
+			"Terraform DevOps",
+			"Vault Security"
+		],
+		flow: [
+			{
+				step: "01",
+				title: "Security & FinOps Audit",
+				desc: "Auditing resource utilization telemetry and mapping microservice authorization flaws."
+			},
+			{
+				step: "02",
+				title: "Service Mesh Hardening",
+				desc: "Enforcing zero-trust service-to-service encryption with Istio mTLS."
+			},
+			{
+				step: "03",
+				title: "Database & Cache Tuning",
+				desc: "Reindexing PostgreSQL transactional tables and eliminating unindexed joins."
+			},
+			{
+				step: "04",
+				title: "Rightsized Autoscaling",
+				desc: "Calibrating Kubernetes HPA thresholds to match empirical concurrency patterns."
+			}
+		]
+	};
+	return renderTemplate`${renderComponent($$result, "CaseStudyLayout", $$CaseStudyLayout, {
+		"title": t.title,
+		"clientIndustry": t.clientIndustry,
+		"summary": t.summary,
+		"challenge": t.challenge,
+		"solution": t.solution,
+		"outcome": t.outcome,
+		"metrics": t.metrics,
+		"techStack": t.techStack,
+		"architectureFlow": t.flow
+	})}`;
+}, "/Users/telkomdev-rahadi/Documents/VeinTech/Web/src/components/portfolio/FintechZeroTrustCaseContent.astro", void 0);
+//#endregion
+export { $$FintechZeroTrustCaseContent as t };

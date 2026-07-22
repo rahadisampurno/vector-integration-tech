@@ -46,7 +46,10 @@ const obfuscatedName = nameParts.map(p => p.length > 2 ? p.substring(0, 2) + '*'
           <img src={product.thumbnail_url || '/logo.svg'} alt={product.name} class="w-full h-full object-cover rounded-xl" />
         </div>
         <h1 class="text-2xl md:text-3xl font-headline font-bold mb-2">Unduh Produk Anda</h1>
-        <p class="text-on-surface-variant">Akses file digital yang telah Anda beli secara aman.</p>
+        <p class="text-on-surface-variant mb-2">Akses file digital yang telah Anda beli secara aman.</p>
+        <p class="text-xs text-on-surface-variant font-bold bg-surface-container-high inline-block px-3 py-1 rounded-full border border-outline-variant/30">
+          Link berlaku selama 30 hari dan maksimal 5 kali unduhan. Hubungi admin untuk memperbarui akses.
+        </p>
       </div>
       
       {isExpired ? (
@@ -124,58 +127,41 @@ const obfuscatedName = nameParts.map(p => p.length > 2 ? p.substring(0, 2) + '*'
                     <strong>Hal ini sangat normal dan aman.</strong> Berikut adalah panduan langkah demi langkah untuk menginstal VeinTools di komputer Anda:
                   </p>
 
-                  <div class="space-y-6">
-                    <!-- Mac OS Guide -->
-                    <div class="bg-white rounded-xl border border-blue-100 p-5 shadow-sm">
-                      <h4 class="font-bold text-blue-900 mb-3 flex items-center gap-2 text-base">
-                        <span class="material-symbols-outlined">laptop_mac</span> Pengguna Mac (macOS)
-                      </h4>
-                      <p class="text-blue-800 mb-4 leading-relaxed">
-                        Jika Anda mendapatkan peringatan <i>"veintools-desktop is damaged and can't be opened. You should move it to the Trash."</i>, jangan panik! Ini adalah fitur "Gatekeeper" dari Apple yang menahan aplikasi dari luar App Store.
-                      </p>
-                      <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-4 rounded-r-lg">
-                        <p class="text-yellow-800 text-xs font-medium"><strong>NOTE:</strong> Peringatan "damaged" (rusak) bukan berarti file benar-benar rusak. Ini hanya cara Mac memberi tahu bahwa aplikasi ini di-download dari browser internet dan tidak memiliki sertifikat developer berbayar dari Apple.</p>
-                      </div>
-                      
-                      <p class="font-bold text-blue-900 mb-2">Langkah-Langkah Instalasi (Mac):</p>
-                      <ol class="list-decimal pl-5 text-blue-800 space-y-2 mb-2">
-                        <li><strong>Download & Buka Installer:</strong> Klik ganda pada file <code class="bg-blue-50 px-1 py-0.5 rounded text-blue-600">.dmg</code> yang telah Anda download.</li>
-                        <li><strong>Pindahkan ke Applications:</strong> Akan muncul sebuah jendela kecil. Tarik (Drag) logo <strong>VeinTools</strong> ke dalam folder <strong>Applications</strong> yang ada di sebelahnya.</li>
-                        <li><strong>Buka Terminal:</strong> Buka Terminal di Mac Anda (Tekan <kbd class="bg-slate-100 border border-slate-300 rounded px-1.5 py-0.5 text-xs shadow-sm">Cmd + Spasi</kbd>, ketik "Terminal", lalu tekan Enter).</li>
-                        <li><strong>Hapus Karantina Mac:</strong> Copy perintah di bawah ini, Paste ke dalam Terminal, lalu tekan Enter:
-                          <div class="bg-slate-900 text-green-400 font-mono text-xs p-3 rounded-lg mt-2 mb-1 overflow-x-auto">
-                            xattr -cr /Applications/veintools-desktop.app
+                    <div class="space-y-6">
+                      <!-- File Information -->
+                      <div class="bg-slate-50 rounded-xl border border-slate-200 p-4 shadow-sm text-sm">
+                        <div class="grid grid-cols-2 gap-2 text-slate-700">
+                          <div><strong>Versi Aplikasi:</strong> v1.0.0</div>
+                          <div><strong>Rilis:</strong> Juli 2026</div>
+                          <div class="col-span-2 mt-1">
+                            <strong>SHA-256 Checksum:</strong>
+                            <code class="block bg-slate-200 p-1.5 rounded text-xs mt-1 break-all select-all">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code>
                           </div>
-                        </li>
-                        <li><strong>Selesai!</strong> Sekarang buka aplikasi VeinTools dari Launchpad atau folder Applications Anda. Aplikasi akan terbuka dengan normal.</li>
-                      </ol>
-                    </div>
-
-                    <!-- Windows Guide -->
-                    <div class="bg-white rounded-xl border border-blue-100 p-5 shadow-sm">
-                      <h4 class="font-bold text-blue-900 mb-3 flex items-center gap-2 text-base">
-                        <span class="material-symbols-outlined">window</span> Pengguna Windows
-                      </h4>
-                      <p class="text-blue-800 mb-4 leading-relaxed">
-                        Pada Windows, Anda mungkin akan melihat layar biru <i>"Windows protected your PC"</i> (Windows SmartScreen) saat mencoba menjalankan file <code class="bg-blue-50 px-1 py-0.5 rounded text-blue-600">.exe</code> atau <code class="bg-blue-50 px-1 py-0.5 rounded text-blue-600">.msi</code>.
-                      </p>
-                      <div class="bg-blue-50 border-l-4 border-blue-400 p-3 mb-4 rounded-r-lg">
-                        <p class="text-blue-800 text-xs font-medium"><strong>TIP:</strong> Aplikasi VeinTools 100% aman dan bebas virus. Peringatan ini muncul semata-mata karena aplikasi masih baru dan belum memiliki riwayat download yang tinggi di database Microsoft.</p>
+                        </div>
                       </div>
                       
-                      <p class="font-bold text-blue-900 mb-2">Langkah-Langkah Instalasi (Windows):</p>
-                      <ol class="list-decimal pl-5 text-blue-800 space-y-2 mb-2">
-                        <li><strong>Download & Buka Installer:</strong> Klik ganda pada file installer Windows (<code class="bg-blue-50 px-1 py-0.5 rounded text-blue-600">.exe</code> atau <code class="bg-blue-50 px-1 py-0.5 rounded text-blue-600">.msi</code>).</li>
-                        <li><strong>Bypass SmartScreen:</strong> Jika muncul layar biru besar bertuliskan <i>"Windows protected your PC"</i>:
-                          <ul class="list-disc pl-5 mt-1 space-y-1">
-                            <li>Klik tulisan kecil <strong>"More info"</strong> (Info lebih lanjut) yang ada di bawah teks peringatan.</li>
-                            <li>Tombol baru akan muncul di bagian bawah. Klik <strong>"Run anyway"</strong> (Tetap jalankan).</li>
-                          </ul>
-                        </li>
-                        <li><strong>Ikuti Proses Instalasi:</strong> Jendela instalasi VeinTools akan terbuka. Lanjutkan dengan menekan <strong>Next</strong> hingga selesai.</li>
-                        <li><strong>Selesai!</strong> Buka VeinTools dari Shortcut di Desktop atau Start Menu Anda.</li>
-                      </ol>
-                    </div>
+                      <!-- Windows Guide -->
+                      <div class="bg-white rounded-xl border border-blue-100 p-5 shadow-sm">
+                        <h4 class="font-bold text-blue-900 mb-3 flex items-center gap-2 text-base">
+                          <span class="material-symbols-outlined">window</span> Pengguna Windows
+                        </h4>
+                        <p class="text-blue-800 mb-4 leading-relaxed">
+                          Karena aplikasi didistribusikan secara mandiri, Anda mungkin akan melihat layar biru <i>"Windows protected your PC"</i> (Windows SmartScreen) saat pertama kali mencoba menjalankan file <code class="bg-blue-50 px-1 py-0.5 rounded text-blue-600">.exe</code>.
+                        </p>
+                        
+                        <p class="font-bold text-blue-900 mb-2">Langkah-Langkah Instalasi:</p>
+                        <ol class="list-decimal pl-5 text-blue-800 space-y-2 mb-2">
+                          <li><strong>Download & Buka Installer:</strong> Klik ganda pada file installer Windows (<code class="bg-blue-50 px-1 py-0.5 rounded text-blue-600">.exe</code>).</li>
+                          <li><strong>Melewati SmartScreen:</strong> Jika muncul peringatan keamanan SmartScreen:
+                            <ul class="list-disc pl-5 mt-1 space-y-1">
+                              <li>Klik <strong>"More info"</strong> (Info lebih lanjut) di bawah teks peringatan.</li>
+                              <li>Lalu klik <strong>"Run anyway"</strong> (Tetap jalankan).</li>
+                            </ul>
+                          </li>
+                          <li><strong>Ikuti Proses Instalasi:</strong> Lanjutkan instalasi dengan menekan <strong>Next</strong> hingga selesai.</li>
+                          <li><strong>Selesai!</strong> Buka VeinTools dari Shortcut di Desktop atau Start Menu Anda.</li>
+                        </ol>
+                      </div>
 
                     <!-- Activation Guide -->
                     <div class="bg-white rounded-xl border border-blue-100 p-5 shadow-sm">

@@ -1,8 +1,7 @@
 ---
 import { db } from '../../db';
-import { products, orders } from '../../db/schema';
+import { products } from '../../db/schema';
 import { eq } from 'drizzle-orm';
-import { randomBytes } from 'node:crypto';
 
 const { slug, errorMessage } = Astro.props;
 

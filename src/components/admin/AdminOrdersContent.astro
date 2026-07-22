@@ -1,7 +1,7 @@
 ---
 import { db } from '../../db';
 import { orders, products, downloadAccesses } from '../../db/schema';
-import { desc, asc, eq, sql } from 'drizzle-orm';
+import { desc, asc, eq, sql, like, or, and } from 'drizzle-orm';
 
 const searchParams = Astro.url.searchParams;
 
@@ -10,13 +10,46 @@ const page = parseInt(searchParams.get('page') || '1') || 1;
 const limit = 10;
 const offset = (page - 1) * limit;
 
-// 2. Filter
+// 2. Filter & Search
 const statusFilter = searchParams.get('status') || 'ALL';
 const orderStatusCondition = statusFilter !== 'ALL' ? eq(orders.status, statusFilter) : undefined;
 
+const searchQuery = searchParams.get('search') || '';
+const searchCondition = searchQuery ? or(
+  like(orders.order_code, `%${searchQuery}%`),
+  like(orders.customer_name, `%${searchQuery}%`),
+  like(orders.whatsapp, `%${searchQuery}%`)
+) : undefined;
+
+const finalCondition = and(orderStatusCondition, searchCondition);
+
 // 3. Sort
-const sortParam = searchParams.get('sort') || 'desc';
-const sortOrder = sortParam === 'asc' ? asc(orders.created_at) : desc(orders.created_at);
+const sortCol = searchParams.get('sortCol') || 'created_at';
+const sortDir = searchParams.get('sortDir') || 'desc';
+
+let sortColumn = orders.created_at;
+if (sortCol === 'order_code') sortColumn = orders.order_code;
+if (sortCol === 'customer_name') sortColumn = orders.customer_name;
+if (sortCol === 'total_amount') sortColumn = orders.total_amount;
+if (sortCol === 'status') sortColumn = orders.status;
+
+const sortOrder = sortDir === 'asc' ? asc(sortColumn) : desc(sortColumn);
+
+// Helper for links
+const getSortLink = (col: string) => {
+  const newDir = (sortCol === col && sortDir === 'asc') ? 'desc' : 'asc';
+  const p = new URLSearchParams(searchParams);
+  p.set('sortCol', col);
+  p.set('sortDir', newDir);
+  p.set('page', '1');
+  return `?${p.toString()}`;
+};
+
+const getPageLink = (p: number) => {
+  const urlParams = new URLSearchParams(searchParams);
+  urlParams.set('page', p.toString());
+  return `?${urlParams.toString()}`;
+};
 
 // Fetch Data
 const allOrders = db.select({
@@ -26,14 +59,14 @@ const allOrders = db.select({
 }).from(orders)
   .leftJoin(products, eq(orders.product_id, products.id))
   .leftJoin(downloadAccesses, eq(orders.id, downloadAccesses.order_id))
-  .where(orderStatusCondition)
+  .where(finalCondition)
   .orderBy(sortOrder)
   .limit(limit)
   .offset(offset)
   .all();
 
 // Fetch Count
-const countResult = db.select({ count: sql<number>`count(*)` }).from(orders).where(orderStatusCondition).get();
+const countResult = db.select({ count: sql<number>`count(*)` }).from(orders).where(finalCondition).get();
 const totalCount = countResult ? Number(countResult.count) : 0;
 const totalPages = Math.ceil(totalCount / limit) || 1;
 
@@ -51,6 +84,13 @@ const totalPages = Math.ceil(totalCount / limit) || 1;
     
     <div class="mb-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
       <form method="GET" class="flex flex-col sm:flex-row gap-4 w-full" id="filterForm">
+        <div class="flex-1">
+          <label class="text-sm font-bold whitespace-nowrap sr-only">Cari Pesanan</label>
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+            <input type="text" name="search" value={searchQuery} placeholder="Cari No Pesanan, Nama, atau WA..." class="w-full bg-surface border border-outline-variant/50 rounded-lg pl-10 pr-4 py-1.5 text-sm outline-none focus:border-primary-fixed" onchange="document.getElementById('filterForm').submit()" />
+          </div>
+        </div>
         <div class="flex items-center gap-2">
           <label class="text-sm font-bold whitespace-nowrap">Filter Status:</label>
           <select name="status" class="bg-surface border border-outline-variant/50 rounded-lg px-3 py-1.5 text-sm outline-none focus:border-primary-fixed" onchange="document.getElementById('filterForm').submit()">
@@ -62,13 +102,8 @@ const totalPages = Math.ceil(totalCount / limit) || 1;
             <option value="COMPLETED" selected={statusFilter === 'COMPLETED'}>Selesai</option>
           </select>
         </div>
-        <div class="flex items-center gap-2">
-          <label class="text-sm font-bold whitespace-nowrap">Urutkan:</label>
-          <select name="sort" class="bg-surface border border-outline-variant/50 rounded-lg px-3 py-1.5 text-sm outline-none focus:border-primary-fixed" onchange="document.getElementById('filterForm').submit()">
-            <option value="desc" selected={sortParam === 'desc'}>Terbaru ke Terlama (DESC)</option>
-            <option value="asc" selected={sortParam === 'asc'}>Terlama ke Terbaru (ASC)</option>
-          </select>
-        </div>
+        <input type="hidden" name="sortCol" value={sortCol} />
+        <input type="hidden" name="sortDir" value={sortDir} />
         <input type="hidden" name="page" value="1" />
       </form>
     </div>
@@ -78,11 +113,11 @@ const totalPages = Math.ceil(totalCount / limit) || 1;
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="bg-surface-container-high text-on-surface-variant text-sm border-b border-outline-variant/30">
-              <th class="py-4 px-6 font-bold">Waktu</th>
-              <th class="py-4 px-6 font-bold">Nomor Pesanan</th>
-              <th class="py-4 px-6 font-bold">Pembeli & Produk</th>
-              <th class="py-4 px-6 font-bold">Total</th>
-              <th class="py-4 px-6 font-bold">Status</th>
+              <th class="py-4 px-6 font-bold"><a href={getSortLink('created_at')} class="hover:text-primary-fixed flex items-center gap-1">Waktu {sortCol === 'created_at' && <span class="material-symbols-outlined text-[14px]">{sortDir === 'asc' ? 'arrow_upward' : 'arrow_downward'}</span>}</a></th>
+              <th class="py-4 px-6 font-bold"><a href={getSortLink('order_code')} class="hover:text-primary-fixed flex items-center gap-1">Nomor Pesanan {sortCol === 'order_code' && <span class="material-symbols-outlined text-[14px]">{sortDir === 'asc' ? 'arrow_upward' : 'arrow_downward'}</span>}</a></th>
+              <th class="py-4 px-6 font-bold"><a href={getSortLink('customer_name')} class="hover:text-primary-fixed flex items-center gap-1">Pembeli & Produk {sortCol === 'customer_name' && <span class="material-symbols-outlined text-[14px]">{sortDir === 'asc' ? 'arrow_upward' : 'arrow_downward'}</span>}</a></th>
+              <th class="py-4 px-6 font-bold"><a href={getSortLink('total_amount')} class="hover:text-primary-fixed flex items-center gap-1">Total {sortCol === 'total_amount' && <span class="material-symbols-outlined text-[14px]">{sortDir === 'asc' ? 'arrow_upward' : 'arrow_downward'}</span>}</a></th>
+              <th class="py-4 px-6 font-bold"><a href={getSortLink('status')} class="hover:text-primary-fixed flex items-center gap-1">Status {sortCol === 'status' && <span class="material-symbols-outlined text-[14px]">{sortDir === 'asc' ? 'arrow_upward' : 'arrow_downward'}</span>}</a></th>
               <th class="py-4 px-6 font-bold text-center">Aksi</th>
             </tr>
           </thead>
@@ -165,8 +200,8 @@ const totalPages = Math.ceil(totalCount / limit) || 1;
         <div class="flex flex-col sm:flex-row items-center justify-between p-4 border-t border-outline-variant/30 gap-4">
           <p class="text-sm text-on-surface-variant">Menampilkan Halaman <span class="font-bold text-on-surface">{page}</span> dari <span class="font-bold text-on-surface">{totalPages}</span></p>
           <div class="flex gap-2">
-            <a href={`?page=${page - 1}&status=${statusFilter}&sort=${sortParam}`} class={`px-4 py-2 text-sm font-bold rounded-lg border border-outline-variant/50 hover:bg-surface-container-high transition-colors ${page <= 1 ? 'opacity-50 pointer-events-none' : ''}`}>Sebelumnya</a>
-            <a href={`?page=${page + 1}&status=${statusFilter}&sort=${sortParam}`} class={`px-4 py-2 text-sm font-bold rounded-lg border border-outline-variant/50 hover:bg-surface-container-high transition-colors ${page >= totalPages ? 'opacity-50 pointer-events-none' : ''}`}>Selanjutnya</a>
+            <a href={getPageLink(page - 1)} class={`px-4 py-2 text-sm font-bold rounded-lg border border-outline-variant/50 hover:bg-surface-container-high transition-colors ${page <= 1 ? 'opacity-50 pointer-events-none' : ''}`}>Sebelumnya</a>
+            <a href={getPageLink(page + 1)} class={`px-4 py-2 text-sm font-bold rounded-lg border border-outline-variant/50 hover:bg-surface-container-high transition-colors ${page >= totalPages ? 'opacity-50 pointer-events-none' : ''}`}>Selanjutnya</a>
           </div>
         </div>
       )}

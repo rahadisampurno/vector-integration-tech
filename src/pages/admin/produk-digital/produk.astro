@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { db } from '../../../db';
+import { products } from '../../../db/schema';
+import { desc, eq } from 'drizzle-orm';
+
+let errorMessage = '';
+let successMessage = '';
+if (Astro.request.method === 'POST') {
+  try {
+    const data = await Astro.request.formData();
+    const action = data.get('action')?.toString();
+    if (action === 'toggle') {
+      const id = data.get('id')?.toString() || '';
+      const currentStatus = data.get('current_status')?.toString();
+      if (!db.select().from(products).where(eq(products.id, id)).get()) throw new Error('Produk tidak ditemukan.');
+      db.update(products).set({ status: currentStatus === 'active' ? 'inactive' : 'active' }).where(eq(products.id, id)).run();
+      successMessage = 'Status produk berhasil diperbarui.';
+    } else {
+      const name = data.get('name')?.toString().trim() || '';
+      const slug = data.get('slug')?.toString().trim().toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '') || '';
+      const category = data.get('category')?.toString().trim() || '';
+      const regularPrice = Number(data.get('regular_price'));
+      const saleRaw = data.get('sale_price')?.toString().trim() || '';
+      const salePrice = saleRaw ? Number(saleRaw) : null;
+      const thumbnailUrl = data.get('thumbnail_url')?.toString().trim() || '/veintools_logo.png';
+      const shortDescription = data.get('short_description')?.toString().trim() || '';
+      const description = data.get('description')?.toString().trim() || '';
+      if (!name || !slug || !category) throw new Error('Nama, slug, dan kategori wajib diisi.');
+      if (!Number.isInteger(regularPrice) || regularPrice < 0) throw new Error('Harga normal tidak valid.');
+      if (salePrice !== null && (!Number.isInteger(salePrice) || salePrice < 0 || salePrice >= regularPrice)) throw new Error('Harga promo harus lebih kecil dari harga normal.');
+      if (db.select().from(products).where(eq(products.slug, slug)).get()) throw new Error('Slug produk sudah digunakan.');
+      db.insert(products).values({ id: crypto.randomUUID(), name, slug, category, regular_price: regularPrice, sale_price: salePrice, thumbnail_url: thumbnailUrl, short_description: shortDescription, description, status: 'active', created_at: new Date() }).run();
+      successMessage = `Produk ${name} berhasil ditambahkan.`;
+    }
+  } catch (error) { errorMessage = error instanceof Error ? error.message : 'Produk gagal disimpan.'; }
+}
+const productRows = db.select().from(products).orderBy(desc(products.created_at)).all();
+---
+<BaseLayout title="Admin - Produk Digital">
+  <section class="pt-32 pb-24 min-h-screen bg-surface text-on-surface"><div class="max-w-6xl mx-auto px-6 md:px-12">
+    <div class="flex justify-between items-end mb-8"><div><h1 class="text-3xl font-bold font-headline">Tambah Produk Baru</h1><p class="text-on-surface-variant mt-1">Tambahkan produk digital yang siap ditawarkan kepada pelanggan dan affiliate.</p></div><a href="/admin/produk-digital/dashboard" class="font-bold text-primary">← Dashboard</a></div>
+    {errorMessage && <div class="p-4 mb-6 rounded-xl bg-red-50 text-red-700 border border-red-200">{errorMessage}</div>}{successMessage && <div class="p-4 mb-6 rounded-xl bg-green-50 text-green-700 border border-green-200">{successMessage}</div>}
+    <div class="grid lg:grid-cols-[420px_1fr] gap-8">
+      <form method="POST" class="bg-surface-container rounded-2xl p-6 border border-outline-variant/30 space-y-4 h-fit">
+        <label class="block text-sm font-bold">Nama Produk<input name="name" required class="mt-2 w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3"/></label>
+        <label class="block text-sm font-bold">Slug URL<input name="slug" required pattern="[a-z0-9-]+" placeholder="contoh-produk" class="mt-2 w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3"/><span class="block font-normal text-xs text-on-surface-variant mt-1">Huruf kecil, angka, dan tanda hubung.</span></label>
+        <label class="block text-sm font-bold">Kategori<input name="category" required class="mt-2 w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3"/></label>
+        <div class="grid grid-cols-2 gap-3"><label class="block text-sm font-bold">Harga Normal<input name="regular_price" type="number" min="0" required class="mt-2 w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3"/></label><label class="block text-sm font-bold">Harga Promo<input name="sale_price" type="number" min="0" class="mt-2 w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3"/></label></div>
+        <label class="block text-sm font-bold">URL Thumbnail<input name="thumbnail_url" value="/veintools_logo.png" required class="mt-2 w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3"/></label>
+        <label class="block text-sm font-bold">Deskripsi Singkat<input name="short_description" maxlength="180" class="mt-2 w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3"/></label>
+        <label class="block text-sm font-bold">Deskripsi<textarea name="description" rows="4" class="mt-2 w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3"></textarea></label>
+        <button class="w-full bg-primary text-on-primary font-bold py-3 rounded-xl">Simpan Produk</button>
+      </form>
+      <div class="bg-surface-container rounded-2xl border border-outline-variant/30 overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-left bg-surface-container-high"><th class="p-4">Produk</th><th class="p-4">Harga</th><th class="p-4">Status</th><th class="p-4"></th></tr></thead><tbody>{productRows.map(product => <tr class="border-b border-outline-variant/20"><td class="p-4"><b>{product.name}</b><br/><span class="text-xs text-on-surface-variant">/{product.slug} · {product.category}</span></td><td class="p-4">{product.sale_price && <><span class="line-through text-xs text-on-surface-variant">Rp {product.regular_price.toLocaleString('id-ID')}</span><br/></>}<b>Rp {(product.sale_price || product.regular_price).toLocaleString('id-ID')}</b></td><td class="p-4 font-bold">{product.status}</td><td class="p-4"><form method="POST"><input type="hidden" name="action" value="toggle"/><input type="hidden" name="id" value={product.id}/><input type="hidden" name="current_status" value={product.status}/><button class="font-bold text-primary">{product.status === 'active' ? 'Nonaktifkan' : 'Aktifkan'}</button></form></td></tr>)}</tbody></table>{productRows.length === 0 && <p class="p-8 text-center text-on-surface-variant">Belum ada produk.</p>}</div>
+    </div>
+  </div></section>
+</BaseLayout>

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { validateContactForm, generateWhatsAppConsultationUrl } from './validation';
+import { validateContactForm, generateWhatsAppConsultationUrl, normalizeWhatsAppNumber } from './validation';
 
 describe('Contact Form Validation & Lead Generation', () => {
   it('fails validation when required fields are missing or too short', () => {
@@ -40,4 +40,11 @@ describe('Contact Form Validation & Lead Generation', () => {
     expect(url).toContain(encodeURIComponent('Rahadi'));
     expect(url).toContain(encodeURIComponent('AI & Business Automation'));
   });
+});
+
+describe('WhatsApp number normalization', () => {
+  it.each(['081298579746', '81298579746', '6281298579746', '+62 812-9857-9746', '006281298579746'])(
+    'treats %s as the same Indonesian number',
+    (phone) => expect(normalizeWhatsAppNumber(phone)).toBe('6281298579746')
+  );
 });

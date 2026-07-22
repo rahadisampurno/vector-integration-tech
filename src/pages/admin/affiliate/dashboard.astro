@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { db } from '../../../db';
+import { affiliates, orders, products } from '../../../db/schema';
+import { desc, eq, sql } from 'drizzle-orm';
+import { getSession } from '../../../lib/auth';
+
+const session = getSession(Astro.cookies);
+if (!session?.affiliate_id) return Astro.redirect('/admin/login');
+const affiliate = db.select().from(affiliates).where(eq(affiliates.id, session.affiliate_id)).get();
+if (!affiliate || affiliate.status !== 'active') return Astro.redirect('/api/admin/logout');
+
+const paidSql = sql`${orders.status} in ('PAID','DOWNLOAD_READY','WAITING_LICENSE','COMPLETED')`;
+const stats = db.select({
+  totalCheckouts: sql<number>`count(*)`,
+  paidOrders: sql<number>`coalesce(sum(case when ${paidSql} then 1 else 0 end), 0)`,
+  waitingPayment: sql<number>`coalesce(sum(case when ${orders.status} = 'WAITING_PAYMENT' then 1 else 0 end), 0)`,
+  inReview: sql<number>`coalesce(sum(case when ${orders.status} in ('PAYMENT_CONFIRMATION_SENT','PAYMENT_REVIEW') then 1 else 0 end), 0)`,
+  revenue: sql<number>`coalesce(sum(case when ${paidSql} then ${orders.total_amount} else 0 end), 0)`,
+  commission: sql<number>`coalesce(sum(case when ${paidSql} then ${orders.affiliate_commission} else 0 end), 0)`,
+  paidCommission: sql<number>`coalesce(sum(case when ${paidSql} and ${orders.commission_status} = 'paid' then ${orders.affiliate_commission} else 0 end), 0)`,
+  unpaidCommission: sql<number>`coalesce(sum(case when ${paidSql} and ${orders.commission_status} != 'paid' then ${orders.affiliate_commission} else 0 end), 0)`,
+  totalDiscount: sql<number>`coalesce(sum(${orders.discount_amount}), 0)`
+}).from(orders).where(eq(orders.affiliate_id, affiliate.id)).get();
+
+const ownOrders = db.select({ order: orders, product: products }).from(orders)
+  .leftJoin(products, eq(orders.product_id, products.id))
+  .where(eq(orders.affiliate_id, affiliate.id)).orderBy(desc(orders.created_at)).limit(100).all();
+
+const productPerformance = db.select({
+  productId: orders.product_id,
+  productName: products.name,
+  checkoutCount: sql<number>`count(${orders.id})`,
+  soldCount: sql<number>`coalesce(sum(case when ${paidSql} then 1 else 0 end), 0)`,
+  revenue: sql<number>`coalesce(sum(case when ${paidSql} then ${orders.total_amount} else 0 end), 0)`,
+  commission: sql<number>`coalesce(sum(case when ${paidSql} then ${orders.affiliate_commission} else 0 end), 0)`
+}).from(orders).leftJoin(products, eq(orders.product_id, products.id))
+  .where(eq(orders.affiliate_id, affiliate.id)).groupBy(orders.product_id, products.name)
+  .orderBy(desc(sql`count(${orders.id})`)).all();
+
+const totalCheckouts = Number(stats?.totalCheckouts || 0);
+const paidOrders = Number(stats?.paidOrders || 0);
+const conversionRate = totalCheckouts ? (paidOrders / totalCheckouts) * 100 : 0;
+const referralLink = `${Astro.url.origin}/produk-digital/veintools-desktop/pesan?ref=${affiliate.referral_code}`;
+const statusLabels: Record<string, string> = {
+  WAITING_PAYMENT: 'Menunggu Pembayaran', PAYMENT_CONFIRMATION_SENT: 'Konfirmasi Dikirim',
+  PAYMENT_REVIEW: 'Sedang Diverifikasi', DOWNLOAD_READY: 'Lunas', WAITING_LICENSE: 'Lunas',
+  PAID: 'Lunas', COMPLETED: 'Selesai'
+};
+---
+<BaseLayout title="Dashboard Affiliate - VeinTech">
+  <section class="pt-32 pb-24 bg-surface min-h-screen text-on-surface"><div class="max-w-7xl mx-auto px-6 md:px-12">
+    <div class="flex justify-between gap-4 items-start mb-8"><div><p class="text-primary font-bold mb-1">Halo, {affiliate.name}</p><h1 class="text-3xl font-headline font-bold">Dashboard Affiliate</h1><p class="text-on-surface-variant mt-1">Pantau funnel checkout, penjualan, dan keuntungan Anda.</p></div><form method="POST" action="/api/admin/logout"><button class="font-bold text-red-600 flex items-center gap-2"><span class="material-symbols-outlined text-lg">logout</span> Keluar</button></form></div>
+
+    <div class="bg-surface-container p-5 rounded-2xl border border-outline-variant/30 mb-8"><p class="text-sm font-bold mb-2">Link referral Anda</p><div class="flex flex-col sm:flex-row gap-3"><input id="referralLink" readonly value={referralLink} class="flex-1 bg-surface border border-outline-variant/50 rounded-xl px-4 py-3 font-mono text-sm"/><button id="copyReferral" class="bg-primary text-on-primary px-5 py-3 rounded-xl font-bold">Salin Link</button></div><p class="text-xs text-on-surface-variant mt-2">Kode: <b>{affiliate.referral_code}</b> · Komisi {affiliate.commission_rate}% dari harga setelah diskon · Diskon pembeli {affiliate.discount_rate}%.</p></div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div class="bg-surface-container p-5 rounded-2xl border border-outline-variant/20"><p class="text-sm text-on-surface-variant">Produk Checkout</p><b class="text-3xl">{totalCheckouts}</b><p class="text-xs text-on-surface-variant mt-1">Semua pesanan masuk</p></div>
+      <div class="bg-surface-container p-5 rounded-2xl border border-outline-variant/20"><p class="text-sm text-on-surface-variant">Produk Terjual</p><b class="text-3xl text-green-600">{paidOrders}</b><p class="text-xs text-on-surface-variant mt-1">Pesanan sudah lunas</p></div>
+      <div class="bg-surface-container p-5 rounded-2xl border border-outline-variant/20"><p class="text-sm text-on-surface-variant">Menunggu Bayar</p><b class="text-3xl text-orange-600">{Number(stats?.waitingPayment || 0)}</b><p class="text-xs text-on-surface-variant mt-1">Review: {Number(stats?.inReview || 0)}</p></div>
+      <div class="bg-surface-container p-5 rounded-2xl border border-outline-variant/20"><p class="text-sm text-on-surface-variant">Total Penjualan</p><b class="text-2xl">Rp {Number(stats?.revenue || 0).toLocaleString('id-ID')}</b><p class="text-xs text-on-surface-variant mt-1">Omzet pesanan lunas</p></div>
+      <div class="bg-primary/10 p-5 rounded-2xl border border-primary/20"><p class="text-sm text-on-surface-variant">Total Keuntungan</p><b class="text-2xl text-primary">Rp {Number(stats?.commission || 0).toLocaleString('id-ID')}</b><p class="text-xs text-on-surface-variant mt-1">Komisi pesanan lunas</p></div>
+      <div class="bg-surface-container p-5 rounded-2xl border border-outline-variant/20"><p class="text-sm text-on-surface-variant">Konversi Checkout</p><b class="text-3xl">{conversionRate.toLocaleString('id-ID', { maximumFractionDigits: 1 })}%</b><p class="text-xs text-on-surface-variant mt-1">Checkout menjadi lunas</p></div>
+      <div class="bg-green-50 dark:bg-green-950/20 p-5 rounded-2xl border border-green-200 dark:border-green-800"><p class="text-sm text-on-surface-variant">Komisi Dibayar</p><b class="text-2xl text-green-700 dark:text-green-300">Rp {Number(stats?.paidCommission || 0).toLocaleString('id-ID')}</b><p class="text-xs text-on-surface-variant mt-1">Sudah ditransfer admin</p></div>
+      <div class="bg-orange-50 dark:bg-orange-950/20 p-5 rounded-2xl border border-orange-200 dark:border-orange-800"><p class="text-sm text-on-surface-variant">Belum Dibayar</p><b class="text-2xl text-orange-700 dark:text-orange-300">Rp {Number(stats?.unpaidCommission || 0).toLocaleString('id-ID')}</b><p class="text-xs text-on-surface-variant mt-1">Pesanan lunas, belum ditransfer</p></div>
+    </div>
+
+    <div class="mb-8">
+      <div class="flex justify-between items-end mb-4"><div><h2 class="text-xl font-bold">Keuntungan per Produk</h2><p class="text-sm text-on-surface-variant">Performa seluruh produk yang dijual menggunakan kode Anda.</p></div><p class="text-sm text-on-surface-variant">Total diskon diberikan: <b>Rp {Number(stats?.totalDiscount || 0).toLocaleString('id-ID')}</b></p></div>
+      <div class="bg-surface-container rounded-2xl border border-outline-variant/30 overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-left border-b border-outline-variant/30 bg-surface-container-high"><th class="p-4">Produk</th><th class="p-4">Checkout</th><th class="p-4">Terjual</th><th class="p-4">Konversi</th><th class="p-4">Total Penjualan</th><th class="p-4">Keuntungan</th></tr></thead><tbody>{productPerformance.map((item) => { const rate = Number(item.checkoutCount) ? Number(item.soldCount) / Number(item.checkoutCount) * 100 : 0; return <tr class="border-b border-outline-variant/20"><td class="p-4 font-bold">{item.productName || 'Produk tidak tersedia'}</td><td class="p-4">{Number(item.checkoutCount)}</td><td class="p-4">{Number(item.soldCount)}</td><td class="p-4">{rate.toLocaleString('id-ID', { maximumFractionDigits: 1 })}%</td><td class="p-4 font-bold">Rp {Number(item.revenue).toLocaleString('id-ID')}</td><td class="p-4 font-bold text-primary">Rp {Number(item.commission).toLocaleString('id-ID')}</td></tr>})}</tbody></table>{productPerformance.length === 0 && <p class="p-10 text-center text-on-surface-variant">Belum ada performa produk.</p>}</div>
+    </div>
+
+    <div><h2 class="text-xl font-bold mb-4">Riwayat Checkout</h2><div class="bg-surface-container rounded-2xl border border-outline-variant/30 overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-left border-b border-outline-variant/30 bg-surface-container-high"><th class="p-4">Tanggal</th><th class="p-4">Pesanan</th><th class="p-4">Produk</th><th class="p-4">Nilai</th><th class="p-4">Keuntungan Affiliate</th><th class="p-4">Status Komisi</th><th class="p-4">Status Pesanan</th></tr></thead><tbody>{ownOrders.map(({order, product}) => { const isOrderPaid = ['PAID','DOWNLOAD_READY','WAITING_LICENSE','COMPLETED'].includes(order.status || ''); const isCommissionPaid = order.commission_status === 'paid'; return <tr class="border-b border-outline-variant/20"><td class="p-4 whitespace-nowrap">{new Date(order.created_at).toLocaleDateString('id-ID')}</td><td class="p-4 font-mono">{order.order_code}</td><td class="p-4">{product?.name || '-'}</td><td class="p-4">Rp {order.total_amount.toLocaleString('id-ID')}</td><td class="p-4 font-bold">Rp {Number(order.affiliate_commission || 0).toLocaleString('id-ID')}</td><td class="p-4 min-w-[150px]">{!isOrderPaid ? <span class="text-xs font-bold text-slate-600">Menunggu pesanan lunas</span> : isCommissionPaid ? <><span class="text-xs font-bold text-green-700">Sudah dibayar</span>{order.commission_paid_at && <p class="text-[11px] text-on-surface-variant mt-1">{new Date(order.commission_paid_at).toLocaleString('id-ID')}</p>}</> : <span class="text-xs font-bold text-orange-700">Belum dibayar</span>}</td><td class="p-4 font-bold whitespace-nowrap">{statusLabels[order.status || ''] || order.status}</td></tr>})}</tbody></table>{ownOrders.length === 0 && <p class="p-10 text-center text-on-surface-variant">Belum ada pesanan dari referral Anda.</p>}</div></div>
+  </div></section>
+  <script is:inline>document.getElementById('copyReferral')?.addEventListener('click', async () => { const input = document.getElementById('referralLink'); if (input instanceof HTMLInputElement) { await navigator.clipboard.writeText(input.value); document.getElementById('copyReferral').textContent = 'Tersalin'; } });</script>
+</BaseLayout>

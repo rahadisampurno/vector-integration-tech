@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { db } from '../../../db';
+import { paymentAccounts, products } from '../../../db/schema';
+import { asc, eq } from 'drizzle-orm';
+
+let errorMessage = '';
+let successMessage = '';
+if (Astro.request.method === 'POST') {
+  try {
+    const data = await Astro.request.formData();
+    const action = data.get('action')?.toString();
+    const id = data.get('id')?.toString() || '';
+    if (action === 'update_product') {
+      const product = db.select().from(products).where(eq(products.id, id)).get();
+      const regularPrice = Number(data.get('regular_price'));
+      const saleRaw = data.get('sale_price')?.toString().trim() || '';
+      const salePrice = saleRaw ? Number(saleRaw) : null;
+      if (!product) throw new Error('Produk tidak ditemukan.');
+      if (!Number.isInteger(regularPrice) || regularPrice < 0) throw new Error('Harga normal tidak valid.');
+      if (salePrice !== null && (!Number.isInteger(salePrice) || salePrice < 0 || salePrice >= regularPrice)) throw new Error('Harga promo harus lebih kecil dari harga normal.');
+      db.update(products).set({ regular_price: regularPrice, sale_price: salePrice }).where(eq(products.id, id)).run();
+      successMessage = `Harga ${product.name} berhasil diperbarui.`;
+    } else {
+      const name = data.get('name')?.toString().trim() || '';
+      const holder = data.get('holder')?.toString().trim() || '';
+      const accountNumber = data.get('account_number')?.toString().trim() || '';
+      const sortOrder = Number(data.get('sort_order') || 0);
+      const status = data.get('status') === 'active' ? 'active' : 'inactive';
+      if (!name || !holder || !accountNumber) throw new Error('Nama metode, pemilik, dan nomor rekening wajib diisi.');
+      if (!Number.isInteger(sortOrder) || sortOrder < 0) throw new Error('Urutan tidak valid.');
+      if (action === 'update_account') {
+        if (!db.select().from(paymentAccounts).where(eq(paymentAccounts.id, id)).get()) throw new Error('Rekening tidak ditemukan.');
+        db.update(paymentAccounts).set({ name, holder, account_number: accountNumber, sort_order: sortOrder, status }).where(eq(paymentAccounts.id, id)).run();
+        successMessage = `${name} berhasil diperbarui.`;
+      } else {
+        db.insert(paymentAccounts).values({ id: crypto.randomUUID(), name, holder, account_number: accountNumber, sort_order: sortOrder, status, created_at: new Date() }).run();
+        successMessage = `${name} berhasil ditambahkan.`;
+      }
+    }
+  } catch (error) { errorMessage = error instanceof Error ? error.message : 'Pengaturan gagal disimpan.'; }
+}
+const accounts = db.select().from(paymentAccounts).orderBy(asc(paymentAccounts.sort_order)).all();
+const productRows = db.select().from(products).orderBy(asc(products.name)).all();
+---
+<BaseLayout title="Admin - Pengaturan Rekening & Harga">
+  <section class="pt-32 pb-24 min-h-screen bg-surface text-on-surface"><div class="max-w-6xl mx-auto px-6 md:px-12">
+    <div class="flex justify-between items-end mb-8"><div><h1 class="text-3xl font-bold font-headline">Pengaturan Rekening & Harga</h1><p class="text-on-surface-variant mt-1">Perubahan aktif langsung digunakan pada checkout berikutnya.</p></div><a href="/admin/produk-digital/dashboard" class="font-bold text-primary">← Dashboard</a></div>
+    {errorMessage && <div class="p-4 mb-6 rounded-xl bg-red-50 text-red-700 border border-red-200">{errorMessage}</div>}{successMessage && <div class="p-4 mb-6 rounded-xl bg-green-50 text-green-700 border border-green-200">{successMessage}</div>}
+    <div class="grid lg:grid-cols-2 gap-8 mb-10">
+      <div><h2 class="text-xl font-bold mb-4">Rekening Pembayaran</h2><div class="space-y-4">{accounts.map(account => <form method="POST" class="bg-surface-container p-5 rounded-2xl border border-outline-variant/30 grid sm:grid-cols-2 gap-3"><input type="hidden" name="action" value="update_account"/><input type="hidden" name="id" value={account.id}/><label class="text-sm font-bold">Metode<input name="name" value={account.name} required class="mt-1 w-full bg-surface border rounded-lg px-3 py-2"/></label><label class="text-sm font-bold">Pemilik<input name="holder" value={account.holder} required class="mt-1 w-full bg-surface border rounded-lg px-3 py-2"/></label><label class="text-sm font-bold">Nomor<input name="account_number" value={account.account_number} required class="mt-1 w-full bg-surface border rounded-lg px-3 py-2"/></label><label class="text-sm font-bold">Urutan<input name="sort_order" type="number" min="0" value={account.sort_order} required class="mt-1 w-full bg-surface border rounded-lg px-3 py-2"/></label><label class="text-sm font-bold">Status<select name="status" class="mt-1 w-full bg-surface border rounded-lg px-3 py-2"><option value="active" selected={account.status === 'active'}>Aktif</option><option value="inactive" selected={account.status === 'inactive'}>Nonaktif</option></select></label><button class="self-end bg-primary text-on-primary font-bold py-2 rounded-lg">Simpan</button></form>)}</div></div>
+      <div><h2 class="text-xl font-bold mb-4">Tambah Rekening</h2><form method="POST" class="bg-surface-container p-6 rounded-2xl border border-outline-variant/30 space-y-4"><input type="hidden" name="action" value="add_account"/><label class="block text-sm font-bold">Nama Bank / E-Wallet<input name="name" required class="mt-2 w-full bg-surface border rounded-xl px-4 py-3"/></label><label class="block text-sm font-bold">Nama Pemilik<input name="holder" required class="mt-2 w-full bg-surface border rounded-xl px-4 py-3"/></label><label class="block text-sm font-bold">Nomor Rekening / Telepon<input name="account_number" required class="mt-2 w-full bg-surface border rounded-xl px-4 py-3"/></label><label class="block text-sm font-bold">Urutan<input name="sort_order" type="number" min="0" value={accounts.length} required class="mt-2 w-full bg-surface border rounded-xl px-4 py-3"/></label><input type="hidden" name="status" value="active"/><button class="w-full bg-primary text-on-primary font-bold py-3 rounded-xl">Tambah Rekening</button></form></div>
+    </div>
+    <div><h2 class="text-xl font-bold mb-4">Harga Produk</h2><div class="bg-surface-container rounded-2xl border border-outline-variant/30 overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-left bg-surface-container-high"><th class="p-4">Produk</th><th class="p-4">Harga Normal</th><th class="p-4">Harga Promo</th><th class="p-4"></th></tr></thead><tbody>{productRows.map(product => <tr class="border-b border-outline-variant/20"><td class="p-4 font-bold">{product.name}</td><td colspan="3" class="p-4"><form method="POST" class="grid grid-cols-[1fr_1fr_auto] gap-3"><input type="hidden" name="action" value="update_product"/><input type="hidden" name="id" value={product.id}/><input name="regular_price" type="number" min="0" value={product.regular_price} required class="bg-surface border rounded-lg px-3 py-2"/><input name="sale_price" type="number" min="0" value={product.sale_price ?? ''} placeholder="Tanpa promo" class="bg-surface border rounded-lg px-3 py-2"/><button class="bg-primary text-on-primary font-bold px-4 rounded-lg">Simpan</button></form></td></tr>)}</tbody></table></div></div>
+  </div></section>
+</BaseLayout>

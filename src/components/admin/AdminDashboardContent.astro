@@ -1,12 +1,12 @@
 ---
 import { db } from '../../db';
-import { orders, downloadAccesses } from '../../db/schema';
-import { sql } from 'drizzle-orm';
+import { orders, downloadAccesses, affiliates, products } from '../../db/schema';
+import { desc, eq, sql } from 'drizzle-orm';
 
 // Calculate Statistics
 const stats = db.select({
   totalOrders: sql<number>`count(*)`,
-  totalRevenue: sql<number>`sum(case when status in ('PAID', 'DOWNLOAD_READY', 'COMPLETED') then total_amount else 0 end)`,
+  totalRevenue: sql<number>`sum(case when status in ('PAID', 'DOWNLOAD_READY', 'WAITING_LICENSE', 'COMPLETED') then total_amount else 0 end)`,
   waitingPayment: sql<number>`sum(case when status = 'WAITING_PAYMENT' then 1 else 0 end)`,
   needVerification: sql<number>`sum(case when status in ('PAYMENT_CONFIRMATION_SENT', 'PAYMENT_REVIEW') then 1 else 0 end)`
 }).from(orders).get();
@@ -22,6 +22,40 @@ const waiting = stats?.waitingPayment || 0;
 const needVerify = stats?.needVerification || 0;
 const downloads = downloadStats?.totalDownloads || 0;
 
+const affiliatePaidSql = sql`${orders.status} in ('PAID','DOWNLOAD_READY','WAITING_LICENSE','COMPLETED')`;
+const affiliateStats = db.select({
+  checkouts: sql<number>`count(*)`,
+  sold: sql<number>`coalesce(sum(case when ${affiliatePaidSql} then 1 else 0 end), 0)`,
+  revenue: sql<number>`coalesce(sum(case when ${affiliatePaidSql} then ${orders.total_amount} else 0 end), 0)`,
+  commission: sql<number>`coalesce(sum(case when ${affiliatePaidSql} then ${orders.affiliate_commission} else 0 end), 0)`,
+  paidCommission: sql<number>`coalesce(sum(case when ${affiliatePaidSql} and ${orders.commission_status} = 'paid' then ${orders.affiliate_commission} else 0 end), 0)`,
+  unpaidCommission: sql<number>`coalesce(sum(case when ${affiliatePaidSql} and ${orders.commission_status} != 'paid' then ${orders.affiliate_commission} else 0 end), 0)`,
+  discounts: sql<number>`coalesce(sum(${orders.discount_amount}), 0)`
+}).from(orders).where(sql`${orders.affiliate_id} is not null`).get();
+
+const affiliatePerformance = db.select({
+  id: affiliates.id, name: affiliates.name, code: affiliates.referral_code,
+  checkouts: sql<number>`count(${orders.id})`,
+  sold: sql<number>`coalesce(sum(case when ${affiliatePaidSql} then 1 else 0 end), 0)`,
+  revenue: sql<number>`coalesce(sum(case when ${affiliatePaidSql} then ${orders.total_amount} else 0 end), 0)`,
+  commission: sql<number>`coalesce(sum(case when ${affiliatePaidSql} then ${orders.affiliate_commission} else 0 end), 0)`
+}).from(affiliates).leftJoin(orders, eq(orders.affiliate_id, affiliates.id))
+  .groupBy(affiliates.id).orderBy(desc(sql`count(${orders.id})`)).limit(5).all();
+
+const affiliateProductPerformance = db.select({
+  name: products.name,
+  checkouts: sql<number>`count(${orders.id})`,
+  sold: sql<number>`coalesce(sum(case when ${affiliatePaidSql} then 1 else 0 end), 0)`,
+  revenue: sql<number>`coalesce(sum(case when ${affiliatePaidSql} then ${orders.total_amount} else 0 end), 0)`,
+  commission: sql<number>`coalesce(sum(case when ${affiliatePaidSql} then ${orders.affiliate_commission} else 0 end), 0)`
+}).from(orders).leftJoin(products, eq(orders.product_id, products.id))
+  .where(sql`${orders.affiliate_id} is not null`).groupBy(orders.product_id, products.name)
+  .orderBy(desc(sql`count(${orders.id})`)).limit(5).all();
+
+const affiliateCheckouts = Number(affiliateStats?.checkouts || 0);
+const affiliateSold = Number(affiliateStats?.sold || 0);
+const affiliateConversion = affiliateCheckouts ? affiliateSold / affiliateCheckouts * 100 : 0;
+
 ---
 
 <section class="pt-32 pb-24 bg-surface min-h-screen text-on-surface">
@@ -32,10 +66,15 @@ const downloads = downloadStats?.totalDownloads || 0;
         <h1 class="text-3xl md:text-4xl font-headline font-bold mb-2">Dashboard Produk Digital</h1>
         <p class="text-on-surface-variant">Ringkasan performa penjualan dan operasional sistem.</p>
       </div>
-      <div class="hidden sm:block">
+      <div class="flex items-center gap-3">
         <a href="/admin/produk-digital/pesanan" class="bg-surface-container-high text-on-surface text-sm font-bold px-4 py-2 rounded-xl hover:bg-surface-container-highest transition-colors border border-outline-variant/50">
           Kelola Pesanan &rarr;
         </a>
+        <form method="POST" action="/api/admin/logout">
+          <button type="submit" class="bg-red-50 text-red-600 text-sm font-bold px-4 py-2 rounded-xl hover:bg-red-100 transition-colors border border-red-200 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">logout</span> Keluar
+          </button>
+        </form>
       </div>
     </div>
     
@@ -44,18 +83,18 @@ const downloads = downloadStats?.totalDownloads || 0;
       
       <!-- Total Revenue -->
       <div class="bg-surface-container p-6 rounded-2xl border border-outline-variant/30 shadow-sm relative overflow-hidden">
-        <div class="absolute top-0 right-0 p-4 opacity-10">
-          <span class="material-symbols-outlined text-6xl text-primary-fixed">payments</span>
+        <div class="absolute top-0 right-0 p-4 opacity-25">
+          <span class="material-symbols-outlined text-6xl text-blue-700 dark:text-blue-300">payments</span>
         </div>
         <p class="text-sm font-bold text-on-surface-variant mb-2">Total Pendapatan</p>
-        <h3 class="text-3xl font-headline font-bold text-primary-fixed mb-1">Rp {revenue.toLocaleString('id-ID')}</h3>
+        <h3 class="text-3xl font-headline font-black text-blue-700 dark:text-blue-300 mb-1">Rp {revenue.toLocaleString('id-ID')}</h3>
         <p class="text-xs text-on-surface-variant">Hanya dari pesanan Lunas</p>
       </div>
       
       <!-- Total Orders -->
       <div class="bg-surface-container p-6 rounded-2xl border border-outline-variant/30 shadow-sm relative overflow-hidden">
-         <div class="absolute top-0 right-0 p-4 opacity-10">
-          <span class="material-symbols-outlined text-6xl">shopping_cart</span>
+         <div class="absolute top-0 right-0 p-4 opacity-25">
+          <span class="material-symbols-outlined text-6xl text-slate-600 dark:text-slate-300">shopping_cart</span>
         </div>
         <p class="text-sm font-bold text-on-surface-variant mb-2">Total Pesanan</p>
         <h3 class="text-3xl font-headline font-bold mb-1">{totalOrders}</h3>
@@ -64,18 +103,18 @@ const downloads = downloadStats?.totalDownloads || 0;
       
       <!-- Need Verification -->
       <div class="bg-surface-container p-6 rounded-2xl border-blue-500/30 bg-blue-500/5 shadow-sm relative overflow-hidden">
-        <div class="absolute top-0 right-0 p-4 opacity-10">
-          <span class="material-symbols-outlined text-6xl text-blue-500">fact_check</span>
+        <div class="absolute top-0 right-0 p-4 opacity-25">
+          <span class="material-symbols-outlined text-6xl text-blue-700 dark:text-blue-300">fact_check</span>
         </div>
-        <p class="text-sm font-bold text-blue-600 mb-2">Perlu Verifikasi</p>
-        <h3 class="text-3xl font-headline font-bold text-blue-600 mb-1">{needVerify}</h3>
-        <p class="text-xs text-blue-600/70">Pembeli sudah konfirmasi WA</p>
+        <p class="text-sm font-bold text-blue-800 dark:text-blue-200 mb-2">Perlu Verifikasi</p>
+        <h3 class="text-3xl font-headline font-black text-blue-700 dark:text-blue-300 mb-1">{needVerify}</h3>
+        <p class="text-xs font-medium text-blue-700 dark:text-blue-300">Pembeli sudah konfirmasi WA</p>
       </div>
       
       <!-- Waiting Payment -->
       <div class="bg-surface-container p-6 rounded-2xl border border-outline-variant/30 shadow-sm relative overflow-hidden">
-        <div class="absolute top-0 right-0 p-4 opacity-10">
-          <span class="material-symbols-outlined text-6xl">schedule</span>
+        <div class="absolute top-0 right-0 p-4 opacity-25">
+          <span class="material-symbols-outlined text-6xl text-slate-600 dark:text-slate-300">schedule</span>
         </div>
         <p class="text-sm font-bold text-on-surface-variant mb-2">Menunggu Pembayaran</p>
         <h3 class="text-3xl font-headline font-bold mb-1">{waiting}</h3>
@@ -83,36 +122,68 @@ const downloads = downloadStats?.totalDownloads || 0;
       </div>
       
     </div>
+
+    <div class="mb-12">
+      <div class="flex justify-between items-end mb-5">
+        <div><h2 class="text-2xl font-headline font-bold">Performa Affiliate</h2><p class="text-sm text-on-surface-variant">Ringkasan penjualan yang berasal dari kode referral.</p></div>
+        <a href="/admin/affiliate" class="text-sm font-bold text-blue-700 dark:text-blue-300 hover:underline">Kelola Affiliate →</a>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-6">
+        <div class="bg-surface-container p-5 rounded-2xl border border-outline-variant/30"><p class="text-sm text-on-surface-variant">Produk Checkout</p><b class="text-3xl">{affiliateCheckouts}</b></div>
+        <div class="bg-surface-container p-5 rounded-2xl border border-outline-variant/30"><p class="text-sm text-on-surface-variant">Produk Terjual</p><b class="text-3xl text-green-600">{affiliateSold}</b></div>
+        <div class="bg-surface-container p-5 rounded-2xl border border-outline-variant/30"><p class="text-sm text-on-surface-variant">Total Penjualan</p><b class="text-xl">Rp {Number(affiliateStats?.revenue || 0).toLocaleString('id-ID')}</b></div>
+        <div class="bg-blue-50 dark:bg-blue-950/30 p-5 rounded-2xl border border-blue-300 dark:border-blue-700"><p class="text-sm font-medium text-slate-700 dark:text-slate-300">Total Komisi</p><b class="text-xl text-blue-700 dark:text-blue-300">Rp {Number(affiliateStats?.commission || 0).toLocaleString('id-ID')}</b><p class="text-[11px] mt-1"><span class="text-green-700">Dibayar Rp {Number(affiliateStats?.paidCommission || 0).toLocaleString('id-ID')}</span><br/><span class="text-orange-700">Belum Rp {Number(affiliateStats?.unpaidCommission || 0).toLocaleString('id-ID')}</span></p></div>
+        <div class="bg-surface-container p-5 rounded-2xl border border-outline-variant/30"><p class="text-sm text-on-surface-variant">Diskon Diberikan</p><b class="text-xl">Rp {Number(affiliateStats?.discounts || 0).toLocaleString('id-ID')}</b></div>
+        <div class="bg-surface-container p-5 rounded-2xl border border-outline-variant/30"><p class="text-sm text-on-surface-variant">Konversi</p><b class="text-3xl">{affiliateConversion.toLocaleString('id-ID', { maximumFractionDigits: 1 })}%</b></div>
+      </div>
+
+      <div class="grid xl:grid-cols-2 gap-6">
+        <div class="bg-surface-container rounded-2xl border border-outline-variant/30 overflow-x-auto">
+          <div class="flex justify-between items-center p-5 border-b border-outline-variant/30"><h3 class="font-bold text-lg">Top 5 Affiliate</h3><a href="/admin/affiliate" class="text-xs font-bold text-blue-700 dark:text-blue-300 hover:underline">Lihat semua →</a></div>
+          <table class="w-full text-sm"><thead><tr class="text-left bg-surface-container-high"><th class="p-4">Affiliate</th><th class="p-4">Checkout / Terjual</th><th class="p-4">Penjualan</th><th class="p-4">Komisi</th></tr></thead><tbody>{affiliatePerformance.map(item => <tr class="border-b border-outline-variant/20"><td class="p-4"><b>{item.name}</b><br/><span class="font-mono text-xs text-slate-600 dark:text-slate-300">{item.code}</span></td><td class="p-4">{Number(item.checkouts)} / {Number(item.sold)}<br/><span class="text-xs text-slate-600 dark:text-slate-300">{Number(item.checkouts) ? (Number(item.sold) / Number(item.checkouts) * 100).toLocaleString('id-ID', { maximumFractionDigits: 1 }) : 0}% konversi</span></td><td class="p-4 font-bold">Rp {Number(item.revenue).toLocaleString('id-ID')}</td><td class="p-4 font-bold text-blue-700 dark:text-blue-300">Rp {Number(item.commission).toLocaleString('id-ID')}</td></tr>)}</tbody></table>
+          {affiliatePerformance.length === 0 && <p class="p-8 text-center text-on-surface-variant">Belum ada affiliate.</p>}
+        </div>
+        <div class="bg-surface-container rounded-2xl border border-outline-variant/30 overflow-x-auto">
+          <div class="flex justify-between items-center p-5 border-b border-outline-variant/30"><h3 class="font-bold text-lg">Top 5 Produk Affiliate</h3><span class="text-xs text-on-surface-variant">Berdasarkan checkout</span></div>
+          <table class="w-full text-sm"><thead><tr class="text-left bg-surface-container-high"><th class="p-4">Produk</th><th class="p-4">Checkout / Terjual</th><th class="p-4">Penjualan</th><th class="p-4">Komisi</th></tr></thead><tbody>{affiliateProductPerformance.map(item => <tr class="border-b border-outline-variant/20"><td class="p-4 font-bold">{item.name || 'Produk tidak tersedia'}</td><td class="p-4">{Number(item.checkouts)} / {Number(item.sold)}</td><td class="p-4 font-bold">Rp {Number(item.revenue).toLocaleString('id-ID')}</td><td class="p-4 font-bold text-blue-700 dark:text-blue-300">Rp {Number(item.commission).toLocaleString('id-ID')}</td></tr>)}</tbody></table>
+          {affiliateProductPerformance.length === 0 && <p class="p-8 text-center text-on-surface-variant">Belum ada penjualan affiliate.</p>}
+        </div>
+      </div>
+    </div>
     
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <!-- Quick Actions -->
       <div class="bg-surface-container p-8 rounded-2xl border border-outline-variant/30 shadow-sm">
         <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
-          <span class="material-symbols-outlined text-primary-fixed">bolt</span>
+          <span class="material-symbols-outlined text-blue-700 dark:text-blue-300">bolt</span>
           Aksi Cepat
         </h2>
         <div class="space-y-4">
+          <a href="/admin/affiliate" class="flex items-center justify-between p-4 bg-surface rounded-xl border border-outline-variant/50 hover:border-primary-fixed transition-colors group">
+            <div class="flex items-center gap-3"><span class="material-symbols-outlined text-slate-600 dark:text-slate-300 group-hover:text-blue-700">group_add</span><span class="font-bold">Kelola Affiliate</span></div>
+            <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">chevron_right</span>
+          </a>
           <a href="/admin/produk-digital/pesanan" class="flex items-center justify-between p-4 bg-surface rounded-xl border border-outline-variant/50 hover:border-primary-fixed transition-colors group">
             <div class="flex items-center gap-3">
-              <span class="material-symbols-outlined text-slate-400 group-hover:text-primary-fixed transition-colors">list_alt</span>
+              <span class="material-symbols-outlined text-slate-600 dark:text-slate-300 group-hover:text-blue-700 transition-colors">list_alt</span>
               <span class="font-bold">Daftar Pesanan</span>
             </div>
-            <span class="material-symbols-outlined text-slate-400 group-hover:text-primary-fixed transition-colors">chevron_right</span>
+            <span class="material-symbols-outlined text-slate-600 dark:text-slate-300 group-hover:text-blue-700 transition-colors">chevron_right</span>
           </a>
-          <button onclick="alert('Fitur tambah produk belum diimplementasi di MVP.')" class="w-full flex items-center justify-between p-4 bg-surface rounded-xl border border-outline-variant/50 hover:border-primary-fixed transition-colors group text-left">
+          <a href="/admin/produk-digital/produk" class="w-full flex items-center justify-between p-4 bg-surface rounded-xl border border-outline-variant/50 hover:border-primary-fixed transition-colors group text-left">
             <div class="flex items-center gap-3">
-              <span class="material-symbols-outlined text-slate-400 group-hover:text-primary-fixed transition-colors">add_box</span>
+              <span class="material-symbols-outlined text-slate-600 dark:text-slate-300 group-hover:text-blue-700 transition-colors">add_box</span>
               <span class="font-bold">Tambah Produk Baru</span>
             </div>
-            <span class="material-symbols-outlined text-slate-400 group-hover:text-primary-fixed transition-colors">chevron_right</span>
-          </button>
-          <button onclick="alert('Fitur pengaturan belum diimplementasi di MVP.')" class="w-full flex items-center justify-between p-4 bg-surface rounded-xl border border-outline-variant/50 hover:border-primary-fixed transition-colors group text-left">
+            <span class="material-symbols-outlined text-slate-600 dark:text-slate-300 group-hover:text-blue-700 transition-colors">chevron_right</span>
+          </a>
+          <a href="/admin/produk-digital/pengaturan" class="w-full flex items-center justify-between p-4 bg-surface rounded-xl border border-outline-variant/50 hover:border-primary-fixed transition-colors group text-left">
             <div class="flex items-center gap-3">
-              <span class="material-symbols-outlined text-slate-400 group-hover:text-primary-fixed transition-colors">settings</span>
+              <span class="material-symbols-outlined text-slate-600 dark:text-slate-300 group-hover:text-blue-700 transition-colors">settings</span>
               <span class="font-bold">Pengaturan Rekening & Harga</span>
             </div>
-            <span class="material-symbols-outlined text-slate-400 group-hover:text-primary-fixed transition-colors">chevron_right</span>
-          </button>
+            <span class="material-symbols-outlined text-slate-600 dark:text-slate-300 group-hover:text-blue-700 transition-colors">chevron_right</span>
+          </a>
         </div>
       </div>
       
@@ -137,8 +208,8 @@ const downloads = downloadStats?.totalDownloads || 0;
           <div class="p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-xl flex gap-4">
             <span class="material-symbols-outlined text-yellow-600">warning</span>
             <div>
-              <h4 class="font-bold text-yellow-700 mb-1">Status Keamanan</h4>
-              <p class="text-sm text-yellow-700/80">Halaman ini bersifat terbuka (MVP Mode). Akses publik belum dibatasi menggunakan middleware autentikasi admin yang ketat.</p>
+              <h4 class="font-bold text-yellow-700 mb-1">Akses Terproteksi</h4>
+              <p class="text-sm text-yellow-700/80">Dashboard dilindungi sesi server-side dan pembatasan role. Affiliate hanya dapat melihat data penjualannya sendiri.</p>
             </div>
           </div>
         </div>

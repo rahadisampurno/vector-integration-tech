@@ -1,6 +1,6 @@
 ---
 import { db } from '../../db';
-import { orders, products, downloadAccesses } from '../../db/schema';
+import { orders, products, downloadAccesses, affiliates } from '../../db/schema';
 import { desc, asc, eq, sql, like, or, and } from 'drizzle-orm';
 
 const searchParams = Astro.url.searchParams;
@@ -13,6 +13,8 @@ const offset = (page - 1) * limit;
 // 2. Filter & Search
 const statusFilter = searchParams.get('status') || 'ALL';
 const orderStatusCondition = statusFilter !== 'ALL' ? eq(orders.status, statusFilter) : undefined;
+const affiliateFilter = searchParams.get('affiliate') || 'ALL';
+const affiliateCondition = affiliateFilter !== 'ALL' ? eq(orders.affiliate_id, affiliateFilter) : undefined;
 
 const searchQuery = searchParams.get('search') || '';
 const searchCondition = searchQuery ? or(
@@ -21,7 +23,7 @@ const searchCondition = searchQuery ? or(
   like(orders.whatsapp, `%${searchQuery}%`)
 ) : undefined;
 
-const finalCondition = and(orderStatusCondition, searchCondition);
+const finalCondition = and(orderStatusCondition, affiliateCondition, searchCondition);
 
 // 3. Sort
 const sortCol = searchParams.get('sortCol') || 'created_at';
@@ -69,6 +71,8 @@ const allOrders = db.select({
 const countResult = db.select({ count: sql<number>`count(*)` }).from(orders).where(finalCondition).get();
 const totalCount = countResult ? Number(countResult.count) : 0;
 const totalPages = Math.ceil(totalCount / limit) || 1;
+const commissionPayableStatuses = ['PAID', 'DOWNLOAD_READY', 'WAITING_LICENSE', 'COMPLETED'];
+const affiliateOptions = db.select({ id: affiliates.id, name: affiliates.name, code: affiliates.referral_code }).from(affiliates).orderBy(asc(affiliates.name)).all();
 
 ---
 
@@ -79,6 +83,10 @@ const totalPages = Math.ceil(totalCount / limit) || 1;
       <div>
         <h1 class="text-3xl font-headline font-bold mb-2">Daftar Pesanan</h1>
         <p class="text-on-surface-variant">Kelola dan verifikasi pesanan produk digital.</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="/admin/produk-digital/dashboard" class="text-sm font-bold text-primary">Dashboard</a>
+        <form method="POST" action="/api/admin/logout"><button type="submit" class="bg-red-50 text-red-600 text-sm font-bold px-4 py-2 rounded-xl border border-red-200 flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">logout</span> Keluar</button></form>
       </div>
     </div>
     
@@ -102,10 +110,22 @@ const totalPages = Math.ceil(totalCount / limit) || 1;
             <option value="COMPLETED" selected={statusFilter === 'COMPLETED'}>Selesai</option>
           </select>
         </div>
+        <div class="flex items-center gap-2">
+          <label class="text-sm font-bold whitespace-nowrap">Affiliate:</label>
+          <select name="affiliate" class="bg-surface border border-outline-variant/50 rounded-lg px-3 py-1.5 text-sm outline-none focus:border-primary-fixed" onchange="document.getElementById('filterForm').submit()">
+            <option value="ALL" selected={affiliateFilter === 'ALL'}>Semua Affiliate</option>
+            {affiliateOptions.map(item => <option value={item.id} selected={affiliateFilter === item.id}>{item.name} ({item.code})</option>)}
+          </select>
+        </div>
         <input type="hidden" name="sortCol" value={sortCol} />
         <input type="hidden" name="sortDir" value={sortDir} />
         <input type="hidden" name="page" value="1" />
       </form>
+    </div>
+
+    <div id="bulkCommissionBar" class="hidden mb-5 bg-blue-50 dark:bg-blue-950/30 border border-blue-300 dark:border-blue-700 rounded-2xl p-4 flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div><p class="font-bold"><span id="selectedCommissionCount">0</span> pesanan dipilih</p><p class="text-sm text-on-surface-variant">Total yang harus ditransfer: <b id="selectedCommissionTotal" class="text-blue-700 dark:text-blue-300">Rp 0</b></p></div>
+      <button id="bulkPayCommission" type="button" class="bg-green-600 text-white font-bold px-5 py-3 rounded-xl disabled:opacity-50">Tandai Semua Dibayar</button>
     </div>
     
     <div class="bg-surface-container border border-outline-variant/30 rounded-2xl overflow-hidden shadow-sm">
@@ -113,17 +133,20 @@ const totalPages = Math.ceil(totalCount / limit) || 1;
         <table class="w-full text-left border-collapse">
           <thead>
             <tr class="bg-surface-container-high text-on-surface-variant text-sm border-b border-outline-variant/30">
+              <th class="py-4 px-4 w-10"><input id="selectAllCommission" type="checkbox" class="w-4 h-4" title="Pilih semua komisi yang bisa dibayar" /></th>
               <th class="py-4 px-6 font-bold"><a href={getSortLink('created_at')} class="text-on-surface-variant hover:text-primary flex items-center gap-1">Waktu {sortCol === 'created_at' && <span class="material-symbols-outlined text-[14px]">{sortDir === 'asc' ? 'arrow_upward' : 'arrow_downward'}</span>}</a></th>
               <th class="py-4 px-6 font-bold"><a href={getSortLink('order_code')} class="text-on-surface-variant hover:text-primary flex items-center gap-1">Nomor Pesanan {sortCol === 'order_code' && <span class="material-symbols-outlined text-[14px]">{sortDir === 'asc' ? 'arrow_upward' : 'arrow_downward'}</span>}</a></th>
               <th class="py-4 px-6 font-bold"><a href={getSortLink('customer_name')} class="text-on-surface-variant hover:text-primary flex items-center gap-1">Pembeli & Produk {sortCol === 'customer_name' && <span class="material-symbols-outlined text-[14px]">{sortDir === 'asc' ? 'arrow_upward' : 'arrow_downward'}</span>}</a></th>
               <th class="py-4 px-6 font-bold"><a href={getSortLink('total_amount')} class="text-on-surface-variant hover:text-primary flex items-center gap-1">Total {sortCol === 'total_amount' && <span class="material-symbols-outlined text-[14px]">{sortDir === 'asc' ? 'arrow_upward' : 'arrow_downward'}</span>}</a></th>
               <th class="py-4 px-6 font-bold"><a href={getSortLink('status')} class="text-on-surface-variant hover:text-primary flex items-center gap-1">Status {sortCol === 'status' && <span class="material-symbols-outlined text-[14px]">{sortDir === 'asc' ? 'arrow_upward' : 'arrow_downward'}</span>}</a></th>
+              <th class="py-4 px-6 font-bold">Komisi Affiliate</th>
               <th class="py-4 px-6 font-bold text-center">Aksi</th>
             </tr>
           </thead>
           <tbody class="text-sm">
             {allOrders.map(({ order, product, access }) => (
               <tr class="border-b border-outline-variant/20 hover:bg-surface-container-high/50 transition-colors">
+                <td class="py-4 px-4">{order.affiliate_id && order.status === 'COMPLETED' && order.commission_status !== 'paid' && Number(order.affiliate_commission || 0) > 0 && <input type="checkbox" class="commission-select w-4 h-4" value={order.id} data-affiliate={order.affiliate_id} data-amount={order.affiliate_commission || 0} />}</td>
                 <td class="py-4 px-6 text-on-surface-variant whitespace-nowrap">
                   {new Date(order.created_at).toLocaleString('id-ID', { dateStyle: 'short', timeStyle: 'short' })}
                 </td>
@@ -152,6 +175,12 @@ const totalPages = Math.ceil(totalCount / limit) || 1;
                   }`}>
                     {order.status}
                   </span>
+                </td>
+                <td class="py-4 px-6 min-w-[180px]">
+                  {order.affiliate_id ? <div>
+                    <p class="font-bold">Rp {Number(order.affiliate_commission || 0).toLocaleString('id-ID')}</p>
+                    {!commissionPayableStatuses.includes(order.status || '') ? <span class="text-xs font-bold text-slate-500">Menunggu pesanan lunas</span> : order.commission_status === 'paid' ? <><span class="text-xs font-bold text-green-600">Sudah dibayar</span>{order.commission_paid_at && <p class="text-[11px] text-on-surface-variant">{new Date(order.commission_paid_at).toLocaleString('id-ID')}</p>}<button class="commission-btn mt-2 text-xs font-bold text-orange-600" data-id={order.id} data-status="pending">Batalkan tanda</button></> : <><span class="text-xs font-bold text-orange-600">Belum dibayar</span><br/><button class="commission-btn mt-2 bg-green-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold" data-id={order.id} data-status="paid">Tandai Dibayar</button></>}
+                  </div> : <span class="text-xs text-on-surface-variant">Bukan affiliate</span>}
                 </td>
                 <td class="py-4 px-6 text-center">
                   {(order.status === 'PAYMENT_CONFIRMATION_SENT' || order.status === 'PAYMENT_REVIEW') && (
@@ -189,7 +218,7 @@ const totalPages = Math.ceil(totalCount / limit) || 1;
             ))}
             {allOrders.length === 0 && (
               <tr>
-                <td colspan="6" class="py-12 text-center text-on-surface-variant">Belum ada pesanan masuk.</td>
+                <td colspan="8" class="py-12 text-center text-on-surface-variant">Belum ada pesanan masuk.</td>
               </tr>
             )}
           </tbody>
@@ -490,5 +519,80 @@ Terima kasih telah berbelanja di VeinTech!`;
         e.target.disabled = false;
       }
     });
+  });
+  document.querySelectorAll('.commission-btn').forEach(btn => {
+    btn.addEventListener('click', async (event) => {
+      const target = event.currentTarget;
+      const nextStatus = target.getAttribute('data-status');
+      const message = nextStatus === 'paid'
+        ? 'Pastikan komisi benar-benar sudah ditransfer. Tandai sebagai sudah dibayar?'
+        : 'Batalkan tanda pembayaran komisi ini?';
+      if (!confirm(message)) return;
+      target.disabled = true;
+      try {
+        const response = await fetch(`/api/admin/orders/${target.getAttribute('data-id')}/commission`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: nextStatus })
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Gagal memperbarui komisi.');
+        window.location.reload();
+      } catch (error) {
+        alert(error instanceof Error ? error.message : 'Terjadi kesalahan jaringan.');
+        target.disabled = false;
+      }
+    });
+  });
+
+  const commissionCheckboxes = Array.from(document.querySelectorAll('.commission-select'));
+  const selectAllCommission = document.getElementById('selectAllCommission');
+  const bulkBar = document.getElementById('bulkCommissionBar');
+  const bulkPayButton = document.getElementById('bulkPayCommission');
+  const selectedCount = document.getElementById('selectedCommissionCount');
+  const selectedTotal = document.getElementById('selectedCommissionTotal');
+
+  const refreshBulkCommission = () => {
+    const checked = commissionCheckboxes.filter(input => input.checked);
+    const total = checked.reduce((sum, input) => sum + Number(input.dataset.amount || 0), 0);
+    selectedCount.textContent = String(checked.length);
+    selectedTotal.textContent = `Rp ${total.toLocaleString('id-ID')}`;
+    bulkBar.classList.toggle('hidden', checked.length === 0);
+    bulkBar.classList.toggle('flex', checked.length > 0);
+    selectAllCommission.checked = commissionCheckboxes.length > 0 && checked.length === commissionCheckboxes.length;
+    selectAllCommission.indeterminate = checked.length > 0 && checked.length < commissionCheckboxes.length;
+  };
+
+  selectAllCommission?.addEventListener('change', () => {
+    commissionCheckboxes.forEach(input => { input.checked = selectAllCommission.checked; });
+    refreshBulkCommission();
+  });
+  commissionCheckboxes.forEach(input => input.addEventListener('change', refreshBulkCommission));
+
+  bulkPayButton?.addEventListener('click', async () => {
+    const checked = commissionCheckboxes.filter(input => input.checked);
+    if (!checked.length) return;
+    const affiliateIds = [...new Set(checked.map(input => input.dataset.affiliate))];
+    if (affiliateIds.length !== 1) {
+      alert('Bulk pembayaran hanya dapat dilakukan untuk satu affiliate. Gunakan filter Affiliate terlebih dahulu.');
+      return;
+    }
+    const total = checked.reduce((sum, input) => sum + Number(input.dataset.amount || 0), 0);
+    if (!confirm(`Pastikan Anda sudah mentransfer Rp ${total.toLocaleString('id-ID')} untuk ${checked.length} pesanan. Tandai semua sebagai dibayar?`)) return;
+    bulkPayButton.disabled = true;
+    bulkPayButton.textContent = 'Memproses...';
+    try {
+      const response = await fetch('/api/admin/commissions/bulk-pay', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ids: checked.map(input => input.value), affiliateId: affiliateIds[0] })
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || 'Bulk pembayaran gagal.');
+      alert(`${result.updated} komisi berhasil ditandai dibayar. Total: Rp ${Number(result.total).toLocaleString('id-ID')}`);
+      window.location.reload();
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Terjadi kesalahan jaringan.');
+      bulkPayButton.disabled = false;
+      bulkPayButton.textContent = 'Tandai Semua Dibayar';
+    }
   });
 </script>

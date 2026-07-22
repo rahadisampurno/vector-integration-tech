@@ -2,12 +2,21 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import CheckoutContent from '../../../components/produk-digital/CheckoutContent.astro';
 import { db } from '../../../db';
-import { products, orders } from '../../../db/schema';
+import { products, orders, affiliates } from '../../../db/schema';
 import { eq } from 'drizzle-orm';
 import { randomBytes } from 'node:crypto';
+import { normalizeWhatsAppNumber } from '../../../utils/validation';
 
 const { slug } = Astro.params;
 let errorMessage = '';
+let formValues = {
+  customer_name: '',
+  business_name: '',
+  referral_code: '',
+  whatsapp: '',
+  email: '',
+  terms_accepted: false
+};
 
 if (Astro.request.method === 'POST') {
   try {
@@ -16,19 +25,28 @@ if (Astro.request.method === 'POST') {
     const whatsapp = data.get('whatsapp')?.toString() || '';
     const email = data.get('email')?.toString() || '';
     const businessName = data.get('business_name')?.toString() || '';
-    const referralCode = data.get('referral_code')?.toString() || '';
+    const referralCode = data.get('referral_code')?.toString().trim().toUpperCase() || '';
+    formValues = {
+      customer_name: name,
+      business_name: businessName,
+      referral_code: referralCode,
+      whatsapp,
+      email,
+      terms_accepted: data.get('terms_accepted') === 'on'
+    };
     
     if (!name || !whatsapp || !email) {
       throw new Error('Nama, WhatsApp, dan Email wajib diisi.');
     }
+    const affiliate = referralCode
+      ? db.select().from(affiliates).where(eq(affiliates.referral_code, referralCode)).get()
+      : null;
+    if (referralCode && (!affiliate || affiliate.status !== 'active')) {
+      throw new Error('Kode referral tidak valid atau sudah tidak aktif.');
+    }
     
     // Normalize WhatsApp (08x -> 628x)
-    let normalizedWa = whatsapp.replace(/\D/g, '');
-    if (normalizedWa.startsWith('08')) {
-      normalizedWa = '628' + normalizedWa.substring(2);
-    } else if (normalizedWa.startsWith('8')) {
-      normalizedWa = '628' + normalizedWa.substring(1);
-    }
+    const normalizedWa = normalizeWhatsAppNumber(whatsapp);
     
     let product = {
       id: 'test-product',
@@ -36,13 +54,16 @@ if (Astro.request.method === 'POST') {
       name: 'VeinTools Desktop',
       category: 'Aplikasi Desktop',
       regular_price: 199000,
+      sale_price: null as number | null,
       thumbnail_url: '/veintools_logo.png'
     };
 
     if (slug) {
       const dbProduct = db.select().from(products).where(eq(products.slug, slug)).get();
-      if (dbProduct) {
+      if (dbProduct?.status === 'active') {
         product = dbProduct as any;
+      } else if (dbProduct) {
+        throw new Error('Produk sedang tidak tersedia.');
       }
     }
     
@@ -54,7 +75,10 @@ if (Astro.request.method === 'POST') {
     
     // Kode unik
     const uniqueAmount = Math.floor(Math.random() * 900) + 100;
-    const totalAmount = product.regular_price + uniqueAmount;
+    const subtotalAmount = product.sale_price || product.regular_price;
+    const discountAmount = affiliate ? Math.round(subtotalAmount * affiliate.discount_rate / 100) : 0;
+    const affiliateCommission = affiliate ? Math.round((subtotalAmount - discountAmount) * affiliate.commission_rate / 100) : 0;
+    const totalAmount = subtotalAmount - discountAmount + uniqueAmount;
     
     // Ensure product exists in DB to prevent foreign key constraint error
     const existingProduct = db.select().from(products).where(eq(products.id, product.id)).get();
@@ -80,6 +104,11 @@ if (Astro.request.method === 'POST') {
       email: email,
       business_name: businessName,
       referral_code: referralCode || null,
+      affiliate_id: affiliate?.id || null,
+      subtotal_amount: subtotalAmount,
+      discount_amount: discountAmount,
+      affiliate_commission: affiliateCommission,
+      commission_status: 'pending',
       total_amount: totalAmount,
       status: 'WAITING_PAYMENT',
       created_at: new Date()
@@ -95,5 +124,5 @@ if (Astro.request.method === 'POST') {
 ---
 
 <BaseLayout title="Pesan Produk Digital - VeinTech">
-  <CheckoutContent slug={slug} locale="id" errorMessage={errorMessage} />
+  <CheckoutContent slug={slug} locale="id" errorMessage={errorMessage} formValues={formValues} />
 </BaseLayout>

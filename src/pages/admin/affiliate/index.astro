@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { db } from '../../../db';
+import { affiliates, orders } from '../../../db/schema';
+import { desc, eq, like, or, sql } from 'drizzle-orm';
+import { randomBytes } from 'node:crypto';
+import { hashPassword } from '../../../lib/auth';
+
+let errorMessage = '';
+let successMessage = '';
+
+if (Astro.request.method === 'POST') {
+  try {
+    const data = await Astro.request.formData();
+    const action = data.get('action')?.toString();
+    if (action === 'toggle') {
+      const id = data.get('id')?.toString();
+      const currentStatus = data.get('current_status')?.toString();
+      if (!id) throw new Error('Affiliate tidak ditemukan.');
+      db.update(affiliates).set({ status: currentStatus === 'active' ? 'inactive' : 'active' }).where(eq(affiliates.id, id)).run();
+      successMessage = 'Status affiliate berhasil diperbarui.';
+    } else {
+      const name = data.get('name')?.toString().trim() || '';
+      const email = data.get('email')?.toString().trim().toLowerCase() || '';
+      const password = data.get('password')?.toString() || '';
+      const commissionRate = Number(data.get('commission_rate'));
+      const discountRate = Number(data.get('discount_rate'));
+      let referralCode = data.get('referral_code')?.toString().trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '') || '';
+      if (!name || !email || password.length < 8) throw new Error('Nama, email, dan password minimal 8 karakter wajib diisi.');
+      if (!Number.isInteger(commissionRate) || commissionRate < 0 || commissionRate > 100) throw new Error('Komisi harus antara 0–100%.');
+      if (!Number.isInteger(discountRate) || discountRate < 0 || discountRate > 100) throw new Error('Diskon harus antara 0–100%.');
+      if (!referralCode) referralCode = `VT${randomBytes(4).toString('hex').toUpperCase()}`;
+      if (db.select().from(affiliates).where(eq(affiliates.email, email)).get()) throw new Error('Email sudah digunakan.');
+      if (db.select().from(affiliates).where(eq(affiliates.referral_code, referralCode)).get()) throw new Error('Kode referral sudah digunakan.');
+      db.insert(affiliates).values({
+        id: crypto.randomUUID(), name, email,
+        password_hash: hashPassword(password), referral_code: referralCode,
+        commission_rate: commissionRate, discount_rate: discountRate, status: 'active', created_at: new Date()
+      }).run();
+      successMessage = `Affiliate ${name} berhasil dibuat dengan kode ${referralCode}.`;
+    }
+  } catch (error) {
+    errorMessage = error instanceof Error ? error.message : 'Gagal menyimpan affiliate.';
+  }
+}
+
+const page = Math.max(1, Number.parseInt(Astro.url.searchParams.get('page') || '1') || 1);
+const limit = 10;
+const search = Astro.url.searchParams.get('search')?.trim() || '';
+const searchCondition = search ? or(
+  like(affiliates.name, `%${search}%`),
+  like(affiliates.email, `%${search}%`),
+  like(affiliates.referral_code, `%${search}%`)
+) : undefined;
+
+const affiliateRows = db.select({
+  affiliate: affiliates,
+  totalOrders: sql<number>`count(${orders.id})`,
+  paidRevenue: sql<number>`coalesce(sum(case when ${orders.status} in ('PAID','DOWNLOAD_READY','COMPLETED') then ${orders.total_amount} else 0 end), 0)`
+}).from(affiliates).leftJoin(orders, eq(orders.affiliate_id, affiliates.id))
+  .where(searchCondition).groupBy(affiliates.id).orderBy(desc(affiliates.created_at))
+  .limit(limit).offset((page - 1) * limit).all();
+const affiliateCount = Number(db.select({ count: sql<number>`count(*)` }).from(affiliates).where(searchCondition).get()?.count || 0);
+const totalPages = Math.max(1, Math.ceil(affiliateCount / limit));
+const pageLink = (targetPage: number) => {
+  const params = new URLSearchParams();
+  if (search) params.set('search', search);
+  params.set('page', String(targetPage));
+  return `?${params.toString()}`;
+};
+---
+
+<BaseLayout title="Admin - Affiliate">
+  <section class="pt-32 pb-24 bg-surface min-h-screen text-on-surface">
+    <div class="max-w-6xl mx-auto px-6 md:px-12">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+        <div><h1 class="text-3xl font-headline font-bold mb-2">Kelola Affiliate</h1><p class="text-on-surface-variant">Buat akun, kode referral, dan pantau performa partner.</p></div>
+        <div class="flex items-center gap-4">
+          <a href="/admin/produk-digital/dashboard" class="font-bold text-primary">← Dashboard Admin</a>
+          <form method="POST" action="/api/admin/logout"><button type="submit" class="bg-red-50 text-red-600 text-sm font-bold px-4 py-2 rounded-xl border border-red-200 flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">logout</span> Keluar</button></form>
+        </div>
+      </div>
+      {errorMessage && <div class="p-4 mb-6 rounded-xl bg-red-50 text-red-700 border border-red-200">{errorMessage}</div>}
+      {successMessage && <div class="p-4 mb-6 rounded-xl bg-green-50 text-green-700 border border-green-200">{successMessage}</div>}
+      <div class="grid lg:grid-cols-[360px_1fr] gap-8">
+        <form method="POST" class="bg-surface-container p-6 rounded-2xl border border-outline-variant/30 space-y-4 h-fit">
+          <h2 class="text-xl font-bold">Tambah Affiliate</h2>
+          <label class="block text-sm font-bold">Nama<input name="name" required class="mt-2 w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3" /></label>
+          <label class="block text-sm font-bold">Email Login<input name="email" type="email" required class="mt-2 w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3" /></label>
+          <label class="block text-sm font-bold">Password Awal<input name="password" type="password" minlength="8" required class="mt-2 w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3" /></label>
+          <label class="block text-sm font-bold">Komisi (%)<input name="commission_rate" type="number" min="0" max="100" value="10" required class="mt-2 w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3" /></label>
+          <label class="block text-sm font-bold">Diskon Pembeli (%)<input name="discount_rate" type="number" min="0" max="100" value="10" required class="mt-2 w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3" /></label>
+          <label class="block text-sm font-bold">Kode Referral <span class="font-normal text-on-surface-variant">(kosongkan untuk generate)</span><input name="referral_code" maxlength="30" class="mt-2 w-full uppercase bg-surface border border-outline-variant/50 rounded-xl px-4 py-3" placeholder="Otomatis" /></label>
+          <button class="w-full bg-primary text-on-primary font-bold py-3 rounded-xl">Buat Affiliate</button>
+        </form>
+        <div>
+          <form method="GET" class="mb-4 flex gap-2">
+            <input name="search" value={search} placeholder="Cari nama, email, atau kode referral..." class="flex-1 bg-surface border border-outline-variant/50 rounded-xl px-4 py-3" />
+            <button class="bg-primary text-on-primary font-bold px-5 rounded-xl">Cari</button>
+          </form>
+          <div class="bg-surface-container rounded-2xl border border-outline-variant/30 overflow-x-auto">
+          <table class="w-full text-sm"><thead><tr class="text-left border-b border-outline-variant/30"><th class="p-4">Affiliate</th><th class="p-4">Kode</th><th class="p-4">Penjualan</th><th class="p-4">Status</th><th class="p-4"></th></tr></thead>
+          <tbody>{affiliateRows.map(({ affiliate, totalOrders, paidRevenue }) => <tr class="border-b border-outline-variant/20"><td class="p-4"><b>{affiliate.name}</b><br/><span class="text-on-surface-variant">{affiliate.email}<br/>Komisi {affiliate.commission_rate}% · Diskon {affiliate.discount_rate}%</span></td><td class="p-4 font-mono font-bold">{affiliate.referral_code}</td><td class="p-4">{totalOrders} order<br/><span class="text-on-surface-variant">Rp {Number(paidRevenue).toLocaleString('id-ID')}</span></td><td class="p-4">{affiliate.status}</td><td class="p-4"><form method="POST"><input type="hidden" name="action" value="toggle"/><input type="hidden" name="id" value={affiliate.id}/><input type="hidden" name="current_status" value={affiliate.status}/><button class="font-bold text-primary">{affiliate.status === 'active' ? 'Nonaktifkan' : 'Aktifkan'}</button></form></td></tr>)}</tbody></table>
+          {affiliateRows.length === 0 && <p class="p-8 text-center text-on-surface-variant">Belum ada affiliate.</p>}
+          {totalPages > 1 && <div class="flex justify-between items-center p-4 border-t border-outline-variant/30"><p class="text-sm text-on-surface-variant">Halaman {page} dari {totalPages} · {affiliateCount} affiliate</p><div class="flex gap-2"><a href={pageLink(page - 1)} class={`px-4 py-2 rounded-lg border border-outline-variant/50 font-bold text-sm ${page <= 1 ? 'pointer-events-none opacity-40' : ''}`}>Sebelumnya</a><a href={pageLink(page + 1)} class={`px-4 py-2 rounded-lg border border-outline-variant/50 font-bold text-sm ${page >= totalPages ? 'pointer-events-none opacity-40' : ''}`}>Selanjutnya</a></div></div>}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

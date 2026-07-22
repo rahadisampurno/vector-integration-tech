@@ -1,9 +1,13 @@
 ---
 import { db } from '../../db';
-import { products } from '../../db/schema';
+import { products, affiliates } from '../../db/schema';
 import { eq } from 'drizzle-orm';
 
 const { slug, errorMessage } = Astro.props;
+const formValues = (Astro.props.formValues || {}) as Record<string, string | boolean>;
+const referralCode = Astro.url.searchParams.get('ref')?.trim().toUpperCase() || '';
+const fieldValue = (name: string, fallback = '') => String(formValues[name] ?? fallback);
+const effectiveReferralCode = fieldValue('referral_code', referralCode);
 
 let product = {
   id: 'test-product',
@@ -11,15 +15,26 @@ let product = {
   name: 'VeinTools Desktop',
   category: 'Aplikasi Desktop',
   regular_price: 199000,
+  sale_price: null as number | null,
   thumbnail_url: '/veintools_logo.png'
 };
 
 if (slug) {
   const dbProduct = db.select().from(products).where(eq(products.slug, slug)).get();
-  if (dbProduct) {
+  if (dbProduct?.status === 'active') {
     product = dbProduct as any;
+  } else if (dbProduct) {
+    return Astro.redirect('/produk-digital');
   }
 }
+
+const referralAffiliate = effectiveReferralCode
+  ? db.select().from(affiliates).where(eq(affiliates.referral_code, effectiveReferralCode)).get()
+  : null;
+const activeAffiliate = referralAffiliate?.status === 'active' ? referralAffiliate : null;
+const productPrice = product.sale_price || product.regular_price;
+const discountAmount = activeAffiliate ? Math.round(productPrice * activeAffiliate.discount_rate / 100) : 0;
+const discountedPrice = productPrice - discountAmount;
 ---
 
 <section class="pt-32 pb-24 bg-surface min-h-screen text-on-surface">
@@ -65,34 +80,35 @@ if (slug) {
           
           <div>
             <label for="customer_name" class="block text-sm font-medium mb-2">Nama Lengkap *</label>
-            <input type="text" id="customer_name" name="customer_name" required class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-colors" placeholder="Masukkan nama lengkap Anda" />
+            <input type="text" id="customer_name" name="customer_name" value={fieldValue('customer_name')} required class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-colors" placeholder="Masukkan nama lengkap Anda" />
           </div>
           
           <div>
             <label for="business_name" class="block text-sm font-medium mb-2">Nama Usaha (Opsional)</label>
-            <input type="text" id="business_name" name="business_name" class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-colors" placeholder="Masukkan nama usaha atau brand Anda" />
+            <input type="text" id="business_name" name="business_name" value={fieldValue('business_name')} class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-colors" placeholder="Masukkan nama usaha atau brand Anda" />
           </div>
           
           <div>
             <label for="referral_code" class="block text-sm font-medium mb-2">Kode Referal (Opsional)</label>
-            <input type="text" id="referral_code" name="referral_code" class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-colors uppercase" placeholder="Jika ada, masukkan kode dari tim marketing" />
+            <input type="text" id="referral_code" name="referral_code" value={fieldValue('referral_code', referralCode)} class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-colors uppercase" placeholder="Jika ada, masukkan kode dari tim marketing" />
+            <p id="referralStatus" class={`mt-2 text-sm font-bold ${activeAffiliate ? 'text-green-700' : 'hidden'}`}>{activeAffiliate ? `Kode aktif — Anda mendapat diskon ${activeAffiliate.discount_rate}%.` : ''}</p>
           </div>
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label for="whatsapp" class="block text-sm font-medium mb-2">Nomor WhatsApp *</label>
-              <input type="tel" id="whatsapp" name="whatsapp" required class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-colors" placeholder="Contoh: 081234567890" />
+              <input type="tel" id="whatsapp" name="whatsapp" value={fieldValue('whatsapp')} required class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-colors" placeholder="Contoh: 081234567890" />
             </div>
             
             <div>
               <label for="email" class="block text-sm font-medium mb-2">Email Aktif *</label>
-              <input type="email" id="email" name="email" required class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-colors" placeholder="Email untuk notifikasi" />
+              <input type="email" id="email" name="email" value={fieldValue('email')} required class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-colors" placeholder="Email untuk notifikasi" />
             </div>
           </div>
           
           <div class="pt-6 border-t border-outline-variant/30">
             <label class="flex items-start gap-3 cursor-pointer">
-              <input type="checkbox" required class="mt-1 w-5 h-5 rounded border-outline-variant/50 text-primary-fixed focus:ring-primary-fixed" />
+              <input type="checkbox" name="terms_accepted" checked={Boolean(formValues.terms_accepted)} required class="mt-1 w-5 h-5 rounded border-outline-variant/50 text-primary-fixed focus:ring-primary-fixed" />
               <span class="text-sm text-on-surface-variant">
                 Saya menyetujui <a href="/terms" target="_blank" class="text-primary font-medium hover:underline">Syarat & Ketentuan Lisensi</a> serta <a href="/privacy" target="_blank" class="text-primary font-medium hover:underline">Kebijakan Privasi</a> yang berlaku, dan memastikan data WhatsApp & Email sudah benar untuk pengiriman akses.
               </span>
@@ -121,8 +137,9 @@ if (slug) {
           <div class="space-y-3 text-sm mb-6 border-b border-outline-variant/30 pb-6">
             <div class="flex justify-between">
               <span class="text-on-surface-variant">Harga Produk</span>
-              <span>Rp {product.regular_price.toLocaleString('id-ID')}</span>
+              <span id="productPrice">Rp {productPrice.toLocaleString('id-ID')}</span>
             </div>
+            <div id="referralDiscountRow" class={`flex justify-between text-green-700 dark:text-green-300 font-bold ${activeAffiliate ? '' : 'hidden'}`}><span id="referralDiscountLabel">Diskon referral ({activeAffiliate?.discount_rate || 0}%)</span><span id="referralDiscountAmount">-Rp {discountAmount.toLocaleString('id-ID')}</span></div>
             <div class="mt-4 p-3 bg-primary/5 rounded-xl border border-primary/20">
               <p class="text-xs text-on-surface-variant leading-relaxed">
                 <span class="font-bold text-primary">Info:</span> Total pembayaran akan ditambahkan kode unik maksimal Rp999 untuk membantu verifikasi transaksi secara otomatis.
@@ -132,7 +149,7 @@ if (slug) {
           
           <div class="flex justify-between items-center font-bold text-lg mb-6">
             <span>Subtotal</span>
-            <span>Rp {product.regular_price.toLocaleString('id-ID')}</span>
+            <span id="checkoutSubtotal">Rp {discountedPrice.toLocaleString('id-ID')}</span>
           </div>
           
           <div class="bg-blue-50 dark:bg-slate-800/80 p-4 rounded-xl border border-blue-100 dark:border-slate-700 text-sm mt-4">
@@ -151,3 +168,50 @@ if (slug) {
     </div>
   </div>
 </section>
+
+<script define:vars={{ productSlug: product.slug, originalPrice: productPrice }}>
+  const referralInput = document.getElementById('referral_code');
+  const referralStatus = document.getElementById('referralStatus');
+  const discountRow = document.getElementById('referralDiscountRow');
+  const discountLabel = document.getElementById('referralDiscountLabel');
+  const discountAmountEl = document.getElementById('referralDiscountAmount');
+  const subtotalEl = document.getElementById('checkoutSubtotal');
+  const formatRupiah = (value) => `Rp ${Number(value).toLocaleString('id-ID')}`;
+  let referralTimer;
+
+  const resetReferral = (message = '') => {
+    discountRow?.classList.add('hidden');
+    if (subtotalEl) subtotalEl.textContent = formatRupiah(originalPrice);
+    if (referralStatus) {
+      referralStatus.textContent = message;
+      referralStatus.className = message ? 'mt-2 text-sm font-bold text-red-700' : 'hidden';
+    }
+  };
+
+  referralInput?.addEventListener('input', () => {
+    const code = referralInput.value.trim().toUpperCase();
+    referralInput.value = code;
+    clearTimeout(referralTimer);
+    if (!code) { resetReferral(); return; }
+    if (referralStatus) {
+      referralStatus.textContent = 'Memeriksa kode referral...';
+      referralStatus.className = 'mt-2 text-sm font-medium text-slate-600';
+    }
+    referralTimer = setTimeout(async () => {
+      try {
+        const response = await fetch(`/api/referral/validate?code=${encodeURIComponent(code)}&product=${encodeURIComponent(productSlug)}`);
+        const result = await response.json();
+        if (referralInput.value.trim().toUpperCase() !== code) return;
+        if (!result.valid) { resetReferral('Kode referral tidak valid atau sudah tidak aktif.'); return; }
+        if (referralStatus) {
+          referralStatus.textContent = `Kode aktif — Anda mendapat diskon ${result.discountRate}%.`;
+          referralStatus.className = 'mt-2 text-sm font-bold text-green-700';
+        }
+        discountRow?.classList.remove('hidden');
+        if (discountLabel) discountLabel.textContent = `Diskon referral (${result.discountRate}%)`;
+        if (discountAmountEl) discountAmountEl.textContent = `-${formatRupiah(result.discount)}`;
+        if (subtotalEl) subtotalEl.textContent = formatRupiah(result.subtotal);
+      } catch { resetReferral('Kode referral belum dapat diperiksa. Silakan coba lagi.'); }
+    }, 350);
+  });
+</script>

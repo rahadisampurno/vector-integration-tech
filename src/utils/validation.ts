@@ -12,6 +12,16 @@ export interface ValidationResult {
   errors: Partial<Record<keyof ContactFormData, string>>;
 }
 
+/** Normalizes common Indonesian WhatsApp formats to 62xxxxxxxxxx. */
+export function normalizeWhatsAppNumber(value: string): string {
+  let digits = value.replace(/\D/g, '');
+  if (digits.startsWith('00')) digits = digits.slice(2);
+  if (digits.startsWith('62')) return digits;
+  if (digits.startsWith('0')) return `62${digits.slice(1)}`;
+  if (digits.startsWith('8')) return `62${digits}`;
+  return digits;
+}
+
 export function validateContactForm(data: Partial<ContactFormData>): ValidationResult {
   const errors: Partial<Record<keyof ContactFormData, string>> = {};
 

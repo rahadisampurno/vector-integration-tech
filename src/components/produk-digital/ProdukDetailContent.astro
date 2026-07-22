@@ -19,9 +19,11 @@ let product = {
 
 if (slug) {
   const dbProduct = db.select().from(products).where(eq(products.slug, slug)).get();
-  if (dbProduct) {
+  if (dbProduct?.status === 'active') {
     product = dbProduct as any;
-  } else if (slug !== 'veintools-desktop') {
+  } else if (!dbProduct && slug === 'veintools-desktop') {
+    // Keep the legacy fallback product available until it exists in the database.
+  } else {
     return Astro.redirect('/produk-digital');
   }
 }

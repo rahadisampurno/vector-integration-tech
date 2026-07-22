@@ -1,4 +1,5 @@
 import { defineMiddleware } from 'astro:middleware';
+import { getSession } from './lib/auth';
 
 export const onRequest = defineMiddleware((context, next) => {
   const url = new URL(context.request.url);
@@ -12,10 +13,9 @@ export const onRequest = defineMiddleware((context, next) => {
       return next();
     }
 
-    // Check for admin session cookie
-    const adminSession = context.cookies.get('admin_session')?.value;
+    const session = getSession(context.cookies);
 
-    if (adminSession !== 'active') {
+    if (!session) {
       // If it's an API route, return 401 Unauthorized
       if (path.startsWith('/api/admin')) {
         return new Response(JSON.stringify({ error: 'Unauthorized', message: 'Silakan login terlebih dahulu' }), {
@@ -25,6 +25,14 @@ export const onRequest = defineMiddleware((context, next) => {
       }
       // If it's a page route, redirect to login
       return context.redirect('/admin/login');
+    }
+
+    const affiliateAllowed = path === '/admin/affiliate/dashboard' || path === '/api/admin/logout';
+    if (session.role === 'affiliate' && !affiliateAllowed) {
+      if (path.startsWith('/api/admin')) {
+        return new Response(JSON.stringify({ error: 'Forbidden' }), { status: 403, headers: { 'Content-Type': 'application/json' } });
+      }
+      return context.redirect('/admin/affiliate/dashboard');
     }
   }
 

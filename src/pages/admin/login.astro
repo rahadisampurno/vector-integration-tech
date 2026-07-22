@@ -1,8 +1,17 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { db } from '../../db';
+import { affiliates } from '../../db/schema';
+import { eq } from 'drizzle-orm';
+import { createSession, getSession, verifyPassword } from '../../lib/auth';
 
 const { cookies, request, redirect } = Astro;
 let errorMessage = '';
+
+const existingSession = getSession(cookies);
+if (existingSession) {
+  return redirect(existingSession.role === 'admin' ? '/admin/produk-digital/dashboard' : '/admin/affiliate/dashboard');
+}
 
 if (request.method === 'POST') {
   try {
@@ -16,17 +25,18 @@ if (request.method === 'POST') {
     const validPassword = import.meta.env.ADMIN_PASS || 'adminveintech';
     
     if (username === validUsername && password === validPassword) {
-      cookies.set('admin_session', 'active', {
-        path: '/',
-        httpOnly: true,
-        secure: import.meta.env.PROD,
-        sameSite: 'strict',
-        maxAge: 60 * 60 * 24 // 1 day
-      });
+      createSession(cookies, 'admin');
       return redirect('/admin/produk-digital/pesanan');
-    } else {
-      errorMessage = 'Username atau Password salah.';
     }
+
+    const affiliate = typeof username === 'string'
+      ? db.select().from(affiliates).where(eq(affiliates.email, username.trim().toLowerCase())).get()
+      : null;
+    if (affiliate?.status === 'active' && typeof password === 'string' && verifyPassword(password, affiliate.password_hash)) {
+      createSession(cookies, 'affiliate', affiliate.id);
+      return redirect('/admin/affiliate/dashboard');
+    }
+    errorMessage = 'Username/email atau password salah.';
   } catch (e) {
     errorMessage = 'Terjadi kesalahan sistem.';
   }
@@ -39,11 +49,11 @@ if (request.method === 'POST') {
       <div class="flex justify-center mb-6">
         <a href="/" class="text-2xl font-bold font-headline flex items-center gap-2">
           <span class="material-symbols-outlined text-primary-fixed">admin_panel_settings</span>
-          <span>Admin Login</span>
+          <span>Portal Penjualan</span>
         </a>
       </div>
       <h2 class="mt-6 text-center text-3xl font-extrabold text-on-surface">
-        Sign in to your account
+        Masuk ke akun Anda
       </h2>
     </div>
 
@@ -59,7 +69,7 @@ if (request.method === 'POST') {
         <form class="space-y-6" method="POST">
           <div>
             <label for="username" class="block text-sm font-medium text-on-surface">
-              Username
+              Username Admin / Email Affiliate
             </label>
             <div class="mt-1">
               <input id="username" name="username" type="text" required class="appearance-none block w-full px-3 py-2 border border-outline-variant rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm bg-surface">
@@ -77,7 +87,7 @@ if (request.method === 'POST') {
 
           <div>
             <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-on-primary bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors">
-              Sign in
+              Masuk
             </button>
           </div>
         </form>

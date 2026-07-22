@@ -2,6 +2,7 @@
 import { db } from '../../db';
 import { orders, products, downloadAccesses } from '../../db/schema';
 import { eq } from 'drizzle-orm';
+import { normalizeWhatsAppNumber } from '../../utils/validation';
 
 const { orderCode } = Astro.props;
 
@@ -20,11 +21,12 @@ const access = db.select().from(downloadAccesses).where(eq(downloadAccesses.orde
 
 let isAuthorized = false;
 let errorMessage = '';
+let submittedPhone = '';
 
 if (Astro.request.method === 'POST') {
   const data = await Astro.request.formData();
-  const phone = data.get('whatsapp');
-  if (phone && (phone.toString().replace(/\D/g, '') === order.whatsapp.replace(/\D/g, ''))) {
+  submittedPhone = data.get('whatsapp')?.toString() || '';
+  if (submittedPhone && normalizeWhatsAppNumber(submittedPhone) === normalizeWhatsAppNumber(order.whatsapp)) {
     isAuthorized = true;
   } else {
     errorMessage = 'Nomor WhatsApp tidak cocok dengan pesanan ini.';
@@ -94,7 +96,8 @@ const isErrorState = ['EXPIRED', 'CANCELLED', 'REJECTED'].includes(order.status)
         <form method="POST" class="space-y-4">
           <div>
             <label for="whatsapp" class="block text-sm font-medium mb-1">Nomor WhatsApp</label>
-            <input type="tel" id="whatsapp" name="whatsapp" required class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-colors" placeholder="Contoh: 081234567890" />
+            <input type="tel" id="whatsapp" name="whatsapp" value={submittedPhone} required class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-colors" placeholder="Contoh: 081234567890 atau +6281234567890" />
+            <p class="text-xs text-on-surface-variant mt-2">Bisa menggunakan format 08, 8, 62, atau +62.</p>
           </div>
           <button type="submit" class="w-full bg-primary text-on-primary font-bold py-3 rounded-xl hover:bg-primary/90 transition-colors shadow-md">
             Cek Status

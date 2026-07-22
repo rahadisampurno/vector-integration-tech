@@ -139,14 +139,14 @@ const totalPages = Math.ceil(totalCount / limit) || 1;
                     </button>
                   )}
                   {order.status === 'WAITING_LICENSE' && (
-                    <button class="upload-license-btn bg-orange-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg hover:bg-orange-700 transition-colors mt-2" 
+                    <button class="generate-license-btn bg-orange-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg hover:bg-orange-700 transition-colors mt-2" 
                       data-id={order.id}
                       data-phone={order.whatsapp} 
                       data-name={order.customer_name} 
                       data-product={product?.name}
                       data-order-code={order.order_code}
                     >
-                      Upload Lisensi
+                      Generate Lisensi
                     </button>
                   )}
                 </td>
@@ -207,24 +207,27 @@ const totalPages = Math.ceil(totalCount / limit) || 1;
     </div>
   </div>
 
-  <!-- Modal Upload Lisensi -->
+  <!-- Modal Generate Lisensi -->
   <div id="licenseModal" class="fixed inset-0 z-50 bg-black/60 hidden items-center justify-center p-4">
     <div class="bg-surface rounded-2xl w-full max-w-md p-6 shadow-2xl">
       <div class="flex justify-between items-center mb-4">
-        <h3 class="text-xl font-bold font-headline">Upload File Lisensi</h3>
+        <h3 class="text-xl font-bold font-headline">Generate Lisensi</h3>
         <button id="closeLicenseModal" class="text-slate-400 hover:text-slate-600"><span class="material-symbols-outlined">close</span></button>
       </div>
       
-      <p class="text-sm text-on-surface-variant mb-4">Pilih file lisensi (.key, .lic) untuk pesanan <span id="licenseOrderCode" class="font-bold text-slate-800"></span></p>
+      <p class="text-sm text-on-surface-variant mb-4">Buat lisensi untuk pesanan <span id="licenseOrderCode" class="font-bold text-slate-800"></span></p>
 
-      <input type="file" id="licenseFileInput" class="w-full text-sm text-slate-500 mb-6 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20" />
+      <div class="mb-6">
+        <label class="block text-sm font-bold text-slate-700 mb-2">Device Fingerprint (App ID)</label>
+        <input type="text" id="deviceFingerprintInput" placeholder="Contoh: VT-A826-9860..." class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-3 outline-none focus:border-primary-fixed" />
+      </div>
       
-      <button id="btnUploadLicense" class="w-full bg-primary text-on-primary font-bold py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors">
-        Upload & Proses
+      <button id="btnGenerateLicense" class="w-full bg-primary text-on-primary font-bold py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors">
+        Generate Lisensi & Download
       </button>
 
       <button id="btnSendLicenseWa" class="w-full bg-[#25D366] text-white font-bold py-3 rounded-xl hidden items-center justify-center gap-2 hover:bg-[#1ebd5c] transition-colors mt-4">
-        Kirim via WhatsApp
+        Beritahu via WhatsApp
       </button>
     </div>
   </div>
@@ -242,8 +245,7 @@ const totalPages = Math.ceil(totalCount / limit) || 1;
   // License Modal Elements
   const licenseModal = document.getElementById('licenseModal');
   const closeLicenseModal = document.getElementById('closeLicenseModal');
-  const licenseFileInput = document.getElementById('licenseFileInput');
-  const btnUploadLicense = document.getElementById('btnUploadLicense');
+  const btnGenerateLicense = document.getElementById('btnGenerateLicense');
   const btnSendLicenseWa = document.getElementById('btnSendLicenseWa');
   const licenseOrderCodeSpan = document.getElementById('licenseOrderCode');
 
@@ -344,7 +346,7 @@ Terima kasih telah berbelanja di VeinTech.`;
     });
   });
 
-  document.querySelectorAll('.upload-license-btn').forEach(btn => {
+  document.querySelectorAll('.generate-license-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const b = e.currentTarget;
       const orderId = b.getAttribute('data-id');
@@ -357,50 +359,60 @@ Terima kasih telah berbelanja di VeinTech.`;
       licenseOrderCodeSpan.innerText = orderCode;
       
       // Reset state
-      licenseFileInput.value = '';
-      btnUploadLicense.classList.remove('hidden');
-      btnUploadLicense.classList.add('flex');
+      document.getElementById('deviceFingerprintInput').value = '';
+      btnGenerateLicense.classList.remove('hidden');
+      btnGenerateLicense.classList.add('flex');
       btnSendLicenseWa.classList.add('hidden');
       btnSendLicenseWa.classList.remove('flex');
-      btnUploadLicense.innerText = 'Upload & Proses';
+      btnGenerateLicense.innerText = 'Generate Lisensi & Download';
 
-      btnUploadLicense.onclick = async () => {
-        const file = licenseFileInput.files[0];
-        if (!file) {
-          alert('Silakan pilih file lisensi terlebih dahulu!');
+      btnGenerateLicense.onclick = async () => {
+        const fingerprint = document.getElementById('deviceFingerprintInput').value.trim();
+        if (!fingerprint) {
+          alert('Silakan masukkan Device Fingerprint (App ID) terlebih dahulu!');
           return;
         }
 
-        btnUploadLicense.innerText = 'Uploading...';
-        btnUploadLicense.disabled = true;
-
-        const formData = new FormData();
-        formData.append('license_file', file);
+        btnGenerateLicense.innerText = 'Generating...';
+        btnGenerateLicense.disabled = true;
 
         try {
-          const res = await fetch(`/api/admin/orders/${orderId}/upload-license`, {
+          const res = await fetch(`/api/admin/license/generate`, {
             method: 'POST',
-            body: formData
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              deviceFingerprint: fingerprint,
+              customerName: name,
+              orderId: orderId
+            })
           });
           const data = await res.json();
 
           if (data.success) {
-            btnUploadLicense.classList.add('hidden');
-            btnUploadLicense.classList.remove('flex');
+            // Trigger download
+            const blob = new Blob([JSON.stringify(data.envelope, null, 2)], { type: 'application/json' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = data.fileName;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            
+            btnGenerateLicense.classList.add('hidden');
+            btnGenerateLicense.classList.remove('flex');
             btnSendLicenseWa.classList.remove('hidden');
             btnSendLicenseWa.classList.add('flex');
 
             btnSendLicenseWa.onclick = () => {
-              const url = `${baseUrl}${data.license_url}`;
               const msg = `Halo ${name},
 
 Lisensi Anda untuk produk ${product} telah berhasil dibuat!
-
-Silakan download file lisensi Anda pada link berikut:
-${url}
+Kami telah mengirimkan file lisensi (.veinlicense) ke Anda. Silakan simpan file lisensi tersebut.
 
 Cara Aktivasi:
-1. Ekstrak file lisensi jika dalam bentuk ZIP.
+1. Simpan file lisensi (.veinlicense) yang kami berikan.
 2. Buka aplikasi VeinTools Desktop.
 3. Klik tombol Aktivasi Lisensi.
 4. Pilih file lisensi yang baru saja diunduh.
@@ -410,14 +422,14 @@ Terima kasih telah berbelanja di VeinTech!`;
               window.location.reload();
             };
           } else {
-            alert('Upload gagal: ' + data.error);
-            btnUploadLicense.innerText = 'Upload & Proses';
-            btnUploadLicense.disabled = false;
+            alert('Generate gagal: ' + data.message);
+            btnGenerateLicense.innerText = 'Generate Lisensi & Download';
+            btnGenerateLicense.disabled = false;
           }
         } catch (err) {
           alert('Terjadi kesalahan jaringan.');
-          btnUploadLicense.innerText = 'Upload & Proses';
-          btnUploadLicense.disabled = false;
+          btnGenerateLicense.innerText = 'Generate Lisensi & Download';
+          btnGenerateLicense.disabled = false;
         }
       };
 

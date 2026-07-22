@@ -218,6 +218,53 @@ const checkoutUrl = `/produk-digital/${product.slug}/pesan`;
            <p class="mb-6">
              Kami memahami bahwa privasi data bisnis sangat penting. VeinTools bekerja <strong>sepenuhnya offline</strong>. Database disimpan langsung di laptop/PC Anda, bukan di *cloud server* pihak ketiga. Artinya, tidak ada yang bisa mengintip data penjualan Anda.
            </p>
+
+           <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-12 mb-6">Spesifikasi Sistem (System Requirements)</h3>
+           <div class="space-y-8 text-slate-700 dark:text-slate-300 mb-12">
+             <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+               <h4 class="font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2 mb-4"><span class="text-xl">💻</span> 1. Sistem Operasi (OS)</h4>
+               <ul class="list-disc pl-6 space-y-2 text-sm md:text-base">
+                 <li><strong>Windows:</strong> Windows 10 & Windows 11 (Tauri secara otomatis menggunakan WebView2 bawaan Windows). Bisa jalan di Windows 7/8 jika diinstal WebView2 secara manual, namun sangat disarankan minimal Windows 10.</li>
+                 <li><strong>Mac (Apple):</strong> macOS 10.15 (Catalina) atau versi yang lebih baru. Sangat dioptimalkan baik untuk Intel Mac maupun chip Apple Silicon (M1/M2/M3).</li>
+                 <li><strong>Linux:</strong> Berbagai distro modern (Ubuntu 20.04+, Debian, dsb) yang mendukung WebKitGTK.</li>
+               </ul>
+             </div>
+             
+             <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+               <h4 class="font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2 mb-4"><span class="text-xl">🧠</span> 2. Memori (RAM)</h4>
+               <ul class="list-disc pl-6 space-y-2 text-sm md:text-base">
+                 <li><strong>Minimum:</strong> 2 GB RAM.</li>
+                 <li><strong>Rekomendasi:</strong> 4 GB RAM.</li>
+               </ul>
+               <p class="mt-4 text-sm italic text-slate-500 bg-white dark:bg-slate-900 p-3 rounded-lg border border-slate-200 dark:border-slate-700">
+                 *Sebagai perbandingan, saat menyala, aplikasi VeinTools ini umumnya hanya akan memakan sekitar 30 - 80 MB RAM saja.
+               </p>
+             </div>
+             
+             <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+               <h4 class="font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2 mb-4"><span class="text-xl">⚙️</span> 3. Prosesor (CPU)</h4>
+               <ul class="list-disc pl-6 space-y-2 text-sm md:text-base">
+                 <li><strong>Minimum:</strong> Prosesor Dual-core 1.5 GHz ke atas (Intel Celeron, Pentium, Core i3 generasi lama, atau setara AMD).</li>
+                 <li>Tidak membutuhkan spesifikasi gaming atau grafis tinggi sama sekali.</li>
+               </ul>
+             </div>
+             
+             <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+               <h4 class="font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2 mb-4"><span class="text-xl">💾</span> 4. Penyimpanan (Storage)</h4>
+               <ul class="list-disc pl-6 space-y-2 text-sm md:text-base">
+                 <li>Ukuran installer aplikasi ini sangat kecil (biasanya hanya sekitar 10 - 20 MB).</li>
+                 <li><strong>Minimum Space:</strong> Sediakan sekitar 100 MB ruang kosong pada Hardisk atau SSD untuk instalasi dan penyimpanan database lokal.</li>
+               </ul>
+             </div>
+             
+             <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+               <h4 class="font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2 mb-4"><span class="text-xl">🌐</span> 5. Internet</h4>
+               <ul class="list-disc pl-6 space-y-2 text-sm md:text-base">
+                 <li><strong>Offline-First:</strong> Aplikasi ini dirancang untuk bekerja 100% tanpa internet (Offline).</li>
+                 <li>Internet hanya dibutuhkan <strong>satu kali pada saat awal</strong> pengguna memasukkan License Key untuk validasi, setelah itu aplikasi bisa berjalan murni tanpa koneksi.</li>
+               </ul>
+             </div>
+           </div>
            
            <p class="font-bold text-lg text-blue-600 dark:text-blue-400 mt-10">
              Dapatkan lisensi resmi 1 Tahun ke VeinTools Desktop hari ini!

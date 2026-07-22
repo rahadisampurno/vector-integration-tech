@@ -73,7 +73,9 @@ if (slug) {
           <div class="pt-6 border-t border-outline-variant/30">
             <label class="flex items-start gap-3 cursor-pointer">
               <input type="checkbox" required class="mt-1 w-5 h-5 rounded border-outline-variant/50 text-primary-fixed focus:ring-primary-fixed" />
-              <span class="text-sm text-on-surface-variant">Saya menyetujui syarat dan ketentuan yang berlaku dan memastikan data yang saya masukkan sudah benar.</span>
+              <span class="text-sm text-on-surface-variant">
+                Saya menyetujui <a href="#" class="text-primary font-medium hover:underline">Syarat & Ketentuan Lisensi</a> serta <a href="#" class="text-primary font-medium hover:underline">Kebijakan Privasi</a> yang berlaku, dan memastikan data WhatsApp & Email sudah benar untuk pengiriman akses.
+              </span>
             </label>
           </div>
           
@@ -107,9 +109,20 @@ if (slug) {
             </div>
           </div>
           
-          <div class="flex justify-between items-center font-bold text-lg">
+          <div class="flex justify-between items-center font-bold text-lg mb-6">
             <span>Subtotal</span>
             <span>Rp {product.regular_price.toLocaleString('id-ID')}</span>
+          </div>
+          
+          <div class="bg-blue-50 dark:bg-slate-800/80 p-4 rounded-xl border border-blue-100 dark:border-slate-700 text-sm mt-4">
+            <div class="flex items-center gap-2 font-bold text-blue-800 dark:text-blue-300 mb-2">
+              <span class="material-symbols-outlined text-lg">lock</span> Pembayaran Transaksi Aman
+            </div>
+            <p class="text-slate-600 dark:text-slate-400 text-xs mb-3">Menerima Transfer BCA, Mandiri, BRI, BNI, Bank Syariah, dan QRIS / E-Wallet.</p>
+            <p class="text-slate-600 dark:text-slate-400 text-xs flex items-start gap-1">
+              <span class="material-symbols-outlined text-green-500 text-[14px]">verified</span> 
+              <span>Jaminan uang kembali jika aplikasi gagal diinstal.</span>
+            </p>
           </div>
         </div>
       </div>

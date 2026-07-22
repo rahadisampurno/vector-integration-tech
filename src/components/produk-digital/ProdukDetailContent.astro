@@ -50,7 +50,7 @@ const checkoutUrl = `/produk-digital/${product.slug}/pesan`;
              <h2 class="text-lg md:text-xl text-slate-600 dark:text-slate-400 font-medium max-w-3xl mb-4">
                Kotak peralatan bisnis offline terlengkap. Dapatkan <strong>lebih dari 25+ tools cerdas</strong> dalam satu aplikasi untuk mempermudah operasional harian UMKM.
              </h2>
-             <div class="flex flex-wrap items-center gap-4 text-sm font-bold">
+             <div class="flex flex-wrap items-center gap-4 text-sm font-bold mb-6">
                <div class="flex items-center gap-1 text-yellow-500">
                  <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
                  <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
@@ -58,8 +58,17 @@ const checkoutUrl = `/produk-digital/${product.slug}/pesan`;
                  <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
                  <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
                </div>
-               <span class="text-blue-600 dark:text-blue-400 font-medium">1.250+ total download</span>
+               <span class="text-blue-600 dark:text-blue-400 font-medium">Berdasarkan Aktivasi Resmi Hingga Juli 2026</span>
                <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-md text-xs font-black uppercase tracking-wider border border-yellow-200">Lisensi 1 Tahun</span>
+             </div>
+             
+             <div class="flex flex-col sm:flex-row gap-4 max-w-xl">
+               <a href={checkoutUrl} class="flex-1 bg-primary text-on-primary font-bold text-center py-4 px-6 rounded-xl hover:bg-primary-fixed shadow-lg shadow-primary/20 transition-all transform hover:-translate-y-1">
+                 Beli Sekarang — Rp {product.regular_price.toLocaleString('id-ID')}
+               </a>
+               <a href="#" class="flex-1 bg-surface-container-high text-on-surface font-bold text-center py-4 px-6 rounded-xl hover:bg-surface-container-highest transition-colors border border-outline-variant/50">
+                 Lihat Demo (2 Menit)
+               </a>
              </div>
           </div>
        </div>
@@ -271,6 +280,53 @@ const checkoutUrl = `/produk-digital/${product.slug}/pesan`;
            </p>
         </div>
         
+        <!-- Testimonials -->
+        <div class="mt-16 pt-12 border-t border-slate-200 dark:border-slate-800">
+           <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8">Apa Kata Pengguna Kami?</h3>
+           
+           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+             <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+               <div class="flex items-center gap-1 text-yellow-500 mb-3">
+                 <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                 <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                 <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                 <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                 <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+               </div>
+               <p class="text-slate-700 dark:text-slate-300 italic mb-4 leading-relaxed">
+                 "Dulu sering banget salah hitung margin karena nulis di buku kas manual. Setelah pakai modul Kalkulator HPP VeinTools, sekarang harga jual jadi masuk akal dan profit per item lebih jelas."
+               </p>
+               <div class="flex items-center gap-3">
+                 <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold">DI</div>
+                 <div>
+                   <p class="font-bold text-slate-900 dark:text-white text-sm">Dimas I.</p>
+                   <p class="text-xs text-slate-500">Pemilik Kedai Kopi, Bandung</p>
+                 </div>
+               </div>
+             </div>
+             
+             <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+               <div class="flex items-center gap-1 text-yellow-500 mb-3">
+                 <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                 <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                 <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                 <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                 <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+               </div>
+               <p class="text-slate-700 dark:text-slate-300 italic mb-4 leading-relaxed">
+                 "Gak perlu langganan internet bulanan buat ngurus invoice sama stok barang. Semuanya offline dan cepet banget. Suka banget fitur kirim struk thermal otomatis ke printer!"
+               </p>
+               <div class="flex items-center gap-3">
+                 <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-700 font-bold">SA</div>
+                 <div>
+                   <p class="font-bold text-slate-900 dark:text-white text-sm">Siti A.</p>
+                   <p class="text-xs text-slate-500">Distributor Skincare, Surabaya</p>
+                 </div>
+               </div>
+             </div>
+           </div>
+        </div>
+        
         <!-- Accordion / FAQ Area -->
         <div class="mt-16 pt-12 border-t border-slate-200 dark:border-slate-800">
            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8">Pertanyaan Sering Diajukan</h3>
@@ -306,30 +362,10 @@ const checkoutUrl = `/produk-digital/${product.slug}/pesan`;
               <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-black uppercase tracking-wider">Lisensi 1 Tahun</span>
             </div>
             
-            <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 rounded-xl p-4 mb-6">
-               <div class="text-center mb-3">
-                 <span class="text-[11px] font-bold uppercase tracking-wider text-red-600 dark:text-red-400 flex items-center justify-center gap-1">
-                    <span class="material-symbols-outlined text-sm">schedule</span> Harga Promo Berakhir Dalam:
-                 </span>
-               </div>
-               <div class="flex justify-center gap-2 text-center">
-                 <div class="bg-white dark:bg-slate-800 rounded border border-red-100 dark:border-red-800/50 w-[3.25rem] py-1.5 shadow-sm">
-                   <div id="cd-days" class="text-lg font-black text-slate-900 dark:text-white leading-none mb-1">00</div>
-                   <div class="text-[9px] uppercase font-bold text-slate-500 leading-none">Hari</div>
-                 </div>
-                 <div class="bg-white dark:bg-slate-800 rounded border border-red-100 dark:border-red-800/50 w-[3.25rem] py-1.5 shadow-sm">
-                   <div id="cd-hours" class="text-lg font-black text-slate-900 dark:text-white leading-none mb-1">00</div>
-                   <div class="text-[9px] uppercase font-bold text-slate-500 leading-none">Jam</div>
-                 </div>
-                 <div class="bg-white dark:bg-slate-800 rounded border border-red-100 dark:border-red-800/50 w-[3.25rem] py-1.5 shadow-sm">
-                   <div id="cd-mins" class="text-lg font-black text-slate-900 dark:text-white leading-none mb-1">00</div>
-                   <div class="text-[9px] uppercase font-bold text-slate-500 leading-none">Mnt</div>
-                 </div>
-                 <div class="bg-white dark:bg-slate-800 rounded border border-red-100 dark:border-red-800/50 w-[3.25rem] py-1.5 shadow-sm">
-                   <div id="cd-secs" class="text-lg font-black text-slate-900 dark:text-white leading-none mb-1">00</div>
-                   <div class="text-[9px] uppercase font-bold text-slate-500 leading-none">Dtk</div>
-                 </div>
-               </div>
+            <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 rounded-xl p-4 mb-6 text-center">
+               <span class="text-sm font-bold text-blue-700 dark:text-blue-300">
+                 🎉 Harga Spesial Early Bird Terbatas!
+               </span>
             </div>
             
             <div class="flex flex-wrap items-baseline gap-2 mb-6">
@@ -341,7 +377,32 @@ const checkoutUrl = `/produk-digital/${product.slug}/pesan`;
                Beli Sekarang
             </a>
             
-            <p class="text-sm text-center text-slate-500 dark:text-slate-400 mb-8 font-medium">Akses penuh selama 12 bulan. Garansi aman.</p>
+            <div class="mb-6 space-y-4">
+               <div class="flex items-start gap-3 bg-green-50 dark:bg-green-900/20 p-3 rounded-lg border border-green-200 dark:border-green-800/50">
+                 <span class="material-symbols-outlined text-green-600 text-xl shrink-0">verified_user</span>
+                 <p class="text-xs font-medium text-green-800 dark:text-green-300 leading-snug"><strong>Garansi Berhasil Diinstal:</strong> Jika aplikasi gagal berjalan di PC sesuai spesifikasi dan tim kami tidak bisa membantu, uang kembali 100%.</p>
+               </div>
+            </div>
+            
+            <div class="mb-8">
+              <h4 class="text-xs font-bold uppercase text-slate-500 mb-3 text-center">Alur Pemesanan Cepat</h4>
+              <div class="flex items-center justify-between text-[11px] text-center font-medium text-slate-600 dark:text-slate-400">
+                <div class="flex-1 relative">
+                  <span class="bg-slate-100 dark:bg-slate-800 w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-1 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white">1</span>
+                  Isi Data
+                </div>
+                <div class="w-8 h-[1px] bg-slate-300 dark:bg-slate-700 mx-1"></div>
+                <div class="flex-1 relative">
+                  <span class="bg-slate-100 dark:bg-slate-800 w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-1 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white">2</span>
+                  Transfer
+                </div>
+                <div class="w-8 h-[1px] bg-slate-300 dark:bg-slate-700 mx-1"></div>
+                <div class="flex-1 relative">
+                  <span class="bg-slate-100 dark:bg-slate-800 w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-1 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white">3</span>
+                  Terima via WA
+                </div>
+              </div>
+            </div>
             
             <div class="border-t border-slate-200 dark:border-slate-700 pt-6">
               <h4 class="font-bold text-lg mb-6 text-slate-900 dark:text-white">Syarat & Ketentuan Lisensi Deal Ini:</h4>
@@ -409,6 +470,17 @@ const checkoutUrl = `/produk-digital/${product.slug}/pesan`;
 
     </div>
   </div>
+  
+  <!-- Mobile Sticky CTA -->
+  <div class="lg:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 p-4 shadow-[0_-4px_10px_-1px_rgba(0,0,0,0.1)] z-40 flex items-center justify-between gap-4">
+    <div>
+      <p class="text-xs text-slate-500 font-bold uppercase">Lisensi 1 Tahun</p>
+      <p class="text-xl font-black text-slate-900 dark:text-white leading-none mt-1">Rp {product.regular_price.toLocaleString('id-ID')}</p>
+    </div>
+    <a href={checkoutUrl} class="bg-primary text-on-primary font-bold px-8 py-3 rounded-xl hover:bg-primary-fixed transition-colors whitespace-nowrap shadow-md">
+      Beli Sekarang
+    </a>
+  </div>
 ) : (
   <section class="pt-32 pb-24 bg-surface min-h-screen text-on-surface">
     <div class="max-w-[1440px] mx-auto px-6 md:px-12">
@@ -457,40 +529,6 @@ const checkoutUrl = `/produk-digital/${product.slug}/pesan`;
 )}
 
 <script>
-  function startCountdown() {
-    const daysEl = document.getElementById('cd-days');
-    const hoursEl = document.getElementById('cd-hours');
-    const minsEl = document.getElementById('cd-mins');
-    const secsEl = document.getElementById('cd-secs');
-    
-    if (!daysEl) return;
-
-    // Set countdown to end of tomorrow for FOMO effect
-    let endDate = new Date();
-    endDate.setHours(23, 59, 59, 999);
-    endDate.setDate(endDate.getDate() + 1); // 1 day from today midnight
-
-    const updateTimer = () => {
-      const now = new Date().getTime();
-      const distance = endDate.getTime() - now;
-
-      if (distance < 0) return;
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      daysEl.innerText = days.toString().padStart(2, '0');
-      hoursEl.innerText = hours.toString().padStart(2, '0');
-      minsEl.innerText = minutes.toString().padStart(2, '0');
-      secsEl.innerText = seconds.toString().padStart(2, '0');
-    };
-
-    setInterval(updateTimer, 1000);
-    updateTimer();
-  }
-  
   // Gallery Logic
   function initGallery() {
     const mainImg = document.getElementById('main-preview-img');
@@ -593,11 +631,9 @@ const checkoutUrl = `/produk-digital/${product.slug}/pesan`;
 
   document.addEventListener('DOMContentLoaded', () => {
     initGallery();
-    startCountdown();
   });
   
   document.addEventListener('astro:page-load', () => {
     initGallery();
-    startCountdown();
   });
 </script>

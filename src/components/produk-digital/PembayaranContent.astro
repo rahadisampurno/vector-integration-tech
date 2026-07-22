@@ -228,17 +228,14 @@ const uniqueAmount = order.total_amount - (product?.regular_price || 0);
         
         try {
           await navigator.clipboard.writeText(msg);
+          const originalHTML = copyConfirmBtn.innerHTML;
           copyConfirmBtn.innerHTML = '<span class="material-symbols-outlined text-lg">check</span> Tersalin';
           copyConfirmBtn.classList.add('bg-green-100', 'text-green-700');
           
-          proceedBtn.disabled = true;
-          copyConfirmBtn.disabled = true;
-          
-          await confirmOrder(senderNameInput.value.trim(), senderBankInput.value.trim());
-          
           setTimeout(() => {
-            window.location.href = `/produk-digital/pesanan/${order.order_code}`;
-          }, 1500);
+            copyConfirmBtn.innerHTML = originalHTML;
+            copyConfirmBtn.classList.remove('bg-green-100', 'text-green-700');
+          }, 2000);
         } catch (err) {
           alert("Gagal menyalin teks. Silakan gunakan tombol WhatsApp.");
         }

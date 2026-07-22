@@ -26,7 +26,7 @@ const paymentMethods = [
 ];
 
 // Calculate expired time (24 hours from creation)
-const expiredAt = new Date(order.created_at.getTime() + 24 * 60 * 60 * 1000);
+const expiredAt = new Date(new Date(order.created_at).getTime() + 24 * 60 * 60 * 1000);
 const formattedExpired = new Intl.DateTimeFormat('id-ID', {
   day: 'numeric', month: 'long', year: 'numeric',
   hour: '2-digit', minute: '2-digit', timeZoneName: 'short'

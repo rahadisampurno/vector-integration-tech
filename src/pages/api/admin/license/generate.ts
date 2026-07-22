@@ -54,22 +54,35 @@ export const POST: APIRoute = async ({ request }) => {
     const safeDeviceStr = deviceFingerprint.replace(/[^a-zA-Z0-9]/g, '-');
     const fileName = `VeinTools_${payload.license_id}_${safeDeviceStr}.veinlicense`;
 
+    // Save the file to public/uploads/licenses
+    const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'licenses');
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+    const filePath = path.join(uploadDir, fileName);
+    fs.writeFileSync(filePath, JSON.stringify(envelope, null, 2));
+
+    const licenseUrl = `/api/download/license/${fileName}`;
+
     // Update order status if orderId is provided
     if (orderId) {
       try {
         db.update(orders)
-          .set({ status: 'COMPLETED' })
+          .set({ 
+             status: 'COMPLETED',
+             license_url: licenseUrl
+          })
           .where(eq(orders.id, orderId))
           .run();
       } catch (dbErr) {
         console.error("Failed to update order status:", dbErr);
-        // Continue anyway, we don't want to fail the license generation just for DB
+        // Continue anyway
       }
     }
 
     return new Response(JSON.stringify({
       success: true,
-      envelope,
+      licenseUrl: licenseUrl,
       fileName
     }), {
       status: 200,

@@ -389,30 +389,22 @@ Terima kasih telah berbelanja di VeinTech.`;
           const data = await res.json();
 
           if (data.success) {
-            // Trigger download
-            const blob = new Blob([JSON.stringify(data.envelope, null, 2)], { type: 'application/json' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.style.display = 'none';
-            a.href = url;
-            a.download = data.fileName;
-            document.body.appendChild(a);
-            a.click();
-            window.URL.revokeObjectURL(url);
-            
             btnGenerateLicense.classList.add('hidden');
             btnGenerateLicense.classList.remove('flex');
             btnSendLicenseWa.classList.remove('hidden');
             btnSendLicenseWa.classList.add('flex');
 
             btnSendLicenseWa.onclick = () => {
+              const url = `${baseUrl}${data.licenseUrl}`;
               const msg = `Halo ${name},
 
 Lisensi Anda untuk produk ${product} telah berhasil dibuat!
-Kami telah mengirimkan file lisensi (.veinlicense) ke Anda. Silakan simpan file lisensi tersebut.
+
+Silakan download file lisensi Anda pada link berikut:
+${url}
 
 Cara Aktivasi:
-1. Simpan file lisensi (.veinlicense) yang kami berikan.
+1. Simpan file lisensi (.veinlicense) yang baru saja diunduh.
 2. Buka aplikasi VeinTools Desktop.
 3. Klik tombol Aktivasi Lisensi.
 4. Pilih file lisensi yang baru saja diunduh.

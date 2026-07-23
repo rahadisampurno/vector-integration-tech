@@ -1,0 +1,159 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const supportMessage = encodeURIComponent('Halo Admin VeinTools, saya mengalami kendala instalasi.\n\nSaya pakai: Mac / Windows\nPesan yang muncul:\nLangkah yang sudah dicoba:\n\nSaya akan mengirim foto layar setelah pesan ini.');
+const supportUrl = `https://wa.me/6287787290712?text=${supportMessage}`;
+const macCommand = 'xattr -cr /Applications/veintools-desktop.app';
+---
+
+<BaseLayout title="Cara Instal VeinTools — Panduan Mudah Mac & Windows">
+  <main class="pt-28 pb-24 bg-surface min-h-screen text-on-surface">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <a href="/produk-digital/veintools-desktop" class="inline-flex items-center gap-2 min-h-12 text-base font-bold text-blue-700 dark:text-blue-300 hover:underline">
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span> Kembali ke halaman VeinTools
+      </a>
+
+      <header class="text-center py-8 md:py-12">
+        <div class="inline-flex items-center gap-2 bg-green-100 dark:bg-green-950/30 text-green-800 dark:text-green-200 font-bold px-4 py-2 rounded-full mb-5">
+          <span class="material-symbols-outlined" aria-hidden="true">school</span> Panduan untuk pemula
+        </div>
+        <h1 class="text-4xl md:text-6xl font-headline font-black leading-tight mb-5">Cara Memasang<br />VeinTools</h1>
+        <p class="text-xl md:text-2xl text-on-surface-variant leading-relaxed max-w-2xl mx-auto">Tidak perlu mengerti komputer. Pilih perangkat Anda, lalu ikuti langkahnya satu per satu.</p>
+      </header>
+
+      <section aria-labelledby="pilih-perangkat" class="bg-surface-container rounded-3xl border-2 border-outline-variant/30 p-5 md:p-8 mb-8 shadow-sm">
+        <h2 id="pilih-perangkat" class="text-2xl md:text-3xl font-black text-center mb-2">Pertama, Anda memakai apa?</h2>
+        <p class="text-lg text-on-surface-variant text-center mb-6">Tekan salah satu tombol besar di bawah.</p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <a href="#mac" class="group min-h-32 flex items-center gap-5 bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 hover:border-blue-600 rounded-2xl p-6 transition-colors">
+            <span class="text-5xl" aria-hidden="true">🍎</span>
+            <span><strong class="block text-2xl group-hover:text-blue-700">Saya pakai Mac</strong><span class="block text-base text-on-surface-variant mt-1">MacBook atau iMac</span></span>
+          </a>
+          <a href="#windows" class="group min-h-32 flex items-center gap-5 bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 hover:border-blue-600 rounded-2xl p-6 transition-colors">
+            <span class="text-5xl" aria-hidden="true">🪟</span>
+            <span><strong class="block text-2xl group-hover:text-blue-700">Saya pakai Windows</strong><span class="block text-base text-on-surface-variant mt-1">Laptop atau komputer PC</span></span>
+          </a>
+        </div>
+      </section>
+
+      <div class="flex gap-4 bg-amber-50 dark:bg-amber-950/20 border-2 border-amber-300 dark:border-amber-800 rounded-2xl p-5 md:p-6 mb-12">
+        <span class="material-symbols-outlined text-3xl text-amber-700 dark:text-amber-300" aria-hidden="true">verified_user</span>
+        <div>
+          <h2 class="text-xl font-black text-amber-950 dark:text-amber-100">Sebelum mulai</h2>
+          <p class="text-lg leading-relaxed text-amber-900 dark:text-amber-200 mt-1">Gunakan file yang Anda unduh dari situs resmi VeinTools. Jangan memakai file kiriman orang yang tidak dikenal.</p>
+        </div>
+      </div>
+
+      <section id="mac" class="scroll-mt-28 mb-16" aria-labelledby="judul-mac">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="text-5xl" aria-hidden="true">🍎</span>
+          <div><p class="font-bold text-blue-700 dark:text-blue-300">UNTUK MACBOOK / IMAC</p><h2 id="judul-mac" class="text-3xl md:text-4xl font-black">Cara memasang di Mac</h2></div>
+        </div>
+
+        <div class="bg-blue-50 dark:bg-blue-950/20 border-2 border-blue-200 dark:border-blue-800 rounded-2xl p-5 mb-6 text-lg leading-relaxed">
+          Installer Mac saat ini untuk Mac dengan chip <strong>M1, M2, M3, M4, atau yang lebih baru.</strong> Jika Mac Anda memakai Intel atau Anda tidak yakin, <a href={supportUrl} target="_blank" class="font-bold text-blue-700 dark:text-blue-300 underline">tanya Admin dahulu</a>.
+        </div>
+
+        <div class="space-y-5">
+          <div class="step-card"><span class="step-number">1</span><div><h3>Download file untuk Mac</h3><p>Tekan tombol download Mac. Tunggu sampai file yang berakhiran <strong>.dmg</strong> selesai diunduh.</p></div></div>
+          <div class="step-card"><span class="step-number">2</span><div><h3>Buka file yang sudah di-download</h3><p>Buka folder <strong>Downloads</strong>, lalu klik dua kali file VeinTools.</p></div></div>
+          <div class="step-card"><span class="step-number">3</span><div><h3>Tarik VeinTools ke Applications</h3><p>Tahan gambar VeinTools dengan mouse, geser ke gambar folder <strong>Applications</strong>, lalu lepaskan.</p><div class="mt-3 bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800 rounded-xl p-3 font-bold text-red-800 dark:text-red-200">Jangan membuka aplikasi langsung dari jendela installer.</div></div></div>
+          <div class="step-card"><span class="step-number">4</span><div><h3>Buka dari folder Applications</h3><p>Buka Finder → Applications → cari VeinTools. Klik kanan VeinTools, kemudian tekan <strong>Open</strong>.</p></div></div>
+          <div class="step-card"><span class="step-number">5</span><div><h3>Jika aplikasi terbuka, selesai</h3><p>Lanjutkan ke bagian <a href="#aktivasi" class="font-bold text-blue-700 dark:text-blue-300 underline">Aktivasi Lisensi</a>. Jika muncul tulisan <strong>“damaged”</strong>, ikuti kotak bantuan berikut.</p></div></div>
+        </div>
+
+        <div id="mac-damaged" class="scroll-mt-28 mt-8 bg-surface-container border-2 border-orange-300 dark:border-orange-800 rounded-3xl p-5 md:p-8">
+          <div class="flex gap-4 items-start mb-6"><span class="material-symbols-outlined text-4xl text-orange-600" aria-hidden="true">warning</span><div><p class="font-bold text-orange-700 dark:text-orange-300">JIKA MUNCUL PERINGATAN</p><h3 class="text-2xl md:text-3xl font-black">“VeinTools is damaged and can’t be opened”</h3></div></div>
+          <p class="text-lg leading-relaxed mb-6">Tenang. Pesan ini belum tentu berarti filenya rusak. Mac sedang menahan aplikasi yang berasal dari luar App Store.</p>
+          <div class="space-y-5">
+            <div class="mini-step"><strong>1. Pastikan VeinTools sudah ada di folder Applications.</strong></div>
+            <div class="mini-step"><strong>2. Tekan tombol Cmd (⌘) + Spasi.</strong> Ketik <strong>Terminal</strong>, lalu tekan Enter.</div>
+            <div class="mini-step"><strong>3. Tekan tombol “Salin Perintah” di bawah.</strong> Kembali ke Terminal, tekan Cmd (⌘) + V, lalu Enter.</div>
+          </div>
+          <div class="mt-5 bg-slate-950 rounded-2xl p-4 md:p-5">
+            <code id="mac-command" class="block text-base md:text-lg text-white font-mono break-all mb-4">{macCommand}</code>
+            <button id="copy-command" type="button" class="w-full sm:w-auto min-h-14 inline-flex items-center justify-center gap-2 bg-white text-slate-950 text-lg font-black px-6 py-3 rounded-xl hover:bg-slate-100">
+              <span class="material-symbols-outlined" aria-hidden="true">content_copy</span><span id="copy-label">Salin Perintah</span>
+            </button>
+          </div>
+          <div class="mini-step mt-5"><strong>4. Buka kembali VeinTools dari Applications.</strong> Jika tetap ditolak, buka System Settings → Privacy & Security → tekan <strong>Open Anyway</strong>.</div>
+        </div>
+
+        <details id="mac-eject" class="scroll-mt-28 mt-5 bg-surface-container border-2 border-outline-variant/30 rounded-2xl p-5 md:p-6">
+          <summary class="cursor-pointer text-xl font-black flex items-center gap-3"><span class="material-symbols-outlined text-orange-600" aria-hidden="true">help</span> Muncul tulisan “disk image could not be ejected”?</summary>
+          <div class="mt-5 text-lg leading-relaxed space-y-3 text-on-surface-variant">
+            <p>Ini bukan kerusakan aplikasi. Lakukan secara berurutan:</p>
+            <p><strong>1.</strong> Tutup VeinTools dengan Cmd + Q.</p><p><strong>2.</strong> Tutup jendela installer.</p><p><strong>3.</strong> Di Finder, tekan tanda eject ⏏ di samping “veintools-desktop”.</p><p><strong>4.</strong> Jika belum bisa, restart Mac lalu coba eject lagi.</p>
+          </div>
+        </details>
+      </section>
+
+      <section id="windows" class="scroll-mt-28 mb-16" aria-labelledby="judul-windows">
+        <div class="flex items-center gap-4 mb-6"><span class="text-5xl" aria-hidden="true">🪟</span><div><p class="font-bold text-blue-700 dark:text-blue-300">UNTUK LAPTOP / PC WINDOWS</p><h2 id="judul-windows" class="text-3xl md:text-4xl font-black">Cara memasang di Windows</h2></div></div>
+        <div class="space-y-5">
+          <div class="step-card"><span class="step-number">1</span><div><h3>Download file Windows</h3><p>Pilih file <strong>.exe</strong>. Anda tidak perlu men-download file Mac.</p></div></div>
+          <div class="step-card"><span class="step-number">2</span><div><h3>Buka file yang sudah di-download</h3><p>Buka folder Downloads, lalu klik dua kali file VeinTools.</p></div></div>
+          <div class="step-card"><span class="step-number">3</span><div><h3>Jika muncul layar biru, tekan “More info”</h3><p>Pada layar <strong>Windows protected your PC</strong>, cari tulisan kecil <strong>More info</strong> atau <strong>Info selengkapnya</strong>.</p></div></div>
+          <div class="step-card"><span class="step-number">4</span><div><h3>Tekan “Run anyway”</h3><p>Setelah tombol muncul, tekan <strong>Run anyway</strong> atau <strong>Tetap jalankan</strong>.</p></div></div>
+          <div class="step-card"><span class="step-number">5</span><div><h3>Tekan Next sampai selesai</h3><p>Ikuti petunjuk pemasangan. Setelah selesai, buka VeinTools dari Desktop atau Start Menu.</p></div></div>
+        </div>
+
+        <details class="mt-5 bg-surface-container border-2 border-outline-variant/30 rounded-2xl p-5 md:p-6">
+          <summary class="cursor-pointer text-xl font-black flex items-center gap-3"><span class="material-symbols-outlined text-orange-600" aria-hidden="true">help</span> Masih tidak bisa di Windows?</summary>
+          <div class="mt-5 text-lg leading-relaxed space-y-4 text-on-surface-variant">
+            <p><strong>Tidak ada tombol Run anyway:</strong> tekan More info terlebih dahulu. Komputer kantor mungkin memerlukan izin petugas IT.</p>
+            <p><strong>Muncul Access denied:</strong> klik kanan installer → pilih Run as administrator.</p>
+            <p><strong>Diblokir antivirus:</strong> jangan matikan antivirus permanen. Foto pesannya dan kirim ke Admin.</p>
+            <p><strong>Versi lama masih ada:</strong> hapus VeinTools lama melalui Settings → Apps, restart komputer, lalu pasang versi terbaru.</p>
+          </div>
+        </details>
+      </section>
+
+      <section id="aktivasi" class="scroll-mt-28 bg-green-50 dark:bg-green-950/20 border-2 border-green-300 dark:border-green-800 rounded-3xl p-5 md:p-8 mb-10">
+        <div class="flex items-center gap-4 mb-6"><span class="material-symbols-outlined text-5xl text-green-700" aria-hidden="true">key</span><div><p class="font-bold text-green-700 dark:text-green-300">SETELAH APLIKASI TERBUKA</p><h2 class="text-3xl font-black">Aktifkan lisensi</h2></div></div>
+        <div class="space-y-4 text-lg leading-relaxed">
+          <p><strong>1.</strong> Di halaman “Aktifkan VeinTools”, tekan <strong>Salin ID</strong>.</p>
+          <p><strong>2.</strong> Kirim kode tersebut dan nomor pesanan Anda ke WhatsApp Admin.</p>
+          <p><strong>3.</strong> Admin akan mengirim file dengan akhiran <strong>.veinlicense</strong>.</p>
+          <p><strong>4.</strong> Kembali ke VeinTools → tekan <strong>Pilih File Lisensi</strong> → pilih file dari Admin.</p>
+          <p><strong>5.</strong> Selesai. VeinTools siap digunakan.</p>
+        </div>
+      </section>
+
+      <section class="bg-blue-700 text-white rounded-3xl p-6 md:p-10 text-center shadow-lg">
+        <span class="material-symbols-outlined text-5xl mb-3" aria-hidden="true">support_agent</span>
+        <h2 class="text-3xl font-black mb-3">Masih bingung? Kami bantu.</h2>
+        <p class="text-lg md:text-xl text-blue-100 leading-relaxed mb-6">Tekan tombol WhatsApp, lalu kirim foto tulisan error yang muncul. Pesan bantuan sudah disiapkan untuk Anda.</p>
+        <a href={supportUrl} target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto min-h-16 inline-flex items-center justify-center gap-3 bg-white text-blue-800 text-xl font-black px-7 py-4 rounded-2xl hover:bg-blue-50">
+          <span class="material-symbols-outlined text-3xl" aria-hidden="true">chat</span> Minta Bantuan via WhatsApp
+        </a>
+      </section>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .step-card { display: flex; gap: 1rem; align-items: flex-start; border: 2px solid color-mix(in srgb, currentColor 14%, transparent); border-radius: 1.25rem; padding: 1.25rem; background: var(--color-surface-container, rgba(148, 163, 184, .12)); }
+  .step-number { flex: 0 0 3rem; width: 3rem; height: 3rem; border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center; background: #0369a1; color: white; font-size: 1.5rem; font-weight: 900; }
+  .step-card h3 { font-size: 1.25rem; line-height: 1.35; font-weight: 900; margin-bottom: .4rem; }
+  .step-card p { font-size: 1.125rem; line-height: 1.65; color: var(--color-on-surface-variant, #475569); }
+  .mini-step { font-size: 1.125rem; line-height: 1.65; background: rgba(255,255,255,.65); border: 1px solid rgba(148,163,184,.45); border-radius: .9rem; padding: 1rem; }
+  @media (max-width: 480px) { .step-card { padding: 1rem; gap: .75rem; } .step-number { flex-basis: 2.5rem; width: 2.5rem; height: 2.5rem; font-size: 1.25rem; } }
+  :global(.dark) .mini-step { background: rgba(15,23,42,.55); }
+</style>
+
+<script is:inline define:vars={{ macCommand }}>
+  const copyButton = document.getElementById('copy-command');
+  const copyLabel = document.getElementById('copy-label');
+  copyButton?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(macCommand);
+      if (copyLabel) copyLabel.textContent = 'Berhasil Disalin ✓';
+      setTimeout(() => { if (copyLabel) copyLabel.textContent = 'Salin Perintah'; }, 2500);
+    } catch {
+      const command = document.getElementById('mac-command');
+      if (command) window.getSelection()?.selectAllChildren(command);
+      if (copyLabel) copyLabel.textContent = 'Tekan Cmd + C';
+    }
+  });
+</script>

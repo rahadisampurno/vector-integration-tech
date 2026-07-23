@@ -366,6 +366,9 @@ const affiliateOptions = db.select({ id: affiliates.id, name: affiliates.name, c
 
       btnSendWa.onclick = () => {
         const url = token ? `${baseUrl}/download/${token}` : 'Tidak Tersedia';
+        const installationGuide = product?.toLowerCase().includes('veintools')
+          ? `\n\nPanduan Instalasi & Solusi Error\n${baseUrl}/produk-digital/veintools-desktop/panduan-instalasi\n\nSebaiknya buka panduan tersebut sebelum mulai memasang aplikasi. Tersedia petunjuk bergambar sederhana untuk Mac dan Windows.`
+          : '';
         const msg = `Halo ${name},
 
 Pembayaran Anda untuk produk ${product} telah berhasil kami verifikasi.
@@ -398,6 +401,7 @@ Informasi penting:
 Khusus untuk VeinTools Desktop:
 
 Setelah aplikasi selesai diinstal, VeinTools akan menampilkan Kode Perangkat. Silakan kirimkan Kode Perangkat tersebut kepada kami agar lisensi aktivasi dapat dibuat.
+${installationGuide}
 
 Jika mengalami kendala saat download, instalasi, atau aktivasi, silakan balas pesan ini.
 

@@ -117,71 +117,10 @@ const obfuscatedName = nameParts.map(p => p.length > 2 ? p.substring(0, 2) + '*'
                   <p class="text-on-surface-variant">Setelah instalasi, VeinTools perlu diaktifkan pada perangkat Anda. Petunjuk aktivasi akan tampil saat aplikasi pertama kali dibuka.</p>
                 </div>
                 
-                <div class="text-sm bg-blue-50 border border-blue-200 rounded-xl p-6 text-left shadow-sm mt-6">
-                  <h3 class="font-bold text-blue-900 text-lg mb-3 flex items-center gap-2">
-                    <span class="material-symbols-outlined">menu_book</span> 
-                    Panduan Instalasi VeinTools Desktop
-                  </h3>
-                  <p class="text-blue-800 mb-6 leading-relaxed">
-                    Selamat datang di VeinTools! Karena aplikasi kami dibuat khusus (Custom Desktop App) dan didistribusikan secara mandiri, sistem operasi komputer Anda (Mac/Windows) mungkin akan menampilkan peringatan keamanan saat pertama kali aplikasi dibuka. <br/><br/>
-                    <strong>Hal ini sangat normal dan aman.</strong> Berikut adalah panduan langkah demi langkah untuk menginstal VeinTools di komputer Anda:
-                  </p>
-
-                    <div class="space-y-6">
-                      <!-- File Information -->
-                      <div class="bg-slate-50 rounded-xl border border-slate-200 p-4 shadow-sm text-sm">
-                        <div class="grid grid-cols-2 gap-2 text-slate-700">
-                          <div><strong>Versi Aplikasi:</strong> v1.0.0</div>
-                          <div><strong>Rilis:</strong> Juli 2026</div>
-                          <div class="col-span-2 mt-1">
-                            <strong>SHA-256 Checksum:</strong>
-                            <code class="block bg-slate-200 p-1.5 rounded text-xs mt-1 break-all select-all">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <!-- Windows Guide -->
-                      <div class="bg-white rounded-xl border border-blue-100 p-5 shadow-sm">
-                        <h4 class="font-bold text-blue-900 mb-3 flex items-center gap-2 text-base">
-                          <span class="material-symbols-outlined">window</span> Pengguna Windows
-                        </h4>
-                        <p class="text-blue-800 mb-4 leading-relaxed">
-                          Karena aplikasi didistribusikan secara mandiri, Anda mungkin akan melihat layar biru <i>"Windows protected your PC"</i> (Windows SmartScreen) saat pertama kali mencoba menjalankan file <code class="bg-blue-50 px-1 py-0.5 rounded text-blue-600">.exe</code>.
-                        </p>
-                        
-                        <p class="font-bold text-blue-900 mb-2">Langkah-Langkah Instalasi:</p>
-                        <ol class="list-decimal pl-5 text-blue-800 space-y-2 mb-2">
-                          <li><strong>Download & Buka Installer:</strong> Klik ganda pada file installer Windows (<code class="bg-blue-50 px-1 py-0.5 rounded text-blue-600">.exe</code>).</li>
-                          <li><strong>Melewati SmartScreen:</strong> Jika muncul peringatan keamanan SmartScreen:
-                            <ul class="list-disc pl-5 mt-1 space-y-1">
-                              <li>Klik <strong>"More info"</strong> (Info lebih lanjut) di bawah teks peringatan.</li>
-                              <li>Lalu klik <strong>"Run anyway"</strong> (Tetap jalankan).</li>
-                            </ul>
-                          </li>
-                          <li><strong>Ikuti Proses Instalasi:</strong> Lanjutkan instalasi dengan menekan <strong>Next</strong> hingga selesai.</li>
-                          <li><strong>Selesai!</strong> Buka VeinTools dari Shortcut di Desktop atau Start Menu Anda.</li>
-                        </ol>
-                      </div>
-
-                    <!-- Activation Guide -->
-                    <div class="bg-white rounded-xl border border-blue-100 p-5 shadow-sm">
-                      <h4 class="font-bold text-blue-900 mb-3 flex items-center gap-2 text-base">
-                        <span class="material-symbols-outlined">vpn_key</span> Langkah Selanjutnya: Aktivasi Lisensi
-                      </h4>
-                      <p class="text-blue-800 mb-3 leading-relaxed">
-                        Setelah aplikasi berhasil terbuka, Anda akan disambut oleh halaman "Aktifkan VeinTools".
-                      </p>
-                      <ol class="list-decimal pl-5 text-blue-800 space-y-2">
-                        <li>Pada halaman tersebut, Anda akan melihat <strong>Kode Perangkat (Installation ID)</strong> Anda.</li>
-                        <li>Klik tombol <strong>Salin ID</strong> atau <strong>Kirim Kode ke Admin</strong>.</li>
-                        <li>Kirimkan kode tersebut ke WhatsApp Admin VeinTools.</li>
-                        <li>Admin akan membalas dengan memberikan sebuah file berakhiran <code class="bg-blue-50 px-1 py-0.5 rounded text-blue-600">.veinlicense</code>.</li>
-                        <li>Kembali ke aplikasi VeinTools, klik <strong>Pilih File Lisensi</strong>, lalu masukkan file yang dikirimkan oleh Admin.</li>
-                        <li><strong>Selamat!</strong> VeinTools Anda sudah aktif dan siap digunakan.</li>
-                      </ol>
-                    </div>
-                  </div>
-                </div>
+                <a href="/produk-digital/veintools-desktop/panduan-instalasi" target="_blank" class="flex items-center justify-between gap-4 text-left bg-blue-50 dark:bg-blue-950/20 border border-blue-300 dark:border-blue-800 rounded-xl p-5 hover:bg-blue-100 dark:hover:bg-blue-950/40 transition-colors">
+                  <div><p class="font-bold text-blue-900 dark:text-blue-200 flex items-center gap-2"><span class="material-symbols-outlined">menu_book</span> Panduan Instalasi & Solusi Error</p><p class="text-sm text-blue-800 dark:text-blue-300 mt-1">Baca sebelum instalasi, terutama jika Mac menampilkan “damaged” atau Windows menampilkan SmartScreen.</p></div>
+                  <span class="material-symbols-outlined text-blue-700">open_in_new</span>
+                </a>
               </div>
             )}
           </div>

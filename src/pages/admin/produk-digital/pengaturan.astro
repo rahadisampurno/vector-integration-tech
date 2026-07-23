@@ -12,14 +12,14 @@ if (Astro.request.method === 'POST') {
     const action = data.get('action')?.toString();
     const id = data.get('id')?.toString() || '';
     if (action === 'update_product') {
-      const product = db.select().from(products).where(eq(products.id, id)).get();
+      const product = await db.select().from(products).where(eq(products.id, id)).get();
       const regularPrice = Number(data.get('regular_price'));
       const saleRaw = data.get('sale_price')?.toString().trim() || '';
       const salePrice = saleRaw ? Number(saleRaw) : null;
       if (!product) throw new Error('Produk tidak ditemukan.');
       if (!Number.isInteger(regularPrice) || regularPrice < 0) throw new Error('Harga normal tidak valid.');
       if (salePrice !== null && (!Number.isInteger(salePrice) || salePrice < 0 || salePrice >= regularPrice)) throw new Error('Harga promo harus lebih kecil dari harga normal.');
-      db.update(products).set({ regular_price: regularPrice, sale_price: salePrice }).where(eq(products.id, id)).run();
+      await db.update(products).set({ regular_price: regularPrice, sale_price: salePrice }).where(eq(products.id, id)).run();
       successMessage = `Harga ${product.name} berhasil diperbarui.`;
     } else {
       const name = data.get('name')?.toString().trim() || '';
@@ -30,18 +30,18 @@ if (Astro.request.method === 'POST') {
       if (!name || !holder || !accountNumber) throw new Error('Nama metode, pemilik, dan nomor rekening wajib diisi.');
       if (!Number.isInteger(sortOrder) || sortOrder < 0) throw new Error('Urutan tidak valid.');
       if (action === 'update_account') {
-        if (!db.select().from(paymentAccounts).where(eq(paymentAccounts.id, id)).get()) throw new Error('Rekening tidak ditemukan.');
-        db.update(paymentAccounts).set({ name, holder, account_number: accountNumber, sort_order: sortOrder, status }).where(eq(paymentAccounts.id, id)).run();
+        if (!await db.select().from(paymentAccounts).where(eq(paymentAccounts.id, id)).get()) throw new Error('Rekening tidak ditemukan.');
+        await db.update(paymentAccounts).set({ name, holder, account_number: accountNumber, sort_order: sortOrder, status }).where(eq(paymentAccounts.id, id)).run();
         successMessage = `${name} berhasil diperbarui.`;
       } else {
-        db.insert(paymentAccounts).values({ id: crypto.randomUUID(), name, holder, account_number: accountNumber, sort_order: sortOrder, status, created_at: new Date() }).run();
+        await db.insert(paymentAccounts).values({ id: crypto.randomUUID(), name, holder, account_number: accountNumber, sort_order: sortOrder, status, created_at: new Date() }).run();
         successMessage = `${name} berhasil ditambahkan.`;
       }
     }
   } catch (error) { errorMessage = error instanceof Error ? error.message : 'Pengaturan gagal disimpan.'; }
 }
-const accounts = db.select().from(paymentAccounts).orderBy(asc(paymentAccounts.sort_order)).all();
-const productRows = db.select().from(products).orderBy(asc(products.name)).all();
+const accounts = await db.select().from(paymentAccounts).orderBy(asc(paymentAccounts.sort_order)).all();
+const productRows = await db.select().from(products).orderBy(asc(products.name)).all();
 ---
 <BaseLayout title="Admin - Pengaturan Rekening & Harga">
   <section class="pt-32 pb-24 min-h-screen bg-surface text-on-surface"><div class="max-w-6xl mx-auto px-6 md:px-12">

@@ -1,7 +1,7 @@
 import { defineMiddleware } from 'astro:middleware';
 import { getSession } from './lib/auth';
 
-export const onRequest = defineMiddleware((context, next) => {
+export const onRequest = defineMiddleware(async (context, next) => {
   const url = new URL(context.request.url);
   const path = url.pathname;
 
@@ -13,7 +13,7 @@ export const onRequest = defineMiddleware((context, next) => {
       return next();
     }
 
-    const session = getSession(context.cookies);
+    const session = await getSession(context.cookies);
 
     if (!session) {
       // If it's an API route, return 401 Unauthorized

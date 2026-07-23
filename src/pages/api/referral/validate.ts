@@ -7,8 +7,8 @@ export const GET: APIRoute = async ({ url }) => {
   const code = url.searchParams.get('code')?.trim().toUpperCase() || '';
   const slug = url.searchParams.get('product')?.trim() || '';
   if (!code || !slug) return Response.json({ valid: false });
-  const affiliate = db.select().from(affiliates).where(eq(affiliates.referral_code, code)).get();
-  const product = db.select().from(products).where(eq(products.slug, slug)).get();
+  const affiliate = await db.select().from(affiliates).where(eq(affiliates.referral_code, code)).get();
+  const product = await db.select().from(products).where(eq(products.slug, slug)).get();
   if (!affiliate || affiliate.status !== 'active' || !product || product.status !== 'active') {
     return Response.json({ valid: false });
   }

@@ -67,7 +67,7 @@ export const POST: APIRoute = async ({ request }) => {
     // Update order status if orderId is provided
     if (orderId) {
       try {
-        db.update(orders)
+        await db.update(orders)
           .set({ 
              status: 'COMPLETED',
              license_url: licenseUrl

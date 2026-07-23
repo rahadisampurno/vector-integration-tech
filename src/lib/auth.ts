@@ -21,11 +21,11 @@ export function verifyPassword(password: string, storedHash: string) {
   return actual.length === expected.length && timingSafeEqual(actual, expected);
 }
 
-export function createSession(cookies: AstroCookies, role: 'admin' | 'affiliate', affiliateId?: string) {
+export async function createSession(cookies: AstroCookies, role: 'admin' | 'affiliate', affiliateId?: string) {
   const token = randomBytes(32).toString('hex');
   const now = new Date();
   const expiresAt = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-  db.insert(authSessions).values({
+  await db.insert(authSessions).values({
     id: crypto.randomUUID(),
     token_hash: hashToken(token),
     role,
@@ -39,18 +39,18 @@ export function createSession(cookies: AstroCookies, role: 'admin' | 'affiliate'
   });
 }
 
-export function getSession(cookies: AstroCookies) {
+export async function getSession(cookies: AstroCookies) {
   const token = cookies.get(SESSION_COOKIE)?.value;
   if (!token) return null;
-  return db.select().from(authSessions).where(and(
+  return await db.select().from(authSessions).where(and(
     eq(authSessions.token_hash, hashToken(token)),
     gt(authSessions.expires_at, new Date())
   )).get() || null;
 }
 
-export function destroySession(cookies: AstroCookies) {
+export async function destroySession(cookies: AstroCookies) {
   const token = cookies.get(SESSION_COOKIE)?.value;
-  if (token) db.delete(authSessions).where(eq(authSessions.token_hash, hashToken(token))).run();
+  if (token) await db.delete(authSessions).where(eq(authSessions.token_hash, hashToken(token))).run();
   cookies.delete(SESSION_COOKIE, { path: '/' });
   cookies.delete('admin_session', { path: '/' });
 }

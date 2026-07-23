@@ -13,8 +13,8 @@ if (Astro.request.method === 'POST') {
     if (action === 'toggle') {
       const id = data.get('id')?.toString() || '';
       const currentStatus = data.get('current_status')?.toString();
-      if (!db.select().from(products).where(eq(products.id, id)).get()) throw new Error('Produk tidak ditemukan.');
-      db.update(products).set({ status: currentStatus === 'active' ? 'inactive' : 'active' }).where(eq(products.id, id)).run();
+      if (!await db.select().from(products).where(eq(products.id, id)).get()) throw new Error('Produk tidak ditemukan.');
+      await db.update(products).set({ status: currentStatus === 'active' ? 'inactive' : 'active' }).where(eq(products.id, id)).run();
       successMessage = 'Status produk berhasil diperbarui.';
     } else {
       const name = data.get('name')?.toString().trim() || '';
@@ -29,13 +29,13 @@ if (Astro.request.method === 'POST') {
       if (!name || !slug || !category) throw new Error('Nama, slug, dan kategori wajib diisi.');
       if (!Number.isInteger(regularPrice) || regularPrice < 0) throw new Error('Harga normal tidak valid.');
       if (salePrice !== null && (!Number.isInteger(salePrice) || salePrice < 0 || salePrice >= regularPrice)) throw new Error('Harga promo harus lebih kecil dari harga normal.');
-      if (db.select().from(products).where(eq(products.slug, slug)).get()) throw new Error('Slug produk sudah digunakan.');
-      db.insert(products).values({ id: crypto.randomUUID(), name, slug, category, regular_price: regularPrice, sale_price: salePrice, thumbnail_url: thumbnailUrl, short_description: shortDescription, description, status: 'active', created_at: new Date() }).run();
+      if (await db.select().from(products).where(eq(products.slug, slug)).get()) throw new Error('Slug produk sudah digunakan.');
+      await db.insert(products).values({ id: crypto.randomUUID(), name, slug, category, regular_price: regularPrice, sale_price: salePrice, thumbnail_url: thumbnailUrl, short_description: shortDescription, description, status: 'active', created_at: new Date() }).run();
       successMessage = `Produk ${name} berhasil ditambahkan.`;
     }
   } catch (error) { errorMessage = error instanceof Error ? error.message : 'Produk gagal disimpan.'; }
 }
-const productRows = db.select().from(products).orderBy(desc(products.created_at)).all();
+const productRows = await db.select().from(products).orderBy(desc(products.created_at)).all();
 ---
 <BaseLayout title="Admin - Produk Digital">
   <section class="pt-32 pb-24 min-h-screen bg-surface text-on-surface"><div class="max-w-6xl mx-auto px-6 md:px-12">

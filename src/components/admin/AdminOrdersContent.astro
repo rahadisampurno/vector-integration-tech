@@ -54,7 +54,7 @@ const getPageLink = (p: number) => {
 };
 
 // Fetch Data
-const allOrders = db.select({
+const allOrders = await db.select({
   order: orders,
   product: products,
   access: downloadAccesses
@@ -68,11 +68,11 @@ const allOrders = db.select({
   .all();
 
 // Fetch Count
-const countResult = db.select({ count: sql<number>`count(*)` }).from(orders).where(finalCondition).get();
+const countResult = await db.select({ count: sql<number>`count(*)` }).from(orders).where(finalCondition).get();
 const totalCount = countResult ? Number(countResult.count) : 0;
 const totalPages = Math.ceil(totalCount / limit) || 1;
 const commissionPayableStatuses = ['PAID', 'DOWNLOAD_READY', 'WAITING_LICENSE', 'COMPLETED'];
-const affiliateOptions = db.select({ id: affiliates.id, name: affiliates.name, code: affiliates.referral_code }).from(affiliates).orderBy(asc(affiliates.name)).all();
+const affiliateOptions = await db.select({ id: affiliates.id, name: affiliates.name, code: affiliates.referral_code }).from(affiliates).orderBy(asc(affiliates.name)).all();
 
 ---
 

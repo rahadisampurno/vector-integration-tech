@@ -12,7 +12,7 @@ export const POST: APIRoute = async ({ params }) => {
   }
 
   try {
-    const order = db.select().from(orders).where(eq(orders.id, id)).get();
+    const order = await db.select().from(orders).where(eq(orders.id, id)).get();
     
     if (!order) {
       return new Response(JSON.stringify({ error: 'Order not found' }), { status: 404 });
@@ -39,13 +39,13 @@ export const POST: APIRoute = async ({ params }) => {
     const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
     // Update Status
-    db.update(orders)
+    await db.update(orders)
       .set({ status: 'DOWNLOAD_READY' })
       .where(eq(orders.id, id))
       .run();
 
     // Create Download Access
-    db.insert(downloadAccesses).values({
+    await db.insert(downloadAccesses).values({
       id: crypto.randomUUID(),
       order_id: id,
       download_code_hash: codeHash,

@@ -4,14 +4,14 @@ import { orders, downloadAccesses, affiliates, products } from '../../db/schema'
 import { desc, eq, sql } from 'drizzle-orm';
 
 // Calculate Statistics
-const stats = db.select({
+const stats = await db.select({
   totalOrders: sql<number>`count(*)`,
   totalRevenue: sql<number>`sum(case when status in ('PAID', 'DOWNLOAD_READY', 'WAITING_LICENSE', 'COMPLETED') then total_amount else 0 end)`,
   waitingPayment: sql<number>`sum(case when status = 'WAITING_PAYMENT' then 1 else 0 end)`,
   needVerification: sql<number>`sum(case when status in ('PAYMENT_CONFIRMATION_SENT', 'PAYMENT_REVIEW') then 1 else 0 end)`
 }).from(orders).get();
 
-const downloadStats = db.select({
+const downloadStats = await db.select({
   totalDownloads: sql<number>`sum(download_count)`
 }).from(downloadAccesses).get();
 
@@ -23,7 +23,7 @@ const needVerify = stats?.needVerification || 0;
 const downloads = downloadStats?.totalDownloads || 0;
 
 const affiliatePaidSql = sql`${orders.status} in ('PAID','DOWNLOAD_READY','WAITING_LICENSE','COMPLETED')`;
-const affiliateStats = db.select({
+const affiliateStats = await db.select({
   checkouts: sql<number>`count(*)`,
   sold: sql<number>`coalesce(sum(case when ${affiliatePaidSql} then 1 else 0 end), 0)`,
   revenue: sql<number>`coalesce(sum(case when ${affiliatePaidSql} then ${orders.total_amount} else 0 end), 0)`,
@@ -33,7 +33,7 @@ const affiliateStats = db.select({
   discounts: sql<number>`coalesce(sum(${orders.discount_amount}), 0)`
 }).from(orders).where(sql`${orders.affiliate_id} is not null`).get();
 
-const affiliatePerformance = db.select({
+const affiliatePerformance = await db.select({
   id: affiliates.id, name: affiliates.name, code: affiliates.referral_code,
   checkouts: sql<number>`count(${orders.id})`,
   sold: sql<number>`coalesce(sum(case when ${affiliatePaidSql} then 1 else 0 end), 0)`,
@@ -42,7 +42,7 @@ const affiliatePerformance = db.select({
 }).from(affiliates).leftJoin(orders, eq(orders.affiliate_id, affiliates.id))
   .groupBy(affiliates.id).orderBy(desc(sql`count(${orders.id})`)).limit(5).all();
 
-const affiliateProductPerformance = db.select({
+const affiliateProductPerformance = await db.select({
   name: products.name,
   checkouts: sql<number>`count(${orders.id})`,
   sold: sql<number>`coalesce(sum(case when ${affiliatePaidSql} then 1 else 0 end), 0)`,

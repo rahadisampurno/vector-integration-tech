@@ -18,7 +18,7 @@ let product = {
 };
 
 if (slug) {
-  const dbProduct = db.select().from(products).where(eq(products.slug, slug)).get();
+  const dbProduct = await db.select().from(products).where(eq(products.slug, slug)).get();
   if (dbProduct?.status === 'active') {
     product = dbProduct as any;
   } else if (!dbProduct && slug === 'veintools-desktop') {

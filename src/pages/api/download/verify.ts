@@ -13,7 +13,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const tokenHash = createHash('sha256').update(token).digest('hex');
-    const access = db.select().from(downloadAccesses).where(eq(downloadAccesses.token_hash, tokenHash)).get();
+    const access = await db.select().from(downloadAccesses).where(eq(downloadAccesses.token_hash, tokenHash)).get();
 
     if (!access) {
       return new Response(JSON.stringify({ error: 'Invalid token' }), { status: 404 });
@@ -38,19 +38,19 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Order status must be DOWNLOAD_READY, WAITING_LICENSE, or COMPLETED
-    const order = db.select().from(orders).where(eq(orders.id, access.order_id)).get();
+    const order = await db.select().from(orders).where(eq(orders.id, access.order_id)).get();
     if (!order || (order.status !== 'DOWNLOAD_READY' && order.status !== 'WAITING_LICENSE' && order.status !== 'COMPLETED')) {
       return new Response(JSON.stringify({ error: 'Pesanan belum valid untuk diunduh.' }), { status: 403 });
     }
 
     // Update download count
-    db.update(downloadAccesses)
+    await db.update(downloadAccesses)
       .set({ download_count: access.download_count + 1 })
       .where(eq(downloadAccesses.id, access.id))
       .run();
 
     if (order.status === 'DOWNLOAD_READY') {
-      db.update(orders)
+      await db.update(orders)
         .set({ status: 'WAITING_LICENSE' })
         .where(eq(orders.id, order.id))
         .run();

@@ -20,3 +20,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Local databases must never be deployed; production uses Supabase PostgreSQL.
+*.db
+*.db-shm
+*.db-wal

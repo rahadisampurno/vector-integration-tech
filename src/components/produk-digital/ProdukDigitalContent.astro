@@ -4,7 +4,7 @@ import { products } from '../../db/schema';
 import { eq } from 'drizzle-orm';
 
 // Fetch products
-const allProducts = db.select().from(products).where(eq(products.status, 'active')).all();
+const allProducts = await db.select().from(products).where(eq(products.status, 'active')).all();
 
 // Mock data if empty
 const displayProducts = allProducts.length > 0 ? allProducts : [

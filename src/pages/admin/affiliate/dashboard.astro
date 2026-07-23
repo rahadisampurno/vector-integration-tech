@@ -5,13 +5,13 @@ import { affiliates, orders, products } from '../../../db/schema';
 import { desc, eq, sql } from 'drizzle-orm';
 import { getSession } from '../../../lib/auth';
 
-const session = getSession(Astro.cookies);
+const session = await getSession(Astro.cookies);
 if (!session?.affiliate_id) return Astro.redirect('/admin/login');
-const affiliate = db.select().from(affiliates).where(eq(affiliates.id, session.affiliate_id)).get();
+const affiliate = await db.select().from(affiliates).where(eq(affiliates.id, session.affiliate_id)).get();
 if (!affiliate || affiliate.status !== 'active') return Astro.redirect('/api/admin/logout');
 
 const paidSql = sql`${orders.status} in ('PAID','DOWNLOAD_READY','WAITING_LICENSE','COMPLETED')`;
-const stats = db.select({
+const stats = await db.select({
   totalCheckouts: sql<number>`count(*)`,
   paidOrders: sql<number>`coalesce(sum(case when ${paidSql} then 1 else 0 end), 0)`,
   waitingPayment: sql<number>`coalesce(sum(case when ${orders.status} = 'WAITING_PAYMENT' then 1 else 0 end), 0)`,
@@ -23,11 +23,11 @@ const stats = db.select({
   totalDiscount: sql<number>`coalesce(sum(${orders.discount_amount}), 0)`
 }).from(orders).where(eq(orders.affiliate_id, affiliate.id)).get();
 
-const ownOrders = db.select({ order: orders, product: products }).from(orders)
+const ownOrders = await db.select({ order: orders, product: products }).from(orders)
   .leftJoin(products, eq(orders.product_id, products.id))
   .where(eq(orders.affiliate_id, affiliate.id)).orderBy(desc(orders.created_at)).limit(100).all();
 
-const productPerformance = db.select({
+const productPerformance = await db.select({
   productId: orders.product_id,
   productName: products.name,
   checkoutCount: sql<number>`count(${orders.id})`,

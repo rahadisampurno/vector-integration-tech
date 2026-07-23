@@ -20,7 +20,7 @@ let product = {
 };
 
 if (slug) {
-  const dbProduct = db.select().from(products).where(eq(products.slug, slug)).get();
+  const dbProduct = await db.select().from(products).where(eq(products.slug, slug)).get();
   if (dbProduct?.status === 'active') {
     product = dbProduct as any;
   } else if (dbProduct) {
@@ -29,7 +29,7 @@ if (slug) {
 }
 
 const referralAffiliate = effectiveReferralCode
-  ? db.select().from(affiliates).where(eq(affiliates.referral_code, effectiveReferralCode)).get()
+  ? await db.select().from(affiliates).where(eq(affiliates.referral_code, effectiveReferralCode)).get()
   : null;
 const activeAffiliate = referralAffiliate?.status === 'active' ? referralAffiliate : null;
 const productPrice = product.sale_price || product.regular_price;

@@ -10,14 +10,14 @@ if (!orderCode) {
   return Astro.redirect('/produk-digital/cari-pesanan');
 }
 
-const order = db.select().from(orders).where(eq(orders.order_code, orderCode)).get();
+const order = await db.select().from(orders).where(eq(orders.order_code, orderCode)).get();
 
 if (!order) {
   return Astro.redirect('/produk-digital/cari-pesanan');
 }
 
-const product = db.select().from(products).where(eq(products.id, order.product_id)).get();
-const access = db.select().from(downloadAccesses).where(eq(downloadAccesses.order_id, order.id)).get();
+const product = await db.select().from(products).where(eq(products.id, order.product_id)).get();
+const access = await db.select().from(downloadAccesses).where(eq(downloadAccesses.order_id, order.id)).get();
 
 let isAuthorized = false;
 let errorMessage = '';

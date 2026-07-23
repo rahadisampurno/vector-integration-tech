@@ -20,7 +20,7 @@ export const POST: APIRoute = async ({ request, params }) => {
       return new Response(JSON.stringify({ error: 'License file is required' }), { status: 400 });
     }
 
-    const order = db.select().from(orders).where(eq(orders.id, id)).get();
+    const order = await db.select().from(orders).where(eq(orders.id, id)).get();
     if (!order) {
        return new Response(JSON.stringify({ error: 'Order not found' }), { status: 404 });
     }
@@ -42,7 +42,7 @@ export const POST: APIRoute = async ({ request, params }) => {
     const licenseUrl = `/api/download/license/${fileName}`;
 
     // Update order status to COMPLETED and set license URL
-    db.update(orders)
+    await db.update(orders)
       .set({ 
          status: 'COMPLETED',
          license_url: licenseUrl

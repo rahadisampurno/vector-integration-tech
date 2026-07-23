@@ -13,7 +13,7 @@ if (!token) {
 // Hash token to query DB safely
 const tokenHash = createHash('sha256').update(token).digest('hex');
 
-const access = db.select().from(downloadAccesses).where(eq(downloadAccesses.token_hash, tokenHash)).get();
+const access = await db.select().from(downloadAccesses).where(eq(downloadAccesses.token_hash, tokenHash)).get();
 
 if (!access) {
   return Astro.redirect('/produk-digital/not-found?error=invalid_token');
@@ -22,8 +22,8 @@ if (!access) {
 // Check expiration
 const isExpired = new Date() > new Date(access.expires_at);
 
-const order = db.select().from(orders).where(eq(orders.id, access.order_id)).get();
-const product = order ? db.select().from(products).where(eq(products.id, order.product_id)).get() : null;
+const order = await db.select().from(orders).where(eq(orders.id, access.order_id)).get();
+const product = order ? await db.select().from(products).where(eq(products.id, order.product_id)).get() : null;
 
 if (!order || !product) {
   return Astro.redirect('/produk-digital/not-found');

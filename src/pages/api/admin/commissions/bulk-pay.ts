@@ -11,7 +11,7 @@ export const POST: APIRoute = async ({ request }) => {
     if (!affiliateId || ids.length === 0 || ids.length > 500) {
       return Response.json({ error: 'Pilih 1–500 pesanan dari satu affiliate.' }, { status: 400 });
     }
-    const eligibleOrders = db.select().from(orders).where(and(
+    const eligibleOrders = await db.select().from(orders).where(and(
       inArray(orders.id, ids), eq(orders.affiliate_id, affiliateId),
       eq(orders.status, 'COMPLETED'), eq(orders.commission_status, 'pending')
     )).all();
@@ -20,7 +20,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
     const total = eligibleOrders.reduce((sum, order) => sum + Number(order.affiliate_commission || 0), 0);
     const paidAt = new Date();
-    db.update(orders).set({ commission_status: 'paid', commission_paid_at: paidAt }).where(and(
+    await db.update(orders).set({ commission_status: 'paid', commission_paid_at: paidAt }).where(and(
       inArray(orders.id, ids), eq(orders.affiliate_id, affiliateId),
       eq(orders.status, 'COMPLETED'), eq(orders.commission_status, 'pending')
     )).run();

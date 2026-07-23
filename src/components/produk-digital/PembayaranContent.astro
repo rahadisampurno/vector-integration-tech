@@ -9,16 +9,16 @@ if (!orderCode) {
   return Astro.redirect('/produk-digital/cari-pesanan');
 }
 
-const order = db.select().from(orders).where(eq(orders.order_code, orderCode)).get();
+const order = await db.select().from(orders).where(eq(orders.order_code, orderCode)).get();
 
 if (!order) {
   return Astro.redirect('/produk-digital/cari-pesanan');
 }
 
-const product = db.select().from(products).where(eq(products.id, order.product_id)).get();
+const product = await db.select().from(products).where(eq(products.id, order.product_id)).get();
 
 // Payment Methods
-const paymentMethods = db.select().from(paymentAccounts).where(eq(paymentAccounts.status, 'active')).orderBy(asc(paymentAccounts.sort_order)).all();
+const paymentMethods = await db.select().from(paymentAccounts).where(eq(paymentAccounts.status, 'active')).orderBy(asc(paymentAccounts.sort_order)).all();
 
 // Calculate expired time (24 hours from creation)
 const expiredAt = new Date(new Date(order.created_at).getTime() + 24 * 60 * 60 * 1000);

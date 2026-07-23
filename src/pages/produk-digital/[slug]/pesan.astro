@@ -39,7 +39,7 @@ if (Astro.request.method === 'POST') {
       throw new Error('Nama, WhatsApp, dan Email wajib diisi.');
     }
     const affiliate = referralCode
-      ? db.select().from(affiliates).where(eq(affiliates.referral_code, referralCode)).get()
+      ? await db.select().from(affiliates).where(eq(affiliates.referral_code, referralCode)).get()
       : null;
     if (referralCode && (!affiliate || affiliate.status !== 'active')) {
       throw new Error('Kode referral tidak valid atau sudah tidak aktif.');
@@ -59,7 +59,7 @@ if (Astro.request.method === 'POST') {
     };
 
     if (slug) {
-      const dbProduct = db.select().from(products).where(eq(products.slug, slug)).get();
+      const dbProduct = await db.select().from(products).where(eq(products.slug, slug)).get();
       if (dbProduct?.status === 'active') {
         product = dbProduct as any;
       } else if (dbProduct) {
@@ -81,9 +81,9 @@ if (Astro.request.method === 'POST') {
     const totalAmount = subtotalAmount - discountAmount + uniqueAmount;
     
     // Ensure product exists in DB to prevent foreign key constraint error
-    const existingProduct = db.select().from(products).where(eq(products.id, product.id)).get();
+    const existingProduct = await db.select().from(products).where(eq(products.id, product.id)).get();
     if (!existingProduct) {
-       db.insert(products).values({
+       await db.insert(products).values({
          id: product.id,
          slug: product.slug,
          name: product.name,
@@ -95,7 +95,7 @@ if (Astro.request.method === 'POST') {
     }
     
     // Save order
-    db.insert(orders).values({
+    await db.insert(orders).values({
       id: crypto.randomUUID(),
       order_code: orderCode,
       product_id: product.id,

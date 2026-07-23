@@ -8,7 +8,7 @@ import { createSession, getSession, verifyPassword } from '../../lib/auth';
 const { cookies, request, redirect } = Astro;
 let errorMessage = '';
 
-const existingSession = getSession(cookies);
+const existingSession = await getSession(cookies);
 if (existingSession) {
   return redirect(existingSession.role === 'admin' ? '/admin/produk-digital/dashboard' : '/admin/affiliate/dashboard');
 }
@@ -25,15 +25,15 @@ if (request.method === 'POST') {
     const validPassword = import.meta.env.ADMIN_PASS || 'adminveintech';
     
     if (username === validUsername && password === validPassword) {
-      createSession(cookies, 'admin');
+      await createSession(cookies, 'admin');
       return redirect('/admin/produk-digital/pesanan');
     }
 
     const affiliate = typeof username === 'string'
-      ? db.select().from(affiliates).where(eq(affiliates.email, username.trim().toLowerCase())).get()
+      ? await db.select().from(affiliates).where(eq(affiliates.email, username.trim().toLowerCase())).get()
       : null;
     if (affiliate?.status === 'active' && typeof password === 'string' && verifyPassword(password, affiliate.password_hash)) {
-      createSession(cookies, 'affiliate', affiliate.id);
+      await createSession(cookies, 'affiliate', affiliate.id);
       return redirect('/admin/affiliate/dashboard');
     }
     errorMessage = 'Username/email atau password salah.';

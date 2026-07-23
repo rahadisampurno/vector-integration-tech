@@ -11,7 +11,7 @@ export const POST: APIRoute = async ({ params, request }) => {
   }
 
   try {
-    const order = db.select().from(orders).where(eq(orders.id, id)).get();
+    const order = await db.select().from(orders).where(eq(orders.id, id)).get();
     
     if (!order) {
       return new Response(JSON.stringify({ error: 'Order not found' }), { status: 404 });
@@ -21,7 +21,7 @@ export const POST: APIRoute = async ({ params, request }) => {
     const { senderName, senderBank } = body;
 
     if (order.status === 'WAITING_PAYMENT') {
-      db.update(orders)
+      await db.update(orders)
         .set({ 
           status: 'PAYMENT_CONFIRMATION_SENT',
           sender_name: senderName || null,

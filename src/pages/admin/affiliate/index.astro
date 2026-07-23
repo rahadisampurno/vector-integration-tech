@@ -17,7 +17,7 @@ if (Astro.request.method === 'POST') {
       const id = data.get('id')?.toString();
       const currentStatus = data.get('current_status')?.toString();
       if (!id) throw new Error('Affiliate tidak ditemukan.');
-      db.update(affiliates).set({ status: currentStatus === 'active' ? 'inactive' : 'active' }).where(eq(affiliates.id, id)).run();
+      await db.update(affiliates).set({ status: currentStatus === 'active' ? 'inactive' : 'active' }).where(eq(affiliates.id, id)).run();
       successMessage = 'Status affiliate berhasil diperbarui.';
     } else {
       const name = data.get('name')?.toString().trim() || '';
@@ -30,9 +30,9 @@ if (Astro.request.method === 'POST') {
       if (!Number.isInteger(commissionRate) || commissionRate < 0 || commissionRate > 100) throw new Error('Komisi harus antara 0–100%.');
       if (!Number.isInteger(discountRate) || discountRate < 0 || discountRate > 100) throw new Error('Diskon harus antara 0–100%.');
       if (!referralCode) referralCode = `VT${randomBytes(4).toString('hex').toUpperCase()}`;
-      if (db.select().from(affiliates).where(eq(affiliates.email, email)).get()) throw new Error('Email sudah digunakan.');
-      if (db.select().from(affiliates).where(eq(affiliates.referral_code, referralCode)).get()) throw new Error('Kode referral sudah digunakan.');
-      db.insert(affiliates).values({
+      if (await db.select().from(affiliates).where(eq(affiliates.email, email)).get()) throw new Error('Email sudah digunakan.');
+      if (await db.select().from(affiliates).where(eq(affiliates.referral_code, referralCode)).get()) throw new Error('Kode referral sudah digunakan.');
+      await db.insert(affiliates).values({
         id: crypto.randomUUID(), name, email,
         password_hash: hashPassword(password), referral_code: referralCode,
         commission_rate: commissionRate, discount_rate: discountRate, status: 'active', created_at: new Date()
@@ -53,14 +53,15 @@ const searchCondition = search ? or(
   like(affiliates.referral_code, `%${search}%`)
 ) : undefined;
 
-const affiliateRows = db.select({
+const affiliateRows = await db.select({
   affiliate: affiliates,
   totalOrders: sql<number>`count(${orders.id})`,
   paidRevenue: sql<number>`coalesce(sum(case when ${orders.status} in ('PAID','DOWNLOAD_READY','COMPLETED') then ${orders.total_amount} else 0 end), 0)`
 }).from(affiliates).leftJoin(orders, eq(orders.affiliate_id, affiliates.id))
   .where(searchCondition).groupBy(affiliates.id).orderBy(desc(affiliates.created_at))
   .limit(limit).offset((page - 1) * limit).all();
-const affiliateCount = Number(db.select({ count: sql<number>`count(*)` }).from(affiliates).where(searchCondition).get()?.count || 0);
+const affiliateCountRow = await db.select({ count: sql<number>`count(*)` }).from(affiliates).where(searchCondition).get();
+const affiliateCount = Number(affiliateCountRow?.count || 0);
 const totalPages = Math.max(1, Math.ceil(affiliateCount / limit));
 const pageLink = (targetPage: number) => {
   const params = new URLSearchParams();

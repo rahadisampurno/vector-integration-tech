@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const supportUrl = `https://wa.me/6287787290712?text=${encodeURIComponent('Halo Admin VeinTools, saya membutuhkan bantuan menggunakan menu:\n\nNama menu:\nYang ingin saya lakukan:\nKendala yang muncul:\n\nSaya akan mengirim foto layar setelah pesan ini.')}`;
+const rawGuides = [
+  ['Mulai','home','Beranda Launcher','Membuka semua alat VeinTools dan melihat menu favorit.','Buka VeinTools|Pilih menu dari panel sebelah kiri|Gunakan pencarian jika menu sulit ditemukan'],
+  ['Mulai','bookmark','Customer Shortcut','Menyimpan menu yang paling sering dipakai agar lebih cepat dibuka.','Tekan Atur & Pilih Shortcut|Pilih menu favorit atau paket preset|Tekan kartu shortcut untuk membuka menu'],
+  ['Mulai','store','Profil Usaha & Rekening','Mengisi identitas toko untuk invoice, quotation, dan kuitansi.','Isi identitas dan kontak usaha|Isi data rekening pembayaran|Tekan Simpan Profil Usaha'],
+  ['Keuangan','calculate','HPP & Harga Jual','Menghitung modal per produk dan menentukan harga jual yang sehat.','Isi produk, hasil jadi, dan satuan|Tambahkan semua bahan baku|Masukkan biaya tambahan dan lihat hasil harga'],
+  ['Keuangan','menu_book','Buku Kas Sederhana','Mencatat uang masuk, uang keluar, dan saldo usaha.','Pilih Kas Masuk atau Kas Keluar|Isi tanggal, nominal, dan keterangan|Tekan Catat ke Buku Kas'],
+  ['Keuangan','track_changes','Target Omzet & Prediksi','Membagi target bulanan menjadi target harian dan mingguan.','Masukkan target omzet bulanan|Masukkan omzet yang sudah tercapai|Baca kekurangan dan prediksi akhir bulan'],
+  ['Keuangan','monitoring','Profit & ROI Simulator','Melihat laba, margin, dan modal untuk berbagai jumlah penjualan.','Isi harga jual dan HPP|Isi perkiraan jumlah terjual|Baca laba, margin, ROI, dan simulasi'],
+  ['Keuangan','trending_up','Margin vs Markup','Menghitung laba, margin, dan markup otomatis.','Isi modal per unit|Isi harga jual|Hasil langsung muncul di sebelah kanan'],
+  ['Keuangan','balance','Titik Impas (BEP)','Menghitung minimal unit dan omzet agar usaha tidak rugi.','Isi biaya tetap bulanan|Isi biaya variabel per unit|Isi harga jual dan baca hasil BEP'],
+  ['Keuangan','percent','Biaya Marketplace','Menghitung laba setelah diskon dan potongan marketplace.','Pilih preset marketplace|Isi harga jual, HPP, dan diskon|Periksa uang cair dan laba bersih'],
+  ['Keuangan','person_alert','Reminder Piutang','Mencatat pelanggan yang belum membayar dan mengingatkannya lewat WA.','Isi pelanggan, WA, nominal, dan jatuh tempo|Simpan catatan piutang|Kirim pengingat WA dan tandai lunas'],
+  ['Keuangan','credit_card','Reminder Hutang Usaha','Mencatat kewajiban pembayaran kepada supplier.','Isi supplier dan nominal|Isi jatuh tempo dan keterangan|Simpan lalu tandai lunas setelah dibayar'],
+  ['Inventori','inventory_2','Reminder Stok Menipis','Memantau stok dan memberi peringatan saat hampir habis.','Isi data barang dan stok|Tentukan batas stok minimal|Gunakan tombol −1/+1 untuk update cepat'],
+  ['Inventori','groups','Direktori Supplier','Menyimpan pemasok dan melakukan order melalui WhatsApp.','Isi kontak serta produk supplier|Tekan Simpan Supplier|Tekan Chat & Order via WhatsApp'],
+  ['Inventori','barcode','Generator SKU Otomatis','Membuat banyak kode SKU produk secara berurutan.','Isi prefix dan kode kategori|Tentukan nomor awal dan jumlah|Salin atau unduh TXT/XLSX'],
+  ['Dokumen','receipt_long','Invoice & Tagihan','Membuat invoice profesional dengan pratinjau siap cetak.','Isi tanggal dan pelanggan|Tambahkan semua barang atau jasa|Periksa lalu simpan atau unduh PDF'],
+  ['Dokumen','request_quote','Quotation Penawaran','Membuat surat penawaran harga untuk calon pelanggan.','Isi masa berlaku dan calon pelanggan|Tambahkan item dan syarat|Periksa lalu simpan atau unduh PDF'],
+  ['Dokumen','task','Kuitansi Pembayaran','Membuat bukti pembayaran dengan terbilang otomatis.','Isi pembayar, tanggal, dan nominal|Isi keperluan dan metode|Periksa lalu simpan atau cetak'],
+  ['Dokumen','history','Riwayat & Ekspor Data','Mencari dokumen tersimpan dan mengekspornya.','Cari nomor atau pelanggan|Pilih filter jenis dokumen|Tekan Ekspor ke CSV'],
+  ['Pemasaran','calendar_month','Kalender Promo & Event','Merencanakan promo berdasarkan hari besar dan tanggal belanja.','Lihat agenda terdekat|Tambahkan promo toko|Siapkan stok sebelum tanggal event'],
+  ['Pemasaran','qr_code_2','QR & Link WhatsApp','Membuat link dan QR agar pelanggan mudah memesan.','Isi nomor WhatsApp|Tulis pesan otomatis|Salin link atau unduh QR'],
+  ['Pemasaran','branding_watermark','Watermark Foto Produk','Memberi nama toko pada foto produk.','Pilih foto produk|Atur teks, posisi, warna, dan ukuran|Unduh foto ber-watermark'],
+  ['Pemasaran','aspect_ratio','Resize Foto Marketplace','Menyesuaikan ukuran foto untuk marketplace dan media sosial.','Pilih foto|Pilih preset tujuan|Pilih mode lalu unduh hasil'],
+  ['Utilitas','barcode_scanner','Barcode Generator','Membuat barcode dari SKU untuk label produk.','Isi SKU, produk, dan harga|Pilih format barcode|Unduh PNG atau PDF'],
+  ['Utilitas','label','Cetak Label Produk & Rak','Membuat label harga atau stiker produk siap cetak.','Isi nama, harga, SKU, dan promo|Pilih jumlah label|Unduh PDF atau PNG'],
+  ['Utilitas','print','Cetak Struk Thermal','Membuat struk printer thermal 58 mm atau 80 mm.','Pilih ukuran dan isi data kasir|Tambahkan barang serta harga|Periksa lalu cetak'],
+  ['Utilitas','checklist','To-Do List Bisnis','Mencatat pekerjaan harian agar tidak terlewat.','Isi tugas, prioritas, dan deadline|Simpan tugas operasional|Tandai selesai setelah dikerjakan'],
+  ['Data','backup','Backup & Restore Data','Mengamankan data dan memulihkannya saat ganti komputer.','Unduh file backup secara rutin|Simpan di tempat aman|Pilih file backup saat ingin memulihkan'],
+  ['Bantuan','help','Pusat Bantuan & FAQ','Membaca jawaban umum dan menghubungi bantuan.','Cari pertanyaan yang sesuai|Ikuti jawaban yang diberikan|Hubungi WhatsApp CS jika belum selesai'],
+] as const;
+const guides = rawGuides.map((item, index) => ({ category:item[0], icon:item[1], title:item[2], purpose:item[3], steps:item[4].split('|'), image:index === 0 ? 'photoproduk.png' : `photoproduk${index}.png` }));
+const categories = ['Semua', ...new Set(guides.map((guide) => guide.category))];
+---
+
+<BaseLayout title="Panduan Penggunaan VeinTools — Cara Memakai Setiap Menu" description="Panduan penggunaan setiap menu VeinTools Desktop dengan screenshot dan langkah yang mudah diikuti.">
+  <main class="pt-28 pb-24 bg-surface min-h-screen text-on-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-wrap gap-3 justify-between items-center mb-8">
+        <a href="/produk-digital/veintools-desktop" class="nav-link"><span class="material-symbols-outlined">arrow_back</span>Kembali ke VeinTools</a>
+        <a href="/produk-digital/veintools-desktop/panduan-instalasi" class="nav-link boxed"><span class="material-symbols-outlined">download</span>Panduan Instalasi</a>
+      </div>
+      <header class="max-w-4xl mx-auto text-center mb-10">
+        <div class="badge"><span class="material-symbols-outlined">school</span>Panduan bergambar untuk pemula</div>
+        <h1 class="text-4xl md:text-6xl font-headline font-black leading-tight mb-5">Cara Menggunakan<br />VeinTools</h1>
+        <p class="text-lg md:text-2xl text-on-surface-variant leading-relaxed">Pilih menu yang ingin dipelajari. Setiap bagian berisi kegunaan, langkah singkat, dan gambar tampilan aslinya.</p>
+      </header>
+
+      <section class="sticky top-20 z-30 bg-surface/95 backdrop-blur-xl py-4 mb-8 border-y border-outline-variant/20">
+        <div class="relative max-w-2xl mx-auto mb-4"><span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">search</span><input id="guide-search" type="search" placeholder="Ketik nama menu, contoh: invoice atau stok" class="w-full min-h-14 rounded-2xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 pl-12 pr-4 text-base focus:border-blue-600 outline-none" /></div>
+        <div class="flex gap-2 overflow-x-auto pb-1 lg:justify-center">
+          {categories.map((category, index) => <button type="button" data-filter={category} class={`filter-button ${index === 0 ? 'active' : ''}`}>{category}</button>)}
+        </div>
+      </section>
+
+      <div id="no-results" class="hidden text-center py-16"><span class="material-symbols-outlined text-6xl text-slate-400">search_off</span><h2 class="text-2xl font-black mt-3">Menu tidak ditemukan</h2><p class="text-on-surface-variant mt-2">Coba gunakan kata yang lebih pendek.</p></div>
+      <section class="space-y-8">
+        {guides.map((guide, index) => (
+          <article data-guide data-category={guide.category} data-search={`${guide.title} ${guide.purpose} ${guide.category}`.toLowerCase()} class="guide-card scroll-mt-48 bg-surface-container rounded-3xl border-2 border-outline-variant/25 overflow-hidden shadow-sm">
+            <div class="grid lg:grid-cols-[minmax(300px,.78fr)_minmax(0,1.5fr)]">
+              <div class="p-5 md:p-8 flex flex-col">
+                <div class="flex items-center gap-4 mb-5"><span class="menu-icon material-symbols-outlined">{guide.icon}</span><div><p class="text-sm font-bold text-blue-700 dark:text-blue-300">{index + 1}. {guide.category}</p><h2 class="text-2xl md:text-3xl font-black leading-tight">{guide.title}</h2></div></div>
+                <p class="text-lg leading-relaxed text-on-surface-variant mb-6">{guide.purpose}</p>
+                <h3 class="font-black text-lg mb-3">Langkah penggunaan:</h3>
+                <ol class="space-y-3 mb-6">{guide.steps.map((step, i) => <li class="flex gap-3 leading-relaxed"><span class="step-number">{i + 1}</span><span>{step}</span></li>)}</ol>
+                <a href={supportUrl} target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center gap-2 font-bold text-green-700 dark:text-green-300 hover:underline"><span class="material-symbols-outlined">chat</span>Bingung pada menu ini? Tanya Admin</a>
+              </div>
+              <a href={`/produk/${guide.image}`} target="_blank" class="screenshot" aria-label={`Perbesar screenshot ${guide.title}`}><figure><img src={`/produk/${guide.image}`} alt={`Tampilan menu ${guide.title} di VeinTools`} loading="lazy" decoding="async" class="w-full rounded-xl shadow-md border border-slate-300 dark:border-slate-700" /><figcaption><span class="material-symbols-outlined text-lg">zoom_in</span>Tekan gambar untuk memperbesar</figcaption></figure></a>
+            </div>
+          </article>
+        ))}
+      </section>
+      <section class="mt-12 bg-blue-700 text-white rounded-3xl p-6 md:p-10 text-center shadow-lg"><span class="material-symbols-outlined text-5xl mb-3">support_agent</span><h2 class="text-3xl font-black mb-3">Masih belum berhasil?</h2><p class="text-lg text-blue-100 mb-6">Kirim nama menu dan foto layar kepada Admin.</p><a href={supportUrl} target="_blank" rel="noopener noreferrer" class="min-h-14 inline-flex items-center gap-3 bg-white text-blue-800 text-lg font-black px-7 py-3 rounded-2xl"><span class="material-symbols-outlined">chat</span>Minta Bantuan via WhatsApp</a></section>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .nav-link{display:inline-flex;align-items:center;gap:.5rem;min-height:3rem;font-weight:700;color:#0369a1}.nav-link.boxed{padding:0 1.25rem;border:2px solid #bae6fd;border-radius:.75rem}.badge{display:inline-flex;align-items:center;gap:.5rem;background:#dcfce7;color:#166534;font-weight:700;padding:.5rem 1rem;border-radius:999px;margin-bottom:1.25rem}.filter-button{white-space:nowrap;min-height:2.75rem;padding:0 1rem;border-radius:999px;border:2px solid rgba(148,163,184,.5);font-weight:700;color:var(--color-on-surface-variant,#475569)}.filter-button:hover,.filter-button.active{border-color:#0369a1;color:white;background:#0369a1}.guide-card[hidden]{display:none}.menu-icon{flex:none;width:3rem;height:3rem;border-radius:1rem;background:#0369a1;color:white;display:grid;place-items:center}.step-number{flex:none;width:1.75rem;height:1.75rem;display:grid;place-items:center;border-radius:999px;background:#dbeafe;color:#1e40af;font-weight:900;font-size:.875rem}.screenshot{background:#f1f5f9;border-top:2px solid rgba(148,163,184,.3);padding:.75rem;display:flex;align-items:center}.screenshot figcaption{text-align:center;font-size:.875rem;font-weight:700;color:#475569;margin-top:.75rem;display:flex;align-items:center;justify-content:center;gap:.25rem}@media(min-width:1024px){.screenshot{border-top:0;border-left:2px solid rgba(148,163,184,.3);padding:1.25rem}}
+</style>
+
+<script>
+  const input = document.querySelector('#guide-search');
+  const cards = Array.from(document.querySelectorAll('[data-guide]'));
+  const buttons = Array.from(document.querySelectorAll('[data-filter]'));
+  const empty = document.querySelector('#no-results');
+  let category = 'Semua';
+  const filter = () => { const query = input instanceof HTMLInputElement ? input.value.trim().toLowerCase() : ''; let visible = 0; cards.forEach((card) => { if (!(card instanceof HTMLElement)) return; const show = (category === 'Semua' || card.dataset.category === category) && (!query || (card.dataset.search || '').includes(query)); card.hidden = !show; if (show) visible++; }); empty?.classList.toggle('hidden', visible > 0); };
+  input?.addEventListener('input', filter);
+  buttons.forEach((button) => button.addEventListener('click', () => { if (!(button instanceof HTMLButtonElement)) return; category = button.dataset.filter || 'Semua'; buttons.forEach((item) => item.classList.toggle('active', item === button)); filter(); }));
+</script>

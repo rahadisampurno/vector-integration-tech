@@ -2,7 +2,18 @@ import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 import * as schema from './schema';
 
-const connectionString = process.env.SUPABASE_DB_URL || process.env.DATABASE_URL || process.env.POSTGRES_URL || process.env.POSTGRES_URL_NON_POOLING;
+// Astro exposes values from local `.env` files through `import.meta.env`, while
+// the production Node runtime exposes Hostinger variables through `process.env`.
+// Supporting both keeps local development and production deployments aligned.
+const connectionString =
+  import.meta.env.SUPABASE_DB_URL ||
+  import.meta.env.DATABASE_URL ||
+  import.meta.env.POSTGRES_URL ||
+  import.meta.env.POSTGRES_URL_NON_POOLING ||
+  process.env.SUPABASE_DB_URL ||
+  process.env.DATABASE_URL ||
+  process.env.POSTGRES_URL ||
+  process.env.POSTGRES_URL_NON_POOLING;
 
 if (!connectionString) {
   throw new Error('Database belum dikonfigurasi. Tambahkan SUPABASE_DB_URL atau DATABASE_URL di environment server.');

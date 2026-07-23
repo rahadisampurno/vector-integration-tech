@@ -61,7 +61,7 @@ export const POST: APIRoute = async ({ request }) => {
       success: true, 
       files: [
         { name: 'Windows (.msi)', url: '/produk/veintools/installers/veintools-desktop_0.1.0_x64_en-US.msi', icon: 'window' },
-        { name: 'Windows (.exe)', url: '/produk/veintools/installers/veintools-desktop_0.1.0_x64-setup .exe', icon: 'window' },
+        { name: 'Windows (.exe)', url: '/produk/veintools/installers/veintools-desktop_0.1.0_x64-setup.exe', icon: 'window' },
         { name: 'Mac (.dmg)', url: '/produk/veintools/installers/veintools-desktop_0.1.0_aarch64.dmg', icon: 'laptop_mac' }
       ]
     }), { status: 200 });

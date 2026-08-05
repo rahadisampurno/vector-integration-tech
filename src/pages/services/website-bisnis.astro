@@ -1,39 +1,36 @@
 ---
 import ServiceCTA from '../../components/ServiceCTA.astro';
-
 import WhyChooseUs from '../../components/WhyChooseUs.astro';
-
 import ServiceEcosystem from '../../components/ServiceEcosystem.astro';
-
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ServiceBottomSections from '../../components/ServiceBottomSections.astro';
 import FlashSaleBanner from '../../components/FlashSaleBanner.astro';
 ---
 
-<BaseLayout title="Website UMKM & Bisnis | Layanan">
+<BaseLayout title="Website Profesional untuk UMKM & Bisnis | Layanan">
 <FlashSaleBanner slot="top-banner" />
 <main class="pb-20">
 
     <!-- Hero Section -->
-    <header class="max-w-[1440px] mx-auto px-12 mb-24">
+    <header class="max-w-[1440px] mx-auto px-12 mb-24 mt-8 md:mt-12">
         <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary-fixed-dim/10 border border-primary-fixed-dim/20 rounded-full text-primary-fixed-dim text-xs font-label tracking-widest uppercase mb-8">
             <span class="w-2 h-2 rounded-full bg-primary-fixed-dim animate-pulse"></span>
             Layanan — Bisnis
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div class="space-y-6">
-                <h1 class="text-5xl md:text-7xl font-bold leading-[0.9] tracking-tighter font-headline text-slate-900 dark:text-white">
-                    Website UMKM <br/><span class="text-primary-fixed-dim">& Bisnis.</span>
+                <h1 class="text-4xl md:text-6xl font-bold leading-[1.1] tracking-tighter font-headline text-slate-900 dark:text-white">
+                    Website Profesional untuk <br class="hidden lg:block"/><span class="text-primary-fixed-dim">UMKM dan Bisnis</span>
                 </h1>
-                <p class="text-xl text-on-surface-variant max-w-lg leading-relaxed font-body">
-                    Solusi kehadiran digital profesional untuk UMKM dan Startup. Paket lengkap yang mencakup desain kustom, domain, dan hosting dalam satu harga.
+                <p class="text-lg text-on-surface-variant max-w-lg leading-relaxed font-body">
+                    Bangun kepercayaan pelanggan melalui website profesional yang cepat, aman, dan mudah diakses melalui berbagai perangkat. Seluruh paket sudah mencakup desain responsif, domain, hosting, SSL, integrasi WhatsApp, serta dukungan teknis sesuai paket yang dipilih.
                 </p>
-                <div class="flex gap-4 pt-4">
-                    <a href="/contact" class="bg-primary-fixed-dim text-on-primary-fixed px-8 py-4 rounded-xl font-headline font-bold hover:brightness-110 transition-all flex items-center gap-2">
-                        Konsultasi Gratis <span class="material-symbols-outlined">arrow_forward</span>
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <a href="#pricing" class="bg-primary-fixed-dim text-on-primary-fixed px-8 py-4 rounded-xl font-headline font-bold hover:brightness-110 transition-all flex items-center gap-2">
+                        Lihat Paket <span class="material-symbols-outlined">arrow_downward</span>
                     </a>
-                    <a href="/services" class="border border-outline-variant/30 text-slate-600 dark:text-slate-300 px-8 py-4 rounded-xl font-headline font-bold hover:bg-surface-container-high transition-all">
-                        Semua Layanan
+                    <a href="/contact" class="border border-outline-variant/30 text-slate-600 dark:text-slate-300 px-8 py-4 rounded-xl font-headline font-bold hover:bg-surface-container-high transition-all">
+                        Konsultasi Gratis
                     </a>
                 </div>
             </div>
@@ -44,285 +41,324 @@ import FlashSaleBanner from '../../components/FlashSaleBanner.astro';
         </div>
     </header>
 
-    <!-- Feature Grid -->
-    <section class="max-w-[1440px] mx-auto px-12 mb-20">
-        <div class="mb-12">
-            <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">Paket Digital</h2>
-            <div class="w-20 h-1 bg-gradient-to-r from-primary-fixed-dim to-transparent"></div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
-                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block">business</span>
-                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Company Profile</h3>
-                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Website elegan untuk membangun kepercayaan pelanggan dan menampilkan portofolio bisnis Anda.</p>
-            </div>
-            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
-                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block">devices</span>
-                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">Responsive Design</h3>
-                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Tampilan website yang otomatis menyesuaikan diri di smartphone, tablet, maupun komputer.</p>
-            </div>
-            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 hover:bg-surface-container transition-all group">
-                <span class="material-symbols-outlined text-primary-fixed-dim text-4xl mb-5 block">search</span>
-                <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-3">SEO Optimized</h3>
-                <p class="text-sm text-on-surface-variant font-body leading-relaxed">Struktur website yang ramah mesin pencari agar bisnis Anda lebih mudah ditemukan di Google.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Detailed Content Section -->
-    <section class="max-w-[1440px] mx-auto px-12 mb-20">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
-            <!-- Left: Benefits -->
-            <div class="space-y-12">
-                <div>
-                    <h2 class="text-3xl font-headline font-bold text-slate-900 dark:text-white mb-6">Tingkatkan Kredibilitas Bisnis Anda</h2>
-                    <p class="text-on-surface-variant leading-relaxed mb-8">Di era digital, website adalah wajah dari bisnis Anda. Kami membantu UMKM dan bisnis lokal untuk tampil profesional dengan website yang cepat dan mudah dikelola.</p>
-                    
-                    <div class="space-y-6">
-                        <div class="flex gap-4">
-                            <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary-fixed-dim">speed</span>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">Loading Super Cepat</h4>
-                                <p class="text-sm text-on-surface-variant">Kami menggunakan teknologi Astro untuk memastikan website Anda dimuat seketika, meningkatkan kepuasan pengunjung.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary-fixed-dim">edit_note</span>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">Mudah Diupdate</h4>
-                                <p class="text-sm text-on-surface-variant">Panel admin yang intuitif memungkinkan Anda mengubah konten website tanpa perlu keahlian coding.</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="w-12 h-12 rounded-xl bg-primary-fixed-dim/10 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-primary-fixed-dim">support</span>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-900 dark:text-white mb-1">Dukungan Teknis</h4>
-                                <p class="text-sm text-on-surface-variant">Tim kami siap membantu jika Anda mengalami kendala teknis atau ingin menambah fitur baru.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right: Service Packages -->
-            <div class="bg-slate-50 dark:bg-white/5 rounded-3xl p-10 border border-outline-variant/10">
-                <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mb-8 text-center">Apa yang Anda Dapatkan?</h3>
-                <div class="space-y-6">
-                    <div class="flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-white/5 border border-outline-variant/10">
-                        <span class="material-symbols-outlined text-green-500">check_circle</span>
-                        <span class="text-slate-700 dark:text-slate-300">Domain .com / .id Gratis (1 Tahun)</span>
-                    </div>
-                    <div class="flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-white/5 border border-outline-variant/10">
-                        <span class="material-symbols-outlined text-green-500">check_circle</span>
-                        <span class="text-slate-700 dark:text-slate-300">Cloud Hosting High Performance</span>
-                    </div>
-                    <div class="flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-white/5 border border-outline-variant/10">
-                        <span class="material-symbols-outlined text-green-500">check_circle</span>
-                        <span class="text-slate-700 dark:text-slate-300">Sertifikat SSL (HTTPS) Aman</span>
-                    </div>
-                    <div class="flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-white/5 border border-outline-variant/10">
-                        <span class="material-symbols-outlined text-green-500">check_circle</span>
-                        <span class="text-slate-700 dark:text-slate-300">Integrasi WhatsApp Chat</span>
-                    </div>
-                    <div class="flex items-center gap-4 p-4 rounded-xl bg-white dark:bg-white/5 border border-outline-variant/10">
-                        <span class="material-symbols-outlined text-green-500">check_circle</span>
-                        <span class="text-slate-700 dark:text-slate-300">Email Bisnis Kustom (nama@bisnisanda.com)</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Pricing Tiers -->
-    <section class="max-w-[1440px] mx-auto px-12 mb-20">
+    <section id="pricing" class="max-w-[1440px] mx-auto px-12 mb-20">
         <div class="mb-12 text-center">
-            <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">Pilih Paket yang Tepat</h2>
-            <p class="text-on-surface-variant max-w-xl mx-auto">Semua paket sudah termasuk hosting & domain .com, desain custom (bukan template), dan dukungan teknis.</p>
+            <h2 class="text-3xl md:text-4xl font-headline font-bold text-slate-900 dark:text-white mb-3">Pilih Paket yang Sesuai dengan Bisnis Anda</h2>
+            <p class="text-on-surface-variant max-w-xl mx-auto">Kami menyediakan solusi dari landing page hingga sistem website kustom terintegrasi.</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-            <!-- Single Page -->
+            <!-- Landing Page -->
             <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 flex flex-col gap-5 hover:border-primary-fixed-dim/30 transition-all">
                 <div>
-                    <span class="text-xs font-label font-bold text-primary-fixed-dim tracking-widest uppercase">Single Page</span>
-                    <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mt-1">Landing Page</h3>
-                    <p class="text-sm text-on-surface-variant mt-1">Fokus 1 tujuan, konversi maksimal</p>
+                    <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white">Landing Page</h3>
+                    <p class="text-xs text-on-surface-variant mt-2 font-medium">Fokus satu tujuan, lebih mudah menghasilkan calon pelanggan</p>
                 </div>
-                <div id="pricing">
-                    <div class="flex items-baseline gap-2">
-                        <p class="text-3xl font-headline font-bold text-red-600">Rp 500rb</p>
-                        <p class="text-sm text-on-surface-variant line-through opacity-50">Rp 1jt</p>
+                <div>
+                    <div class="flex flex-col gap-1">
+                        <p class="text-2xl font-headline font-bold text-red-600">Rp 999.000</p>
+                        <p class="text-xs text-on-surface-variant line-through opacity-70">Harga normal Rp 1.500.000</p>
                     </div>
-                    <p class="text-xs text-on-surface-variant mt-1">Development time 3 hari</p>
+                    <p class="text-[11px] text-primary-fixed-dim font-bold mt-2 bg-primary-fixed-dim/10 inline-block px-2 py-1 rounded">Estimasi: 5–7 hari kerja</p>
                 </div>
                 <ul class="space-y-3 flex-1">
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Desain eksklusif (Bukan Template)
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        1 halaman landing page (Maks. 7 bagian)
                     </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Gratis Domain .com & Hosting khusus
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Desain responsif sesuai identitas bisnis
                     </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Layout Landing Page (1 Halaman)
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Bantuan struktur & editing copywriting dasar
                     </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Arsitektur konten & copywriting basic
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Integrasi WhatsApp & 1 formulir calon pelanggan
                     </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Optimasi SEO standar & set Analytics
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        SEO dasar, Analytics & Search Console
                     </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Terintegrasi WhatsApp & Form inquiry
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Domain .com, Hosting & SSL (1 tahun)
                     </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Mendukung fitur Multi-bahasa
-                    </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Biaya perpanjangan: Rp 850.000/tahun
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Maksimal 2 revisi & garansi bug 14 hari
                     </li>
                 </ul>
-                <div class="pt-2 border-t border-outline-variant/10">
-                    <p class="text-xs text-on-surface-variant mb-4">Cocok untuk: Landing page promo produk/jasa, webinar, launching aplikasi, portofolio singkat, halaman event.</p>
-                    <a href="/contact" class="block text-center border border-primary-fixed-dim text-primary-fixed-dim px-6 py-3 rounded-xl font-headline font-bold hover:bg-primary-fixed-dim hover:text-white transition-all text-sm">
-                        Konsultasi Sekarang
+                <div class="pt-4 border-t border-outline-variant/10">
+                    <p class="text-[10px] text-on-surface-variant mb-4">Cocok untuk promosi produk, jasa, event, webinar, aplikasi, portofolio.</p>
+                    <p class="text-[10px] text-slate-500 mb-4 font-bold">Perpanjangan: Rp 650.000/tahun</p>
+                    <a href="/contact" class="block text-center border border-primary-fixed-dim text-primary-fixed-dim px-4 py-2.5 rounded-xl font-headline font-bold hover:bg-primary-fixed-dim hover:text-white transition-all text-sm">
+                        Pilih Paket
                     </a>
                 </div>
             </div>
 
-            <!-- Multi Page — highlighted -->
-            <div class="p-8 rounded-2xl bg-gradient-to-b from-primary-fixed-dim/15 to-surface-container border border-primary-fixed-dim/40 flex flex-col gap-5 relative">
-                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary-fixed-dim text-on-primary-fixed text-[10px] font-label font-bold tracking-widest uppercase px-4 py-1 rounded-full">Paling Populer</div>
+            <!-- Company Profile -->
+            <div class="p-8 rounded-2xl bg-gradient-to-b from-primary-fixed-dim/15 to-surface-container border border-primary-fixed-dim/40 flex flex-col gap-5 relative transform lg:-translate-y-2 shadow-xl shadow-primary-fixed-dim/10">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary-fixed-dim text-on-primary-fixed text-[10px] font-label font-bold tracking-widest uppercase px-4 py-1 rounded-full whitespace-nowrap">Rekomendasi</div>
                 <div>
-                    <span class="text-xs font-label font-bold text-primary-fixed-dim tracking-widest uppercase">Multi Page</span>
-                    <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mt-1">Multi Page</h3>
-                    <p class="text-sm text-on-surface-variant mt-1">Company profile lengkap</p>
+                    <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white">Company Profile</h3>
+                    <p class="text-xs text-on-surface-variant mt-2 font-medium">Website lengkap untuk meningkatkan kredibilitas bisnis</p>
                 </div>
                 <div>
-                    <div class="flex items-baseline gap-2">
-                        <p class="text-3xl font-headline font-bold text-red-600">Rp 1,4jt</p>
-                        <p class="text-sm text-on-surface-variant line-through opacity-50">Rp 2,8jt</p>
+                    <div class="flex flex-col gap-1">
+                        <p class="text-2xl font-headline font-bold text-red-600">Rp 2.490.000</p>
+                        <p class="text-xs text-on-surface-variant line-through opacity-70">Harga normal Rp 3.500.000</p>
                     </div>
-                    <p class="text-xs text-on-surface-variant mt-1">Development time mulai dari 3 hari</p>
+                    <p class="text-[11px] text-primary-fixed-dim font-bold mt-2 bg-primary-fixed-dim/10 inline-block px-2 py-1 rounded">Estimasi: 10–15 hari kerja</p>
                 </div>
                 <ul class="space-y-3 flex-1">
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Visual eksklusif (Sesuai profil bisnis)
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Maksimal 5 halaman utama (Beranda, Tentang, dll)
                     </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Domain & Hosting kapasitas besar
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Desain responsif sesuai profil identitas
                     </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Kapasitas hingga 5 halaman utama
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Bantuan struktur & editing copy (5 hal)
                     </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Copywriting tingkat lanjut (Persuasif)
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Integrasi WA, Email, Maps, Galeri & 2 Form
                     </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Manajemen leads via WA & Email
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        SEO on-page dasar, Analytics & Search Console
                     </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Setup Google Analytics & SEO On-Page
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Domain .com, Hosting, SSL & 1 Email (1 tahun)
                     </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Dukungan teks multi-bahasa
-                    </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Perpanjangan tahunan: Rp 2.500.000
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Maksimal 3 revisi & garansi bug 30 hari
                     </li>
                 </ul>
-                <div class="pt-2 border-t border-primary-fixed-dim/20">
-                    <p class="text-xs text-on-surface-variant mb-4">Cocok untuk: Bisnis butuh company profile lengkap, brand yang ingin meningkatkan kepercayaan pelanggan, halaman layanan & portofolio.</p>
-                    <a href="/contact" class="block text-center bg-primary-fixed-dim text-on-primary-fixed px-6 py-3 rounded-xl font-headline font-bold hover:brightness-110 transition-all text-sm shadow-lg shadow-primary-fixed-dim/20">
-                        Konsultasi Sekarang
+                <div class="pt-4 border-t border-primary-fixed-dim/20">
+                    <p class="text-[10px] text-on-surface-variant mb-4">Cocok untuk UMKM, perusahaan jasa, distributor, kontraktor, konsultan.</p>
+                    <p class="text-[10px] text-slate-500 mb-4 font-bold">Perpanjangan: Rp 1.200.000/tahun (termasuk 2x ubah konten)</p>
+                    <a href="/contact" class="block text-center bg-primary-fixed-dim text-on-primary-fixed px-4 py-2.5 rounded-xl font-headline font-bold hover:brightness-110 transition-all text-sm shadow-lg shadow-primary-fixed-dim/20">
+                        Pilih Paket
                     </a>
                 </div>
             </div>
 
-            <!-- Enterprise -->
+            <!-- Business Pro -->
             <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 flex flex-col gap-5 hover:border-primary-fixed-dim/30 transition-all">
                 <div>
-                    <span class="text-xs font-label font-bold text-primary-fixed-dim tracking-widest uppercase">Enterprise</span>
-                    <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mt-1">Skala Besar</h3>
-                    <p class="text-sm text-on-surface-variant mt-1">Integrasi penuh, fitur lengkap</p>
+                    <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white">Business Pro</h3>
+                    <p class="text-xs text-on-surface-variant mt-2 font-medium">Siap mendukung pertumbuhan dan pemasaran</p>
                 </div>
                 <div>
-                    <div class="flex items-baseline gap-2">
-                        <p class="text-3xl font-headline font-bold text-red-600">Rp 2,5jt</p>
-                        <p class="text-sm text-on-surface-variant line-through opacity-50">Rp 5jt</p>
+                    <div class="flex flex-col gap-1">
+                        <p class="text-2xl font-headline font-bold text-red-600">Mulai Rp 5.900.000</p>
+                        <p class="text-xs text-on-surface-variant line-through opacity-70">Harga normal mulai Rp 7.500.000</p>
                     </div>
-                    <p class="text-xs text-on-surface-variant mt-1">Development time mulai dari 5 hari</p>
+                    <p class="text-[11px] text-primary-fixed-dim font-bold mt-2 bg-primary-fixed-dim/10 inline-block px-2 py-1 rounded">Estimasi: 15–25 hari kerja</p>
                 </div>
                 <ul class="space-y-3 flex-1">
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Desain Premium UX (Bukan Template)
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Maksimal 10 halaman (Desain UI/UX Premium)
                     </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Server prioritas & Domain korporat
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        CMS, Blog/Artikel, Portofolio & FAQ
                     </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Jumlah halaman fleksibel sesuai skala
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        3 form khusus, kalender, WA, Email, Maps
                     </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Konten premium: Studi kasus & FAQ mendalam
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        SEO on-page, structured data & performa tinggi
                     </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Komponen UI variatif & halaman fungsional
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Analytics, Search Console & Conversion Tracking
                     </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Integrasi API, CRM, & sistem booking otomatis
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Domain .com, Hosting Premium, SSL (1 tahun)
                     </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Arsitektur data untuk tim & stakeholders
-                    </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Tracking konversi advanced & Advanced SEO
-                    </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Lokalisasi konten multi-bahasa
-                    </li>
-                    <li class="flex items-start gap-3 text-sm text-on-surface-variant">
-                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:16px" data-icon="check_circle">check_circle</span>
-                        Dukungan teknis SLA & pemeliharaan
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Maks. 4 revisi, dukungan prioritas & garansi bug 60 hari
                     </li>
                 </ul>
-                <div class="pt-2 border-t border-outline-variant/10">
-                    <p class="text-xs text-on-surface-variant mb-4">Cocok untuk: Bisnis skala besar, banyak halaman, butuh integrasi tools marketing/CRM, standar brand konsisten.</p>
-                    <a href="/contact" class="block text-center border border-primary-fixed-dim text-primary-fixed-dim px-6 py-3 rounded-xl font-headline font-bold hover:bg-primary-fixed-dim hover:text-white transition-all text-sm">
-                        Hubungi Kami
+                <div class="pt-4 border-t border-outline-variant/10">
+                    <p class="text-[10px] text-on-surface-variant mb-4">Cocok untuk bisnis butuh kelola konten, blog, form khusus, dan tracking marketing.</p>
+                    <p class="text-[10px] text-slate-500 mb-4 font-bold">Perpanjangan: Mulai Rp 2.000.000/tahun (termasuk 4x ubah konten)</p>
+                    <a href="/contact" class="block text-center border border-primary-fixed-dim text-primary-fixed-dim px-4 py-2.5 rounded-xl font-headline font-bold hover:bg-primary-fixed-dim hover:text-white transition-all text-sm">
+                        Konsultasi Paket
                     </a>
                 </div>
             </div>
+
+            <!-- Custom Website -->
+            <div class="p-8 rounded-2xl bg-surface-container-low border border-outline-variant/15 flex flex-col gap-5 hover:border-primary-fixed-dim/30 transition-all">
+                <div>
+                    <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white">Custom & Sistem</h3>
+                    <p class="text-xs text-on-surface-variant mt-2 font-medium">Kebutuhan kompleks dan terintegrasi</p>
+                </div>
+                <div>
+                    <div class="flex flex-col gap-1">
+                        <p class="text-2xl font-headline font-bold text-slate-900 dark:text-white">Mulai Rp 12.000.000</p>
+                    </div>
+                    <p class="text-[11px] text-primary-fixed-dim font-bold mt-2 bg-primary-fixed-dim/10 inline-block px-2 py-1 rounded">Sesuai ruang lingkup</p>
+                </div>
+                <ul class="space-y-3 flex-1">
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Sistem booking custom
+                    </li>
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Integrasi API pihak ketiga & CRM
+                    </li>
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Payment gateway & Marketplace
+                    </li>
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Dashboard operasional & Sistem internal
+                    </li>
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Login & Hak akses pengguna
+                    </li>
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        Database, pengelolaan data & otomatisasi proses
+                    </li>
+                    <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                        <span class="material-symbols-outlined text-primary-fixed-dim flex-shrink-0" style="font-size:14px" data-icon="check">check</span>
+                        SLA & Dukungan teknis khusus
+                    </li>
+                </ul>
+                <div class="pt-4 border-t border-outline-variant/10">
+                    <p class="text-[10px] text-on-surface-variant mb-4">Cocok untuk bisnis besar yang membutuhkan sistem kustom dan integrasi penuh.</p>
+                    <a href="/contact" class="block text-center border border-primary-fixed-dim text-primary-fixed-dim px-4 py-2.5 rounded-xl font-headline font-bold hover:bg-primary-fixed-dim hover:text-white transition-all text-sm">
+                        Mulai Diskusi
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Additional Info Sections -->
+    <section class="max-w-[1440px] mx-auto px-12 mb-24">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            
+            <!-- Add Ons -->
+            <div class="bg-surface-container-low rounded-3xl p-8 border border-outline-variant/15">
+                <h3 class="text-2xl font-headline font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
+                    <span class="material-symbols-outlined text-primary-fixed-dim">extension</span>
+                    Add-On Opsional
+                </h3>
+                <p class="text-sm text-on-surface-variant mb-6">Kebutuhan berikut dapat ditambahkan sesuai kebutuhan pada paket yang Anda pilih:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                    <div class="flex justify-between items-center text-sm border-b border-outline-variant/10 pb-2">
+                        <span class="text-slate-700 dark:text-slate-300">Halaman tambahan</span>
+                        <span class="font-bold text-slate-900 dark:text-white">Rp 250rb/hal</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm border-b border-outline-variant/10 pb-2">
+                        <span class="text-slate-700 dark:text-slate-300">Bahasa tambahan</span>
+                        <span class="font-bold text-slate-900 dark:text-white">Mulai Rp 750rb</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm border-b border-outline-variant/10 pb-2">
+                        <span class="text-slate-700 dark:text-slate-300">Copywriting dari nol</span>
+                        <span class="font-bold text-slate-900 dark:text-white">Mulai Rp 750rb</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm border-b border-outline-variant/10 pb-2">
+                        <span class="text-slate-700 dark:text-slate-300">Panel Admin/CMS</span>
+                        <span class="font-bold text-slate-900 dark:text-white">Mulai Rp 1,5jt</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm border-b border-outline-variant/10 pb-2">
+                        <span class="text-slate-700 dark:text-slate-300">Blog/Artikel</span>
+                        <span class="font-bold text-slate-900 dark:text-white">Mulai Rp 1jt</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm border-b border-outline-variant/10 pb-2">
+                        <span class="text-slate-700 dark:text-slate-300">Email bisnis tambahan</span>
+                        <span class="font-bold text-slate-900 dark:text-white">Rp 250rb/thn</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm border-b border-outline-variant/10 pb-2">
+                        <span class="text-slate-700 dark:text-slate-300">Formulir custom</span>
+                        <span class="font-bold text-slate-900 dark:text-white">Mulai Rp 350rb</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm border-b border-outline-variant/10 pb-2">
+                        <span class="text-slate-700 dark:text-slate-300">Kalender eksternal</span>
+                        <span class="font-bold text-slate-900 dark:text-white">Mulai Rp 500rb</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm border-b border-outline-variant/10 pb-2">
+                        <span class="text-slate-700 dark:text-slate-300">Payment gateway</span>
+                        <span class="font-bold text-slate-900 dark:text-white">Mulai Rp 2,5jt</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm border-b border-outline-variant/10 pb-2">
+                        <span class="text-slate-700 dark:text-slate-300">Maintenance bulanan</span>
+                        <span class="font-bold text-slate-900 dark:text-white">Mulai Rp 350rb/bln</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm border-b border-outline-variant/10 pb-2 col-span-1 md:col-span-2">
+                        <span class="text-slate-700 dark:text-slate-300">Integrasi API/CRM & Input Produk</span>
+                        <span class="font-bold text-slate-900 dark:text-white">Sesuai scope</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Ketentuan -->
+                <div class="bg-surface-container-low rounded-3xl p-8 border border-outline-variant/15">
+                    <h3 class="text-xl font-headline font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary-fixed-dim">rule</span>
+                        Ketentuan Pengerjaan
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                            <span class="material-symbols-outlined text-primary-fixed-dim shrink-0" style="font-size: 16px;">fiber_manual_record</span>
+                            Harga berlaku untuk ruang lingkup yang tercantum. Permintaan di luar lingkup dihitung sebagai pekerjaan tambahan.
+                        </li>
+                        <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                            <span class="material-symbols-outlined text-primary-fixed-dim shrink-0" style="font-size: 16px;">fiber_manual_record</span>
+                            Klien menyediakan logo, profil bisnis, foto, daftar layanan, dan informasi utama. VeinTech membantu menyusun dan menyunting materi agar lebih sesuai.
+                        </li>
+                        <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                            <span class="material-symbols-outlined text-primary-fixed-dim shrink-0" style="font-size: 16px;">fiber_manual_record</span>
+                            Pembayaran dilakukan 50% di awal dan 50% sebelum website dipublikasikan. Estimasi waktu mulai dihitung setelah DP dan materi diterima.
+                        </li>
+                        <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                            <span class="material-symbols-outlined text-primary-fixed-dim shrink-0" style="font-size: 16px;">fiber_manual_record</span>
+                            Revisi merupakan perubahan terhadap desain dan konten yang telah disepakati, bukan perubahan konsep atau penambahan fitur baru.
+                        </li>
+                        <li class="flex items-start gap-3 text-xs text-on-surface-variant leading-relaxed">
+                            <span class="material-symbols-outlined text-primary-fixed-dim shrink-0" style="font-size: 16px;">fiber_manual_record</span>
+                            Domain dapat didaftarkan menggunakan data kepemilikan klien. Garansi mencakup perbaikan kesalahan teknis dari hasil pengembangan. Biaya layanan pihak ketiga tidak termasuk kecuali disebutkan tertulis.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Transparansi -->
+                <div class="bg-primary-fixed-dim/10 rounded-3xl p-6 border border-primary-fixed-dim/30 flex items-start gap-4">
+                    <span class="material-symbols-outlined text-primary-fixed-dim text-3xl">verified_user</span>
+                    <div>
+                        <h4 class="font-headline font-bold text-slate-900 dark:text-white mb-1">Tidak Ada Biaya Tersembunyi</h4>
+                        <p class="text-xs text-on-surface-variant leading-relaxed">Sebelum pengerjaan dimulai, Anda akan menerima rincian fitur, biaya, jadwal pengerjaan, jumlah revisi, serta biaya perpanjangan secara transparan. Kami tidak akan menambahkan biaya tanpa persetujuan Anda.</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -330,13 +366,11 @@ import FlashSaleBanner from '../../components/FlashSaleBanner.astro';
 
     <WhyChooseUs />
 
-
     <!-- Premium CTA Component -->
     <ServiceCTA 
-        title="Go Digital Sekarang, Raih Lebih Banyak Pelanggan."
-        description="Jangan biarkan kompetitor mendahului Anda. Bangun kehadiran digital profesional Anda hari ini."
-        ctaText="Konsultasi Website Gratis"
-        
+        title="Konsultasikan Website Bisnis Anda"
+        description="Belum yakin paket mana yang sesuai? Ceritakan jenis usaha, tujuan website, dan fitur yang Anda butuhkan. Tim VeinTech akan membantu memilih solusi yang paling efisien tanpa memaksakan fitur yang belum diperlukan."
+        ctaText="Hubungi Konsultan Kami"
     />
 
     <ServiceBottomSections currentSlug="website-bisnis" />

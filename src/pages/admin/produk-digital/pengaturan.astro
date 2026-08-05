@@ -44,7 +44,7 @@ const accounts = await db.select().from(paymentAccounts).orderBy(asc(paymentAcco
 const productRows = await db.select().from(products).orderBy(asc(products.name)).all();
 ---
 <BaseLayout title="Admin - Pengaturan Rekening & Harga">
-  <section class="pt-32 pb-24 min-h-screen bg-surface text-on-surface"><div class="max-w-6xl mx-auto px-6 md:px-12">
+  <section class="pt-12 md:pt-16 pb-24 min-h-screen bg-surface text-on-surface"><div class="max-w-6xl mx-auto px-6 md:px-12">
     <div class="flex justify-between items-end mb-8"><div><h1 class="text-3xl font-bold font-headline">Pengaturan Rekening & Harga</h1><p class="text-on-surface-variant mt-1">Perubahan aktif langsung digunakan pada checkout berikutnya.</p></div><a href="/admin/produk-digital/dashboard" class="font-bold text-primary">← Dashboard</a></div>
     {errorMessage && <div class="p-4 mb-6 rounded-xl bg-red-50 text-red-700 border border-red-200">{errorMessage}</div>}{successMessage && <div class="p-4 mb-6 rounded-xl bg-green-50 text-green-700 border border-green-200">{successMessage}</div>}
     <div class="grid lg:grid-cols-2 gap-8 mb-10">

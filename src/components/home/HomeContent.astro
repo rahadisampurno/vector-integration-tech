@@ -269,7 +269,7 @@ const t = lang === 'id' ? {
 ---
 
 <!-- Hero Section -->
-<section class="relative pt-28 pb-20 md:pt-32 md:pb-32 overflow-hidden bg-surface text-on-surface border-b border-outline-variant/15">
+<section class="relative pt-12 pb-8 md:pt-16 md:pb-12 overflow-hidden bg-surface text-on-surface border-b border-outline-variant/15">
   <div class="max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
     <!-- Left Column: High-Impact Enterprise Positioning -->
     <div class="lg:col-span-7 space-y-8">
@@ -363,6 +363,116 @@ const t = lang === 'id' ? {
     </div>
   </div>
 </section>
+
+<!-- Banner Carousel Section -->
+<section id="banner-carousel-section" class="py-8 bg-surface border-b border-outline-variant/15">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-12">
+    <!-- Carousel Container -->
+    <div class="relative w-full group">
+      <!-- We use a scroll-snap container for the carousel effect -->
+      <div id="banner-carousel" class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-2 hide-scrollbar scroll-smooth">
+        
+        <!-- Slide 1: Website Bisnis -->
+        <a href="/services/website-bisnis" class="block w-full flex-shrink-0 snap-center rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-outline-variant/15 focus:outline-none focus:ring-2 focus:ring-primary-fixed-dim focus:ring-offset-2">
+          <img src="/images/website-bisnis-banner.png" alt="Website Profesional untuk UMKM & Bisnis" class="w-full h-auto block object-cover" />
+        </a>
+
+        <!-- Slide 2: VeinTools Desktop -->
+        <a href="/produk-digital/veintools-desktop" class="block w-full flex-shrink-0 snap-center rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-outline-variant/15 focus:outline-none focus:ring-2 focus:ring-primary-fixed-dim focus:ring-offset-2">
+          <img src="/images/veintools-desktop-banner.png" alt="VeinTools Desktop - Aplikasi operasional UMKM" class="w-full h-auto block object-cover" />
+        </a>
+        
+      </div>
+      
+      <!-- Carousel Indicators -->
+      <div id="carousel-indicators" class="flex justify-center gap-2 mt-4">
+        <button class="w-8 h-1.5 rounded-full bg-primary-fixed-dim cursor-pointer" aria-label="Go to slide 1"></button>
+        <button class="w-8 h-1.5 rounded-full bg-outline-variant/30 cursor-pointer" aria-label="Go to slide 2"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initCarousel() {
+    const carousel = document.getElementById('banner-carousel');
+    const indicators = document.getElementById('carousel-indicators')?.children;
+    if (!carousel || !indicators) return;
+
+    let currentIndex = 0;
+    const slideCount = carousel.children.length;
+    const autoPlayInterval = 5000; // 5 detik
+    let intervalId: ReturnType<typeof setInterval>;
+
+    const updateIndicators = (index: number) => {
+      Array.from(indicators).forEach((ind, i) => {
+        if (i === index) {
+          ind.classList.remove('bg-outline-variant/30');
+          ind.classList.add('bg-primary-fixed-dim');
+        } else {
+          ind.classList.remove('bg-primary-fixed-dim');
+          ind.classList.add('bg-outline-variant/30');
+        }
+      });
+    };
+
+    const scrollToSlide = (index: number) => {
+      if (index >= slideCount) index = 0;
+      if (index < 0) index = slideCount - 1;
+      
+      currentIndex = index;
+      const slide = carousel.children[currentIndex] as HTMLElement;
+      if (slide) {
+        // Handle padding/margins
+        const scrollLeft = slide.offsetLeft - carousel.offsetLeft - 24; // 24px is roughly the px-6 padding
+        carousel.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+      }
+      updateIndicators(currentIndex);
+    };
+
+    const startAutoPlay = () => {
+      intervalId = setInterval(() => {
+        scrollToSlide(currentIndex + 1);
+      }, autoPlayInterval);
+    };
+
+    const stopAutoPlay = () => {
+      clearInterval(intervalId);
+    };
+
+    // Update index on manual scroll
+    carousel.addEventListener('scroll', () => {
+      const scrollPosition = carousel.scrollLeft;
+      const slideWidth = (carousel.children[0] as HTMLElement).offsetWidth;
+      const newIndex = Math.round(scrollPosition / slideWidth);
+      if (newIndex !== currentIndex && newIndex >= 0 && newIndex < slideCount) {
+        currentIndex = newIndex;
+        updateIndicators(currentIndex);
+      }
+    });
+
+    // Pause on hover
+    const section = document.getElementById('banner-carousel-section');
+    if (section) {
+      section.addEventListener('mouseenter', stopAutoPlay);
+      section.addEventListener('mouseleave', startAutoPlay);
+    }
+
+    // Allow clicking indicators
+    Array.from(indicators).forEach((ind, i) => {
+      ind.addEventListener('click', () => {
+        scrollToSlide(i);
+      });
+    });
+
+    startAutoPlay();
+  }
+
+  // Run on load
+  initCarousel();
+  // Support for Astro View Transitions
+  document.addEventListener('astro:page-load', initCarousel);
+</script>
 
 <!-- Trust Bar Section -->
 <section class="py-14 bg-surface-container-lowest border-b border-outline-variant/15">

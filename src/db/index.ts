@@ -19,13 +19,21 @@ if (!connectionString) {
   throw new Error('Database belum dikonfigurasi. Tambahkan SUPABASE_DB_URL atau DATABASE_URL di environment server.');
 }
 
-const client = postgres(connectionString, {
+const globalForDb = globalThis as unknown as {
+  postgresClient: postgres.Sql | undefined;
+};
+
+const client = globalForDb.postgresClient ?? postgres(connectionString, {
   ssl: connectionString.includes('localhost') || connectionString.includes('127.0.0.1') ? false : 'require',
   max: 10,
   idle_timeout: 20,
   connect_timeout: 15,
   prepare: false
 });
+
+if (process.env.NODE_ENV !== 'production') {
+  globalForDb.postgresClient = client;
+}
 
 await client.begin(async (sql) => {
   await sql.unsafe(`

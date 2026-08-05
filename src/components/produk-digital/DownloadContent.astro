@@ -34,7 +34,7 @@ const nameParts = order.customer_name.split(' ');
 const obfuscatedName = nameParts.map(p => p.length > 2 ? p.substring(0, 2) + '*'.repeat(p.length - 2) : p).join(' ');
 ---
 
-<section class="pt-32 pb-24 bg-surface min-h-screen text-on-surface flex items-center justify-center">
+<section class="pt-12 md:pt-16 pb-24 bg-surface min-h-screen text-on-surface flex items-center justify-center">
   <div class="max-w-xl w-full px-6">
     
     <div class="bg-surface-container p-8 md:p-12 rounded-3xl border border-outline-variant/30 shadow-xl relative overflow-hidden">

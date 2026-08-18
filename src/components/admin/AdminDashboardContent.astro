@@ -163,6 +163,13 @@ const affiliateConversion = affiliateCheckouts ? affiliateSold / affiliateChecko
             <div class="flex items-center gap-3"><span class="material-symbols-outlined text-slate-600 dark:text-slate-300 group-hover:text-blue-700">group_add</span><span class="font-bold">Kelola Affiliate</span></div>
             <span class="material-symbols-outlined text-slate-600 dark:text-slate-300">chevron_right</span>
           </a>
+          <button id="openGenerateLicenseBtn" class="w-full flex items-center justify-between p-4 bg-surface rounded-xl border border-outline-variant/50 hover:border-primary-fixed transition-colors group text-left">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-slate-600 dark:text-slate-300 group-hover:text-blue-700 transition-colors">key</span>
+              <span class="font-bold">Generate License Manual</span>
+            </div>
+            <span class="material-symbols-outlined text-slate-600 dark:text-slate-300 group-hover:text-blue-700 transition-colors">chevron_right</span>
+          </button>
           <a href="/admin/produk-digital/pesanan" class="flex items-center justify-between p-4 bg-surface rounded-xl border border-outline-variant/50 hover:border-primary-fixed transition-colors group">
             <div class="flex items-center gap-3">
               <span class="material-symbols-outlined text-slate-600 dark:text-slate-300 group-hover:text-blue-700 transition-colors">list_alt</span>
@@ -217,4 +224,124 @@ const affiliateConversion = affiliateCheckouts ? affiliateSold / affiliateChecko
     </div>
 
   </div>
+
+  <!-- Generate License Modal -->
+  <div id="generateLicenseModal" class="fixed inset-0 z-50 bg-black/60 hidden items-center justify-center p-4">
+    <div class="bg-surface rounded-2xl w-full max-w-md p-6 shadow-2xl">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-xl font-bold font-headline">Generate License Manual</h3>
+        <button id="closeGenerateLicenseBtn" class="text-slate-400 hover:text-slate-600"><span class="material-symbols-outlined">close</span></button>
+      </div>
+      
+      <p class="mb-6 text-on-surface-variant text-sm">Gunakan fitur ini untuk membuat file license secara manual untuk pembeli via WhatsApp atau luar sistem.</p>
+      
+      <div id="licenseFormSection">
+        <div class="mb-4">
+          <label for="manualCustomerName" class="block text-sm font-medium mb-1">Nama Pembeli *</label>
+          <input type="text" id="manualCustomerName" class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-2 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed" placeholder="Misal: Budi Santoso" />
+        </div>
+
+        <div class="mb-6">
+          <label for="manualAppId" class="block text-sm font-medium mb-1">Kode Perangkat (App ID) *</label>
+          <input type="text" id="manualAppId" class="w-full bg-surface border border-outline-variant/50 rounded-xl px-4 py-2 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed" placeholder="Misal: VD-ABC-123" />
+        </div>
+        
+        <button id="processLicenseBtn" class="w-full bg-primary text-on-primary font-bold py-3 rounded-xl hover:bg-primary/90 transition-colors shadow-md disabled:opacity-50 flex justify-center items-center gap-2">
+          <span class="material-symbols-outlined text-lg">key</span> Generate License
+        </button>
+      </div>
+
+      <div id="licenseResultSection" class="hidden text-center">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="material-symbols-outlined text-green-600 text-3xl">check_circle</span>
+        </div>
+        <h4 class="font-bold text-lg mb-2">License Berhasil Dibuat!</h4>
+        <p class="text-sm text-on-surface-variant mb-6">File license sudah jadi dan siap dikirimkan ke pembeli.</p>
+        
+        <a id="downloadLicenseLink" href="#" download class="w-full inline-flex items-center justify-center gap-2 bg-green-600 text-white font-bold py-3 px-4 rounded-xl hover:bg-green-700 transition-colors shadow-sm mb-3">
+          <span class="material-symbols-outlined">download</span> Unduh File License
+        </a>
+        <button id="resetLicenseBtn" class="text-sm font-bold text-primary hover:underline">Buat License Lain</button>
+      </div>
+    </div>
+  </div>
+
 </section>
+
+<script is:inline>
+  const modal = document.getElementById('generateLicenseModal');
+  const openBtn = document.getElementById('openGenerateLicenseBtn');
+  const closeBtn = document.getElementById('closeGenerateLicenseBtn');
+  const processBtn = document.getElementById('processLicenseBtn');
+  const formSection = document.getElementById('licenseFormSection');
+  const resultSection = document.getElementById('licenseResultSection');
+  const downloadLink = document.getElementById('downloadLicenseLink');
+  const resetBtn = document.getElementById('resetLicenseBtn');
+  
+  const customerNameInput = document.getElementById('manualCustomerName');
+  const appIdInput = document.getElementById('manualAppId');
+
+  if (openBtn) {
+    openBtn.addEventListener('click', () => {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    });
+  }
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      customerNameInput.value = '';
+      appIdInput.value = '';
+      resultSection.classList.add('hidden');
+      formSection.classList.remove('hidden');
+    });
+  }
+
+  if (processBtn) {
+    processBtn.addEventListener('click', async () => {
+      const name = customerNameInput.value.trim();
+      const appId = appIdInput.value.trim();
+
+      if (!name || !appId) {
+        alert("Nama Pembeli dan Kode Perangkat (App ID) wajib diisi.");
+        return;
+      }
+
+      processBtn.disabled = true;
+      processBtn.innerHTML = 'Memproses...';
+
+      try {
+        const res = await fetch('/api/admin/license/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            customerName: name,
+            deviceFingerprint: appId
+          })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          downloadLink.href = data.licenseUrl;
+          formSection.classList.add('hidden');
+          resultSection.classList.remove('hidden');
+        } else {
+          alert(data.message || "Gagal membuat license.");
+        }
+      } catch (err) {
+        alert("Terjadi kesalahan jaringan.");
+      } finally {
+        processBtn.disabled = false;
+        processBtn.innerHTML = '<span class="material-symbols-outlined text-lg">key</span> Generate License';
+      }
+    });
+  }
+</script>

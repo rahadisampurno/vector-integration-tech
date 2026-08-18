@@ -36,7 +36,7 @@ export const POST: APIRoute = async ({ request }) => {
       customer_name: customerName,
       device_fingerprint: deviceFingerprint,
       issued_at: Math.floor(Date.now() / 1000),
-      expires_at: Math.floor(Date.now() / 1000) + (365 * 24 * 60 * 60),
+      expires_at: Math.floor(Date.now() / 1000) + (100 * 365 * 24 * 60 * 60),
       entitlements: ["hpp", "invoice", "quotation", "buku_kas", "stok", "piutang"],
       max_devices: 1
     };
